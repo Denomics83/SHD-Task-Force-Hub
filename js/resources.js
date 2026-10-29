@@ -33,6 +33,7 @@
     if (landing) landing.hidden = false;
     if (resDetail) resDetail.hidden = true;
     if (resBack) resBack.hidden = true;
+    document.body.classList.remove("is-hunter");
     setHunterBack("off");
   }
 
@@ -81,6 +82,7 @@
     if (landing) landing.hidden = true;
     if (resDetail) resDetail.hidden = false;
     if (resBack) resBack.hidden = true;
+    document.body.classList.add("is-hunter");
     setHunterBack("list");
     var byGroup = {};
     (hunterData.hunters || []).forEach(function (hunter) {
@@ -116,6 +118,7 @@
     if (landing) landing.hidden = true;
     if (resDetail) resDetail.hidden = false;
     if (resBack) resBack.hidden = true;
+    document.body.classList.add("is-hunter");
     setHunterBack("detail");
     var steps = (hunter.steps || []).map(function (step) { return "<li>" + STF.esc(step) + "</li>"; }).join("");
     var tips = (hunter.tips || []).map(function (tip) { return "<li>" + STF.esc(tip) + "</li>"; }).join("");
@@ -151,6 +154,7 @@
     if (landing) landing.hidden = true;
     if (resDetail) resDetail.hidden = false;
     if (resBack) resBack.hidden = true;
+    document.body.classList.remove("is-hunter");
     setHunterBack("list");
     resBody.innerHTML = "<h1>" + STF.esc(item.title) + "</h1>" + item.html;
     window.scrollTo(0, 0);

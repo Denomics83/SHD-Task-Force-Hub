@@ -889,6 +889,23 @@ body.page-resources {
   background: #0b0d10;
   background-image: none;
 }
+body.page-resources.is-hunter {
+  height: auto;
+  max-height: none;
+  min-height: 100dvh;
+  overflow: visible;
+}
+html:has(body.page-resources.is-hunter) {
+  overflow: auto;
+  scrollbar-width: none;
+}
+html:has(body.page-resources.is-hunter)::-webkit-scrollbar { display: none; }
+body.page-resources.is-hunter main,
+body.page-resources.is-hunter .res-detail {
+  flex: none;
+  overflow: visible;
+  max-height: none;
+}
 body.page-resources .topbar { position: relative; flex: 0 0 auto; }
 body.page-resources .bottom-nav { position: relative; flex: 0 0 auto; }
 body.page-resources main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
