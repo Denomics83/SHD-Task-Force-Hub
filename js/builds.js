@@ -115,27 +115,37 @@
     );
   }
 
-  function setListBack(on) {
+  function setHeaderBack(mode, cat) {
     var top = document.querySelector(".topbar");
     var pill = document.querySelector(".hub-pill");
     var back = document.getElementById("builds-back");
-    if (pill) pill.hidden = !!on;
-    if (!on) {
+    if (pill) pill.hidden = mode !== "off";
+    if (mode === "off") {
       if (back) back.remove();
       return;
     }
-    if (back || !top) return;
-    back = document.createElement("button");
-    back.type = "button";
-    back.id = "builds-back";
-    back.className = "upd-header-back";
+    if (!top) return;
+    if (!back) {
+      back = document.createElement("button");
+      back.type = "button";
+      back.id = "builds-back";
+      back.className = "upd-header-back";
+      back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+      top.appendChild(back);
+    }
+    if (mode === "detail" && cat) {
+      back.setAttribute("aria-label", "Back to " + cat.label);
+      back.onclick = function () {
+        history.pushState({ cat: cat.id }, "", "#" + cat.id);
+        showList(cat.id, false);
+      };
+      return;
+    }
     back.setAttribute("aria-label", "Back to Builds");
-    back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-    back.addEventListener("click", function () {
+    back.onclick = function () {
       history.pushState({}, "", "builds.html");
       showGrid();
-    });
-    top.appendChild(back);
+    };
   }
 
   function showGrid() {
@@ -144,7 +154,7 @@
     stage.hidden = false;
     listView.hidden = true;
     detailView.hidden = true;
-    setListBack(false);
+    setHeaderBack("off");
     window.scrollTo(0, 0);
   }
 
@@ -156,7 +166,7 @@
     stage.hidden = true;
     detailView.hidden = true;
     listView.hidden = false;
-    setListBack(true);
+    setHeaderBack("list");
     if (listTitle) listTitle.textContent = cat.label;
     var rows = LISTS[catId] || [];
     listRows.innerHTML = rows
@@ -184,9 +194,8 @@
     stage.hidden = true;
     listView.hidden = true;
     detailView.hidden = false;
-    setListBack(false);
+    setHeaderBack("detail", cat);
     detailBody.innerHTML = row.detail === "hollow-man" ? hollowDetail(row) : placeholderDetail(row);
-    if (detailBack) detailBack.textContent = "← " + cat.label;
     window.scrollTo(0, 0);
     if (push) history.pushState({ cat: catId, build: buildId }, "", "#" + catId + "/" + buildId);
   }
