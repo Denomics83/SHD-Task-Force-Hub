@@ -134,6 +134,25 @@
     return html + "</div>";
   }
 
+  function emblemKind(id) {
+    if (id === "red-moon-unleashed") return "moon";
+    if (id === "expertise-surge") return "shield";
+    if (id === "vanguard-overdrive") return "hex";
+    return "shield";
+  }
+
+  function emblemSVG(kind) {
+    var paths = {
+      moon: '<path fill="currentColor" d="M14.6 4.4c-3.8.9-6.5 4.2-6.5 7.8 0 3.6 2.7 6.9 6.5 7.8-4.6-.5-8.1-4.2-8.1-7.8s3.5-7.3 8.1-7.8z"/>',
+      shield: '<path d="M12 3.2 19.2 6.1v5.6c0 3.8-2.8 6.4-7.2 7.8-4.4-1.4-7.2-4-7.2-7.8V6.1z" fill="none" stroke="currentColor" stroke-width="1.6"/>',
+      hex: '<path d="M12 3.4 19 7.4v9.2L12 20.6 5 16.6V7.4z" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="12" cy="12" r="2.1" fill="currentColor"/>',
+      wings: '<path d="M12 14.2 3.8 8.6c2.4 3.2 5 4.6 8.2 5.2 3.2-.6 5.8-2 8.2-5.2z" fill="currentColor"/>',
+      raid: '<circle cx="12" cy="12" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.6v3.2M12 17.2v3.2M3.6 12h3.2M17.2 12h3.2" stroke="currentColor" stroke-width="1.6"/>',
+      season: '<path d="M12 3.8 14.4 9l5.4.6-4 3.6 1.1 5.2L12 16.2 7.1 18.4 8.2 13.2 4.2 9.6 9.6 9z" fill="currentColor"/>'
+    };
+    return '<svg viewBox="0 0 24 24" aria-hidden="true">' + (paths[kind] || paths.shield) + "</svg>";
+  }
+
   var detail = document.getElementById("event-detail");
   var catalog = [];
   var altarsDoc = { altars: [] };
@@ -180,6 +199,8 @@
 
   function showRail() {
     clearEventMap();
+    var screen = document.getElementById("tl-screen");
+    if (screen) screen.hidden = false;
     rail.hidden = false;
     if (detail) {
       detail.hidden = true;
@@ -253,6 +274,8 @@
       mapBlock +
       (type.source ? '<p class="src-line">' + STF.esc(type.source) + "</p>" : "") +
       suggested;
+    var screen = document.getElementById("tl-screen");
+    if (screen) screen.hidden = true;
     rail.hidden = true;
     detail.hidden = false;
     setEventsBack(true);
@@ -355,7 +378,11 @@
         sub: item.type.description || "",
         label: item.type.name || "Event",
         remainStart: item.start,
-        remainEnd: item.end
+        remainEnd: item.end,
+        state: item.state,
+        accent: item.type.accent || "#FF6D10",
+        cardLabel: item.type.cardLabel || "Season Event",
+        icon: emblemKind(item.type.id)
       });
     });
 
@@ -365,10 +392,15 @@
       href: "season.html",
       chip: "Live",
       chipClass: "",
-      title: "Current Season",
-      kicker: seasonLine,
-      sub: "Manhunt · Journey · Modifiers",
-      label: "Open current season"
+      title: season.name || "Current Season",
+      kicker: "",
+      sub: "",
+      label: "Open current season",
+      image: season.cardImage || "",
+      accent: "#FF6D10",
+      cardLabel: "Season",
+      icon: "season",
+      state: "active"
     });
 
     raids.forEach(function (raid) {
@@ -384,7 +416,11 @@
         title: "Raid Scheduled",
         kickerHtml: kicker,
         sub: "",
-        label: "Scheduled raid"
+        label: "Scheduled raid",
+        accent: "#FF6D10",
+        cardLabel: "Raid",
+        icon: "raid",
+        state: "upcoming"
       });
     });
 
@@ -396,35 +432,70 @@
         chipClass: "",
         title: "Recently ended",
         sub: ended.map(function (row) { return row.type.name || row.id; }).join(" · "),
-        label: "Recently ended events"
+        label: "Recently ended events",
+        accent: "#6e7480",
+        cardLabel: "Ended",
+        icon: "hex",
+        state: "ended"
       });
     }
 
-    var count = slides.length;
+    var head = document.getElementById("tl-head");
+    if (head) {
+      head.innerHTML =
+        "<h1>" + STF.esc(season.yearSeason || "Season") + "</h1>" +
+        "<p>" + STF.esc(season.name || "") + "</p>";
+    }
     rail.innerHTML = slides
-      .map(function (slide, i) {
-        var kicker = slide.kickerHtml || (slide.kicker ? STF.esc(slide.kicker) : "");
+      .map(function (slide) {
+        var upcoming = slide.state === "upcoming";
+        var ended = slide.state === "ended";
+        var photo = slide.image && /^assets\/[a-z0-9._/-]+$/i.test(slide.image);
         var remain = slide.remainEnd
           ? '<span class="hero-remain" data-remain-start="' + STF.esc(slide.remainStart) + '" data-remain-end="' + STF.esc(slide.remainEnd) + '">' + STF.esc(eventRemainLabel(slide.remainStart, slide.remainEnd)) + "</span>"
+          : (slide.kind === "raid" && slide.chip
+            ? '<span class="hero-remain">' + STF.esc(slide.chip) + "</span>"
+            : "");
+        var top = upcoming
+          ? '<div class="tl-soon-head"><span>Coming Soon</span>' + remain + "</div>"
+          : '<span class="tl-tag">' + (ended ? "ENDED" : "ONGOING") + "</span>" + remain;
+        var lock = upcoming
+          ? '<svg class="tl-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="11" width="10" height="8" fill="#f4f4f4"/><path d="M9 11V8.4a3 3 0 0 1 6 0V11" fill="none" stroke="#f4f4f4" stroke-width="1.7"/></svg>'
           : "";
-        var photo = slide.image && /^assets\/[a-z0-9._/-]+$/i.test(slide.image)
-          ? '<div class="hero-photo" style="background-image:url(\'' + slide.image + '\')"></div>'
-          : '<div class="hero-photo"></div>';
+        var soonPill = upcoming ? '<span class="tl-soon-pill">COMING SOON</span>' : "";
+        var extra = slide.kind === "recent" && slide.sub ? '<em>' + STF.esc(slide.sub) + "</em>" : "";
+        var kicker = slide.kickerHtml || (slide.kicker ? STF.esc(slide.kicker) : "");
         var inner =
-          photo +
-          '<div class="hero-copy">' +
-          '<span class="hero-chip' + slide.chipClass + '">' + STF.esc(slide.chip) + "</span>" +
-          "<h2>" + STF.esc(slide.title) + "</h2>" +
-          (remain || (kicker ? '<p class="hero-kicker">' + kicker + "</p>" : "")) +
-          (slide.sub ? '<p class="hero-sub">' + STF.esc(slide.sub) + "</p>" : "") +
-          dots(i, count) +
+          '<div class="tl-art' + (photo ? " has-photo" : "") + '"' +
+          (photo ? ' style="background-image:url(\'' + slide.image + '\')"' : "") + ">" +
+          top +
+          '<div class="tl-emblem" style="--ring:' + STF.esc(slide.accent || "#FF6D10") + '">' +
+          emblemSVG(slide.icon || "shield") + lock + "</div></div>" +
+          '<div class="tl-foot' + (upcoming ? " is-hot" : "") + '">' +
+          '<span class="tl-kind">' + STF.esc(slide.cardLabel || "Season Event") + "</span>" +
+          "<strong>" + STF.esc(slide.title) + "</strong>" +
+          (kicker && !slide.remainEnd ? '<small>' + kicker + "</small>" : "") +
+          extra + soonPill +
+          '<span class="tl-mini" aria-hidden="true">' + emblemSVG(slide.icon || "shield") + "</span>" +
           "</div>";
         var card = slide.href
-          ? '<a class="hero-card is-' + slide.kind + '" href="' + slide.href + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</a>"
-          : '<article class="hero-card is-' + slide.kind + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</article>";
+          ? '<a class="hero-card tl-card is-' + slide.kind + '" href="' + slide.href + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</a>"
+          : '<article class="hero-card tl-card is-' + slide.kind + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</article>";
         return '<div class="hero-slide">' + card + "</div>";
       })
       .join("");
+    var thumb = document.getElementById("tl-thumb");
+    function moveThumb() {
+      if (!thumb) return;
+      var max = rail.scrollWidth - rail.clientWidth;
+      var track = thumb.parentElement.clientWidth;
+      var width = Math.max(28, rail.scrollWidth ? (rail.clientWidth / rail.scrollWidth) * track : track);
+      var x = max > 0 ? (rail.scrollLeft / max) * (track - width) : 0;
+      thumb.style.width = width + "px";
+      thumb.style.transform = "translateX(" + x + "px)";
+    }
+    rail.addEventListener("scroll", moveThumb, { passive: true });
+    moveThumb();
 
     function openHashCard(href) {
       if (!href || href.charAt(0) !== "#") return;

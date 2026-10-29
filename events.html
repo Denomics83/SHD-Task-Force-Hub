@@ -17,8 +17,14 @@
   <div id="topbar-root"></div>
 
   <main class="event-stage">
-    <div class="hero-rail" id="hero-rail" tabindex="0" aria-label="Season and scheduled events">
-      <p class="lede hero-loading">Loading events…</p>
+    <div class="tl-screen" id="tl-screen">
+      <header class="tl-head" id="tl-head"></header>
+      <div class="tl-frame">
+        <div class="hero-rail" id="hero-rail" tabindex="0" aria-label="Season and scheduled events">
+          <p class="lede hero-loading">Loading events…</p>
+        </div>
+        <div class="tl-bar" aria-hidden="true"><span id="tl-thumb"></span></div>
+      </div>
     </div>
     <article id="event-detail" class="event-detail wrap upd-detail" hidden></article>
   </main>

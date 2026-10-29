@@ -200,10 +200,10 @@
   function fillTypeForm(type) {
     var blank = {
       id: "", name: "", description: "", rewards: "add details", modifiers: "add details",
-      tasks: "add details", accent: "#ff7f00", image: "", source: "Source · checked 29 Oct 2026", suggested: ""
+      tasks: "add details", accent: "#ff6d10", image: "", cardLabel: "Season Event", source: "Source · checked 29 Oct 2026", suggested: ""
     };
     var row = type || blank;
-    ["id", "name", "description", "rewards", "modifiers", "tasks", "accent", "image", "source", "suggested"].forEach(function (key) {
+    ["id", "name", "description", "rewards", "modifiers", "tasks", "accent", "image", "cardLabel", "source", "suggested"].forEach(function (key) {
       if (typeForm.elements[key]) typeForm.elements[key].value = row[key] == null ? "" : row[key];
     });
     var del = document.getElementById("type-delete");
@@ -330,8 +330,9 @@
       rewards: String(fd.get("rewards") || ""),
       modifiers: String(fd.get("modifiers") || ""),
       tasks: String(fd.get("tasks") || ""),
-      accent: String(fd.get("accent") || "#ff7f00"),
+      accent: String(fd.get("accent") || "#ff6d10"),
       image: String(fd.get("image") || "").trim(),
+      cardLabel: String(fd.get("cardLabel") || "Season Event").trim() || "Season Event",
       source: String(fd.get("source") || "").trim(),
       suggested: String(fd.get("suggested") || "")
     };
@@ -354,6 +355,18 @@
     }
     setStatus("Saving type…");
     try {
+      var bg = document.getElementById("type-bg");
+      var bgFile = bg && bg.files && bg.files[0];
+      if (bgFile) {
+        var packed = await resizeImage(bgFile);
+        var path = "assets/events/" + next.id + "." + packed.ext;
+        var existing = await readRaw(path);
+        await writeBinary(path, packed.b64, existing && existing.sha, "Update event card " + next.name);
+        next.image = path;
+        if (idx >= 0) typesDoc.types[idx] = next;
+        else typesDoc.types[typesDoc.types.length - 1] = next;
+        bg.value = "";
+      }
       var savedType = await writeFile("data/event-types.json", typesDoc, typesSha, "Update event type " + next.name);
       typesSha = savedType.content.sha;
       if (next.id !== previous && previous) {
@@ -684,6 +697,17 @@
     seasonDoc.theme = document.getElementById("theme-input").value.trim() || "Add the season theme here";
     setStatus("Saving theme…");
     try {
+      var themeBg = document.getElementById("theme-bg");
+      var themeFile = themeBg && themeBg.files && themeBg.files[0];
+      if (themeFile) {
+        if (!seasonDoc.id || !/^[A-Za-z0-9._-]+$/.test(seasonDoc.id)) return setStatus("Season id cannot be used as a file name.");
+        var themePacked = await resizeImage(themeFile);
+        var themePath = "assets/events/season-" + seasonDoc.id + "." + themePacked.ext;
+        var themeExisting = await readRaw(themePath);
+        await writeBinary(themePath, themePacked.b64, themeExisting && themeExisting.sha, "Update season card image");
+        seasonDoc.cardImage = themePath;
+        themeBg.value = "";
+      }
       var saved = await writeFile("data/season.json", seasonDoc, seasonSha, "Update season theme");
       seasonSha = saved.content.sha;
       setStatus("Season theme saved. Live in about 1 minute.", true);

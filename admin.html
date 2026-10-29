@@ -40,8 +40,11 @@
           <label>Rewards <textarea name="rewards" rows="3"></textarea></label>
           <label>Modifiers <textarea name="modifiers" rows="3"></textarea></label>
           <label>Tasks / notes <textarea name="tasks" rows="3"></textarea></label>
-          <label>Accent colour <input name="accent" type="color" value="#ff7f00"></label>
+          <label>Card label <input name="cardLabel" placeholder="Season Event"></label>
+          <label>Accent colour <input name="accent" type="color" value="#ff6d10"></label>
           <label>Image path <input name="image" placeholder="assets/events/season-hero.jpg"></label>
+          <label>Card background <input id="type-bg" type="file" accept="image/jpeg,image/png,image/webp"></label>
+          <p class="lede">Optional. A dark gradient is used when no image is set.</p>
           <label>Source line <input name="source" placeholder="Source · checked 29 Oct 2026"></label>
           <label>Suggested note <textarea name="suggested" rows="2" placeholder="Optional. Not shown as the main detail."></textarea></label>
           <p class="admin-row">
@@ -75,6 +78,8 @@
           <label>Season theme
             <textarea name="theme" id="theme-input" rows="4"></textarea>
           </label>
+          <label>Season card background <input id="theme-bg" type="file" accept="image/jpeg,image/png,image/webp"></label>
+          <p class="lede">Optional art behind the season card on Events. Dark gradient if empty.</p>
           <button class="admin-btn" type="submit">Save theme</button>
         </form>
       </section>
