@@ -1778,7 +1778,7 @@ body.page-resources.is-grid #tab-builds { overflow: hidden; }
   line-height: 1; font-weight: 700;
 }
 body.page-events .hero-slide {
-  flex: 0 0 85%; width: 85%; height: auto; align-self: stretch;
+  flex: 0 0 85vw; width: 85vw; height: auto; align-self: stretch;
 }
 body.page-events .tl-card {
   height: auto; aspect-ratio: 4 / 5; max-height: calc(100dvh - 250px);
