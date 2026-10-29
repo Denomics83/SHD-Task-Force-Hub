@@ -5,13 +5,32 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="stf-build" content="ad4b6b4">
+  <meta name="stf-build" content="c24d1a9">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>Builds — Shade Task Force Hub</title>
-  <link rel="stylesheet" href="styles.css?v=ad4b6b4">
+  <link rel="stylesheet" href="styles.css?v=c24d1a9">
   <script>location.replace("resources.html?tab=builds" + (location.hash || ""));</script>
 </head>
 <body>
   <p><a href="resources.html?tab=builds">Open Builds</a></p>
+<script data-stf-toast>
+(function () {
+  var meta = document.querySelector('meta[name="stf-build"]');
+  var current = meta ? meta.content : "";
+  fetch("data/build-version.json?t=" + Date.now(), { cache: "no-store" })
+    .then(function (res) { return res.ok ? res.json() : null; })
+    .then(function (doc) {
+      if (!doc || !doc.version || doc.version === current) return;
+      if (document.querySelector(".build-toast")) return;
+      var btn = document.createElement("button");
+      btn.type = "button";
+      btn.className = "build-toast";
+      btn.textContent = "New version available — tap to refresh";
+      btn.addEventListener("click", function () { location.reload(); });
+      document.body.appendChild(btn);
+    })
+    .catch(function () {});
+})();
+</script>
 </body>
 </html>
