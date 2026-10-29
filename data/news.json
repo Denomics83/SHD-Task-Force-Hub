@@ -2,40 +2,89 @@
   "updated": "2026-10-29",
   "items": [
     {
-      "id": "ann-farm-now",
-      "type": "announcement",
+      "id": "patch-saturday",
+      "type": "patch",
+      "demo": true,
       "priority": 1,
-      "title": "Season event almost finished",
-      "body": "Farm now while you can.",
+      "title": "Downloadable update Saturday",
+      "summary": "Minor fixes and features. About 4 hours down, about 100GB to download.",
       "date": "2026-10-29",
-      "href": null
-    },
-    {
-      "id": "ann-new-season",
-      "type": "announcement",
-      "priority": 2,
-      "title": "New season coming",
-      "body": "Here's what you need to know.",
-      "date": "2026-10-29",
-      "href": "season.html"
+      "schedule": "Sat 31 Oct · 02:00–06:00 UTC",
+      "sections": [
+        {
+          "title": "Patch notes",
+          "accent": true,
+          "blocks": [
+            {
+              "heading": "Changes to gear",
+              "bullets": [
+                "Example: a popular weapon-damage talent is eased back slightly.",
+                "Example: a sustain brand gets a small armor-regen bump.",
+                "Example: one skill-haste brand loses a little cooldown reduction."
+              ]
+            },
+            {
+              "heading": "Fixes",
+              "bullets": [
+                "Example: stash menu crash when sorting a full inventory.",
+                "Example: matchmaking desync after a countdown run.",
+                "Example: specialization ammo not refilling on a safe-house visit."
+              ]
+            }
+          ]
+        }
+      ]
     },
     {
       "id": "maint-tuesday",
       "type": "maintenance",
-      "priority": 3,
+      "demo": true,
+      "priority": 2,
       "title": "Scheduled maintenance",
-      "body": "Tuesday — servers down about 5 hours.",
-      "date": "2026-10-27",
-      "href": null
+      "summary": "Routine maintenance. Expect about 5 hours of downtime.",
+      "date": "2026-10-29",
+      "schedule": "Tue 3 Nov · 08:00–13:00 UTC",
+      "sections": [
+        {
+          "blocks": [
+            {
+              "text": "Routine maintenance while the servers restart. Log out before the window so progress can save. The game will be unavailable for about five hours."
+            }
+          ]
+        }
+      ]
     },
     {
-      "id": "patch-thursday",
-      "type": "patch",
-      "priority": 4,
-      "title": "Update Thursday",
-      "body": "Download is live. Patch notes inside.",
+      "id": "ann-season-window",
+      "type": "announcement",
+      "demo": true,
+      "priority": 3,
+      "title": "Season event almost finished",
+      "summary": "Farm the remaining rewards while the window is still open.",
       "date": "2026-10-29",
-      "href": null
+      "schedule": "Open through 3 Nov",
+      "image": {
+        "src": "assets/events/season-hero.jpg",
+        "alt": "Agent on a rooftop over the city at dusk"
+      },
+      "sections": [
+        {
+          "blocks": [
+            {
+              "heading": "The window",
+              "text": "Red Horizon’s limited event is nearly over. Rewards on the free track and the seasonal activity stay up until the window closes."
+            },
+            {
+              "heading": "Before it ends",
+              "bullets": [
+                "Clear the remaining free-track rewards.",
+                "Run the seasonal activity while matchmaking is still busy.",
+                "Open the season page for manhunts, maps, and modifiers."
+              ]
+            }
+          ]
+        }
+      ]
     }
   ]
 }
