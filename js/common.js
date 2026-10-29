@@ -67,8 +67,8 @@ STF.topbarHTML = function () {
   return (
     '<header class="topbar">' +
     '<a class="brand" href="index.html">' +
-    '<div class="brand-text"><strong>Shade Task Force</strong>' +
-    "<span>Clan Hub</span></div></a>" +
+    "<strong>Shade Task Force</strong>" +
+    '<span class="hub-pill">Clan Hub</span></a>' +
     "</header>"
   );
 };

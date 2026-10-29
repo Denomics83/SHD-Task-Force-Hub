@@ -56,15 +56,18 @@ button { cursor: pointer; }
 }
 .brand:hover { text-decoration: none; }
 .brand img { width: 34px; height: 34px; flex-shrink: 0; }
-.brand-text { min-width: 0; }
-.brand-text strong {
-  display: block; font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em;
+.brand strong {
+  min-width: 0; font-size: 1.2rem; font-weight: 700; letter-spacing: -.01em;
   text-transform: none; line-height: 1.15; white-space: nowrap;
   overflow: hidden; text-overflow: ellipsis;
 }
-.brand-text span {
-  display: block; margin-top: 3px; font-size: .78rem; color: #8b919a;
-  letter-spacing: 0; text-transform: none; line-height: 1.2;
+.hub-pill {
+  flex-shrink: 0; margin-left: auto;
+  font-size: .62rem; font-weight: 700; letter-spacing: .12em;
+  text-transform: uppercase; color: #9aa0a6; line-height: 1;
+  padding: 5px 8px; border-radius: 999px;
+  background: rgba(255,255,255,.04);
+  border: 1px solid rgba(255,255,255,.12);
 }
 .page-chip {
   flex-shrink: 0; font-size: .68rem; font-weight: 800; letter-spacing: .12em;
@@ -515,7 +518,7 @@ body.page-events {
 .updates-page { padding-top: 14px; }
 .upd-list { display: grid; gap: 12px; }
 .upd-entry {
-  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 18px; align-items: center;
   background: rgba(255,255,255,.035);
   border: 1px solid rgba(255,255,255,.1);
   border-radius: 16px;
@@ -529,7 +532,8 @@ a.upd-entry:hover { text-decoration: none; color: inherit; border-color: rgba(25
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .upd-desc {
-  margin: 0; min-width: 0; color: #8a9099; font-size: .84rem; line-height: 1.3;
+  display: block; margin: 0; max-width: min(38ch, 72%);
+  color: #8a9099; font-size: .84rem; line-height: 1.3;
   white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .upd-stamp {
@@ -672,8 +676,7 @@ body.page-loot {
   font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
 }
 body.page-loot .topbar { position: relative; flex: 0 0 auto; min-height: 52px; padding: 8px 16px 6px; }
-body.page-loot .brand-text strong { font-size: 1.05rem; }
-body.page-loot .brand-text span { margin-top: 1px; font-size: .68rem; }
+body.page-loot .brand strong { font-size: 1.05rem; }
 body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
 .loot-screen {
   flex: 1 1 auto;
