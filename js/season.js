@@ -8,9 +8,12 @@
   var tabs = document.getElementById("season-tabs");
   var panels = {
     manhunts: document.getElementById("panel-manhunts"),
+    journey: document.getElementById("panel-journey"),
     maps: document.getElementById("panel-maps"),
-    modifiers: document.getElementById("panel-modifiers")
+    modifiers: document.getElementById("panel-modifiers"),
+    global: document.getElementById("panel-global")
   };
+  var themeEl = document.getElementById("season-theme");
 
   function sourceLine(name, url) {
     var link = url
@@ -37,20 +40,90 @@
       ? "Checked Oct 2026"
       : week.confirmed === "may-have-changed"
         ? "May have changed"
-        : "Launch list";
+        : week.confirmed === "launch-compilation"
+          ? "Launch list"
+          : "";
     var tasks = (week.tasks || [])
       .map(function (task) { return "<li>" + STF.esc(task) + "</li>"; })
       .join("");
     return (
       '<article class="season-item">' +
-      '<span class="status">' + STF.esc(flag) + "</span>" +
+      (flag ? '<span class="status">' + STF.esc(flag) + "</span>" : "") +
       "<h3>Week " + STF.esc(week.week) + " · " + STF.esc(week.scout) +
+      (week.label ? " · " + STF.esc(week.label) : "") +
       (week.date ? " · " + STF.esc(STF.formatDate(week.date)) : "") + "</h3>" +
       "<ul class=\"task-list\">" + tasks + "</ul>" +
       (week.caveat ? '<p class="caveat">' + STF.esc(week.caveat) + "</p>" : "") +
-      sourceLine(week.sourceName, week.source) +
+      (week.source ? sourceLine(week.sourceName, week.source) : "") +
       "</article>"
     );
+  }
+
+  function journeyHTML(pack) {
+    var missions = (pack && pack.missions) || [];
+    if (!missions.length) return '<p class="lede">No journey missions for this season.</p>';
+    return missions.map(function (mission, index) {
+      var tasks = (mission.tasks || []).map(function (task) {
+        return "<li>" + STF.esc(task) + "</li>";
+      }).join("");
+      var unlocks = mission.unlocks
+        ? '<p class="unlocks-line">Unlocks ' + STF.esc(mission.unlocks) + "</p>"
+        : "";
+      return (
+        '<article class="season-item journey-mission">' +
+        '<button type="button" class="journey-toggle" aria-expanded="false">' +
+        "<h3>" + STF.esc(mission.name || ("Mission " + (index + 1))) + "</h3>" +
+        unlocks +
+        "</button>" +
+        '<ol class="task-list" hidden>' + tasks + "</ol>" +
+        "</article>"
+      );
+    }).join("");
+  }
+
+  function bindJourney(root) {
+    if (!root) return;
+    root.addEventListener("click", function (e) {
+      var btn = e.target.closest(".journey-toggle");
+      if (!btn || !root.contains(btn)) return;
+      var list = btn.parentElement.querySelector(".task-list");
+      if (!list) return;
+      var open = list.hidden;
+      list.hidden = !open;
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+    });
+  }
+
+  function imageMapHTML(src, caption) {
+    return (
+      '<button type="button" class="map-shot" data-map="' + STF.esc(src) + '" data-caption="' + STF.esc(caption || "") + '">' +
+      '<img src="' + STF.esc(src) + '" alt="Season map">' +
+      "</button>" +
+      (caption ? '<p class="lede map-note">' + STF.esc(caption) + "</p>" : "") +
+      '<p class="lede map-note">Tap the map to open it full screen. Pinch to zoom.</p>'
+    );
+  }
+
+  function bindMapZoom(root) {
+    if (!root) return;
+    root.addEventListener("click", function (e) {
+      var btn = e.target.closest("[data-map]");
+      if (!btn || !root.contains(btn)) return;
+      STF.openMap(btn.getAttribute("data-map"), btn.getAttribute("data-caption") || "");
+    });
+  }
+
+  function globalHTML(list) {
+    if (!list.length) return '<p class="lede">No global modifiers for this season.</p>';
+    return list.map(function (item) {
+      var guide = item.guide && /^https?:\/\//i.test(String(item.guide).trim())
+        ? '<a class="guide-btn" href="' + STF.esc(item.guide) + '" target="_blank" rel="noopener">Guide</a>'
+        : "";
+      return (
+        '<article class="season-item"><h3>' + STF.esc(item.name) + "</h3><p>" +
+        STF.esc(item.description) + "</p>" + guide + "</article>"
+      );
+    }).join("");
   }
 
   function plot(menu) {
@@ -156,13 +229,18 @@
       STF.fetchJSON("data/season.json"),
       STF.fetchJSON("data/manhunt.json"),
       STF.fetchJSON("data/altars.json"),
-      STF.fetchJSON("data/modifiers.json")
+      STF.fetchJSON("data/modifiers.json"),
+      STF.fetchJSON("data/journey.json").catch(function () { return { seasons: {} }; }),
+      STF.fetchJSON("data/global-modifiers.json").catch(function () { return { seasons: {} }; })
     ]);
     var season = loaded[0];
     var manhunt = loaded[1];
     var altars = loaded[2];
     var modifiers = loaded[3];
+    var journey = loaded[4] || { seasons: {} };
+    var globalMods = loaded[5] || { seasons: {} };
 
+    if (themeEl) themeEl.textContent = season.theme || "Add the season theme here";
     if (title) title.textContent = (season.yearSeason || "") + " — " + (season.name || "Season");
     if (summary) {
       summary.textContent =
@@ -174,7 +252,7 @@
     var climax = manhunt.climax
       ? '<article class="season-item"><h3>' + STF.esc(manhunt.climax.title) + "</h3><p>" +
         STF.esc(manhunt.climax.task) + "</p>" +
-        sourceLine(manhunt.climax.sourceName, manhunt.climax.source) + "</article>"
+        (manhunt.climax.source ? sourceLine(manhunt.climax.sourceName, manhunt.climax.source) : "") + "</article>"
       : "";
 
     if (panels.manhunts) {
@@ -196,8 +274,25 @@
       }
     }
 
-    if (panels.maps) panels.maps.innerHTML = mapHTML(altars);
+    if (panels.journey) {
+      var pack = (journey.seasons && journey.seasons[season.id]) || { missions: [] };
+      panels.journey.innerHTML = journeyHTML(pack);
+      bindJourney(panels.journey);
+    }
+
+    if (panels.maps) {
+      if (season.mapImage) {
+        panels.maps.innerHTML = imageMapHTML(season.mapImage, season.mapCaption || "");
+        bindMapZoom(panels.maps);
+      } else {
+        panels.maps.innerHTML = mapHTML(altars);
+      }
+    }
     if (panels.modifiers) panels.modifiers.innerHTML = modifiersHTML(modifiers);
+    if (panels.global) {
+      var seasonMods = (globalMods.seasons && globalMods.seasons[season.id] && globalMods.seasons[season.id].modifiers) || [];
+      panels.global.innerHTML = globalHTML(seasonMods);
+    }
   } catch (e) {
     if (summary) summary.textContent = "Could not load season data.";
     console.error(e);

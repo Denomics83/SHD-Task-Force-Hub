@@ -1,0 +1,23 @@
+{
+  "seasons": {
+    "y8s3-red-horizon": {
+      "modifiers": [
+        {
+          "name": "Add modifier name",
+          "description": "Add a short description",
+          "guide": ""
+        },
+        {
+          "name": "Add modifier name",
+          "description": "Add a short description",
+          "guide": ""
+        },
+        {
+          "name": "Add modifier name",
+          "description": "Add a short description",
+          "guide": ""
+        }
+      ]
+    }
+  }
+}

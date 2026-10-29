@@ -1,0 +1,120 @@
+{
+  "seasons": {
+    "y8s3-red-horizon": {
+      "missions": [
+        {
+          "name": "Mission 1 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        },
+        {
+          "name": "Mission 2 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        },
+        {
+          "name": "Mission 3 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        },
+        {
+          "name": "Mission 4 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        },
+        {
+          "name": "Mission 5 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        },
+        {
+          "name": "Mission 6 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        },
+        {
+          "name": "Mission 7 — add name",
+          "unlocks": "",
+          "tasks": [
+            "Task 1 — add task",
+            "Task 2 — add task",
+            "Task 3 — add task",
+            "Task 4 — add task",
+            "Task 5 — add task",
+            "Task 6 — add task",
+            "Task 7 — add task",
+            "Task 8 — add task",
+            "Task 9 — add task",
+            "Task 10 — add task"
+          ]
+        }
+      ]
+    }
+  }
+}

@@ -5,6 +5,7 @@
   "started": "2026-08-26",
   "patch": "Y8S3.2 (15 Oct 2026)",
   "summary": "Brand-set bonus rework season. Most pre–late-August 2026 brand guides are outdated.",
+  "theme": "Add the season theme here",
   "manhunts": [
     { "title": "Season Manhunt arc", "status": "Active", "blurb": "Follow the in-game Manhunt board for the current target chain. Rewards rotate with season track." },
     { "title": "Legacy Manhunts", "status": "Available", "blurb": "Prior season manhunts remain for exotic / cosmetic catch-up — check difficulty before Hardcore runs." }

@@ -79,3 +79,40 @@ STF.mountChrome = function (active) {
   if (top) top.innerHTML = STF.topbarHTML();
   if (bottom) bottom.innerHTML = STF.bottomNavHTML(active || "");
 };
+
+STF.openMap = function (src, caption) {
+  var old = document.getElementById("map-zoom");
+  if (old) old.remove();
+  var el = document.createElement("div");
+  el.id = "map-zoom";
+  el.className = "map-zoom";
+  el.innerHTML =
+    '<button type="button" class="map-zoom-close" aria-label="Close map">×</button>' +
+    '<div class="map-zoom-stage"><img alt="Map" src="' + STF.esc(src) + '"></div>' +
+    (caption ? "<p>" + STF.esc(caption) + "</p>" : "");
+  document.body.appendChild(el);
+  var img = el.querySelector("img");
+  var stage = el.querySelector(".map-zoom-stage");
+  var scale = 1;
+  var startDist = 0;
+  var startScale = 1;
+  stage.addEventListener("touchmove", function (e) {
+    if (e.touches.length !== 2) return;
+    e.preventDefault();
+    var dx = e.touches[0].clientX - e.touches[1].clientX;
+    var dy = e.touches[0].clientY - e.touches[1].clientY;
+    var dist = Math.hypot(dx, dy);
+    if (!startDist) {
+      startDist = dist;
+      startScale = scale;
+    }
+    scale = Math.min(4, Math.max(1, startScale * (dist / startDist)));
+    img.style.transform = "scale(" + scale + ")";
+  }, { passive: false });
+  stage.addEventListener("touchend", function () { startDist = 0; });
+  img.addEventListener("click", function () {
+    scale = scale > 1 ? 1 : 2;
+    img.style.transform = "scale(" + scale + ")";
+  });
+  el.querySelector(".map-zoom-close").addEventListener("click", function () { el.remove(); });
+};

@@ -997,3 +997,84 @@ body.page-resources main { flex: 1 1 auto; min-height: 0; display: flex; flex-di
 /* Inactive season sub-tabs stay hidden. .season-list { display:grid } would otherwise show every panel. */
 .season-panel.season-list { display: none; }
 .season-panel.season-list.active { display: grid; }
+.season-theme {
+  margin: 0 0 12px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 12px 14px;
+  color: var(--muted);
+  font-size: .9rem;
+  line-height: 1.45;
+}
+.journey-toggle {
+  width: 100%; text-align: left; background: transparent; border: 0; padding: 0; color: inherit;
+}
+.journey-toggle h3 { margin: 0; }
+.unlocks-line { margin: 4px 0 0; color: var(--orange); font-size: .75rem; font-weight: 700; }
+.guide-btn {
+  display: inline-flex; align-items: center; margin-top: 10px; min-height: 36px; padding: 0 14px;
+  border-radius: 999px; border: 1px solid var(--orange); color: var(--orange);
+  background: rgba(255,127,0,.12); font-weight: 800; font-size: .82rem; text-decoration: none;
+}
+a.guide-btn:hover { text-decoration: none; }
+.map-shot { display: block; width: 100%; padding: 0; border: 0; background: transparent; cursor: zoom-in; }
+.map-shot img { width: 100%; border-radius: 12px; border: 1px solid var(--border); }
+.map-zoom {
+  position: fixed; inset: 0; z-index: 80; background: rgba(0,0,0,.94);
+  display: flex; flex-direction: column; padding: 56px 12px 16px;
+}
+.map-zoom-stage { flex: 1; overflow: auto; display: grid; place-items: center; touch-action: none; }
+.map-zoom img { width: min(100%, 1600px); transform-origin: center center; }
+.map-zoom p { margin: 8px 0 0; text-align: center; color: #c8ccd4; font-size: .85rem; }
+.map-zoom-close {
+  position: absolute; top: 12px; right: 12px; width: 38px; height: 38px;
+  border-radius: 10px; border: 1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.06); color: #fff; font-size: 1.4rem;
+}
+body.page-events.is-event-detail {
+  height: auto; min-height: 100dvh; overflow: auto;
+  padding-bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 8px);
+}
+body.page-events.is-event-detail .event-stage { display: block; flex: none; }
+body.page-events.is-event-detail .hero-rail { display: none; }
+body.page-events.is-event-detail .bottom-nav { position: fixed; left: 0; right: 0; bottom: 0; }
+.event-detail[hidden] { display: none !important; }
+.admin-link {
+  position: fixed; right: 14px; bottom: calc(var(--nav-h) + 8px); z-index: 30;
+  font-size: .68rem; color: #6c7380; letter-spacing: .04em;
+}
+body.is-event-detail .admin-link { display: none; }
+body.page-admin { background: #0b0d10; background-image: none; }
+.admin-main { padding-bottom: 28px; }
+.admin-card {
+  background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);
+  padding: 14px; margin: 0 0 14px;
+}
+.admin-card h2 { margin: 0 0 8px; font-size: 1.05rem; }
+.admin-sub { margin: 14px 0 8px; font-size: .95rem; }
+.admin-card label, .admin-acc label {
+  display: grid; gap: 4px; margin: 0 0 10px; font-size: .75rem; font-weight: 700; color: var(--muted);
+}
+.admin-card input, .admin-card select, .admin-card textarea,
+.admin-acc input, .admin-acc select, .admin-acc textarea {
+  width: 100%; background: #101318; border: 1px solid rgba(255,255,255,.12);
+  border-radius: 10px; padding: 10px 12px; color: var(--text);
+}
+.admin-btn {
+  min-height: 40px; padding: 0 14px; border-radius: 999px; border: 1px solid var(--orange);
+  background: rgba(255,127,0,.16); color: var(--orange); font-weight: 800;
+}
+.admin-btn-ghost { background: transparent; border-color: rgba(255,255,255,.16); color: var(--muted); }
+.admin-row { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.admin-status { min-height: 1.2em; margin: 0 0 12px; font-size: .85rem; }
+.admin-status.is-ok { color: var(--gear); }
+.admin-status.is-err { color: #f87171; }
+.admin-instance, .admin-acc {
+  border: 1px solid rgba(255,255,255,.1); border-radius: 12px; padding: 10px 12px; margin: 0 0 8px;
+}
+.admin-acc-btn {
+  width: 100%; text-align: left; background: transparent; border: 0; color: inherit;
+  font-weight: 800; padding: 4px 0;
+}
+#map-preview { max-height: 180px; width: auto; border-radius: 10px; margin: 0 0 10px; }

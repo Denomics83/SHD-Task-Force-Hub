@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0D10">
+  <title>Admin — Shade Task Force Hub</title>
+  <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body class="page-admin">
+  <div id="topbar-root"></div>
+  <main class="wrap admin-main">
+    <p class="lede"><a href="events.html">← Events</a></p>
+    <h1>Events admin</h1>
+    <p class="lede">Saves JSON straight to <code>main</code>. The token stays in this browser only.</p>
+    <p id="admin-status" class="admin-status" role="status"></p>
+
+    <section id="login-box" class="admin-card">
+      <h2>Log in</h2>
+      <label>GitHub fine-grained token
+        <input id="token-input" type="password" autocomplete="off" placeholder="github_pat_…">
+      </label>
+      <button type="button" class="admin-btn" id="login-btn">Log in</button>
+    </section>
+
+    <div id="app-box" hidden>
+      <p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" id="logout-btn">Log out</button></p>
+
+      <section class="admin-card">
+        <h2>Event type</h2>
+        <label>Existing type
+          <select id="type-select"></select>
+        </label>
+        <form id="type-form">
+          <label>Id <input name="id" required pattern="[a-z0-9-]+" title="Lowercase letters, numbers, hyphens"></label>
+          <label>Name <input name="name" required></label>
+          <label>Short description <input name="description" required></label>
+          <label>Rewards <textarea name="rewards" rows="3"></textarea></label>
+          <label>Modifiers <textarea name="modifiers" rows="3"></textarea></label>
+          <label>Tasks / notes <textarea name="tasks" rows="3"></textarea></label>
+          <label>Accent colour <input name="accent" type="color" value="#ff7f00"></label>
+          <label>Image path <input name="image" placeholder="assets/events/season-hero.jpg"></label>
+          <label>Source line <input name="source" placeholder="Source · checked 29 Oct 2026"></label>
+          <label>Suggested note <textarea name="suggested" rows="2" placeholder="Optional. Not shown as the main detail."></textarea></label>
+          <p class="admin-row">
+            <button class="admin-btn" type="submit">Save type</button>
+            <button type="button" class="admin-btn admin-btn-ghost" id="type-delete" hidden>Delete type</button>
+          </p>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Schedule an event</h2>
+        <p class="lede">Times are Melbourne. They are stored as UTC.</p>
+        <form id="event-form">
+          <label>Type
+            <select name="typeId" id="event-type" required></select>
+          </label>
+          <label>Start <input name="start" type="datetime-local" required></label>
+          <label>End <input name="end" type="datetime-local" required></label>
+          <label>Note <input name="note" placeholder="Optional"></label>
+          <button class="admin-btn" type="submit">Save event</button>
+        </form>
+        <h3 class="admin-sub">Scheduled</h3>
+        <div id="instance-list"></div>
+      </section>
+
+      <section class="admin-card">
+        <h2>Season theme</h2>
+        <p class="lede">One paragraph for the whole season. It sits under the tabs and stays visible on every tab.</p>
+        <form id="theme-form">
+          <label>Season theme
+            <textarea name="theme" id="theme-input" rows="4"></textarea>
+          </label>
+          <button class="admin-btn" type="submit">Save theme</button>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Configure manhunt</h2>
+        <p class="lede">Tap a week, then a task, and type. Saves <code>data/manhunt.json</code>.</p>
+        <form id="manhunt-form">
+          <label>Season label <input name="season" id="mh-season" required></label>
+          <label>Note <textarea name="note" id="mh-note" rows="2"></textarea></label>
+          <label>Weeks <input name="count" id="mh-count" type="number" min="1" max="20" value="13"></label>
+          <div id="mh-weeks"></div>
+          <h3 class="admin-sub">Climax mission</h3>
+          <label>Title <input id="mh-climax-title" placeholder="Optional"></label>
+          <label>Task <textarea id="mh-climax-task" rows="2" placeholder="Optional"></textarea></label>
+          <button class="admin-btn" type="submit">Save manhunt</button>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Configure journey</h2>
+        <p class="lede">Tap a mission, then a task, and type. Journey missions unlock global modifiers. Saves <code>data/journey.json</code>.</p>
+        <form id="journey-form">
+          <label>Season
+            <select id="journey-season"></select>
+          </label>
+          <div id="journey-missions"></div>
+          <p class="admin-row">
+            <button type="button" class="admin-btn admin-btn-ghost" id="journey-add">Add mission</button>
+          </p>
+          <button class="admin-btn" type="submit">Save journey</button>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Global modifiers</h2>
+        <p class="lede">Cards on the season’s Global Modifiers tab. A Guide button shows only when a link is set.</p>
+        <form id="gm-form">
+          <label>Season
+            <select id="gm-season"></select>
+          </label>
+          <div id="gm-list"></div>
+          <h3 class="admin-sub" id="gm-editing">Add modifier</h3>
+          <input type="hidden" id="gm-index" value="-1">
+          <label>Name <input id="gm-name" required></label>
+          <label>Short description <textarea id="gm-desc" rows="2" required></textarea></label>
+          <label>Guide link <input id="gm-guide" type="url" placeholder="Optional https://…"></label>
+          <p class="admin-row">
+            <button class="admin-btn" type="submit">Save modifier</button>
+            <button type="button" class="admin-btn admin-btn-ghost" id="gm-cancel" hidden>Cancel</button>
+          </p>
+        </form>
+      </section>
+
+      <section class="admin-card">
+        <h2>Map image</h2>
+        <p class="lede">Jpg, png, or webp. The image is resized to 1600px wide before it is committed.</p>
+        <form id="map-form">
+          <label>Season or event
+            <select id="map-target" required></select>
+          </label>
+          <p id="map-current" class="lede"></p>
+          <img id="map-preview" alt="" hidden>
+          <label>Image file <input id="map-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
+          <label>Caption <input id="map-caption" placeholder="Optional, e.g. Altars can be shot once every 24h"></label>
+          <p class="admin-row">
+            <button class="admin-btn" type="submit">Save map</button>
+            <button type="button" class="admin-btn admin-btn-ghost" id="map-remove">Remove map</button>
+          </p>
+        </form>
+      </section>
+    </div>
+  </main>
+  <script src="js/common.js"></script>
+  <script src="js/admin.js"></script>
+</body>
+</html>

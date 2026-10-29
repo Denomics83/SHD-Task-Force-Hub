@@ -1,0 +1,40 @@
+{
+  "types": [
+    {
+      "id": "red-moon-unleashed",
+      "name": "Red Moon Unleashed",
+      "description": "Limited-time event in Washington, D.C.",
+      "rewards": "add details",
+      "modifiers": "add details",
+      "tasks": "add details",
+      "accent": "#c43b3b",
+      "image": "assets/events/season-hero.jpg",
+      "source": "Source · checked 29 Oct 2026",
+      "suggested": ""
+    },
+    {
+      "id": "expertise-surge",
+      "name": "Expertise Surge",
+      "description": "Limited-time expertise progress window.",
+      "rewards": "add details",
+      "modifiers": "add details",
+      "tasks": "add details",
+      "accent": "#d97706",
+      "image": "",
+      "source": "Source · checked 29 Oct 2026",
+      "suggested": ""
+    },
+    {
+      "id": "vanguard-overdrive",
+      "name": "Vanguard Overdrive",
+      "description": "Limited-time vanguard activity window.",
+      "rewards": "add details",
+      "modifiers": "add details",
+      "tasks": "add details",
+      "accent": "#3b82f6",
+      "image": "assets/events/raid-hero.jpg",
+      "source": "Source · checked 29 Oct 2026",
+      "suggested": ""
+    }
+  ]
+}
