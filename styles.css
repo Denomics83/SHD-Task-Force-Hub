@@ -710,15 +710,15 @@ body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
 .loot-row {
   flex: 1 1 0;
   min-height: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 28px max-content;
-  column-gap: 8px;
+  display: flex;
   align-items: center;
+  gap: 8px;
   border-bottom: 1px solid rgba(255,255,255,.06);
 }
 .loot-row:last-child { border-bottom: 0; }
-.loot-row-dz { grid-template-columns: max-content 28px minmax(0, 1fr) max-content; }
 .loot-name {
+  flex: 1 1 auto;
+  min-width: 0;
   font-size: 12.5px;
   font-weight: 600;
   letter-spacing: -.02em;
@@ -727,13 +727,17 @@ body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
   overflow: hidden;
   text-overflow: ellipsis;
 }
+.loot-esc .loot-name { font-size: 14px; }
 .loot-val {
   font-size: 12px;
   font-weight: 600;
   letter-spacing: -.015em;
   color: #ebebf0;
-  text-align: right;
+  text-align: left;
   white-space: nowrap;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 .loot-val.is-placeholder {
   color: #8e8e93;
@@ -741,15 +745,19 @@ body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
   font-style: italic;
 }
 .loot-ico {
-  width: 28px;
-  height: 28px;
+  width: 34px;
+  height: 34px;
+  margin-left: auto;
+  flex: 0 0 auto;
   border-radius: 8px;
   display: grid;
   place-items: center;
   background: rgba(255,255,255,.05);
   border: 1px solid rgba(255,255,255,.08);
 }
-.loot-ico img { width: 20px; height: 20px; object-fit: contain; display: block; }
+.loot-row-dz .dz-badge { margin-left: auto; }
+.loot-row-dz .loot-ico { margin-left: 0; }
+.loot-ico img { width: 26px; height: 26px; object-fit: contain; display: block; }
 .loot-ico.kind-gearset { background: rgba(1,255,144,.14); }
 .loot-ico.kind-brand { background: rgba(255,196,64,.14); }
 .loot-ico.kind-slot,

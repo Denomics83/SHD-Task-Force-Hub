@@ -4,6 +4,9 @@
   var root = document.getElementById("loot-screen");
   if (!root) return;
 
+  /* Dark Zone data and row markup stay in place. Flip this to show the section again. */
+  var SHOW_DARK_ZONE = false;
+
   function iconHTML(row) {
     var kind = STF.esc(row.kind || "unknown");
     if (!row.icon) {
@@ -21,8 +24,8 @@
     return (
       '<div class="loot-row">' +
       '<span class="loot-name">' + STF.esc(name) + "</span>" +
-      iconHTML(row) +
       '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
+      iconHTML(row) +
       "</div>"
     );
   }
@@ -49,28 +52,34 @@
         return (
           '<div class="loot-row loot-row-dz">' +
           '<span class="loot-name">' + STF.esc(row.map) + "</span>" +
-          iconHTML(row) +
           '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
           badgeHTML(row) +
+          iconHTML(row) +
           "</div>"
         );
       })
       .join("");
 
     var creditDate = data.lootDate ? STF.formatDate(data.lootDate) : "";
+    var dzSection = "";
+    if (SHOW_DARK_ZONE) {
+      dzSection =
+        '<section class="loot-block loot-dz">' +
+        "<h2>Dark Zone</h2>" +
+        '<div class="loot-rows">' + dz + "</div></section>";
+    }
     root.innerHTML =
       '<section class="loot-block loot-esc">' +
-      "<h2>Escalations</h2>" +
+      "<h2>Missions</h2>" +
       '<div class="loot-rows">' + esc + "</div></section>" +
       '<section class="loot-block loot-proto">' +
-      "<h2>Proto Caches</h2>" +
+      "<h2>Caches</h2>" +
       '<div class="loot-rows">' + caches + "</div></section>" +
-      '<section class="loot-block loot-dz">' +
-      "<h2>Dark Zone</h2>" +
-      '<div class="loot-rows">' + dz + "</div></section>" +
+      dzSection +
       '<p class="loot-credit">Source: <a href="' + STF.esc(data.source || "https://prototrack.gg/target-loot/target-loot.php") + '" rel="noopener" target="_blank">ProtoTrack</a>' +
       (creditDate ? " · " + STF.esc(creditDate) : "") +
-      ". DZ loot and mode: confirm in-game.</p>";
+      (SHOW_DARK_ZONE ? ". DZ loot and mode: confirm in-game." : "") +
+      "</p>";
   } catch (err) {
     root.innerHTML = '<p class="lede">Could not load targeted loot.</p>';
     console.error(err);
