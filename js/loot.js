@@ -1,25 +1,27 @@
-/* One-screen targeted loot. Escalations + proto caches from ProtoTrack.
-   DZ loot and weekly mode are placeholders until an admin fills data/loot.json. */
+/* One-screen targeted loot. Icons are the real brand, set, slot, or weapon marks. */
 (async function () {
   STF.mountChrome("loot");
   var root = document.getElementById("loot-screen");
   if (!root) return;
 
-  function chip(row) {
+  function iconHTML(row) {
+    var kind = STF.esc(row.kind || "unknown");
+    if (!row.icon) {
+      return '<span class="loot-ico kind-' + kind + ' is-empty" aria-hidden="true"></span>';
+    }
     return (
-      '<span class="loot-chip kind-' + STF.esc(row.kind || "unknown") + '" aria-hidden="true">' +
-      STF.esc(row.mark || "·") +
+      '<span class="loot-ico kind-' + kind + '">' +
+      '<img src="' + STF.esc(row.icon) + '" alt="">' +
       "</span>"
     );
   }
 
   function rowHTML(name, row) {
-    var pri = row.priority ? '<span class="loot-pri" title="Priority on ProtoTrack">●</span>' : "";
     var placeholder = row.loot === "confirm in-game";
     return (
       '<div class="loot-row">' +
-      '<span class="loot-name">' + pri + STF.esc(name) + "</span>" +
-      chip(row) +
+      '<span class="loot-name">' + STF.esc(name) + "</span>" +
+      iconHTML(row) +
       '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
       "</div>"
     );
@@ -47,7 +49,7 @@
         return (
           '<div class="loot-row loot-row-dz">' +
           '<span class="loot-name">' + STF.esc(row.map) + "</span>" +
-          chip(row) +
+          iconHTML(row) +
           '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
           badgeHTML(row) +
           "</div>"

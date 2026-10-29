@@ -142,13 +142,13 @@
       if (when) kicker += " · " + STF.esc(clockLabel(when, raid.timezone));
       slides.push({
         kind: "raid",
-        href: "resources.html#raids",
+        href: "",
         chip: chip,
         chipClass: " countdown",
         title: "Raid Scheduled",
         kickerHtml: kicker,
         sub: "",
-        label: "Open raid planner to confirm"
+        label: "Scheduled raid"
       });
     });
 
@@ -156,15 +156,19 @@
     rail.innerHTML = slides
       .map(function (slide, i) {
         var kicker = slide.kickerHtml || (slide.kicker ? STF.esc(slide.kicker) : "");
-        return (
-          '<a class="hero-card is-' + slide.kind + '" href="' + slide.href + '" aria-label="' + STF.esc(slide.label) + '">' +
+        var inner =
+          '<div class="hero-photo"></div>' +
+          '<div class="hero-copy">' +
           '<span class="hero-chip' + slide.chipClass + '">' + STF.esc(slide.chip) + "</span>" +
           "<h2>" + STF.esc(slide.title) + "</h2>" +
           (kicker ? '<p class="hero-kicker">' + kicker + "</p>" : "") +
           (slide.sub ? '<p class="hero-sub">' + STF.esc(slide.sub) + "</p>" : "") +
           dots(i, count) +
-          "</a>"
-        );
+          "</div>";
+        var card = slide.href
+          ? '<a class="hero-card is-' + slide.kind + '" href="' + slide.href + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</a>"
+          : '<article class="hero-card is-' + slide.kind + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</article>";
+        return '<div class="hero-slide">' + card + "</div>";
       })
       .join("");
 

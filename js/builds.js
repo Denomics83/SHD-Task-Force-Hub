@@ -1,354 +1,207 @@
+/* Builds: category grid → name/role list → detail.
+   The owner's second "Incursion" block is Escalation. */
 (function () {
-  STF.mountChrome("builds", "Builds");
+  STF.mountChrome("builds");
 
-  const builds = window.CLAN_BUILDS || [];
-  const rail = document.getElementById("build-rail");
-  const empty = document.getElementById("empty-state");
-  const countEl = document.getElementById("build-count");
-  const stage = document.getElementById("cat-stage");
-  const detail = document.getElementById("build-detail");
-  const titleEl = document.getElementById("build-title");
-  const backBtn = document.getElementById("build-back");
-  if (!rail || !stage) return;
+  var stage = document.getElementById("cat-stage");
+  var listView = document.getElementById("build-list");
+  var listTitle = document.getElementById("list-title");
+  var listRows = document.getElementById("list-rows");
+  var listBack = document.getElementById("list-back");
+  var detailView = document.getElementById("build-detail");
+  var detailBody = document.getElementById("detail-body");
+  var detailBack = document.getElementById("detail-back");
+  if (!stage || !listView || !detailView) return;
 
-  const TILES = [
-    { id: "solo", label: "Solo", art: "assets/tiles/builds-solo.jpg", match: ["solo-hybrid", "solo-damage"] },
-    { id: "team", label: "Team", art: "assets/tiles/builds-team.jpg", match: ["team-tank", "skill-support", "dps-support", "healer"] },
-    { id: "incursion", label: "Incursion", art: "assets/tiles/builds-incursion.jpg", match: ["incursion"] },
-    { id: "escalation", label: "Escalation", art: "assets/tiles/builds-escalation.jpg", match: ["escalation"] },
-    { id: "raid", label: "Raid", art: "assets/tiles/builds-raid.jpg", match: ["raid"] },
-    { id: "pvp", label: "PvP", art: "assets/tiles/builds-pvp.jpg", match: ["pvp"] }
+  var STRIKER = "assets/icons/gearsets/strikers-battlegear.png";
+
+  var CATS = [
+    { id: "solo", label: "Solo", art: "assets/tiles/builds-solo.jpg" },
+    { id: "team", label: "Team", art: "assets/tiles/builds-team.jpg" },
+    { id: "incursion", label: "Incursion", art: "assets/tiles/builds-incursion.jpg" },
+    { id: "escalation", label: "Escalation", art: "assets/tiles/builds-escalation.jpg" },
+    { id: "raid", label: "Raid", art: "assets/tiles/builds-raid.jpg" },
+    { id: "pvp", label: "PvP", art: "assets/tiles/builds-pvp.jpg" }
   ];
 
-  function coresHTML(cores) {
-    if (!cores || !cores.length) return '<span class="core core-u"></span>';
-    return cores
-      .map(function (c) {
-        const cls = c === "r" ? "core-r" : c === "b" ? "core-b" : c === "y" ? "core-y" : "core-u";
-        return '<span class="core ' + cls + '"></span>';
-      })
-      .join("");
+  /* Names and roles only. No attribute numbers. */
+  var LISTS = {
+    solo: [
+      { id: "striker", name: "Striker", role: "DPS", tone: "dps", icon: STRIKER },
+      { id: "hollow-man", name: "Hollow Man", role: "DPS", tone: "dps", detail: "hollow-man" },
+      { id: "oneshot", name: "Oneshot", role: "DPS", tone: "dps" }
+    ],
+    team: [
+      { id: "hollow-man", name: "Hollow Man", role: "Damage support", tone: "dps", detail: "hollow-man" },
+      { id: "capin-murica", name: "Capin Murica", role: "Damage support", tone: "dps" },
+      { id: "splooge", name: "Splooge", role: "Crowd control", tone: "skill" },
+      { id: "medic", name: "Medic", role: "Healer", tone: "heal" }
+    ],
+    incursion: [
+      { id: "juggernaut", name: "Juggernaut", role: "Tank support", tone: "tank" },
+      { id: "measured", name: "Measured", role: "Healer", tone: "heal" },
+      { id: "attack", name: "Attack", role: "Damage", tone: "dps" }
+    ],
+    escalation: [
+      { id: "splooge", name: "Splooge", role: "Crowd control", tone: "skill" },
+      { id: "striker", name: "Striker", role: "Damage", tone: "dps", icon: STRIKER },
+      { id: "medic", name: "Medic", role: "Healer", tone: "heal" }
+    ],
+    raid: [
+      { id: "striker", name: "Striker", role: "Damage", tone: "dps", icon: STRIKER }
+    ],
+    pvp: [
+      { id: "up-close", name: "Up Close", role: "Damage", tone: "dps" }
+    ]
+  };
+
+  function catById(id) {
+    for (var i = 0; i < CATS.length; i++) if (CATS[i].id === id) return CATS[i];
+    return null;
   }
 
-  function rarityNameClass(r) {
-    if (r === "exotic") return "exotic";
-    if (r === "named") return "named";
-    if (r === "gearset") return "gearset";
-    if (r === "highend") return "highend";
-    return "";
+  function findBuild(catId, buildId) {
+    var rows = LISTS[catId] || [];
+    for (var i = 0; i < rows.length; i++) if (rows[i].id === buildId) return rows[i];
+    return null;
   }
 
-  function gearIcon(p) {
-    if (p.icon) return '<img src="' + p.icon + '" alt="" width="34" height="34" loading="lazy">';
-    const letter = p.letter || (p.name || "?").slice(0, 2).toUpperCase();
-    return '<span class="letter">' + STF.esc(letter) + "</span>";
-  }
-
-  function attrsLine(attrs) {
-    if (!attrs || !attrs.length) return "";
+  function hollowDetail(row) {
     return (
-      '<div class="gear-attrs" title="Priority attributes">' +
-      attrs
-        .map(function (a) {
-          return '<span class="attr-chip">' + STF.esc(a) + "</span>";
-        })
-        .join("") +
-      "</div>"
+      '<h1>Hollow Man</h1>' +
+      '<p class="build-role tone-' + row.tone + '">' + STF.esc(row.role) + "</p>" +
+      '<div class="detail-blurb"><strong>Summary</strong>DPS support — creates status effects.</div>' +
+      '<div class="detail-blurb"><strong>How to play</strong>Use cover and the big Alejandro or any machine gun to spray and mark enemies with status effects. Offer crowd control support whilst team DPS eliminates marked enemies to proc hollow point bullets.</div>' +
+      '<div class="detail-blurb"><strong>Hardcore</strong>Stay in cover. Do not greed marks in the open. Pair with a tank or healer.</div>' +
+      '<h2 class="detail-label">Pieces</h2>' +
+      '<ul class="piece-list">' +
+      "<li><span>Mask</span> Striker's Battlegear</li>" +
+      "<li><span>Chest</span> Grupo Sombra · Obliterate</li>" +
+      "<li><span>Backpack</span> Memento</li>" +
+      "<li><span>Gloves</span> Striker's Battlegear</li>" +
+      "<li><span>Holster</span> Striker's Battlegear</li>" +
+      "<li><span>Kneepads</span> Striker's Battlegear</li>" +
+      "<li><span>Primary</span> St. Elmo's Engine</li>" +
+      "<li><span>Skills</span> Crusader Shield · Reviver Hive</li>" +
+      "<li><span>Spec</span> Gunner</li>" +
+      "</ul>" +
+      '<p class="lede">Piece names only. No rolled attribute numbers.</p>'
     );
   }
 
-  function modsLine(mods) {
-    if (!mods || !mods.length) return "";
+  function placeholderDetail(row) {
+    var icon = row.icon
+      ? '<img class="detail-logo" src="' + row.icon + '" alt="">'
+      : "";
     return (
-      '<div class="gear-mods" title="Recommended gear mods">' +
-      '<span class="mod-label">mod</span> ' +
-      STF.esc(mods.join(" · ")) +
-      "</div>"
+      "<h1>" + icon + STF.esc(row.name) + "</h1>" +
+      '<p class="build-role tone-' + row.tone + '">' + STF.esc(row.role) + "</p>" +
+      '<p class="lede">Setup not seeded yet. No attribute numbers are listed for this build.</p>'
     );
   }
 
-  function findGear(buildId, slot) {
-    const b = builds.find(function (x) {
-      return x.id === buildId;
-    });
-    if (!b) return null;
-    return (b.gear || []).find(function (g) {
-      return g.slot === slot;
-    });
+  function showGrid() {
+    document.body.classList.add("is-grid");
+    document.body.classList.remove("is-list");
+    stage.hidden = false;
+    listView.hidden = true;
+    detailView.hidden = true;
+    window.scrollTo(0, 0);
   }
 
-  /* Inventory order: Mask, Chest, Backpack, Gloves, Holster, Kneepads → 2×3 */
-  function renderCard(b) {
-    const cats = (b.categories || []).join(" ");
-    const stats = (b.stats || [])
-      .map(function (s) {
+  function showList(catId, push) {
+    var cat = catById(catId);
+    if (!cat) return showGrid();
+    document.body.classList.remove("is-grid");
+    document.body.classList.add("is-list");
+    stage.hidden = true;
+    detailView.hidden = true;
+    listView.hidden = false;
+    if (listTitle) listTitle.textContent = cat.label;
+    var rows = LISTS[catId] || [];
+    listRows.innerHTML = rows
+      .map(function (row) {
+        var icon = row.icon
+          ? '<img src="' + row.icon + '" alt="" class="' + (row.icon.indexOf("strikers") !== -1 ? "is-banner" : "") + '">'
+          : '<span class="role-mark tone-' + row.tone + '" aria-hidden="true"></span>';
         return (
-          '<div class="stat"><span class="stat-label">' +
-          STF.esc(s.label) +
-          '</span><span class="stat-value">' +
-          STF.esc(s.value) +
-          "</span></div>"
-        );
-      })
-      .join("");
-
-    const weapons = (b.weapons || [])
-      .map(function (w) {
-        return (
-          '<div class="wep-slot">' +
-          '<span class="slot-tag">' +
-          STF.esc(w.slot) +
-          "</span>" +
-          '<span class="wep-name ' +
-          rarityNameClass(w.rarity) +
-          '">' +
-          STF.esc(w.name) +
-          (w.alt ? " " + STF.esc(w.alt) : "") +
-          "</span>" +
-          (w.note ? '<span class="wep-note">' + STF.esc(w.note) + "</span>" : "") +
-          "</div>"
-        );
-      })
-      .join("");
-
-    const gear = (b.gear || [])
-      .map(function (p) {
-        return (
-          '<button type="button" class="gear-slot rarity-' +
-          STF.esc(p.rarity || "brand") +
-          '" data-build-id="' +
-          STF.esc(b.id) +
-          '" data-slot="' +
-          STF.esc(p.slot) +
-          '" aria-label="' +
-          STF.esc(p.slot + ": " + p.name) +
-          '">' +
-          '<div class="gear-top">' +
-          '<div class="gear-ico">' +
-          gearIcon(p) +
-          "</div>" +
-          '<span class="gear-slot-label">' +
-          STF.esc(p.slot) +
-          "</span></div>" +
-          '<div class="gear-slot-name ' +
-          rarityNameClass(p.rarity) +
-          '">' +
-          STF.esc(p.name) +
-          "</div>" +
-          (p.talent ? '<div class="gear-talent">' + STF.esc(p.talent) + "</div>" : "") +
-          attrsLine(p.attrs) +
-          modsLine(p.mods) +
-          '<div class="cores">' +
-          coresHTML(p.cores) +
-          "</div>" +
+          '<button type="button" class="build-row tone-' + row.tone + '" data-build="' + row.id + '">' +
+          '<span class="build-logo">' + icon + "</span>" +
+          "<span><strong>" + STF.esc(row.name) + "</strong>" +
+          '<em class="tone-' + row.tone + '">' + STF.esc(row.role) + "</em></span>" +
           "</button>"
         );
       })
       .join("");
-
-    const skills = (b.skills || [])
-      .map(function (s) {
-        return (
-          '<div class="skill-slot"><small>' +
-          STF.esc(s.slot) +
-          "</small><span>" +
-          STF.esc(s.name) +
-          "</span></div>"
-        );
-      })
-      .join("");
-
-    return (
-      '<article class="inv-card" data-categories="' +
-      cats +
-      '">' +
-      '<div class="inv-head"><div>' +
-      '<span class="cat-badge">' +
-      STF.esc(b.categoryLabel || "Build") +
-      "</span>" +
-      "<h2>" +
-      STF.esc(b.name) +
-      "</h2></div></div>" +
-      '<div class="inv-hud">' +
-      '<aside class="inv-stats" aria-label="Key stats">' +
-      stats +
-      "</aside>" +
-      '<div class="inv-main">' +
-      '<div class="inv-weapons" aria-label="Weapons">' +
-      weapons +
-      "</div>" +
-      '<div class="inv-gear" aria-label="Gear">' +
-      gear +
-      "</div>" +
-      '<div class="inv-bottom" aria-label="Skills and specialization">' +
-      skills +
-      '<div class="spec-slot">' +
-      (b.specialization && b.specialization.icon
-        ? '<img src="' + b.specialization.icon + '" alt="">'
-        : "") +
-      "<small>Spec</small><span>" +
-      STF.esc((b.specialization && b.specialization.name) || "—") +
-      "</span></div></div></div></div>" +
-      '<div class="inv-notes">' +
-      (b.playstyle
-        ? '<div class="play-blurb"><strong>Playstyle</strong>' + STF.esc(b.playstyle) + "</div>"
-        : "") +
-      (b.hardcore
-        ? '<div class="hc-blurb"><strong>Hardcore</strong>' + STF.esc(b.hardcore) + "</div>"
-        : "") +
-      "</div></article>"
-    );
-  }
-
-  /* Gear detail modal (injected once) */
-  const modal = document.createElement("div");
-  modal.id = "gear-modal";
-  modal.className = "gear-modal";
-  modal.hidden = true;
-  modal.innerHTML =
-    '<div class="gear-modal-backdrop" data-close="1"></div>' +
-    '<div class="gear-modal-panel" role="dialog" aria-modal="true" aria-labelledby="gear-modal-title">' +
-    '<button type="button" class="gear-modal-close" data-close="1" aria-label="Close">×</button>' +
-    '<div class="gear-modal-ico" id="gear-modal-ico"></div>' +
-    '<div class="gear-modal-slot" id="gear-modal-slot"></div>' +
-    '<h3 id="gear-modal-title"></h3>' +
-    '<div class="gear-modal-cores" id="gear-modal-cores"></div>' +
-    '<div class="gear-modal-section" id="gear-modal-talent-wrap" hidden>' +
-    "<strong>Talent</strong><span id=\"gear-modal-talent\"></span></div>" +
-    '<div class="gear-modal-section"><strong>Attributes</strong>' +
-    '<div class="gear-modal-chips" id="gear-modal-attrs"></div></div>' +
-    '<div class="gear-modal-section"><strong>Gear mods</strong>' +
-    '<div class="gear-modal-chips" id="gear-modal-mods"></div></div>' +
-    "</div>";
-  document.body.appendChild(modal);
-
-  function chipsHTML(list, emptyLabel) {
-    if (!list || !list.length) {
-      return '<span class="gear-modal-empty">' + STF.esc(emptyLabel) + "</span>";
-    }
-    return list
-      .map(function (a) {
-        return '<span class="attr-chip">' + STF.esc(a) + "</span>";
-      })
-      .join("");
-  }
-
-  function openGearModal(p) {
-    if (!p) return;
-    document.getElementById("gear-modal-slot").textContent = p.slot || "";
-    const title = document.getElementById("gear-modal-title");
-    title.textContent = p.name || "";
-    title.className = rarityNameClass(p.rarity);
-    document.getElementById("gear-modal-ico").innerHTML = gearIcon(p);
-    document.getElementById("gear-modal-cores").innerHTML = coresHTML(p.cores);
-    const tw = document.getElementById("gear-modal-talent-wrap");
-    if (p.talent) {
-      tw.hidden = false;
-      document.getElementById("gear-modal-talent").textContent = p.talent;
-    } else {
-      tw.hidden = true;
-    }
-    document.getElementById("gear-modal-attrs").innerHTML = chipsHTML(
-      p.attrs,
-      "No priority attrs listed"
-    );
-    document.getElementById("gear-modal-mods").innerHTML = chipsHTML(
-      p.mods,
-      p.rarity === "exotic" ? "Exotic — no mod slot" : "No mod slot on this piece"
-    );
-    modal.hidden = false;
-    document.body.classList.add("modal-open");
-  }
-
-  function closeGearModal() {
-    modal.hidden = true;
-    document.body.classList.remove("modal-open");
-  }
-
-  modal.addEventListener("click", function (e) {
-    if (e.target.closest("[data-close]")) closeGearModal();
-  });
-
-  document.addEventListener("keydown", function (e) {
-    if (e.key === "Escape" && !modal.hidden) closeGearModal();
-  });
-
-  rail.addEventListener("click", function (e) {
-    const btn = e.target.closest(".gear-slot");
-    if (!btn || !rail.contains(btn)) return;
-    openGearModal(findGear(btn.getAttribute("data-build-id"), btn.getAttribute("data-slot")));
-  });
-
-  rail.innerHTML = builds.map(renderCard).join("");
-
-  function showGrid() {
-    document.body.classList.add("is-grid");
-    stage.hidden = false;
-    if (detail) detail.hidden = true;
     window.scrollTo(0, 0);
+    if (push) history.pushState({ cat: catId }, "", "#" + catId);
   }
 
-  function apply(ids) {
-    var n = 0;
-    rail.querySelectorAll(".inv-card").forEach(function (card) {
-      var list = (card.getAttribute("data-categories") || "").split(/\s+/);
-      var show = list.some(function (c) { return ids.indexOf(c) !== -1; });
-      card.classList.toggle("hidden", !show);
-      if (show) n++;
-    });
-    if (countEl) {
-      countEl.textContent = n
-        ? n + " seeded build" + (n === 1 ? "" : "s")
-        : "No seeded builds in this category yet.";
-    }
-    if (empty) empty.classList.toggle("visible", n === 0);
-  }
-
-  function openTile(tile, push) {
-    if (!tile) return showGrid();
+  function showDetail(catId, buildId, push) {
+    var row = findBuild(catId, buildId);
+    var cat = catById(catId);
+    if (!row || !cat) return showList(catId, false);
     document.body.classList.remove("is-grid");
+    document.body.classList.add("is-list");
     stage.hidden = true;
-    if (detail) detail.hidden = false;
-    if (titleEl) titleEl.textContent = tile.label;
-    apply(tile.match);
+    listView.hidden = true;
+    detailView.hidden = false;
+    detailBody.innerHTML = row.detail === "hollow-man" ? hollowDetail(row) : placeholderDetail(row);
+    if (detailBack) detailBack.textContent = "← " + cat.label;
     window.scrollTo(0, 0);
-    if (push) history.pushState({ tile: tile.id }, "", "#" + tile.id);
+    if (push) history.pushState({ cat: catId, build: buildId }, "", "#" + catId + "/" + buildId);
   }
 
   stage.innerHTML =
     '<div class="cat-grid">' +
-    TILES.map(function (tile) {
+    CATS.map(function (cat) {
       return (
-        '<button type="button" class="cat-tile" data-tile="' + tile.id + '">' +
-        '<img src="' + tile.art + '" alt="' + STF.esc(tile.label) + '">' +
+        '<button type="button" class="cat-tile" data-cat="' + cat.id + '">' +
+        '<img src="' + cat.art + '" alt="' + STF.esc(cat.label) + '">' +
         "</button>"
       );
     }).join("") +
     "</div>";
 
   stage.addEventListener("click", function (e) {
-    var btn = e.target.closest("[data-tile]");
+    var btn = e.target.closest("[data-cat]");
     if (!btn) return;
-    var tile = TILES.filter(function (t) { return t.id === btn.getAttribute("data-tile"); })[0];
-    openTile(tile, true);
+    showList(btn.getAttribute("data-cat"), true);
   });
 
-  if (backBtn) {
-    backBtn.addEventListener("click", function () {
-      history.pushState({ tile: null }, "", "builds.html");
+  listRows.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-build]");
+    if (!btn) return;
+    var catId = (location.hash || "").replace("#", "").split("/")[0];
+    showDetail(catId, btn.getAttribute("data-build"), true);
+  });
+
+  if (listBack) {
+    listBack.addEventListener("click", function () {
+      history.pushState({}, "", "builds.html");
       showGrid();
+    });
+  }
+  if (detailBack) {
+    detailBack.addEventListener("click", function () {
+      var catId = (location.hash || "").replace("#", "").split("/")[0];
+      history.pushState({ cat: catId }, "", "#" + catId);
+      showList(catId, false);
     });
   }
 
   window.addEventListener("popstate", function () {
-    var id = (location.hash || "").replace("#", "");
-    var tile = TILES.filter(function (t) { return t.id === id; })[0];
-    if (tile) openTile(tile, false);
-    else showGrid();
+    route(false);
   });
 
-  var initial = (location.hash || "").replace("#", "");
-  var initialTile = TILES.filter(function (t) { return t.id === initial; })[0];
-  if (initialTile) openTile(initialTile, false);
-  else showGrid();
+  function route(push) {
+    var parts = (location.hash || "").replace("#", "").split("/");
+    var catId = parts[0];
+    var buildId = parts[1];
+    if (catId && buildId && findBuild(catId, buildId)) showDetail(catId, buildId, push);
+    else if (catId && catById(catId)) showList(catId, push);
+    else showGrid();
+  }
+
+  route(false);
 })();

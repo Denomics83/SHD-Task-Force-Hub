@@ -3,12 +3,12 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0B0C0E">
+  <meta name="theme-color" content="#0B0D10">
   <title>Resources — Shade Task Force Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="page-resources">
   <div id="topbar-root"></div>
 
   <main>
@@ -23,70 +23,6 @@
       <button type="button" class="back-link" id="res-back">← Resources</button>
       <div id="res-detail-body"></div>
     </section>
-
-    <div class="wrap res-planner">
-    <div class="section-label" id="raids">Raid planner</div>
-    <p class="lede" style="margin-top:0">Upcoming runs from <code>data/raids.json</code>. RSVP + admin add are stored in <strong>this browser only</strong> (localStorage MVP).</p>
-
-    <label class="form-row" style="max-width:280px;margin-bottom:12px">
-      Your name (for “I'm in”)
-      <input id="member-name" type="text" placeholder="Agent name" autocomplete="nickname">
-    </label>
-
-    <div class="raid-list" id="raid-list"></div>
-
-    <div class="admin-box">
-      <h3>Admin — add raid (local MVP)</h3>
-      <form id="raid-admin-form">
-        <div class="form-row cols-2">
-          <label>Activity
-            <select name="activity">
-              <option>Dark Hours</option>
-              <option>Iron Horse</option>
-              <option>Incursion</option>
-              <option>Legendary summit</option>
-              <option>Other</option>
-            </select>
-          </label>
-          <label>Difficulty
-            <select name="difficulty">
-              <option>Normal</option>
-              <option>Hard</option>
-              <option>Challenging</option>
-              <option>Heroic</option>
-            </select>
-          </label>
-        </div>
-        <div class="form-row cols-2">
-          <label>Date <input name="date" type="date" required></label>
-          <label>Time <input name="time" type="time" required value="20:00"></label>
-        </div>
-        <div class="form-row cols-2">
-          <label>Timezone
-            <input name="timezone" type="text" value="Australia/Melbourne">
-          </label>
-          <label>Leader <input name="leader" type="text" placeholder="Optional"></label>
-        </div>
-        <div class="form-row">
-          <label>Notes <textarea name="notes" placeholder="Roles, voice channel, etc."></textarea></label>
-        </div>
-        <button class="btn" type="submit">Add to local schedule</button>
-      </form>
-      <p class="mvp-note">
-        <strong>MVP vs future:</strong> Confirmed names and admin-added raids live in localStorage on each device.
-        They are <em>not</em> shared with other clan members until a backend or shared sheet is wired up.
-        Seed rows still come from <code>data/raids.json</code> for everyone who loads the site fresh.
-      </p>
-    </div>
-
-    <footer class="site-foot">
-      Raid RSVP stays on this page, in this browser only. The Events tab shows the schedule — confirm here.
-      Also:
-      <a href="https://overgear.com/guides/division-2/best-builds-for-any-activities/" rel="noopener" target="_blank">Overgear builds</a>
-      · <a href="https://prototrack.gg/division2-sets.php" rel="noopener" target="_blank">ProtoTrack sets</a>
-      · <a href="https://www.ubisoft.com/en-us/game/the-division/the-division-2" rel="noopener" target="_blank">Ubisoft</a>.
-    </footer>
-    </div>
   </main>
 
   <div id="bottomnav-root"></div>

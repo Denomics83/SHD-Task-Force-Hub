@@ -7,19 +7,19 @@
   "updated": "2026-10-28T09:01",
   "note": "Escalations and Proto caches are the ProtoTrack snapshot for 29 Oct 2026 (week 27 Oct–02 Nov, updated 28 Oct 09:01). Dark Zone targeted loot and which map is Toxic, Blackout, or Balanced were not on that board. Fill badge with PvE · Toxic, PvP · Blackout, or PvP · Balanced after checking in-game. Do not invent DZ loot.",
   "escalations": [
-    { "mission": "Coney Island Ballpark", "loot": "Ortiz: Reficere", "mark": "OR", "kind": "named" },
-    { "mission": "Coney Island Amusement Park", "loot": "Holster", "mark": "HL", "kind": "slot" },
-    { "mission": "ViewPoint Museum", "loot": "Unit Alloys", "mark": "UA", "kind": "brand", "priority": true },
-    { "mission": "Capitol Building", "loot": "Alps Summit Armaments", "mark": "AL", "kind": "brand" },
-    { "mission": "Potomac Event Center", "loot": "Tipping Scales", "mark": "TS", "kind": "gearset", "priority": true }
+    { "mission": "Coney Island Ballpark", "loot": "Ortiz: Reficere", "kind": "gearset", "icon": "assets/icons/gearsets/ortiz-reficere.png" },
+    { "mission": "Coney Island Amusement Park", "loot": "Holster", "kind": "slot", "icon": "assets/icons/slots/holster.png" },
+    { "mission": "ViewPoint Museum", "loot": "Unit Alloys", "kind": "brand", "icon": "assets/icons/brands/unit-alloys.png" },
+    { "mission": "Capitol Building", "loot": "Alps Summit Armaments", "kind": "brand", "icon": "assets/icons/brands/alps-logo.png" },
+    { "mission": "Potomac Event Center", "loot": "Tipping Scales", "kind": "gearset", "icon": "assets/icons/gearsets/tipping-scales.png" }
   ],
   "protoCaches": [
-    { "cache": "Gear cache", "loot": "Masks", "mark": "MK", "kind": "slot" },
-    { "cache": "Weapon cache", "loot": "Assault Rifles", "mark": "AR", "kind": "weapon" }
+    { "cache": "Gear cache", "loot": "Masks", "kind": "slot", "icon": "assets/icons/slots/mask.png" },
+    { "cache": "Weapon cache", "loot": "Assault Rifles", "kind": "weapon", "icon": "assets/icons/weapons/assault-rifle.png" }
   ],
   "darkZone": [
-    { "map": "DZ East", "loot": "confirm in-game", "mark": "DZ", "kind": "unknown", "badge": "" },
-    { "map": "DZ South", "loot": "confirm in-game", "mark": "DZ", "kind": "unknown", "badge": "" },
-    { "map": "DZ West", "loot": "confirm in-game", "mark": "DZ", "kind": "unknown", "badge": "" }
+    { "map": "DZ East", "loot": "confirm in-game", "kind": "unknown", "icon": "", "badge": "" },
+    { "map": "DZ South", "loot": "confirm in-game", "kind": "unknown", "icon": "", "badge": "" },
+    { "map": "DZ West", "loot": "confirm in-game", "kind": "unknown", "icon": "", "badge": "" }
   ]
 }

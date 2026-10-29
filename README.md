@@ -12,7 +12,7 @@ Mobile-first static clan site for *Tom Clancy's The Division 2*.
 | **Events** | `events.html` | Full-bleed season and raid cards (swipe) |
 | **Loot** | `loot.html` | Targeted loot from `data/loot.json` |
 | **Builds** | `builds.html` | Inventory-style loadout cards |
-| **Resources** | `resources.html` | Links + raid planner (localStorage MVP) |
+| **Resources** | `resources.html` | Maps, Hunter Guides, Creators, Manhunts |
 
 **Season is not a bottom tab.** Open it from the season card on Updates or Events → `season.html` (sub-tabs: Manhunts · Maps · Modifiers).
 
