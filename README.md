@@ -4,16 +4,17 @@ Mobile-first static clan site for *Tom Clancy's The Division 2*.
 
 **Path:** `/workspace/division-builds/clan-hub/`
 
-## Bottom navigation (4 slots)
+## Bottom navigation (5 tabs)
 
 | Tab | Page | Notes |
 |-----|------|--------|
-| **Events** | `index.html` | Home — announcement cards + Today strip (loot / escalations) |
+| **Updates** | `index.html` | Home — news, patch, DXP, and season announcements |
+| **Events** | `events.html` | Full-bleed season and raid cards (swipe) |
+| **Loot** | `loot.html` | Targeted loot from `data/loot.json` |
 | **Builds** | `builds.html` | Inventory-style loadout cards |
 | **Resources** | `resources.html` | Links + raid planner (localStorage MVP) |
-| **More** | — | Disabled placeholder (TBD) |
 
-**Season is not a bottom tab.** Tap the current-season card on Events → `season.html` (sub-tabs: Manhunts · Maps · Modifiers).
+**Season is not a bottom tab.** Open it from the season card on Updates or Events → `season.html` (sub-tabs: Manhunts · Maps · Modifiers).
 
 ## Preview locally
 

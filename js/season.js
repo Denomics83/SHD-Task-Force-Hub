@@ -1,5 +1,5 @@
 (async function () {
-  STF.mountChrome("events", "Season");
+  STF.mountChrome("");
   const title = document.getElementById("season-title");
   const summary = document.getElementById("season-summary");
   const tabs = document.getElementById("season-tabs");

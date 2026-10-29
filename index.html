@@ -3,40 +3,23 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-  <meta name="theme-color" content="#0B0C0E">
-  <meta name="description" content="Shade Task Force Hub — Division 2 clan events, builds, and resources.">
-  <title>Events — Shade Task Force Hub</title>
+  <meta name="theme-color" content="#0B0D10">
+  <meta name="description" content="Shade Task Force Hub — Division 2 clan updates, events, loot, builds, and resources.">
+  <title>Updates — Shade Task Force Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body>
+<body class="page-updates">
   <div id="topbar-root"></div>
 
-  <main class="wrap">
-    <div class="eyebrow">Shade Task Force</div>
-    <h1>Events</h1>
-    <p class="lede">Season, patches, DXP, and jump-on alerts. Tap the current-season card for Manhunts, Maps, and Modifiers.</p>
-
-    <div class="section-label">Today</div>
-    <div class="today-strip">
-      <div class="today-card" id="loot-today"><h3>Targeted loot</h3><p class="muted">Loading…</p></div>
-      <div class="today-card" id="escalations-today"><h3>Escalations</h3><p class="muted">Loading…</p></div>
+  <main class="wrap updates-page">
+    <div class="upd-list" id="update-feed" aria-live="polite">
+      <p class="lede">Loading updates…</p>
     </div>
-
-    <div class="section-label">Announcements</div>
-    <div class="event-rail" id="event-feed" aria-live="polite">
-      <p class="lede">Loading events…</p>
-    </div>
-
-    <footer class="site-foot">
-      Shade Task Force Hub · Division 2 clan site (static). Season / loot / escalation JSON is admin-edited.
-      Builds reference <a href="https://overgear.com/guides/division-2/best-builds-for-any-activities/" rel="noopener" target="_blank">Overgear (Sep 2026)</a>.
-      Not affiliated with Ubisoft.
-    </footer>
   </main>
 
   <div id="bottomnav-root"></div>
   <script src="js/common.js"></script>
-  <script src="js/events.js"></script>
+  <script src="js/updates.js"></script>
 </body>
 </html>
