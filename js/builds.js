@@ -1,7 +1,10 @@
 /* Builds: category grid → name/role list → detail.
    Loadouts come from data/builds.json. The owner's second "Incursion" block is Escalation. */
 (function () {
-  STF.mountChrome("builds");
+  if (!document.querySelector(".bottom-nav")) STF.mountChrome("builds");
+  window.addEventListener("stf-tab", function (e) {
+    if (e.detail === "builds") route(false);
+  });
 
   var stage = document.getElementById("cat-stage");
   var listView = document.getElementById("build-list");
@@ -244,6 +247,13 @@
     );
   }
 
+  function buildsURL(hash) {
+    if (document.body.classList.contains("page-resources")) {
+      return "resources.html?tab=builds" + (hash || "");
+    }
+    return hash ? "builds.html" + hash : "builds.html";
+  }
+
   function setHeaderBack(mode, cat) {
     var top = document.querySelector(".topbar");
     var pill = document.querySelector(".hub-pill");
@@ -265,14 +275,14 @@
     if (mode === "detail" && cat) {
       back.setAttribute("aria-label", "Back to " + cat.label);
       back.onclick = function () {
-        history.pushState({ cat: cat.id }, "", "#" + cat.id);
+        history.pushState({ cat: cat.id }, "", buildsURL("#" + cat.id));
         showList(cat.id, false);
       };
       return;
     }
     back.setAttribute("aria-label", "Back to Builds");
     back.onclick = function () {
-      history.pushState({}, "", "builds.html");
+      history.pushState({}, "", buildsURL(""));
       showGrid();
     };
   }
@@ -311,7 +321,7 @@
       }).join("")
       : '<p class="lede">No builds in this category yet.</p>';
     window.scrollTo(0, 0);
-    if (push) history.pushState({ cat: catId }, "", "#" + catId);
+    if (push) history.pushState({ cat: catId }, "", buildsURL("#" + catId));
   }
 
   function showDetail(catId, buildId, push) {
@@ -327,7 +337,7 @@
     openBuild = row;
     detailBody.innerHTML = detailHTML(row);
     window.scrollTo(0, 0);
-    if (push) history.pushState({ cat: catId, build: buildId }, "", "#" + catId + "/" + buildId);
+    if (push) history.pushState({ cat: catId, build: buildId }, "", buildsURL("#" + catId + "/" + buildId));
   }
 
   var CAT_ICONS = {
@@ -387,14 +397,14 @@
 
   if (listBack) {
     listBack.addEventListener("click", function () {
-      history.pushState({}, "", "builds.html");
+      history.pushState({}, "", buildsURL(""));
       showGrid();
     });
   }
   if (detailBack) {
     detailBack.addEventListener("click", function () {
       var catId = (location.hash || "").replace("#", "").split("/")[0];
-      history.pushState({ cat: catId }, "", "#" + catId);
+      history.pushState({ cat: catId }, "", buildsURL("#" + catId));
       showList(catId, false);
     });
   }
@@ -403,7 +413,16 @@
     route(false);
   });
 
+  function buildsTabActive() {
+    if (!document.body.classList.contains("page-resources")) return true;
+    var tab = new URLSearchParams(location.search).get("tab") || "builds";
+    var hash = (location.hash || "").replace("#", "");
+    if (hash === "hunters" || hash.indexOf("hunters/") === 0) return false;
+    return tab !== "maps" && tab !== "hunters";
+  }
+
   function route(push) {
+    if (!buildsTabActive()) return;
     var parts = (location.hash || "").replace("#", "").split("/");
     var catId = parts[0];
     var buildId = parts[1];

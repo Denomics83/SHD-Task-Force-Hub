@@ -420,22 +420,15 @@
       });
     });
 
-    var seasonLine = [season.yearSeason, season.name].filter(Boolean).join(" · ");
-    slides.push({
-      kind: "season",
-      href: "season.html",
-      chip: "Live",
-      chipClass: "",
-      title: season.name || "Current Season",
-      kicker: "",
-      sub: "",
-      label: "Open current season",
-      image: season.cardImage || "",
-      accent: "#FF6D10",
-      cardLabel: "Season",
-      icon: "season",
-      state: "active"
-    });
+    var banner = document.getElementById("season-banner");
+    if (banner) {
+      var label = document.getElementById("season-banner-label");
+      var name = document.getElementById("season-banner-name");
+      if (label) label.textContent = season.yearSeason || "Season";
+      if (name) name.textContent = season.name || "";
+      var art = season.cardImage || "assets/events/season-hero.jpg";
+      banner.style.backgroundImage = "url('" + art + "')";
+    }
 
     raids.forEach(function (raid) {
       var when = zonedDate(raid.date, raid.time, raid.timezone);
@@ -474,12 +467,6 @@
       });
     });
 
-    var head = document.getElementById("tl-head");
-    if (head) {
-      head.innerHTML =
-        "<h1>" + STF.esc(season.yearSeason || "Season") + "</h1>" +
-        "<p>" + STF.esc(season.name || "") + "</p>";
-    }
     rail.innerHTML = slides
       .map(function (slide) {
         var upcoming = slide.state === "upcoming";

@@ -33,10 +33,10 @@ STF.NAV_ICONS = {
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2a7.3 7.3 0 0 0-7.3 7.3c0 1.4.4 2.7 1.1 3.8L4.2 19.8l4.5-1.6A7.3 7.3 0 1 0 12 4.2z"/></svg>',
   loot:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.1"/><path d="M12 2.2v3.1M12 18.7v3.1M2.2 12h3.1M18.7 12h3.1"/></svg>',
-  builds:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 19.6 6v5.7c0 4.5-3.2 7.1-7.6 8.5-4.4-1.4-7.6-4-7.6-8.5V6L12 3.2z"/><path d="m8.7 12.1 2.2 2.2 4.4-4.4"/></svg>',
   resources:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="9" cy="8" r="2.7"/><circle cx="16.6" cy="9.1" r="2"/><path d="M3.8 19.2c.7-2.8 2.7-4.2 5.2-4.2s4.5 1.4 5.2 4.2"/><path d="M14.2 15.2c1.5.15 2.9.9 3.6 2.5"/></svg>'
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.2L19 9.2V19.5H5z"/><path d="M14 4.8V9h4.2"/></svg>',
+  chat:
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 6.5h14v9H8.5L5 18.2z"/></svg>'
 };
 
 STF.bottomNavHTML = function (active) {
@@ -44,8 +44,8 @@ STF.bottomNavHTML = function (active) {
     { id: "updates", href: "index.html", label: "Updates" },
     { id: "events", href: "events.html", label: "Events" },
     { id: "loot", href: "loot.html", label: "Loot" },
-    { id: "builds", href: "builds.html", label: "Builds" },
-    { id: "resources", href: "resources.html", label: "Resources" }
+    { id: "resources", href: "resources.html?tab=builds", label: "Resources" },
+    { id: "chat", href: "chat.html", label: "Chat" }
   ];
   return (
     '<nav class="bottom-nav" aria-label="Primary">' +
@@ -70,8 +70,30 @@ STF.topbarHTML = function () {
     '<a class="brand" href="index.html">' +
     "<strong>Shade Task Force</strong>" +
     '<span class="hub-pill">Clan Hub</span></a>' +
-    "</header>"
+    '<button type="button" class="profile-btn" id="profile-btn" aria-label="Sign in">' +
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 19.2c1.1-3.1 3.2-4.6 6.5-4.6s5.4 1.5 6.5 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' +
+    "</button></header>"
   );
+};
+
+STF.openSignIn = function () {
+  var old = document.getElementById("signin-panel");
+  if (old) {
+    old.remove();
+    return;
+  }
+  var el = document.createElement("div");
+  el.id = "signin-panel";
+  el.className = "signin-panel";
+  el.innerHTML =
+    '<div class="signin-card" role="dialog" aria-labelledby="signin-title">' +
+    '<h2 id="signin-title">Sign in coming soon</h2>' +
+    "<p>Profile will be sign up, log in, and log out. Nothing else lives here yet.</p>" +
+    '<button type="button" class="admin-btn" id="signin-close">Close</button>' +
+    "</div>";
+  document.body.appendChild(el);
+  el.querySelector("#signin-close").addEventListener("click", function () { el.remove(); });
+  el.addEventListener("click", function (e) { if (e.target === el) el.remove(); });
 };
 
 STF.mountChrome = function (active) {
@@ -79,6 +101,8 @@ STF.mountChrome = function (active) {
   var bottom = document.getElementById("bottomnav-root");
   if (top) top.innerHTML = STF.topbarHTML();
   if (bottom) bottom.innerHTML = STF.bottomNavHTML(active || "");
+  var profile = document.getElementById("profile-btn");
+  if (profile) profile.addEventListener("click", STF.openSignIn);
 };
 
 STF.openMap = function (src, caption) {

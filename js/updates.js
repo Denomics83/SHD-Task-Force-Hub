@@ -10,11 +10,11 @@
 
   var GLYPH = {
     announcement:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M4 9.2v5.6h3.2L13.2 18.6V5.4L7.2 9.2H4z"/><path fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" d="M16.2 9a3.5 3.5 0 0 1 0 6M18.6 6.6a6.6 6.6 0 0 1 0 10.8"/></svg>',
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 10h3.2L13 16.2V7.8L7.2 10H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M16 9.2a3.2 3.2 0 0 1 0 5.6"/></svg>',
     maintenance:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="#fff" d="M14.7 6.3a1 1 0 0 0 0 1.4l1.6 1.6a1 1 0 0 0 1.4 0l2.5-2.5a5.5 5.5 0 0 1-7.2 7.1L6.8 20.1a2 2 0 0 1-2.9-2.9l6.2-6.2a5.5 5.5 0 0 1 7.1-7.2l-2.5 2.5z"/></svg>',
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M14.2 6.2 17.8 9.8l2.2-2.2a4.6 4.6 0 0 1-6.2 6.1L7.2 20.3a1.6 1.6 0 0 1-2.3-2.3l6.6-6.6a4.6 4.6 0 0 1 6.1-6.2z"/></svg>',
     patch:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4v9"/><path fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="m8 9 4 4 4-4"/><path fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" d="M5 18h14"/></svg>'
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>'
   };
 
   function shortDate(iso) {

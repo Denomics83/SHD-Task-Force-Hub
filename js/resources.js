@@ -1,11 +1,14 @@
-/* Resources landing. Maps, Hunter Guides, and Creators open a short detail. Events opens admin. */
+/* Resources: Builds, Maps, and Hunters tabs. Builds is the default. */
 (function () {
   STF.mountChrome("resources");
 
-  var landing = document.getElementById("res-landing");
-  var resDetail = document.getElementById("res-detail");
   var resBody = document.getElementById("res-detail-body");
-  var resBack = document.getElementById("res-back");
+  var mapsBody = document.getElementById("maps-body");
+  var panels = {
+    builds: document.getElementById("tab-builds"),
+    maps: document.getElementById("tab-maps"),
+    hunters: document.getElementById("tab-hunters")
+  };
   var RES = {
     maps: {
       title: "Maps",
@@ -29,14 +32,6 @@
 
   var hunterData = null;
 
-  function showLanding() {
-    if (landing) landing.hidden = false;
-    if (resDetail) resDetail.hidden = true;
-    if (resBack) resBack.hidden = true;
-    document.body.classList.remove("is-hunter");
-    setHunterBack("off");
-  }
-
   function setHunterBack(mode) {
     var top = document.querySelector(".topbar");
     var pill = document.querySelector(".hub-pill");
@@ -58,15 +53,15 @@
     if (mode === "detail") {
       back.setAttribute("aria-label", "Back to Hunter Guides");
       back.onclick = function () {
-        history.pushState({ res: "hunters" }, "", "#hunters");
+        history.pushState({ res: "hunters" }, "", "resources.html?tab=hunters");
         showHunterList(false);
       };
       return;
     }
-    back.setAttribute("aria-label", "Back to Resources");
+    back.setAttribute("aria-label", "Back to Builds");
     back.onclick = function () {
-      history.pushState({ res: null }, "", "resources.html");
-      showLanding();
+      history.pushState({ tab: "builds" }, "", "resources.html?tab=builds");
+      showTab("builds", false);
     };
   }
 
@@ -79,11 +74,9 @@
 
   function showHunterList(push) {
     if (!hunterData || !resBody) return;
-    if (landing) landing.hidden = true;
-    if (resDetail) resDetail.hidden = false;
-    if (resBack) resBack.hidden = true;
     document.body.classList.add("is-hunter");
-    setHunterBack("list");
+    document.body.classList.remove("is-grid");
+    setHunterBack("off");
     var byGroup = {};
     (hunterData.hunters || []).forEach(function (hunter) {
       if (!byGroup[hunter.group]) byGroup[hunter.group] = [];
@@ -109,16 +102,14 @@
     html += '<p class="hunter-credit">Mask images: <a href="' + STF.esc(hunterData.imageCreditUrl || "https://thedivision.fandom.com/wiki/Hunters") + '" target="_blank" rel="noopener">The Division Wiki (Fandom)</a></p>';
     resBody.innerHTML = html;
     window.scrollTo(0, 0);
-    if (push) history.pushState({ res: "hunters" }, "", "#hunters");
+    if (push) history.pushState({ res: "hunters" }, "", "resources.html?tab=hunters");
   }
 
   function showHunterDetail(id, push) {
     var hunter = (hunterData.hunters || []).filter(function (row) { return row.id === id; })[0];
     if (!hunter) return showHunterList(false);
-    if (landing) landing.hidden = true;
-    if (resDetail) resDetail.hidden = false;
-    if (resBack) resBack.hidden = true;
     document.body.classList.add("is-hunter");
+    document.body.classList.remove("is-grid");
     setHunterBack("detail");
     var steps = (hunter.steps || []).map(function (step) { return "<li>" + STF.esc(step) + "</li>"; }).join("");
     var tips = (hunter.tips || []).map(function (tip) { return "<li>" + STF.esc(tip) + "</li>"; }).join("");
@@ -141,56 +132,107 @@
       (sources ? '<p class="hunter-sources">' + sources + "</p>" : "") +
       '<p class="hunter-credit">Mask images: <a href="https://thedivision.fandom.com/wiki/Hunters" target="_blank" rel="noopener">The Division Wiki (Fandom)</a></p>';
     window.scrollTo(0, 0);
-    if (push) history.pushState({ res: "hunters", hunter: id }, "", "#hunters/" + id);
-  }
-
-  function openRes(id, push) {
-    if (id === "hunters") {
-      ensureHunters(function () { showHunterList(push); });
-      return;
-    }
-    var item = RES[id];
-    if (!item || !resBody) return;
-    if (landing) landing.hidden = true;
-    if (resDetail) resDetail.hidden = false;
-    if (resBack) resBack.hidden = true;
-    document.body.classList.remove("is-hunter");
-    setHunterBack("list");
-    resBody.innerHTML = "<h1>" + STF.esc(item.title) + "</h1>" + item.html;
-    window.scrollTo(0, 0);
-    if (push) history.pushState({ res: id }, "", "#" + id);
-  }
-
-  function paintHunterCount() {
-    var el = document.getElementById("col-hunters");
-    if (!el || !hunterData || !hunterData.hunters) return;
-    var n = hunterData.hunters.length;
-    el.textContent = (n < 10 ? "0" : "") + n;
+    if (push) history.pushState({ res: "hunters", hunter: id }, "", "resources.html?tab=hunters#" + id);
   }
 
   function ensureHunters(done) {
-    if (hunterData) {
-      paintHunterCount();
-      return done();
-    }
+    if (hunterData) return done();
     STF.fetchJSON("data/hunters.json").then(function (data) {
       hunterData = data;
-      paintHunterCount();
       done();
     }).catch(function () {
       if (resBody) resBody.innerHTML = '<p class="lede">Could not load hunter guides.</p>';
     });
   }
 
-  ensureHunters(function () {});
+  function renderMaps(doc) {
+    var groups = (doc && doc.groups) || [];
+    if (!groups.length) {
+      mapsBody.innerHTML = '<p class="lede">No map links yet.</p>';
+      return;
+    }
+    mapsBody.innerHTML = groups.map(function (group) {
+      var links = (group.links || []).map(function (link) {
+        var meta = STF.esc(link.source || "");
+        if (link.updated) meta += (meta ? " · " : "") + "updated " + STF.esc(link.updated);
+        return (
+          '<a class="map-link" href="' + STF.esc(link.url) + '" target="_blank" rel="noopener">' +
+          "<strong>" + STF.esc(link.title) + "</strong>" +
+          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg>' +
+          "<span>" + STF.esc(link.description || "") + "</span>" +
+          (meta ? "<small>" + meta + "</small>" : "") +
+          "</a>"
+        );
+      }).join("");
+      return '<h2 class="map-sec">' + STF.esc(group.title) + "</h2>" + links;
+    }).join("");
+  }
 
-  if (landing) {
-    landing.addEventListener("click", function (e) {
-      var btn = e.target.closest("[data-res]");
-      if (!btn) return;
-      openRes(btn.getAttribute("data-res"), true);
+  function loadMaps() {
+    if (mapsBody.dataset.ready) return;
+    STF.fetchJSON("data/maps.json").then(function (doc) {
+      mapsBody.dataset.ready = "1";
+      renderMaps(doc);
+    }).catch(function () {
+      mapsBody.innerHTML = '<p class="lede">Could not load maps.</p>';
     });
   }
+
+  function tabFromLocation() {
+    var query = new URLSearchParams(location.search).get("tab");
+    var hash = (location.hash || "").replace("#", "");
+    if (hash === "hunters" || hash.indexOf("hunters/") === 0) return "hunters";
+    if (query === "maps" || query === "hunters" || query === "builds") return query;
+    return "builds";
+  }
+
+  function showTab(tab, push) {
+    if (tab !== "builds" && tab !== "maps" && tab !== "hunters") tab = "builds";
+    Object.keys(panels).forEach(function (key) {
+      if (panels[key]) panels[key].hidden = key !== tab;
+    });
+    document.querySelectorAll(".res-tabs [data-tab]").forEach(function (btn) {
+      btn.setAttribute("aria-selected", btn.getAttribute("data-tab") === tab ? "true" : "false");
+    });
+    if (tab !== "builds") {
+      document.body.classList.remove("is-grid");
+      document.body.classList.remove("is-list");
+    }
+    if (tab !== "hunters") {
+      document.body.classList.remove("is-hunter");
+      setHunterBack("off");
+    }
+    if (tab === "maps") loadMaps();
+    if (tab === "hunters") {
+      var hash = (location.hash || "").replace("#", "");
+      var hunterId = hash.indexOf("hunters/") === 0 ? hash.slice("hunters/".length) : hash && hash !== "hunters" ? hash : "";
+      ensureHunters(function () {
+        if (hunterId) showHunterDetail(hunterId, false);
+        else showHunterList(false);
+      });
+    }
+    if (tab === "builds") window.dispatchEvent(new CustomEvent("stf-tab", { detail: "builds" }));
+    if (push) {
+      var next = "resources.html?tab=" + tab;
+      if (tab === "builds" && location.hash && location.hash.indexOf("#hunters") !== 0) next += location.hash;
+      if (tab === "hunters" && location.hash) next += location.hash;
+      history.pushState({ tab: tab }, "", next);
+    }
+    window.scrollTo(0, 0);
+  }
+
+  document.querySelector(".res-tabs").addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-tab]");
+    if (!btn) return;
+    if (btn.getAttribute("data-tab") !== "hunters" && location.hash) {
+      history.replaceState({}, "", "resources.html?tab=" + btn.getAttribute("data-tab"));
+    }
+    if (btn.getAttribute("data-tab") === "builds" && location.hash.indexOf("#hunters") === 0) {
+      history.replaceState({}, "", "resources.html?tab=builds");
+    }
+    showTab(btn.getAttribute("data-tab"), true);
+  });
+
   if (resBody) {
     resBody.addEventListener("click", function (e) {
       var btn = e.target.closest("[data-hunter]");
@@ -198,35 +240,9 @@
       ensureHunters(function () { showHunterDetail(btn.getAttribute("data-hunter"), true); });
     });
   }
-  if (resBack) {
-    resBack.addEventListener("click", function () {
-      history.pushState({ res: null }, "", "resources.html");
-      showLanding();
-    });
-  }
-  function routeHunter() {
-    var hash = (location.hash || "").replace("#", "");
-    if (hash.indexOf("hunters/") === 0) {
-      var id = hash.slice("hunters/".length);
-      ensureHunters(function () { showHunterDetail(id, false); });
-      return true;
-    }
-    if (hash === "hunters") {
-      ensureHunters(function () { showHunterList(false); });
-      return true;
-    }
-    return false;
-  }
-
   window.addEventListener("popstate", function () {
-    if (routeHunter()) return;
-    var id = (location.hash || "").replace("#", "");
-    if (RES[id]) openRes(id, false);
-    else showLanding();
+    showTab(tabFromLocation(), false);
   });
 
-  if (!routeHunter()) {
-    var start = (location.hash || "").replace("#", "");
-    if (RES[start]) openRes(start, false);
-  }
+  showTab(tabFromLocation(), false);
 })();

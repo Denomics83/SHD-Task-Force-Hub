@@ -23,6 +23,7 @@ PAGES = [
     "resources.html",
     "season.html",
     "admin.html",
+    "chat.html",
 ]
 
 CACHE_METAS = """  <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">

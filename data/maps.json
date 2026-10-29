@@ -1,0 +1,107 @@
+{
+  "groups": [
+    {
+      "id": "dc",
+      "title": "Washington DC",
+      "links": [
+        {
+          "title": "Division 2 Map",
+          "description": "Interactive Washington D.C. map for collectibles, SHD tech, and open-world markers.",
+          "source": "division2map.com",
+          "url": "https://division2map.com/"
+        },
+        {
+          "title": "Washington D.C. overview",
+          "description": "Open-world districts, Dark Zone gates, and where the season map sits.",
+          "source": "thedivision2.wiki",
+          "url": "https://thedivision2.wiki/map/washington-dc/"
+        },
+        {
+          "title": "East Mall",
+          "description": "Collectible map for the East Mall district.",
+          "source": "Gamepressure",
+          "url": "https://www.gamepressure.com/tom-clancys-the-division-2/east-mall/z7c1b1"
+        },
+        {
+          "title": "White House",
+          "description": "Collectible map for the White House area.",
+          "source": "Gamepressure",
+          "url": "https://www.gamepressure.com/tom-clancys-the-division-2/white-house/z9c22b"
+        },
+        {
+          "title": "Washington, D.C.",
+          "description": "Wiki page for the Washington, D.C. open world.",
+          "source": "The Division Wiki (Fandom)",
+          "url": "https://thedivision.fandom.com/wiki/Washington,_D.C."
+        }
+      ]
+    },
+    {
+      "id": "dz",
+      "title": "Dark Zones",
+      "links": [
+        {
+          "title": "Dark Zone East",
+          "description": "Landmarks and layout for Dark Zone East.",
+          "source": "thedivision2.wiki",
+          "url": "https://thedivision2.wiki/map/dark-zone-east/"
+        },
+        {
+          "title": "Dark Zone West",
+          "description": "Landmarks and layout for Dark Zone West.",
+          "source": "thedivision2.wiki",
+          "url": "https://thedivision2.wiki/map/dark-zone-west/"
+        },
+        {
+          "title": "Dark Zone South",
+          "description": "Landmarks and layout for Dark Zone South.",
+          "source": "thedivision2.wiki",
+          "url": "https://thedivision2.wiki/map/dark-zone-south/"
+        },
+        {
+          "title": "Dark Zone South map",
+          "description": "Collectible map of DZ South: crates, terminals, checkpoints, and landmarks.",
+          "source": "Gamepressure",
+          "updated": "2019",
+          "url": "https://www.gamepressure.com/tom-clancys-the-division-2/dark-zone-south/zac22c"
+        },
+        {
+          "title": "Dark Zone South",
+          "description": "Wiki entry for Dark Zone South landmarks, extractions, and checkpoints.",
+          "source": "The Division Wiki (Fandom)",
+          "url": "https://thedivision.fandom.com/wiki/Dark_Zone_South"
+        }
+      ]
+    },
+    {
+      "id": "ny",
+      "title": "New York",
+      "links": [
+        {
+          "title": "New York map",
+          "description": "Interactive Warlords of New York map.",
+          "source": "division2map.com",
+          "url": "https://division2map.com/nyc"
+        },
+        {
+          "title": "New York",
+          "description": "Wiki page for the New York open world.",
+          "source": "The Division Wiki (Fandom)",
+          "url": "https://thedivision.fandom.com/wiki/New_York"
+        }
+      ]
+    },
+    {
+      "id": "other",
+      "title": "Other",
+      "links": [
+        {
+          "title": "Map index",
+          "description": "Gamepressure index of the district collectible maps.",
+          "source": "Gamepressure",
+          "url": "https://www.gamepressure.com/tom-clancys-the-division-2/maps/z6c1b0"
+        }
+      ]
+    }
+  ]
+}
