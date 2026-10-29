@@ -78,7 +78,6 @@
       ? '<p class="upd-demo">Demo copy for layout. Not an official title update.</p>'
       : "";
     detail.innerHTML =
-      '<button type="button" class="back-link" id="upd-back">← Updates</button>' +
       "<h1>" + STF.esc(item.title) + "</h1>" +
       (summary ? '<p class="upd-summary">' + STF.esc(summary) + "</p>" : "") +
       (posted ? '<p class="upd-posted">' + STF.esc(posted) + "</p>" : "") +
@@ -87,19 +86,35 @@
       sections +
       seasonLink +
       demo;
+  }
+
+  function setHeaderBack(on) {
+    var top = document.querySelector(".topbar");
+    var pill = document.querySelector(".hub-pill");
     var back = document.getElementById("upd-back");
-    if (back) {
-      back.addEventListener("click", function () {
-        if (location.hash) history.pushState({}, "", "index.html");
-        showList();
-      });
+    if (pill) pill.hidden = !!on;
+    if (!on) {
+      if (back) back.remove();
+      return;
     }
+    if (back || !top) return;
+    back = document.createElement("button");
+    back.type = "button";
+    back.id = "upd-back";
+    back.className = "back-link upd-header-back";
+    back.textContent = "← Updates";
+    back.addEventListener("click", function () {
+      if (location.hash) history.pushState({}, "", "index.html");
+      showList();
+    });
+    top.appendChild(back);
   }
 
   function showList() {
     feed.hidden = false;
     detail.hidden = true;
     detail.innerHTML = "";
+    setHeaderBack(false);
     window.scrollTo(0, 0);
   }
 
@@ -109,6 +124,7 @@
     renderDetail(item);
     feed.hidden = true;
     detail.hidden = false;
+    setHeaderBack(true);
     window.scrollTo(0, 0);
   }
 
