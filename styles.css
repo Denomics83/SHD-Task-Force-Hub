@@ -775,20 +775,20 @@ body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
   height: 30px;
   object-fit: contain;
   display: block;
-  filter: saturate(1.4) brightness(1.35) contrast(1.15) drop-shadow(0 0 5px rgba(255,255,255,.9));
+  filter: saturate(1.4) brightness(1.35) contrast(1.15) drop-shadow(0 0 3px rgba(255,255,255,.55));
 }
 .loot-ico.kind-gearset {
   background: #00c853;
-  box-shadow: 0 0 10px rgba(0, 200, 83, .7);
+  box-shadow: 0 0 6px rgba(0, 200, 83, .45);
 }
 .loot-ico.kind-brand {
   background: #f5a623;
-  box-shadow: 0 0 10px rgba(245, 166, 35, .7);
+  box-shadow: 0 0 6px rgba(245, 166, 35, .45);
 }
 .loot-ico.kind-slot,
 .loot-ico.kind-weapon {
   background: #4d5d78;
-  box-shadow: 0 0 8px rgba(210, 224, 245, .55);
+  box-shadow: 0 0 5px rgba(210, 224, 245, .35);
 }
 .loot-ico.is-empty { background: rgba(255,255,255,.03); box-shadow: none; }
 .dz-badge {
