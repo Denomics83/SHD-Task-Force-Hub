@@ -32,7 +32,7 @@
   function showLanding() {
     if (landing) landing.hidden = false;
     if (resDetail) resDetail.hidden = true;
-    if (resBack) resBack.hidden = false;
+    if (resBack) resBack.hidden = true;
     setHunterBack("off");
   }
 
@@ -62,7 +62,7 @@
       };
       return;
     }
-    back.setAttribute("aria-label", "Back");
+    back.setAttribute("aria-label", "Back to Resources");
     back.onclick = function () {
       history.pushState({ res: null }, "", "resources.html");
       showLanding();
@@ -150,8 +150,8 @@
     if (!item || !resBody) return;
     if (landing) landing.hidden = true;
     if (resDetail) resDetail.hidden = false;
-    if (resBack) resBack.hidden = false;
-    setHunterBack("off");
+    if (resBack) resBack.hidden = true;
+    setHunterBack("list");
     resBody.innerHTML = "<h1>" + STF.esc(item.title) + "</h1>" + item.html;
     window.scrollTo(0, 0);
     if (push) history.pushState({ res: id }, "", "#" + id);
