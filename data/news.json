@@ -1,0 +1,65 @@
+{
+  "updated": "2026-10-29",
+  "items": [
+    {
+      "id": "season-y8s3",
+      "type": "season",
+      "priority": 1,
+      "title": "Year 8 Season 3 — Red Horizon",
+      "subtitle": "Current season · brand-set rework live",
+      "body": "Red Horizon reworked most brand-set bonuses. Tap for Manhunts, Maps, and Modifiers.",
+      "badge": "SEASON",
+      "href": "season.html",
+      "date": "2026-08-26",
+      "accent": "orange"
+    },
+    {
+      "id": "patch-y8s3-2",
+      "type": "patch",
+      "priority": 2,
+      "title": "Title Update Y8S3.2",
+      "subtitle": "Patch · 15 Oct 2026",
+      "body": "Balance and bug-fix pass on Red Horizon systems. Check Overgear / patch notes before swapping endgame kits.",
+      "badge": "PATCH",
+      "href": null,
+      "date": "2026-10-15",
+      "accent": "gear"
+    },
+    {
+      "id": "dxp-weekend",
+      "type": "dxp",
+      "priority": 3,
+      "title": "Double XP Weekend",
+      "subtitle": "Jump-on alert · check in-game calendar",
+      "body": "DXP windows rotate — confirm live times in the season calendar. Ideal for Hardcore leveling with a duo.",
+      "badge": "DXP",
+      "href": null,
+      "date": "2026-10-29",
+      "accent": "exotic"
+    },
+    {
+      "id": "red-moon",
+      "type": "event",
+      "priority": 4,
+      "title": "Red Moon event window",
+      "subtitle": "Limited · ends ~3 Nov 2026",
+      "body": "Seasonal event rewards and Iron Will chest on the free track — grab before Echoes of Central Park lands.",
+      "badge": "EVENT",
+      "href": null,
+      "date": "2026-10-20",
+      "accent": "named"
+    },
+    {
+      "id": "echoes-nov",
+      "type": "announcement",
+      "priority": 5,
+      "title": "Echoes of Central Park — 3 Nov",
+      "subtitle": "Upcoming content drop",
+      "body": "Next content beat may shift the meta. Shade Task Force will refresh Builds after launch.",
+      "badge": "SOON",
+      "href": null,
+      "date": "2026-11-03",
+      "accent": "muted"
+    }
+  ]
+}

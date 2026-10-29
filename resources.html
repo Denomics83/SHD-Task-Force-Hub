@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0B0C0E">
+  <title>Resources — Shade Task Force Hub</title>
+  <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+  <div id="topbar-root"></div>
+
+  <main class="wrap">
+    <div class="eyebrow">Clan toolkit</div>
+    <h1>Resources</h1>
+    <p class="lede">Maps, build sites, and the Shade Task Force raid planner (browser MVP).</p>
+
+    <div class="section-label">Links</div>
+    <div class="res-grid">
+      <a class="res-card" href="https://division2map.com/" target="_blank" rel="noopener">
+        <span class="tag">Map</span>
+        <h3>division2map.com</h3>
+        <p>SHD Tech caches and open-world markers. Hide all → enable SHD Tech.</p>
+      </a>
+      <a class="res-card" href="https://overgear.com/guides/division-2/best-builds-for-any-activities/" target="_blank" rel="noopener">
+        <span class="tag">Builds</span>
+        <h3>Overgear builds guide</h3>
+        <p>Y8S3 Red Horizon loadout reference (Sep 2026 update).</p>
+      </a>
+      <a class="res-card" href="https://prototrack.gg/division2-sets.php" target="_blank" rel="noopener">
+        <span class="tag">Sets</span>
+        <h3>ProtoTrack brand / gear sets</h3>
+        <p>Set bonuses and core typing cheat-sheet.</p>
+      </a>
+      <a class="res-card" href="https://www.ubisoft.com/en-us/game/the-division/the-division-2" target="_blank" rel="noopener">
+        <span class="tag">Official</span>
+        <h3>Ubisoft — The Division 2</h3>
+        <p>Patch notes and official news.</p>
+      </a>
+      <a class="res-card" href="builds.html">
+        <span class="tag">Clan</span>
+        <h3>Shade Task Force Builds</h3>
+        <p>Our inventory-style encyclopedia for duo + hardcore kits.</p>
+      </a>
+      <a class="res-card" href="season.html">
+        <span class="tag">Season</span>
+        <h3>Red Horizon detail</h3>
+        <p>Manhunts, maps, modifiers (also linked from Events).</p>
+      </a>
+    </div>
+
+    <div class="section-label" id="raids">Raid planner</div>
+    <p class="lede" style="margin-top:0">Upcoming runs from <code>data/raids.json</code>. RSVP + admin add are stored in <strong>this browser only</strong> (localStorage MVP).</p>
+
+    <label class="form-row" style="max-width:280px;margin-bottom:12px">
+      Your name (for “I'm in”)
+      <input id="member-name" type="text" placeholder="Agent name" autocomplete="nickname">
+    </label>
+
+    <div class="raid-list" id="raid-list"></div>
+
+    <div class="admin-box">
+      <h3>Admin — add raid (local MVP)</h3>
+      <form id="raid-admin-form">
+        <div class="form-row cols-2">
+          <label>Activity
+            <select name="activity">
+              <option>Dark Hours</option>
+              <option>Iron Horse</option>
+              <option>Incursion</option>
+              <option>Legendary summit</option>
+              <option>Other</option>
+            </select>
+          </label>
+          <label>Difficulty
+            <select name="difficulty">
+              <option>Normal</option>
+              <option>Hard</option>
+              <option>Challenging</option>
+              <option>Heroic</option>
+            </select>
+          </label>
+        </div>
+        <div class="form-row cols-2">
+          <label>Date <input name="date" type="date" required></label>
+          <label>Time <input name="time" type="time" required value="20:00"></label>
+        </div>
+        <div class="form-row cols-2">
+          <label>Timezone
+            <input name="timezone" type="text" value="Australia/Melbourne">
+          </label>
+          <label>Leader <input name="leader" type="text" placeholder="Optional"></label>
+        </div>
+        <div class="form-row">
+          <label>Notes <textarea name="notes" placeholder="Roles, voice channel, etc."></textarea></label>
+        </div>
+        <button class="btn" type="submit">Add to local schedule</button>
+      </form>
+      <p class="mvp-note">
+        <strong>MVP vs future:</strong> Confirmed names and admin-added raids live in localStorage on each device.
+        They are <em>not</em> shared with other clan members until a backend or shared sheet is wired up.
+        Seed rows still come from <code>data/raids.json</code> for everyone who loads the site fresh.
+      </p>
+    </div>
+
+    <footer class="site-foot">
+      Fourth bottom-nav slot is reserved (More — TBD). Raid planner lives here under Resources, not as its own tab.
+    </footer>
+  </main>
+
+  <div id="bottomnav-root"></div>
+  <script src="js/common.js"></script>
+  <script src="js/resources.js"></script>
+</body>
+</html>

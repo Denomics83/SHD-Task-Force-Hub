@@ -1,0 +1,27 @@
+{
+  "note": "Seed schedule. Members RSVP via localStorage MVP on Resources → Raid Planner. Future: shared backend.",
+  "raids": [
+    {
+      "id": "raid-dh-2026-11-01",
+      "activity": "Dark Hours",
+      "date": "2026-11-01",
+      "time": "20:00",
+      "timezone": "Australia/Melbourne",
+      "difficulty": "Normal",
+      "leader": "Isac",
+      "notes": "Shade Task Force weekly. Bring DPS + one healer or tank.",
+      "confirmed": ["Isac"]
+    },
+    {
+      "id": "raid-ih-2026-11-08",
+      "activity": "Iron Horse",
+      "date": "2026-11-08",
+      "time": "19:30",
+      "timezone": "Australia/Melbourne",
+      "difficulty": "Normal",
+      "leader": "TBD",
+      "notes": "Call roles in clan chat before start.",
+      "confirmed": []
+    }
+  ]
+}

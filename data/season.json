@@ -1,0 +1,22 @@
+{
+  "id": "y8s3-red-horizon",
+  "name": "Red Horizon",
+  "yearSeason": "Year 8 Season 3",
+  "started": "2026-08-26",
+  "patch": "Y8S3.2 (15 Oct 2026)",
+  "summary": "Brand-set bonus rework season. Most pre–late-August 2026 brand guides are outdated.",
+  "manhunts": [
+    { "title": "Season Manhunt arc", "status": "Active", "blurb": "Follow the in-game Manhunt board for the current target chain. Rewards rotate with season track." },
+    { "title": "Legacy Manhunts", "status": "Available", "blurb": "Prior season manhunts remain for exotic / cosmetic catch-up — check difficulty before Hardcore runs." }
+  ],
+  "maps": [
+    { "title": "Washington D.C.", "blurb": "Core open world + strongholds. SHD caches per character — use division2map.com." },
+    { "title": "New York (WoNY)", "blurb": "Caches show as ? icons. Level with care on Hardcore." },
+    { "title": "Countdown / Summit / Descent", "blurb": "Farm loops for targeted loot and XP. Confirm Descent death rules before Hardcore trust." }
+  ],
+  "modifiers": [
+    { "title": "Brand-set rework", "blurb": "Red Horizon changed brand 1/2/3 bonuses — rebuild around current tooltips, not old spreadsheets." },
+    { "title": "Seasonal modifiers", "blurb": "Check Global Events / League panels in-game for the active weekly modifier set." },
+    { "title": "Hardcore reminder", "blurb": "No fire chem / cluster self-damage. Keener hacks skills — pack a non-skill fallback." }
+  ]
+}

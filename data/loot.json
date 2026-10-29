@@ -1,0 +1,15 @@
+{
+  "weekOf": "2026-10-27",
+  "note": "Manual admin JSON — update weekly. Confirm in-game Targeted Loot.",
+  "today": [
+    { "zone": "Downtown East", "loot": "Assault Rifles / Striker's" },
+    { "zone": "Federal Triangle", "loot": "Named items / Brand sets" },
+    { "zone": "East Mall", "loot": "Skill mods / Hana-U" }
+  ],
+  "week": [
+    { "day": "Thu", "highlight": "Capitol Hill — Weapon Damage brands" },
+    { "day": "Fri", "highlight": "West Potomac — Armor brands" },
+    { "day": "Sat", "highlight": "Southwest — Skill brands" },
+    { "day": "Sun", "highlight": "Foggy Bottom — Exotic components" }
+  ]
+}
