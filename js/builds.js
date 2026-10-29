@@ -81,13 +81,124 @@
     return null;
   }
 
-  function hollowDetail(row) {
+  var SLOT_ART = {
+    spec: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 16h14l-1.5-5H6.5z" fill="currentColor"/><path d="M8 11V7h8v4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>',
+    grenade: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="14" r="5.5" fill="currentColor"/><path d="M12 8.5V5.5M10 6.5h4" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>',
+    rifle: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M2 15h11l2-3h6v2.2h-4.2L15 16H2z" fill="currentColor"/></svg>',
+    pistol: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 12h11l1.2-2.2h5v2.6h-3.2L16 15h-2.2v5H11v-5H3z" fill="currentColor"/></svg>',
+    mask: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 10c1.5-4 12.5-4 14 0v5c-1.6 4-12.4 4-14 0z" fill="currentColor"/></svg>',
+    chest: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 5h12l1.5 5v9H4.5v-9z" fill="currentColor"/></svg>',
+    holster: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 3h8v5l1.6 13H6.4L8 8z" fill="currentColor"/></svg>',
+    bag: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12v11H6zM9 8V6a3 3 0 0 1 6 0v2" fill="currentColor"/></svg>',
+    gloves: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12V5h2v7h1V4h2v8h1V6h2v7h1v7H8z" fill="currentColor"/></svg>',
+    knees: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v8c0 4.5-2.2 8-5 8s-5-3.5-5-8z" fill="currentColor"/></svg>',
+    skill: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
+  };
+
+  function hollowLoadout() {
+    var striker = { name: "Striker's Battlegear", rarity: "gearset", icon: STRIKER, mark: "S", art: "mask", dots: 2 };
+    return {
+      spec: { name: "Minigun", rarity: "spec", art: "spec", mark: "G", dots: 0 },
+      grenade: { name: "Grenade", rarity: "empty", art: "grenade" },
+      weapons: [
+        { name: "St. Elmo's Engine", rarity: "gold", art: "rifle", mark: "E", dots: 2 },
+        { name: "Machine gun", rarity: "gold", art: "rifle", dots: 1 },
+        { name: "Sidearm", rarity: "empty", art: "pistol" }
+      ],
+      gear: [
+        { slot: "mask", name: striker.name, rarity: "gearset", icon: STRIKER, mark: "S", art: "mask", dots: 2 },
+        { slot: "chest", name: "Grupo Sombra", rarity: "gold", icon: "assets/icons/brands/grupo-logo.png", mark: "G", art: "chest", dots: 2 },
+        { slot: "holster", name: striker.name, rarity: "gearset", icon: STRIKER, mark: "S", art: "holster", dots: 1 },
+        { slot: "bag", name: "Memento", rarity: "gold", icon: "assets/icons/exotics/memento.png", mark: "M", art: "bag", dots: 3 },
+        { slot: "gloves", name: striker.name, rarity: "gearset", icon: STRIKER, mark: "S", art: "gloves", dots: 2 },
+        { slot: "knees", name: striker.name, rarity: "gearset", icon: STRIKER, mark: "S", art: "knees", dots: 2 }
+      ],
+      skills: [
+        { name: "Crusader Shield", rarity: "empty", art: "skill" },
+        { name: "Reviver Hive", rarity: "empty", art: "skill" }
+      ]
+    };
+  }
+
+  function placeholderLoadout(row) {
+    function piece(name, art) {
+      return { name: name, rarity: "empty", art: art, icon: row.icon || "" };
+    }
+    return {
+      spec: { name: "Signature", rarity: "spec", art: "spec" },
+      grenade: { name: "Grenade", rarity: "empty", art: "grenade" },
+      weapons: [piece("Primary", "rifle"), piece("Secondary", "rifle"), piece("Sidearm", "pistol")],
+      gear: [
+        piece("Mask", "mask"), piece("Chest", "chest"), piece("Holster", "holster"),
+        piece("Backpack", "bag"), piece("Gloves", "gloves"), piece("Kneepads", "knees")
+      ],
+      skills: [piece("Skill", "skill"), piece("Skill", "skill")]
+    };
+  }
+
+  function tdSlot(item) {
+    var rarity = item.rarity || "empty";
+    var art = item.icon
+      ? '<img src="' + STF.esc(item.icon) + '" alt="">'
+      : (SLOT_ART[item.art] || SLOT_ART.skill);
+    var dots = "";
+    var count = rarity === "empty" ? 0 : (item.dots || 0);
+    for (var i = 0; i < count; i++) dots += "<i></i>";
+    var mark = rarity === "empty" || !item.mark
+      ? ""
+      : '<span class="td-mark">' + STF.esc(item.mark) + "</span>";
+    var lvl = rarity === "empty" ? "" : '<span class="td-lvl">40</span>';
     return (
-      '<h1>Hollow Man</h1>' +
+      '<div class="td-slot">' +
+      '<div class="td-face rarity-' + rarity + '">' +
+      lvl +
+      '<span class="td-art">' + art + "</span>" +
+      mark +
+      (dots ? '<span class="td-dots">' + dots + "</span>" : "") +
+      "</div>" +
+      '<span class="td-title">' + STF.esc(item.name) + "</span>" +
+      "</div>"
+    );
+  }
+
+  function loadoutHTML(row) {
+    var pack = row.detail === "hollow-man" ? hollowLoadout() : placeholderLoadout(row);
+    var gear = pack.gear;
+    return (
+      '<div class="td-loadout">' +
+      '<div class="td-row td-row-2">' + tdSlot(pack.spec) + tdSlot(pack.grenade) + "</div>" +
+      '<div class="td-row td-row-3">' + pack.weapons.map(tdSlot).join("") + "</div>" +
+      '<div class="td-row td-row-2">' + tdSlot(gear[0]) + tdSlot(gear[1]) + "</div>" +
+      '<div class="td-row td-row-2">' + tdSlot(gear[2]) + tdSlot(gear[3]) + "</div>" +
+      '<div class="td-row td-row-2">' + tdSlot(gear[4]) + tdSlot(gear[5]) + "</div>" +
+      '<div class="td-row td-row-2">' + pack.skills.map(tdSlot).join("") + "</div>" +
+      "</div>"
+    );
+  }
+
+  function playstyleHTML(row) {
+    if (row.detail === "hollow-man") {
+      return (
+        "<h1>Hollow Man</h1>" +
+        '<p class="build-role tone-' + row.tone + '">' + STF.esc(row.role) + "</p>" +
+        '<div class="detail-blurb"><strong>Summary</strong>DPS support — creates status effects.</div>' +
+        '<div class="detail-blurb"><strong>How to play</strong>Use cover and the big Alejandro or any machine gun to spray and mark enemies with status effects. Offer crowd control support whilst team DPS eliminates marked enemies to proc hollow point bullets.</div>' +
+        '<div class="detail-blurb"><strong>Hardcore</strong>Stay in cover. Do not greed marks in the open. Pair with a tank or healer.</div>'
+      );
+    }
+    var icon = row.icon ? '<img class="detail-logo" src="' + row.icon + '" alt="">' : "";
+    return (
+      "<h1>" + icon + STF.esc(row.name) + "</h1>" +
       '<p class="build-role tone-' + row.tone + '">' + STF.esc(row.role) + "</p>" +
-      '<div class="detail-blurb"><strong>Summary</strong>DPS support — creates status effects.</div>' +
-      '<div class="detail-blurb"><strong>How to play</strong>Use cover and the big Alejandro or any machine gun to spray and mark enemies with status effects. Offer crowd control support whilst team DPS eliminates marked enemies to proc hollow point bullets.</div>' +
-      '<div class="detail-blurb"><strong>Hardcore</strong>Stay in cover. Do not greed marks in the open. Pair with a tank or healer.</div>' +
+      '<p class="lede">Setup not seeded yet. No attribute numbers are listed for this build.</p>'
+    );
+  }
+
+  function specsHTML(row) {
+    if (row.detail !== "hollow-man") {
+      return '<p class="lede">Setup not seeded yet. No attribute numbers are listed for this build.</p>';
+    }
+    return (
       '<h2 class="detail-label">Pieces</h2>' +
       '<ul class="piece-list">' +
       "<li><span>Mask</span> Striker's Battlegear</li>" +
@@ -104,14 +215,13 @@
     );
   }
 
-  function placeholderDetail(row) {
-    var icon = row.icon
-      ? '<img class="detail-logo" src="' + row.icon + '" alt="">'
-      : "";
+  function detailHTML(row) {
     return (
-      "<h1>" + icon + STF.esc(row.name) + "</h1>" +
-      '<p class="build-role tone-' + row.tone + '">' + STF.esc(row.role) + "</p>" +
-      '<p class="lede">Setup not seeded yet. No attribute numbers are listed for this build.</p>'
+      '<div class="detail-rail">' +
+      '<section class="detail-panel" aria-label="Playstyle">' + playstyleHTML(row) + "</section>" +
+      '<section class="detail-panel" aria-label="Gear loadout">' + loadoutHTML(row) + "</section>" +
+      '<section class="detail-panel" aria-label="Specs">' + specsHTML(row) + "</section>" +
+      "</div>"
     );
   }
 
@@ -195,7 +305,7 @@
     listView.hidden = true;
     detailView.hidden = false;
     setHeaderBack("detail", cat);
-    detailBody.innerHTML = row.detail === "hollow-man" ? hollowDetail(row) : placeholderDetail(row);
+    detailBody.innerHTML = detailHTML(row);
     window.scrollTo(0, 0);
     if (push) history.pushState({ cat: catId, build: buildId }, "", "#" + catId + "/" + buildId);
   }
