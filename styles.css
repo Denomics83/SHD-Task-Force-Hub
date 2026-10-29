@@ -543,9 +543,15 @@ a.upd-entry:hover { text-decoration: none; color: inherit; border-color: rgba(25
 #update-feed[hidden],
 #update-detail[hidden] { display: none !important; }
 .topbar .upd-header-back {
-  flex-shrink: 0; margin-left: 12px; padding: 0;
-  font-size: .9rem; white-space: nowrap;
+  flex-shrink: 0; margin-left: 12px;
+  width: 38px; height: 38px; padding: 0;
+  display: grid; place-items: center;
+  border-radius: 10px; border: 1px solid rgba(255,255,255,.1);
+  background: rgba(255,255,255,.035); color: #f2f4f7;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+  cursor: pointer;
 }
+.topbar .upd-header-back svg { width: 18px; height: 18px; display: block; }
 .upd-detail { padding-bottom: 12px; }
 .upd-detail h1 {
   margin: 4px 0 8px; font-size: clamp(1.55rem, 6vw, 1.9rem);

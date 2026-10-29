@@ -101,8 +101,9 @@
     back = document.createElement("button");
     back.type = "button";
     back.id = "upd-back";
-    back.className = "back-link upd-header-back";
-    back.textContent = "← Updates";
+    back.className = "upd-header-back";
+    back.setAttribute("aria-label", "Back to Updates");
+    back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
     back.addEventListener("click", function () {
       if (location.hash) history.pushState({}, "", "index.html");
       showList();
