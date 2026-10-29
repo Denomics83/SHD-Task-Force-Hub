@@ -8,24 +8,20 @@
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
 </head>
-<body class="page-admin">
+<body class="page-admin is-logged-out">
   <div id="topbar-root"></div>
   <main class="wrap admin-main">
-    <p class="lede"><a href="events.html">← Events</a></p>
-    <h1>Events admin</h1>
-    <p class="lede">Saves JSON straight to <code>main</code>. The token stays in this browser only.</p>
-    <p id="admin-status" class="admin-status" role="status"></p>
-
-    <section id="login-box" class="admin-card">
-      <h2>Log in</h2>
-      <label>GitHub fine-grained token
+    <section id="login-box" class="admin-card admin-login">
+      <label>GitHub token
         <input id="token-input" type="password" autocomplete="off" placeholder="github_pat_…">
       </label>
       <button type="button" class="admin-btn" id="login-btn">Log in</button>
+      <p id="login-status" class="admin-status" role="status" hidden></p>
     </section>
 
     <div id="app-box" hidden>
       <p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" id="logout-btn">Log out</button></p>
+      <p id="admin-status" class="admin-status" role="status" hidden></p>
 
       <div id="events-admin">
       <section class="admin-card">

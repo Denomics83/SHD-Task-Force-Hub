@@ -9,11 +9,12 @@
 
   function iconHTML(row) {
     var kind = STF.esc(row.kind || "unknown");
+    var tone = row.tone ? " tone-" + STF.esc(row.tone) : "";
     if (!row.icon) {
-      return '<span class="loot-ico kind-' + kind + ' is-empty" aria-hidden="true"></span>';
+      return '<span class="loot-ico kind-' + kind + tone + ' is-empty" aria-hidden="true"></span>';
     }
     return (
-      '<span class="loot-ico kind-' + kind + '">' +
+      '<span class="loot-ico kind-' + kind + tone + '">' +
       '<img src="' + STF.esc(row.icon) + '" alt="">' +
       "</span>"
     );
@@ -21,13 +22,22 @@
 
   function rowHTML(name, row) {
     var placeholder = row.loot === "confirm in-game";
+    var mark = row.priority ? '<span class="loot-priority" title="Priority loot">!</span>' : "";
     return (
       '<div class="loot-row">' +
       '<span class="loot-name">' + STF.esc(name) + "</span>" +
-      '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
+      '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + mark + STF.esc(row.loot || "") + "</span>" +
       iconHTML(row) +
       "</div>"
     );
+  }
+
+  function pad(n) { return (n < 10 ? "0" : "") + n; }
+
+  function expectedLootDate(now) {
+    var d = new Date(now.getTime());
+    if (d.getUTCHours() < 8) d.setUTCDate(d.getUTCDate() - 1);
+    return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate());
   }
 
   function badgeHTML(zone) {
@@ -61,6 +71,7 @@
       .join("");
 
     var creditDate = data.lootDate ? STF.formatDate(data.lootDate) : "";
+    var stale = data.lootDate && data.lootDate < expectedLootDate(new Date());
     var dzSection = "";
     if (SHOW_DARK_ZONE) {
       dzSection =
@@ -76,9 +87,9 @@
       "<h2>Caches</h2>" +
       '<div class="loot-rows">' + caches + "</div></section>" +
       dzSection +
-      '<p class="loot-credit">Source: <a href="' + STF.esc(data.source || "https://prototrack.gg/target-loot/target-loot.php") + '" rel="noopener" target="_blank">ProtoTrack</a>' +
+      '<p class="loot-credit">Data: <a href="https://prototrack.gg/" rel="noopener" target="_blank">ProtoTrack.gg</a>' +
       (creditDate ? " · " + STF.esc(creditDate) : "") +
-      (SHOW_DARK_ZONE ? ". DZ loot and mode: confirm in-game." : "") +
+      (stale ? ' · <span class="loot-updating">updating…</span>' : "") +
       "</p>";
   } catch (err) {
     root.innerHTML = '<p class="lede">Could not load targeted loot.</p>';

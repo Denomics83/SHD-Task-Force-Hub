@@ -807,6 +807,17 @@ body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
   background: #f5a623;
   box-shadow: 0 0 6px rgba(245, 166, 35, .45);
 }
+.loot-ico.tone-belstone { background: #5c6424; box-shadow: 0 0 6px rgba(92, 100, 36, .45); }
+.loot-ico.tone-wyvern { background: #6b6a1c; box-shadow: 0 0 6px rgba(107, 106, 28, .45); }
+.loot-ico.tone-murakami { background: #c81e1e; box-shadow: 0 0 6px rgba(200, 30, 30, .45); }
+.loot-ico.tone-airaldi { background: #c4962c; box-shadow: 0 0 6px rgba(196, 150, 44, .45); }
+.loot-priority {
+  display: inline-block;
+  margin-right: 4px;
+  color: #ffb020;
+  font-weight: 800;
+}
+.loot-updating { font-style: italic; }
 .loot-ico.kind-slot,
 .loot-ico.kind-weapon {
   background: #4d5d78;
@@ -1073,6 +1084,16 @@ body.page-events.is-event-detail .bottom-nav { position: fixed; left: 0; right: 
 }
 body.is-event-detail .admin-link { display: none; }
 body.page-admin { background: #0b0d10; background-image: none; }
+body.page-admin.is-logged-out .admin-main {
+  min-height: calc(100dvh - 64px - var(--nav-h) - env(safe-area-inset-bottom, 0px));
+  display: grid;
+  place-items: center;
+  padding-top: 0;
+  padding-bottom: 0;
+}
+.admin-login { width: min(340px, 100%); margin: 0; }
+.admin-login .admin-btn { width: 100%; }
+.admin-status[hidden] { display: none !important; }
 .admin-main { padding-bottom: 28px; }
 .admin-card {
   background: var(--panel); border: 1px solid var(--border); border-radius: var(--radius);

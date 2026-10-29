@@ -1,6 +1,7 @@
 /* Events admin. Token stays in localStorage. Never written to the repo. */
 (function () {
   STF.mountChrome("");
+  mountAdminBack();
   var REPO = "Denomics83/SHD-Task-Force-Hub";
   var TOKEN_KEY = "stf_gh_token";
   var ZONE = "Australia/Melbourne";
@@ -26,8 +27,36 @@
   var journeyOpen = 0;
 
   function setStatus(msg, ok) {
-    statusEl.textContent = msg || "";
-    statusEl.className = "admin-status" + (ok ? " is-ok" : msg ? " is-err" : "");
+    [document.getElementById("login-status"), statusEl].forEach(function (el) {
+      if (!el) return;
+      el.textContent = msg || "";
+      el.hidden = !msg;
+      el.className = "admin-status" + (ok ? " is-ok" : msg ? " is-err" : "");
+    });
+  }
+
+  function mountAdminBack() {
+    var top = document.querySelector(".topbar");
+    var pill = document.querySelector(".hub-pill");
+    if (pill) pill.hidden = true;
+    if (!top || document.getElementById("admin-back")) return;
+    var back = document.createElement("button");
+    back.type = "button";
+    back.id = "admin-back";
+    back.className = "upd-header-back";
+    back.setAttribute("aria-label", "Back");
+    back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    back.addEventListener("click", function () {
+      var dest = "";
+      try {
+        if (document.referrer) {
+          var url = new URL(document.referrer);
+          if (url.origin === location.origin && url.pathname.indexOf("admin.html") === -1) dest = document.referrer;
+        }
+      } catch (err) {}
+      location.href = dest || (location.hash === "#events" ? "resources.html" : "events.html");
+    });
+    top.appendChild(back);
   }
 
   function token() {
@@ -233,18 +262,19 @@
   function showApp(on) {
     loginBox.hidden = on;
     appBox.hidden = !on;
+    document.body.classList.toggle("is-logged-out", !on);
   }
 
   async function login() {
     var value = document.getElementById("token-input").value.trim();
-    if (!value) return setStatus("Paste a token first.");
+    if (!value) return;
     localStorage.setItem(TOKEN_KEY, value);
     document.getElementById("token-input").value = "";
-    setStatus("Checking token…");
+    setStatus("");
     try {
       await loadDocs();
       showApp(true);
-      setStatus("Logged in. Saves go to main.", true);
+      setStatus("");
     } catch (err) {
       localStorage.removeItem(TOKEN_KEY);
       showApp(false);
@@ -256,7 +286,7 @@
   document.getElementById("logout-btn").addEventListener("click", function () {
     localStorage.removeItem(TOKEN_KEY);
     showApp(false);
-    setStatus("Logged out. Token removed from this browser.", true);
+    setStatus("");
   });
 
   typeSelect.addEventListener("change", function () {
@@ -784,10 +814,9 @@
   });
 
   if (token()) {
-    setStatus("Checking saved token…");
     loadDocs().then(function () {
       showApp(true);
-      setStatus("Logged in. Saves go to main.", true);
+      setStatus("");
     }).catch(function (err) {
       localStorage.removeItem(TOKEN_KEY);
       showApp(false);
