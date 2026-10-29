@@ -27,7 +27,7 @@ STF.formatDate = function (iso) {
 
 STF.NAV_ICONS = {
   updates:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><polyline points="9 17 4 12 9 7"/><path d="M20 18v-2a4 4 0 0 0-4-4H4"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 10v4h3l5 3V7L7 10H4z"/><path d="M16 9.2a3.4 3.4 0 0 1 0 5.6"/><path d="M18.3 6.8a6.5 6.5 0 0 1 0 10.4"/></svg>',
   events:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2a7.3 7.3 0 0 0-7.3 7.3c0 1.4.4 2.7 1.1 3.8L4.2 19.8l4.5-1.6A7.3 7.3 0 1 0 12 4.2z"/></svg>',
   loot:

@@ -515,36 +515,30 @@ body.page-events {
 .updates-page { padding-top: 14px; }
 .upd-list { display: grid; gap: 12px; }
 .upd-entry {
-  display: grid; grid-template-columns: 1fr auto; gap: 12px; align-items: center;
+  display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 12px; align-items: center;
   background: rgba(255,255,255,.035);
   border: 1px solid rgba(255,255,255,.1);
   border-radius: 16px;
-  padding: 14px 14px 14px 16px; color: inherit; text-decoration: none;
+  padding: 10px 12px 10px 14px; color: inherit; text-decoration: none;
   box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
 }
+.upd-entry > div { min-width: 0; }
 a.upd-entry:hover { text-decoration: none; color: inherit; border-color: rgba(255,255,255,.2); }
-.upd-chip {
-  display: inline-block; margin-bottom: 8px;
-  font-size: .62rem; font-weight: 800; letter-spacing: .08em; text-transform: uppercase;
-  padding: 4px 9px; border-radius: 999px; background: #ff7f00; color: #fff;
+.upd-entry h2 {
+  margin: 0 0 2px; font-size: 1rem; line-height: 1.2; font-weight: 700;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
-.upd-entry h2 { margin: 0 0 4px; font-size: 1.05rem; line-height: 1.2; font-weight: 700; }
 .upd-desc {
-  margin: 0 0 8px; color: #8a9099; font-size: .86rem; line-height: 1.35;
-  display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;
-}
-.upd-entry time {
-  display: block; font-size: .68rem; letter-spacing: .04em; color: #6c7380;
+  margin: 0; color: #8a9099; font-size: .84rem; line-height: 1.3;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
 }
 .upd-ico {
-  width: 52px; height: 52px; border-radius: 12px; display: grid; place-items: center; flex-shrink: 0;
+  width: 44px; height: 44px; border-radius: 11px; display: grid; place-items: center; flex-shrink: 0;
 }
-.upd-ico svg { width: 26px; height: 26px; display: block; }
-.upd-ico.news { background: #ff7f00; }
+.upd-ico svg { width: 22px; height: 22px; display: block; }
+.upd-ico.announcement { background: #dc2626; }
+.upd-ico.maintenance { background: #ff7f00; }
 .upd-ico.patch { background: #3b82f6; }
-.upd-ico.season { background: #d97706; }
-.upd-ico.event { background: #0d9488; }
-.upd-ico.dxp { background: #ea580c; }
 
 .loot-week { display: grid; gap: 8px; }
 .loot-week-row {

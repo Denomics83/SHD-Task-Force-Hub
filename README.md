@@ -8,7 +8,7 @@ Mobile-first static clan site for *Tom Clancy's The Division 2*.
 
 | Tab | Page | Notes |
 |-----|------|--------|
-| **Updates** | `index.html` | Home — news, patch, DXP, and season announcements |
+| **Updates** | `index.html` | Home — announcement, maintenance, and patch cards |
 | **Events** | `events.html` | Full-bleed season and raid cards (swipe) |
 | **Loot** | `loot.html` | Targeted loot from `data/loot.json` |
 | **Builds** | `builds.html` | Inventory-style loadout cards |
