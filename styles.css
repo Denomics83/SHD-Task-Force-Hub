@@ -216,6 +216,28 @@ h1 { margin: 0 0 6px; font-size: clamp(1.25rem, 4.5vw, 1.7rem); letter-spacing: 
   text-transform: uppercase; color: var(--gear); margin-bottom: 6px;
 }
 .season-item p { margin: 0; color: var(--muted); font-size: .85rem; }
+.manhunt-open { margin-top: 12px; }
+#manhunt-weeks { display: grid; gap: 10px; margin-top: 12px; }
+#manhunt-weeks[hidden] { display: none !important; }
+.task-list { margin: 8px 0 0; padding-left: 1.1em; color: var(--muted); }
+.task-list li { margin: 0 0 4px; }
+.caveat, .src-line, .map-note { margin: 8px 0 0; font-size: .72rem; color: #8a9099; line-height: 1.4; }
+.src-line a { color: var(--highend); }
+.mod-label {
+  margin: 16px 0 8px; font-size: .72rem; letter-spacing: .12em;
+  text-transform: uppercase; color: var(--orange);
+}
+.altar-map { margin: 8px 0 12px; }
+.altar-map svg { width: 100%; height: auto; display: block; }
+.map-bg { fill: #12161c; stroke: rgba(255,255,255,.08); }
+.map-zone { fill: #6c7380; font-size: 22px; font-family: inherit; }
+.altar-mark circle { fill: #ff7f00; }
+.altar-mark text {
+  fill: #1a1006; font-size: 14px; font-weight: 800; text-anchor: middle; font-family: inherit;
+}
+.altar-list { margin: 0; padding-left: 1.2em; display: grid; gap: 8px; }
+.altar-list li { color: var(--text); font-size: .86rem; line-height: 1.35; }
+.coords { display: block; color: #8a9099; font-size: .72rem; }
 
 /* ===== Builds filters ===== */
 .filters {

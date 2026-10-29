@@ -1,0 +1,71 @@
+{
+  "season": "Year 8 Season 3 — Red Horizon",
+  "checked": "2026-10-29",
+  "global": {
+    "name": "Under Pressure",
+    "effect": "A Pressure Gauge builds as you fight. Kills, headshots, multikills, skill kills, status-effect kills, fire kills, and kills by other players in your group all add to it. Higher pressure means stronger bonuses. By default the primary bonus is Status Effects. Some passive modifiers can swap that for Signature Weapon Damage or Hazard Protection. The gauge decays if you stay out of cover too long."
+  },
+  "actives": [
+    {
+      "name": "Fiery Aura",
+      "effect": "Secondary attribute: Armor Regen. While active, Armor Regen and Damage Resistance go up, with extra protection while sprinting. Enemies are set on fire the first time they enter its range. At higher levels the defense is stronger, and burning unique enemies can also restore Bonus Armor."
+    },
+    {
+      "name": "Vicarious Combustion",
+      "effect": "Secondary attribute: Headshot Damage. A headshot on an enemy that is already burning also burns nearby enemies. Higher levels reach a larger area. At the highest level, headshots can apply Burn directly."
+    },
+    {
+      "name": "Signed, Shield, Delivered",
+      "effect": "Secondary attribute: Skill Efficiency. Improves Signature Weapon performance, Shield Health, and Shield Active Regen. Kills with a Signature Weapon, or while using a shield, refill the magazine without using reserve ammo. At the highest level those kills can also extend the modifier."
+    }
+  ],
+  "activeNote": "Active modifiers have no shared cooldown this season. Once you have enough Pressure you can trigger one. The gauge resets when it ends.",
+  "hostiles": [
+    {
+      "name": "Draining Presence",
+      "effect": "Drains ammunition from your magazine and reduces your Pressure while the affected enemy is close to you. Setting that enemy on fire is the only way to permanently remove or reverse it."
+    },
+    {
+      "name": "Achilles' Heal",
+      "effect": "Restores health to the affected enemy and nearby allies when you break their weak points or armor pieces, and it also reduces your Pressure. Fire is the permanent counter."
+    },
+    {
+      "name": "Thousand Cuts",
+      "effect": "Reduces your Pressure whenever the affected enemy hits you and applies a stacking damage-reduction debuff. Fire is the permanent counter."
+    }
+  ],
+  "passives": [
+    { "name": "Flow Regulator", "effect": "Earn +10% Pressure Gauge per action." },
+    { "name": "Throttle Valve", "effect": "Earn +25% Pressure Gauge per action, but the gauge decays 50% faster." },
+    { "name": "Flux Stabilizer", "effect": "Pressure Gauge decay is 25% slower." },
+    { "name": "Pressure Control", "effect": "Decay is 50% slower, but gain is reduced by 20% per action." },
+    { "name": "Quality Seals", "effect": "Decay begins after a longer period of time." },
+    { "name": "Delayed Venting", "effect": "Bonuses apply at 0%, 20%, 50%, and 80%. Active modifiers unlock at a 10% lower threshold." },
+    { "name": "Leaky Valve", "effect": "Cover no longer stops decay. Gains increase by 50%. Active modifiers need 95% Pressure. Decay pauses out of combat." },
+    { "name": "Vacuum Seal", "effect": "The gauge no longer decays, but gains are reduced by 50%." },
+    { "name": "New Formula: Beta", "effect": "Primary bonus becomes Signature Weapon Damage instead of Status Effects. Disabled if paired with New Formula: Gamma. PTS progression: 10%, 20%, 30%, 50%." },
+    { "name": "New Formula: Gamma", "effect": "Primary bonus becomes Hazard Protection instead of Status Effects. Disabled if paired with New Formula: Beta. PTS progression: 5%, 15%, 25%, 40%." },
+    { "name": "Microwave Coils", "effect": "Up to four pulsed enemies have a 30% chance to burn. Gain 3% bonus Pressure for every affected enemy." },
+    { "name": "New Model", "effect": "K8 Jetstream Flamethrower: +30% damage to named enemies, −15% total damage, −50% spread, +100% range, +25% equip speed. Specialization ammo pickups are doubled." },
+    { "name": "Afterburner", "effect": "After killing a burning enemy, +20% movement speed for 30 seconds." },
+    { "name": "Flint and Steel", "effect": "Shooting an enemy your skill is also damaging sets them on fire. PTS cooldown: 15 seconds." },
+    { "name": "Fire with Fire", "effect": "While in combat, being burned increases your burn damage by 50% for 30 seconds." },
+    { "name": "Reserve Tank", "effect": "After an Active Modifier, the gauge resets to 20% instead of 0%." },
+    { "name": "All or Nothing", "effect": "Bonuses below 80% become 0. Bonuses above 80% increase by 25% of their value. Disabled if paired with Kickstart." },
+    { "name": "Kickstart", "effect": "Bonuses above 80% become 0. Bonuses below 80% increase by 50% of their value. Disabled if paired with All or Nothing." },
+    { "name": "Firestarter", "effect": "Concussion grenades, flashbangs, and cluster grenades gain +100% range and apply a short burn." },
+    { "name": "Modular Plates", "effect": "Armor kits also grant +100% bonus armor and restore 100% of your shield. Insta armor kits grant +25% bonus armor and restore 50% of the shield." }
+  ],
+  "sources": [
+    {
+      "name": "Ubisoft — The Division 2: Red Horizon",
+      "url": "https://www.ubisoft.com/en-us/game/the-division/the-division-2/news-updates/4mrYiFPIyKpzpoqshDQk80/the-division-2-red-horizon",
+      "covers": "Global, active, and hostile descriptions (no exact hostile distances or percents)."
+    },
+    {
+      "name": "Ubisoft — Red Horizon PTS patch notes, 13 Aug 2026",
+      "url": "https://www.ubisoft.com/en-gb/game/the-division/the-division-2/news-updates/hdUs80E1Fc9nHAhckksLw/red-horizon-pts-patch-notes",
+      "covers": "Passive list and the numeric hostile values from the test server. Later notes lowered Draining Presence from 7m to 5m and Achilles' Heal pressure loss from 10% to 5%, so those PTS numbers are not repeated here as live facts."
+    }
+  ]
+}
