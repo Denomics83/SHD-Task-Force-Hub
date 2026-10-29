@@ -7,6 +7,7 @@
   <title>Season — Shade Task Force Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
 </head>
 <body>
   <div id="topbar-root"></div>
@@ -21,15 +22,13 @@
       <button type="button" class="subtab" role="tab" data-panel="journey" aria-selected="false">Journey</button>
       <button type="button" class="subtab" role="tab" data-panel="maps" aria-selected="false">Maps</button>
       <button type="button" class="subtab" role="tab" data-panel="modifiers" aria-selected="false">Modifiers</button>
-      <button type="button" class="subtab" role="tab" data-panel="global" aria-selected="false">Global Modifiers</button>
     </div>
-    <p class="season-theme" id="season-theme">Add the season theme here</p>
+    <p class="season-theme" id="season-theme" hidden></p>
 
     <div id="panel-manhunts" class="season-panel active season-list" role="tabpanel"></div>
     <div id="panel-journey" class="season-panel season-list" role="tabpanel"></div>
     <div id="panel-maps" class="season-panel season-list" role="tabpanel"></div>
     <div id="panel-modifiers" class="season-panel season-list" role="tabpanel"></div>
-    <div id="panel-global" class="season-panel season-list" role="tabpanel"></div>
 
     <footer class="site-foot">
       Season detail opens from the season card on Updates or Events. It is not a bottom-nav tab.
@@ -39,6 +38,7 @@
 
   <div id="bottomnav-root"></div>
   <script src="js/common.js"></script>
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
   <script src="js/season.js"></script>
 </body>
 </html>

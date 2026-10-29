@@ -27,6 +27,7 @@
     <div id="app-box" hidden>
       <p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" id="logout-btn">Log out</button></p>
 
+      <div id="events-admin">
       <section class="admin-card">
         <h2>Event type</h2>
         <label>Existing type
@@ -65,10 +66,11 @@
         <h3 class="admin-sub">Scheduled</h3>
         <div id="instance-list"></div>
       </section>
+      </div>
 
-      <section class="admin-card">
+      <section class="admin-card" data-admin-extra>
         <h2>Season theme</h2>
-        <p class="lede">One paragraph for the whole season. It sits under the tabs and stays visible on every tab.</p>
+        <p class="lede">One paragraph for the whole season. It stays under the tabs on every tab. Leave the placeholder and the line stays hidden.</p>
         <form id="theme-form">
           <label>Season theme
             <textarea name="theme" id="theme-input" rows="4"></textarea>
@@ -77,7 +79,7 @@
         </form>
       </section>
 
-      <section class="admin-card">
+      <section class="admin-card" data-admin-extra>
         <h2>Configure manhunt</h2>
         <p class="lede">Tap a week, then a task, and type. Saves <code>data/manhunt.json</code>.</p>
         <form id="manhunt-form">
@@ -92,7 +94,7 @@
         </form>
       </section>
 
-      <section class="admin-card">
+      <section class="admin-card" data-admin-extra>
         <h2>Configure journey</h2>
         <p class="lede">Tap a mission, then a task, and type. Journey missions unlock global modifiers. Saves <code>data/journey.json</code>.</p>
         <form id="journey-form">
@@ -107,27 +109,7 @@
         </form>
       </section>
 
-      <section class="admin-card">
-        <h2>Global modifiers</h2>
-        <p class="lede">Cards on the season’s Global Modifiers tab. A Guide button shows only when a link is set.</p>
-        <form id="gm-form">
-          <label>Season
-            <select id="gm-season"></select>
-          </label>
-          <div id="gm-list"></div>
-          <h3 class="admin-sub" id="gm-editing">Add modifier</h3>
-          <input type="hidden" id="gm-index" value="-1">
-          <label>Name <input id="gm-name" required></label>
-          <label>Short description <textarea id="gm-desc" rows="2" required></textarea></label>
-          <label>Guide link <input id="gm-guide" type="url" placeholder="Optional https://…"></label>
-          <p class="admin-row">
-            <button class="admin-btn" type="submit">Save modifier</button>
-            <button type="button" class="admin-btn admin-btn-ghost" id="gm-cancel" hidden>Cancel</button>
-          </p>
-        </form>
-      </section>
-
-      <section class="admin-card">
+      <section class="admin-card" data-admin-extra>
         <h2>Map image</h2>
         <p class="lede">Jpg, png, or webp. The image is resized to 1600px wide before it is committed.</p>
         <form id="map-form">

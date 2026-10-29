@@ -886,7 +886,12 @@ body.page-resources main { flex: 1 1 auto; min-height: 0; display: flex; flex-di
   flex: 1;
   min-height: 0;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+}
+.res-landing .cat-tile:last-child {
+  grid-column: 1 / -1;
+  width: calc(50% - 5px);
+  justify-self: center;
 }
 .res-detail { flex: 1; overflow: auto; }
 .cat-tile {
@@ -911,6 +916,7 @@ body.page-resources main { flex: 1 1 auto; min-height: 0; display: flex; flex-di
   pointer-events: none;
 }
 .res-landing .cat-tile img { object-fit: contain; }
+a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
 .back-link {
   appearance: none;
   border: 0;
@@ -1006,6 +1012,21 @@ body.page-resources main { flex: 1 1 auto; min-height: 0; display: flex; flex-di
   color: var(--muted);
   font-size: .9rem;
   line-height: 1.45;
+}
+.season-theme[hidden] { display: none !important; }
+.climax-line { margin: 4px 0 0; color: var(--text); font-size: .95rem; }
+#altar-leaflet {
+  height: min(68vh, 460px);
+  width: 100%;
+  border-radius: 12px;
+  margin: 0 0 12px;
+  background: #d5dbe3;
+}
+.altar-pin { background: none; border: 0; }
+.altar-pin span {
+  width: 28px; height: 28px; display: grid; place-items: center;
+  border-radius: 50%; background: #c43b3b; color: #fff; font-weight: 800;
+  font-size: .78rem; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4);
 }
 .journey-toggle {
   width: 100%; text-align: left; background: transparent; border: 0; padding: 0; color: inherit;

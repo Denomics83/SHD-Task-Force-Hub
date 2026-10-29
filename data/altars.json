@@ -3,29 +3,305 @@
   "checked": "2026-10-29",
   "window": "15 Oct–3 Nov 2026",
   "reset": "Daily, 08:00 UTC (guides also cite 1:00 a.m. Pacific)",
-  "note": "Stylised plot of menu coordinates from Item Level Gaming, updated 17 Oct 2026. Not an official Ubisoft map. Menu coordinates use Manny’s office at the White House as the origin. Altar 12’s controller map coordinate was not printed in that guide.",
   "source": "https://itemlevel.net/the-division-2-all-20-altar-locations-red-moon-unleashed-guide/",
   "sourceName": "Item Level Gaming, updated 17 Oct 2026",
   "altars": [
-    { "n": 1, "zone": "West End", "where": "On the garage beside the apartment building on Virginia Ave. NW.", "menu": [-1605, 259], "map": [2181, 1209] },
-    { "n": 2, "zone": "West End", "where": "Balcony at 22nd St. NW and I St. NW.", "menu": [-1079, 362], "map": [2283, 1734] },
-    { "n": 3, "zone": "Downtown West", "where": "By the large flower pot at 21st St. NW and Pennsylvania Ave. NW.", "menu": [-899, 432], "map": [2353, 1915] },
-    { "n": 4, "zone": "Downtown West", "where": "Tree planter by the Waffles café on 19th St. NW.", "menu": [-611, -16], "map": [1904, 2203] },
-    { "n": 5, "zone": "Downtown West", "where": "Ivy arch in the Rawlins Park garden.", "menu": [-512, -217], "map": [1703, 2301] },
-    { "n": 6, "zone": "Foggy Bottom", "where": "Plaza in front of the CERA State Disaster Recovery Center, 23rd St. NW and E St. NW.", "menu": [-1156, -168], "map": [1752, 1657] },
-    { "n": 7, "zone": "Foggy Bottom", "where": "Scaffolding in the observatory courtyard by the Navy Hill Control Point.", "menu": [-1254, -309], "map": [1611, 1560] },
-    { "n": 8, "zone": "West Potomac Park", "where": "Kiosk at Lincoln Memorial Circle and Daniel French Dr. SW.", "menu": [-1085, -1027], "map": [894, 1729] },
-    { "n": 9, "zone": "West Potomac Park", "where": "Roof of the small garage northeast of the Washington Monument.", "menu": [71, -815], "map": [1106, 2886] },
-    { "n": 10, "zone": "White House", "where": "In the back of a Humvee on Pennsylvania Ave. NW.", "menu": [-65, 124], "map": [2045, 2748] },
-    { "n": 11, "zone": "White House", "where": "Near the dumpster in the alley next to Ashburton House.", "menu": [84, 307], "map": [2226, 2898] },
-    { "n": 12, "zone": "Downtown East", "where": "Parapet in the alley between the hotel and NationalBond.co.", "menu": [866, 172], "map": null },
-    { "n": 13, "zone": "Downtown East", "where": "Next to the café entrance on I St. NW.", "menu": [1111, 365], "map": [2285, 3924] },
-    { "n": 14, "zone": "Judiciary Square", "where": "Upper-right side of the canopy at the District Mall Center on G St. NW.", "menu": [1663, 93], "map": [2014, 4476] },
-    { "n": 15, "zone": "Judiciary Square", "where": "In front of the Chief Justice John Marshall statue in John Marshall Park.", "menu": [1646, -484], "map": [1436, 4460] },
-    { "n": 16, "zone": "Federal Triangle", "where": "Southwest corner of the wall at the National Archives.", "menu": [1135, -586], "map": [1333, 3948] },
-    { "n": 17, "zone": "East Mall", "where": "Behind the fence at the CERA State checkpoint on Maryland Ave. SW.", "menu": [1919, -1023], "map": [896, 4733] },
-    { "n": 18, "zone": "East Mall", "where": "Between the large rocks in the National Museum of the American Indian fountain.", "menu": [1680, -1026], "map": [893, 4492] },
-    { "n": 19, "zone": "East Mall", "where": "On the red freight train along Virginia Ave. SW.", "menu": [1620, -1447], "map": [473, 4433] },
-    { "n": 20, "zone": "East Mall", "where": "Tree planter in the café square beside Jefferson Plaza on D St. SW.", "menu": [1112, -1464], "map": [453, 3926] }
+    {
+      "n": 1,
+      "zone": "West End",
+      "where": "On the garage beside the apartment building on Virginia Ave. NW.",
+      "menu": [
+        -1605,
+        259
+      ],
+      "map": [
+        2181,
+        1209
+      ],
+      "lat": 38.89993,
+      "lon": -77.05599
+    },
+    {
+      "n": 2,
+      "zone": "West End",
+      "where": "Balcony at 22nd St. NW and I St. NW.",
+      "menu": [
+        -1079,
+        362
+      ],
+      "map": [
+        2283,
+        1734
+      ],
+      "lat": 38.9008,
+      "lon": -77.04949
+    },
+    {
+      "n": 3,
+      "zone": "Downtown West",
+      "where": "By the large flower pot at 21st St. NW and Pennsylvania Ave. NW.",
+      "menu": [
+        -899,
+        432
+      ],
+      "map": [
+        2353,
+        1915
+      ],
+      "lat": 38.9014,
+      "lon": -77.04724
+    },
+    {
+      "n": 4,
+      "zone": "Downtown West",
+      "where": "Tree planter by the Waffles café on 19th St. NW.",
+      "menu": [
+        -611,
+        -16
+      ],
+      "map": [
+        1904,
+        2203
+      ],
+      "lat": 38.89743,
+      "lon": -77.0441
+    },
+    {
+      "n": 5,
+      "zone": "Downtown West",
+      "where": "Ivy arch in the Rawlins Park garden.",
+      "menu": [
+        -512,
+        -217
+      ],
+      "map": [
+        1703,
+        2301
+      ],
+      "lat": 38.89565,
+      "lon": -77.04305
+    },
+    {
+      "n": 6,
+      "zone": "Foggy Bottom",
+      "where": "Plaza in front of the CERA State Disaster Recovery Center, 23rd St. NW and E St. NW.",
+      "menu": [
+        -1156,
+        -168
+      ],
+      "map": [
+        1752,
+        1657
+      ],
+      "lat": 38.89613,
+      "lon": -77.05086
+    },
+    {
+      "n": 7,
+      "zone": "Foggy Bottom",
+      "where": "Scaffolding in the observatory courtyard by the Navy Hill Control Point.",
+      "menu": [
+        -1254,
+        -309
+      ],
+      "map": [
+        1611,
+        1560
+      ],
+      "lat": 38.89489,
+      "lon": -77.05217
+    },
+    {
+      "n": 8,
+      "zone": "West Potomac Park",
+      "where": "Kiosk at Lincoln Memorial Circle and Daniel French Dr. SW.",
+      "menu": [
+        -1085,
+        -1027
+      ],
+      "map": [
+        894,
+        1729
+      ],
+      "lat": 38.88854,
+      "lon": -77.05069
+    },
+    {
+      "n": 9,
+      "zone": "West Potomac Park",
+      "where": "Roof of the small garage northeast of the Washington Monument.",
+      "menu": [
+        71,
+        -815
+      ],
+      "map": [
+        1106,
+        2886
+      ],
+      "lat": 38.89033,
+      "lon": -77.03643
+    },
+    {
+      "n": 10,
+      "zone": "White House",
+      "where": "In the back of a Humvee on Pennsylvania Ave. NW.",
+      "menu": [
+        -65,
+        124
+      ],
+      "map": [
+        2045,
+        2748
+      ],
+      "lat": 38.89862,
+      "lon": -77.03733
+    },
+    {
+      "n": 11,
+      "zone": "White House",
+      "where": "Near the dumpster in the alley next to Ashburton House.",
+      "menu": [
+        84,
+        307
+      ],
+      "map": [
+        2226,
+        2898
+      ],
+      "lat": 38.90022,
+      "lon": -77.03536
+    },
+    {
+      "n": 12,
+      "zone": "Downtown East",
+      "where": "Parapet in the alley between the hotel and NationalBond.co.",
+      "menu": [
+        866,
+        172
+      ],
+      "map": null,
+      "lat": 38.89897,
+      "lon": -77.02594
+    },
+    {
+      "n": 13,
+      "zone": "Downtown East",
+      "where": "Next to the café entrance on I St. NW.",
+      "menu": [
+        1111,
+        365
+      ],
+      "map": [
+        2285,
+        3924
+      ],
+      "lat": 38.90066,
+      "lon": -77.0228
+    },
+    {
+      "n": 14,
+      "zone": "Judiciary Square",
+      "where": "Upper-right side of the canopy at the District Mall Center on G St. NW.",
+      "menu": [
+        1663,
+        93
+      ],
+      "map": [
+        2014,
+        4476
+      ],
+      "lat": 38.89821,
+      "lon": -77.01629
+    },
+    {
+      "n": 15,
+      "zone": "Judiciary Square",
+      "where": "In front of the Chief Justice John Marshall statue in John Marshall Park.",
+      "menu": [
+        1646,
+        -484
+      ],
+      "map": [
+        1436,
+        4460
+      ],
+      "lat": 38.89312,
+      "lon": -77.01696
+    },
+    {
+      "n": 16,
+      "zone": "Federal Triangle",
+      "where": "Southwest corner of the wall at the National Archives.",
+      "menu": [
+        1135,
+        -586
+      ],
+      "map": [
+        1333,
+        3948
+      ],
+      "lat": 38.89226,
+      "lon": -77.02327
+    },
+    {
+      "n": 17,
+      "zone": "East Mall",
+      "where": "Behind the fence at the CERA State checkpoint on Maryland Ave. SW.",
+      "menu": [
+        1919,
+        -1023
+      ],
+      "map": [
+        896,
+        4733
+      ],
+      "lat": 38.88835,
+      "lon": -77.01407
+    },
+    {
+      "n": 18,
+      "zone": "East Mall",
+      "where": "Between the large rocks in the National Museum of the American Indian fountain.",
+      "menu": [
+        1680,
+        -1026
+      ],
+      "map": [
+        893,
+        4492
+      ],
+      "lat": 38.88834,
+      "lon": -77.01698
+    },
+    {
+      "n": 19,
+      "zone": "East Mall",
+      "where": "On the red freight train along Virginia Ave. SW.",
+      "menu": [
+        1620,
+        -1447
+      ],
+      "map": [
+        473,
+        4433
+      ],
+      "lat": 38.88463,
+      "lon": -77.01806
+    },
+    {
+      "n": 20,
+      "zone": "East Mall",
+      "where": "Tree planter in the café square beside Jefferson Plaza on D St. SW.",
+      "menu": [
+        1112,
+        -1464
+      ],
+      "map": [
+        453,
+        3926
+      ],
+      "lat": 38.88452,
+      "lon": -77.02426
+    }
   ]
 }

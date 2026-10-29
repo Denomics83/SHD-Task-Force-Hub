@@ -332,6 +332,37 @@
       })
       .join("");
 
+    function openHashCard(href) {
+      if (!href || href.charAt(0) !== "#") return;
+      if (location.hash === href) routeEvent();
+      else location.hash = href;
+    }
+    rail.addEventListener("click", function (e) {
+      var link = e.target.closest("a.hero-card");
+      if (!link) return;
+      var href = link.getAttribute("href") || "";
+      if (href.charAt(0) !== "#") return;
+      e.preventDefault();
+      openHashCard(href);
+    });
+    var tap = null;
+    rail.addEventListener("touchstart", function (e) {
+      if (!e.touches[0]) return;
+      tap = { x: e.touches[0].clientX, y: e.touches[0].clientY };
+    }, { passive: true });
+    rail.addEventListener("touchend", function (e) {
+      if (!tap || !e.changedTouches[0]) return;
+      var t = e.changedTouches[0];
+      var moved = Math.abs(t.clientX - tap.x) > 12 || Math.abs(t.clientY - tap.y) > 12;
+      tap = null;
+      if (moved) return;
+      var link = e.target.closest("a.hero-card");
+      if (!link) return;
+      var href = link.getAttribute("href") || "";
+      if (href.charAt(0) !== "#") return;
+      e.preventDefault();
+      openHashCard(href);
+    });
     rail.addEventListener("keydown", function (e) {
       if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
       e.preventDefault();

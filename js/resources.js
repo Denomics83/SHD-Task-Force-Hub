@@ -1,4 +1,4 @@
-/* Resources — four tiles only. Maps and Manhunts open a short detail. */
+/* Resources landing. Maps, Hunters, Manhunts, and Creators open a short detail. Events opens admin. */
 (function () {
   STF.mountChrome("resources");
 

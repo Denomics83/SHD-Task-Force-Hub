@@ -1,6 +1,18 @@
 {
   "types": [
     {
+      "id": "red-moon-unleashed",
+      "name": "Red Moon Unleashed",
+      "description": "Limited-time event — earn event keys",
+      "rewards": "details coming soon",
+      "modifiers": "details coming soon",
+      "tasks": "details coming soon",
+      "accent": "#c43b3b",
+      "image": "assets/events/season-hero.jpg",
+      "source": "",
+      "suggested": ""
+    },
+    {
       "id": "expertise-surge",
       "name": "Expertise Surge",
       "description": "Limited-time expertise progress window.",

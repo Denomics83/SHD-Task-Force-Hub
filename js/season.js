@@ -10,8 +10,7 @@
     manhunts: document.getElementById("panel-manhunts"),
     journey: document.getElementById("panel-journey"),
     maps: document.getElementById("panel-maps"),
-    modifiers: document.getElementById("panel-modifiers"),
-    global: document.getElementById("panel-global")
+    modifiers: document.getElementById("panel-modifiers")
   };
   var themeEl = document.getElementById("season-theme");
 
@@ -36,26 +35,14 @@
   }
 
   function weekHTML(week) {
-    var flag = week.confirmed === "october-guide"
-      ? "Checked Oct 2026"
-      : week.confirmed === "may-have-changed"
-        ? "May have changed"
-        : week.confirmed === "launch-compilation"
-          ? "Launch list"
-          : "";
-    var tasks = (week.tasks || [])
+    var tasks = (week.tasks || []).slice(0, 3)
       .map(function (task) { return "<li>" + STF.esc(task) + "</li>"; })
       .join("");
+    var title = "Week " + week.week + (week.scout ? " · " + week.scout : "");
+    if (week.label) title += " · " + week.label;
     return (
-      '<article class="season-item">' +
-      (flag ? '<span class="status">' + STF.esc(flag) + "</span>" : "") +
-      "<h3>Week " + STF.esc(week.week) + " · " + STF.esc(week.scout) +
-      (week.label ? " · " + STF.esc(week.label) : "") +
-      (week.date ? " · " + STF.esc(STF.formatDate(week.date)) : "") + "</h3>" +
-      "<ul class=\"task-list\">" + tasks + "</ul>" +
-      (week.caveat ? '<p class="caveat">' + STF.esc(week.caveat) + "</p>" : "") +
-      (week.source ? sourceLine(week.sourceName, week.source) : "") +
-      "</article>"
+      '<article class="season-item"><h3>' + STF.esc(title) + "</h3>" +
+      '<ul class="task-list">' + tasks + "</ul></article>"
     );
   }
 
@@ -71,11 +58,9 @@
         : "";
       return (
         '<article class="season-item journey-mission">' +
-        '<button type="button" class="journey-toggle" aria-expanded="false">' +
         "<h3>" + STF.esc(mission.name || ("Mission " + (index + 1))) + "</h3>" +
         unlocks +
-        "</button>" +
-        '<ol class="task-list" hidden>' + tasks + "</ol>" +
+        '<ol class="task-list">' + tasks + "</ol>" +
         "</article>"
       );
     }).join("");
@@ -126,58 +111,50 @@
     }).join("");
   }
 
-  function plot(menu) {
-    var minX = -1800;
-    var maxX = 2200;
-    var minY = -1700;
-    var maxY = 700;
-    var x = ((menu[0] - minX) / (maxX - minX)) * 1000;
-    var y = ((maxY - menu[1]) / (maxY - minY)) * 720;
-    return [x, y];
-  }
-
   function mapHTML(data) {
-    var markers = (data.altars || [])
-      .map(function (altar) {
-        var p = plot(altar.menu);
-        return (
-          '<g class="altar-mark">' +
-          '<circle cx="' + p[0].toFixed(1) + '" cy="' + p[1].toFixed(1) + '" r="16"></circle>' +
-          '<text x="' + p[0].toFixed(1) + '" y="' + (p[1] + 5).toFixed(1) + '">' + altar.n + "</text>" +
-          "</g>"
-        );
-      })
-      .join("");
     var list = (data.altars || [])
       .map(function (altar) {
-        var coords = "Menu " + altar.menu.join(", ");
+        var coords = "Menu " + (altar.menu || []).join(", ");
         if (altar.map) coords += " · map " + altar.map.join(", ");
-        else coords += " · controller map pair not in this guide";
         return (
-          "<li><strong>" + altar.n + ". " + STF.esc(altar.zone) + "</strong> " +
+          "<li><strong>" + STF.esc(altar.zone) + "</strong> " +
           STF.esc(altar.where) + ' <span class="coords">' + STF.esc(coords) + "</span></li>"
         );
       })
       .join("");
-    return (
-      '<p class="lede map-note">' + STF.esc(data.note || "") + "</p>" +
-      '<div class="altar-map" role="img" aria-label="Stylised Washington D.C. plot of 20 Red Moon altars">' +
-      '<svg viewBox="0 0 1000 720">' +
-      '<rect class="map-bg" x="0" y="0" width="1000" height="720" rx="16"></rect>' +
-      '<text class="map-zone" x="80" y="150">West End</text>' +
-      '<text class="map-zone" x="180" y="280">Downtown West</text>' +
-      '<text class="map-zone" x="430" y="300">White House</text>' +
-      '<text class="map-zone" x="620" y="250">Downtown East</text>' +
-      '<text class="map-zone" x="700" y="360">Judiciary</text>' +
-      '<text class="map-zone" x="560" y="460">Federal Triangle</text>' +
-      '<text class="map-zone" x="700" y="560">East Mall</text>' +
-      '<text class="map-zone" x="220" y="520">West Potomac</text>' +
-      '<text class="map-zone" x="160" y="400">Foggy Bottom</text>' +
-      markers +
-      "</svg></div>" +
-      '<ol class="altar-list">' + list + "</ol>" +
-      sourceLine(data.sourceName, data.source)
-    );
+    return '<div id="altar-leaflet" role="region" aria-label="Washington D.C. map"></div><ol class="altar-list">' + list + "</ol>";
+  }
+
+  var altarMap = null;
+  var altarBounds = null;
+
+  function mountAltarMap(data) {
+    var el = document.getElementById("altar-leaflet");
+    if (!el || !window.L) return;
+    if (altarMap) {
+      altarMap.remove();
+      altarMap = null;
+    }
+    altarMap = L.map(el, { scrollWheelZoom: false });
+    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+      maxZoom: 19,
+      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+    }).addTo(altarMap);
+    altarBounds = [];
+    (data.altars || []).forEach(function (altar) {
+      if (altar.lat == null || altar.lon == null) return;
+      var icon = L.divIcon({
+        className: "altar-pin",
+        html: "<span>" + altar.n + "</span>",
+        iconSize: [28, 28],
+        iconAnchor: [14, 14]
+      });
+      L.marker([altar.lat, altar.lon], { icon: icon, title: String(altar.n) })
+        .addTo(altarMap)
+        .bindPopup("<strong>" + altar.n + ". " + STF.esc(altar.zone) + "</strong><br>" + STF.esc(altar.where));
+      altarBounds.push([altar.lat, altar.lon]);
+    });
+    if (altarBounds.length) altarMap.fitBounds(altarBounds, { padding: [28, 28] });
   }
 
   function modifierCard(item) {
@@ -221,6 +198,12 @@
       Object.keys(panels).forEach(function (key) {
         if (panels[key]) panels[key].classList.toggle("active", key === id);
       });
+      if (id === "maps" && altarMap) {
+        setTimeout(function () {
+          altarMap.invalidateSize();
+          if (altarBounds && altarBounds.length) altarMap.fitBounds(altarBounds, { padding: [28, 28] });
+        }, 60);
+      }
     });
   }
 
@@ -230,17 +213,20 @@
       STF.fetchJSON("data/manhunt.json"),
       STF.fetchJSON("data/altars.json"),
       STF.fetchJSON("data/modifiers.json"),
-      STF.fetchJSON("data/journey.json").catch(function () { return { seasons: {} }; }),
-      STF.fetchJSON("data/global-modifiers.json").catch(function () { return { seasons: {} }; })
+      STF.fetchJSON("data/journey.json").catch(function () { return { seasons: {} }; })
     ]);
     var season = loaded[0];
     var manhunt = loaded[1];
     var altars = loaded[2];
     var modifiers = loaded[3];
     var journey = loaded[4] || { seasons: {} };
-    var globalMods = loaded[5] || { seasons: {} };
 
-    if (themeEl) themeEl.textContent = season.theme || "Add the season theme here";
+    var themeText = String(season.theme || "").trim();
+    if (themeEl) {
+      var showTheme = themeText && themeText !== "Add the season theme here";
+      themeEl.hidden = !showTheme;
+      themeEl.textContent = showTheme ? themeText : "";
+    }
     if (title) title.textContent = (season.yearSeason || "") + " — " + (season.name || "Season");
     if (summary) {
       summary.textContent =
@@ -249,35 +235,16 @@
     }
 
     var weeks = (manhunt.weeks || []).map(weekHTML).join("");
-    var climax = manhunt.climax
-      ? '<article class="season-item"><h3>' + STF.esc(manhunt.climax.title) + "</h3><p>" +
-        STF.esc(manhunt.climax.task) + "</p>" +
-        (manhunt.climax.source ? sourceLine(manhunt.climax.sourceName, manhunt.climax.source) : "") + "</article>"
+    var climaxText = manhunt.climax
+      ? [manhunt.climax.title, manhunt.climax.task].filter(Boolean).join(" — ")
       : "";
+    var climax = climaxText ? '<p class="climax-line">' + STF.esc(climaxText) + "</p>" : "";
 
-    if (panels.manhunts) {
-      panels.manhunts.innerHTML =
-        renderCards(season.manhunts) +
-        '<button type="button" class="subtab manhunt-open" id="open-weeks" aria-expanded="false">Manhunt</button>' +
-        '<div id="manhunt-weeks" hidden>' +
-        '<p class="lede">' + STF.esc(manhunt.note || "") + "</p>" +
-        weeks + climax +
-        "</div>";
-      var openBtn = document.getElementById("open-weeks");
-      var weekBox = document.getElementById("manhunt-weeks");
-      if (openBtn && weekBox) {
-        openBtn.addEventListener("click", function () {
-          var open = weekBox.hidden;
-          weekBox.hidden = !open;
-          openBtn.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-      }
-    }
+    if (panels.manhunts) panels.manhunts.innerHTML = weeks + climax;
 
     if (panels.journey) {
       var pack = (journey.seasons && journey.seasons[season.id]) || { missions: [] };
       panels.journey.innerHTML = journeyHTML(pack);
-      bindJourney(panels.journey);
     }
 
     if (panels.maps) {
@@ -286,13 +253,10 @@
         bindMapZoom(panels.maps);
       } else {
         panels.maps.innerHTML = mapHTML(altars);
+        mountAltarMap(altars);
       }
     }
     if (panels.modifiers) panels.modifiers.innerHTML = modifiersHTML(modifiers);
-    if (panels.global) {
-      var seasonMods = (globalMods.seasons && globalMods.seasons[season.id] && globalMods.seasons[season.id].modifiers) || [];
-      panels.global.innerHTML = globalHTML(seasonMods);
-    }
   } catch (e) {
     if (summary) summary.textContent = "Could not load season data.";
     console.error(e);

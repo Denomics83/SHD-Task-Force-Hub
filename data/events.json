@@ -1,6 +1,13 @@
 {
   "events": [
     {
+      "id": "red-moon-2026",
+      "typeId": "red-moon-unleashed",
+      "start": "2026-10-14T13:00:00.000Z",
+      "end": "2026-11-03T08:00:00.000Z",
+      "note": ""
+    },
+    {
       "id": "vanguard-2026",
       "typeId": "vanguard-overdrive",
       "start": "2026-10-26T13:00:00.000Z",

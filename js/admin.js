@@ -17,13 +17,11 @@
   var seasonDoc = {};
   var manhuntDoc = { weeks: [] };
   var journeyDoc = { seasons: {} };
-  var gmDoc = { seasons: {} };
   var typesSha = "";
   var eventsSha = "";
   var seasonSha = "";
   var manhuntSha = "";
   var journeySha = "";
-  var gmSha = "";
   var journeyShown = "";
   var journeyOpen = 0;
 
@@ -202,8 +200,7 @@
       readFile("data/events.json"),
       readFile("data/season.json"),
       readFile("data/manhunt.json"),
-      readFile("data/journey.json"),
-      readFile("data/global-modifiers.json")
+      readFile("data/journey.json")
     ]);
     typesDoc = files[0].json;
     typesSha = files[0].sha;
@@ -215,20 +212,22 @@
     manhuntSha = files[3].sha;
     journeyDoc = files[4].json;
     journeySha = files[4].sha;
-    gmDoc = files[5].json;
-    gmSha = files[5].sha;
     if (!typesDoc.types) typesDoc.types = [];
     if (!eventsDoc.events) eventsDoc.events = [];
     if (!manhuntDoc.weeks) manhuntDoc.weeks = [];
     if (!journeyDoc.seasons) journeyDoc.seasons = {};
-    if (!gmDoc.seasons) gmDoc.seasons = {};
     renderTypeSelect();
     fillTypeForm(null);
     renderInstances();
     document.getElementById("theme-input").value = seasonDoc.theme || "Add the season theme here";
     renderManhunt();
     renderJourney();
-    renderGm();
+    focusEventsAdmin();
+  }
+
+  function focusEventsAdmin() {
+    var on = (location.hash || "") === "#events";
+    document.querySelectorAll("[data-admin-extra]").forEach(function (el) { el.hidden = on; });
   }
 
   function showApp(on) {
@@ -499,35 +498,6 @@
     }).join("");
   }
 
-  var gmShown = "";
-
-  function resetGmForm() {
-    document.getElementById("gm-index").value = "-1";
-    document.getElementById("gm-name").value = "";
-    document.getElementById("gm-desc").value = "";
-    document.getElementById("gm-guide").value = "";
-    document.getElementById("gm-editing").textContent = "Add modifier";
-    document.getElementById("gm-cancel").hidden = true;
-  }
-
-  function renderGm() {
-    var sel = document.getElementById("gm-season");
-    var keys = seasonKeys(gmDoc);
-    fillSeasonSelect(sel, keys, gmShown || seasonDoc.id || "");
-    gmShown = sel.value;
-    if (!gmDoc.seasons[gmShown]) gmDoc.seasons[gmShown] = { modifiers: [] };
-    var list = gmDoc.seasons[gmShown].modifiers || [];
-    document.getElementById("gm-list").innerHTML = list.length ? list.map(function (item, i) {
-      return (
-        '<article class="admin-instance"><strong>' + STF.esc(item.name) + "</strong><p>" +
-        STF.esc(item.description) + "</p><p class=\"admin-row\">" +
-        '<button type="button" class="admin-btn admin-btn-ghost" data-gm-edit="' + i + '">Edit</button>' +
-        '<button type="button" class="admin-btn admin-btn-ghost" data-gm-del="' + i + '">Delete</button>' +
-        "</p></article>"
-      );
-    }).join("") : '<p class="lede">No modifiers for this season.</p>';
-  }
-
   function findMapHolder() {
     var sel = document.getElementById("map-target");
     if (!sel || !sel.value) return null;
@@ -755,70 +725,8 @@
     }
   });
 
-  document.getElementById("gm-season").addEventListener("change", function () {
-    gmShown = document.getElementById("gm-season").value;
-    resetGmForm();
-    renderGm();
-  });
-
-  document.getElementById("gm-list").addEventListener("click", async function (e) {
-    var edit = e.target.closest("[data-gm-edit]");
-    var del = e.target.closest("[data-gm-del]");
-    var list = (gmDoc.seasons[gmShown] && gmDoc.seasons[gmShown].modifiers) || [];
-    if (edit) {
-      var item = list[+edit.getAttribute("data-gm-edit")];
-      if (!item) return;
-      document.getElementById("gm-index").value = edit.getAttribute("data-gm-edit");
-      document.getElementById("gm-name").value = item.name || "";
-      document.getElementById("gm-desc").value = item.description || "";
-      document.getElementById("gm-guide").value = item.guide || "";
-      document.getElementById("gm-editing").textContent = "Edit modifier";
-      document.getElementById("gm-cancel").hidden = false;
-      return;
-    }
-    if (!del) return;
-    var index = +del.getAttribute("data-gm-del");
-    if (!confirm("Delete this modifier?")) return;
-    list.splice(index, 1);
-    setStatus("Deleting modifier…");
-    try {
-      var saved = await writeFile("data/global-modifiers.json", gmDoc, gmSha, "Delete global modifier");
-      gmSha = saved.content.sha;
-      resetGmForm();
-      renderGm();
-      setStatus("Modifier deleted. Live in about 1 minute.", true);
-    } catch (err) {
-      setStatus(err.message || "Delete failed.");
-      try { await loadDocs(); } catch (e2) {}
-    }
-  });
-
-  document.getElementById("gm-cancel").addEventListener("click", resetGmForm);
-
-  document.getElementById("gm-form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    if (!gmDoc.seasons[gmShown]) gmDoc.seasons[gmShown] = { modifiers: [] };
-    var list = gmDoc.seasons[gmShown].modifiers;
-    var next = {
-      name: document.getElementById("gm-name").value.trim(),
-      description: document.getElementById("gm-desc").value.trim(),
-      guide: document.getElementById("gm-guide").value.trim()
-    };
-    if (!next.name || !next.description) return setStatus("Name and description are required.");
-    var index = +document.getElementById("gm-index").value;
-    if (index >= 0 && list[index]) list[index] = next;
-    else list.push(next);
-    setStatus("Saving modifier…");
-    try {
-      var saved = await writeFile("data/global-modifiers.json", gmDoc, gmSha, "Update global modifiers");
-      gmSha = saved.content.sha;
-      resetGmForm();
-      renderGm();
-      setStatus("Global modifiers saved. Live in about 1 minute.", true);
-    } catch (err) {
-      setStatus(err.message || "Save failed.");
-    }
-  });
+  window.addEventListener("hashchange", focusEventsAdmin);
+  focusEventsAdmin();
 
   document.getElementById("map-target").addEventListener("change", fillMapForm);
 
