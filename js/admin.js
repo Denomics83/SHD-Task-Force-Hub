@@ -25,6 +25,27 @@
   var journeySha = "";
   var journeyShown = "";
   var journeyOpen = 0;
+  var buildsDoc = { builds: [] };
+  var buildsSha = "";
+  var editingBuildKey = "";
+  var BUILD_SLOTS = [
+    ["signature", "Signature weapon"],
+    ["grenade", "Grenade"],
+    ["primary", "Primary"],
+    ["secondary", "Secondary"],
+    ["sidearm", "Sidearm"],
+    ["mask", "Mask"],
+    ["chest", "Chest"],
+    ["holster", "Holster"],
+    ["backpack", "Backpack"],
+    ["gloves", "Gloves"],
+    ["kneepads", "Kneepads"],
+    ["skill1", "Skill 1"],
+    ["skill2", "Skill 2"],
+    ["specialization", "Specialization"]
+  ];
+  var ROLE_LABEL = { damage: "Damage", support: "Support", cc: "Crowd control", healer: "Healer", tank: "Tank" };
+  var CAT_LABEL = { solo: "Solo", team: "Team", incursion: "Incursion", raid: "Raid", pvp: "PvP", escalation: "Escalation" };
 
   function setStatus(msg, ok) {
     [document.getElementById("login-status"), statusEl].forEach(function (el) {
@@ -229,7 +250,8 @@
       readFile("data/events.json"),
       readFile("data/season.json"),
       readFile("data/manhunt.json"),
-      readFile("data/journey.json")
+      readFile("data/journey.json"),
+      readFile("data/builds.json")
     ]);
     typesDoc = files[0].json;
     typesSha = files[0].sha;
@@ -241,11 +263,15 @@
     manhuntSha = files[3].sha;
     journeyDoc = files[4].json;
     journeySha = files[4].sha;
+    buildsDoc = files[5].json;
+    buildsSha = files[5].sha;
     if (!typesDoc.types) typesDoc.types = [];
     if (!eventsDoc.events) eventsDoc.events = [];
     if (!manhuntDoc.weeks) manhuntDoc.weeks = [];
     if (!journeyDoc.seasons) journeyDoc.seasons = {};
+    if (!buildsDoc.builds) buildsDoc.builds = [];
     renderTypeSelect();
+    renderBuildSelect();
     fillTypeForm(null);
     renderInstances();
     document.getElementById("theme-input").value = seasonDoc.theme || "Add the season theme here";
@@ -586,7 +612,8 @@
     });
     sel.innerHTML = opts.join("");
     var values = Array.prototype.map.call(sel.options, function (o) { return o.value; });
-    sel.value = values.indexOf(current) >= 0 ? current : values[0];
+    var preferred = values.indexOf("event:red-moon-2026") >= 0 ? "event:red-moon-2026" : "type:red-moon-unleashed";
+    sel.value = values.indexOf(current) >= 0 ? current : (values.indexOf(preferred) >= 0 ? preferred : values[0]);
     fillMapForm();
   }
 
@@ -810,6 +837,215 @@
       setStatus("Map removed. Live in about 1 minute.", true);
     } catch (err) {
       setStatus(err.message || "Could not remove the map.");
+    }
+  });
+
+  function blankBuildSlot() {
+    return { name: "", brand: "", rarity: "", talent: "", core: "", attributes: "", image: "" };
+  }
+
+  function blankBuild() {
+    var slots = {};
+    BUILD_SLOTS.forEach(function (pair) { slots[pair[0]] = blankBuildSlot(); });
+    return {
+      id: "", name: "", category: "solo", role: "damage", roleLabel: "",
+      description: "", playstyle: "", slots: slots
+    };
+  }
+
+  function buildKey(row) {
+    return (row.category || "") + "/" + (row.id || "");
+  }
+
+  function slugId(value) {
+    return String(value || "").toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+  }
+
+  function findBuildIndex(key) {
+    return buildsDoc.builds.findIndex(function (row) { return buildKey(row) === key; });
+  }
+
+  function renderBuildSelect() {
+    var sel = document.getElementById("build-select");
+    if (!sel) return;
+    var current = editingBuildKey;
+    var groups = {};
+    buildsDoc.builds.forEach(function (row) {
+      var cat = row.category || "solo";
+      if (!groups[cat]) groups[cat] = [];
+      groups[cat].push(row);
+    });
+    var html = '<option value="">New build</option>';
+    Object.keys(CAT_LABEL).forEach(function (cat) {
+      var rows = groups[cat] || [];
+      if (!rows.length) return;
+      html += '<optgroup label="' + STF.esc(CAT_LABEL[cat]) + '">';
+      rows.forEach(function (row) {
+        html += '<option value="' + STF.esc(buildKey(row)) + '">' + STF.esc(row.name || row.id) + "</option>";
+      });
+      html += "</optgroup>";
+    });
+    sel.innerHTML = html;
+    var values = Array.prototype.map.call(sel.options, function (opt) { return opt.value; });
+    sel.value = values.indexOf(current) >= 0 ? current : "";
+    fillBuildForm(sel.value ? buildsDoc.builds[findBuildIndex(sel.value)] : null);
+  }
+
+  function fillBuildForm(row) {
+    var form = document.getElementById("build-form");
+    if (!form) return;
+    var build = row || blankBuild();
+    editingBuildKey = row ? buildKey(row) : "";
+    document.getElementById("build-name").value = build.name || "";
+    document.getElementById("build-id").value = build.id || "";
+    document.getElementById("build-id").dataset.manual = row ? "1" : "";
+    document.getElementById("build-category").value = CAT_LABEL[build.category] ? build.category : "solo";
+    document.getElementById("build-role").value = ROLE_LABEL[build.role] ? build.role : "damage";
+    document.getElementById("build-description").value = build.description || "";
+    document.getElementById("build-playstyle").value = build.playstyle || "";
+    document.getElementById("build-delete").hidden = !row;
+    var rarities = ["", "named", "exotic", "high-end", "gear-set"];
+    document.getElementById("build-slots").innerHTML = BUILD_SLOTS.map(function (pair, index) {
+      var key = pair[0];
+      var item = (build.slots && build.slots[key]) || blankBuildSlot();
+      var options = rarities.map(function (rarity) {
+        var label = rarity || "Empty / no colour";
+        return '<option value="' + rarity + '"' + (item.rarity === rarity ? " selected" : "") + ">" + label + "</option>";
+      }).join("");
+      return (
+        '<article class="admin-acc">' +
+        '<button type="button" class="admin-acc-btn" data-slot-toggle="' + key + '">' + STF.esc(pair[1]) + (item.name ? " · " + STF.esc(item.name) : "") + "</button>" +
+        '<div class="admin-acc-body"' + (index === 0 ? "" : " hidden") + ">" +
+        '<label>Item name <input data-slot="' + key + '" data-field="name" value="' + STF.esc(item.name || "") + '"></label>' +
+        '<label>Brand / set <input data-slot="' + key + '" data-field="brand" value="' + STF.esc(item.brand || "") + '"></label>' +
+        '<label>Rarity <select data-slot="' + key + '" data-field="rarity">' + options + "</select></label>" +
+        '<label>Talent <input data-slot="' + key + '" data-field="talent" value="' + STF.esc(item.talent || "") + '"></label>' +
+        '<label>Core attribute <input data-slot="' + key + '" data-field="core" value="' + STF.esc(item.core || "") + '"></label>' +
+        '<label>Attributes / mods <textarea data-slot="' + key + '" data-field="attributes" rows="2">' + STF.esc(item.attributes || "") + "</textarea></label>" +
+        '<p class="lede" data-slot-note="' + key + '">' + (item.image ? "Image: " + STF.esc(item.image) : "No image") + "</p>" +
+        '<input type="hidden" data-slot-image="' + key + '" value="' + STF.esc(item.image || "") + '">' +
+        '<label>Image <input data-slot-file="' + key + '" type="file" accept="image/jpeg,image/png,image/webp"></label>' +
+        "</div></article>"
+      );
+    }).join("");
+  }
+
+  function collectBuild() {
+    var slots = {};
+    BUILD_SLOTS.forEach(function (pair) {
+      var key = pair[0];
+      function val(field) {
+        var el = document.querySelector('#build-slots [data-slot="' + key + '"][data-field="' + field + '"]');
+        return el ? String(el.value || "").trim() : "";
+      }
+      var imageEl = document.querySelector('#build-slots [data-slot-image="' + key + '"]');
+      slots[key] = {
+        name: val("name"),
+        brand: val("brand"),
+        rarity: val("rarity"),
+        talent: val("talent"),
+        core: val("core"),
+        attributes: val("attributes"),
+        image: imageEl ? imageEl.value : ""
+      };
+    });
+    var role = document.getElementById("build-role").value;
+    var previous = editingBuildKey ? buildsDoc.builds[findBuildIndex(editingBuildKey)] : null;
+    return {
+      id: slugId(document.getElementById("build-id").value),
+      name: document.getElementById("build-name").value.trim(),
+      category: document.getElementById("build-category").value,
+      role: role,
+      roleLabel: previous && previous.role === role ? (previous.roleLabel || ROLE_LABEL[role] || role) : (ROLE_LABEL[role] || role),
+      description: document.getElementById("build-description").value.trim(),
+      playstyle: document.getElementById("build-playstyle").value.trim(),
+      slots: slots
+    };
+  }
+
+  document.getElementById("build-name").addEventListener("input", function () {
+    var idEl = document.getElementById("build-id");
+    if (idEl.dataset.manual === "1") return;
+    idEl.value = slugId(document.getElementById("build-name").value);
+  });
+  document.getElementById("build-id").addEventListener("input", function () {
+    this.dataset.manual = this.value ? "1" : "";
+  });
+  document.getElementById("build-select").addEventListener("change", function () {
+    var idx = findBuildIndex(document.getElementById("build-select").value);
+    fillBuildForm(idx >= 0 ? buildsDoc.builds[idx] : null);
+  });
+  document.getElementById("build-slots").addEventListener("click", function (e) {
+    var toggle = e.target.closest("[data-slot-toggle]");
+    if (!toggle) return;
+    var body = toggle.parentElement.querySelector(".admin-acc-body");
+    body.hidden = !body.hidden;
+  });
+
+  document.getElementById("build-form").addEventListener("submit", async function (e) {
+    e.preventDefault();
+    var next = collectBuild();
+    if (!/^[a-z0-9-]+$/.test(next.id)) return setStatus("Id must be lowercase letters, numbers, and hyphens.");
+    if (!next.name) return setStatus("Name is required.");
+    var clash = buildsDoc.builds.some(function (row) {
+      return row.category === next.category && row.id === next.id && buildKey(row) !== editingBuildKey;
+    });
+    if (clash) return setStatus("That id is already used in this category.");
+    setStatus("Saving build…");
+    try {
+      for (var i = 0; i < BUILD_SLOTS.length; i++) {
+        var key = BUILD_SLOTS[i][0];
+        var fileInput = document.querySelector('#build-slots [data-slot-file="' + key + '"]');
+        var file = fileInput && fileInput.files && fileInput.files[0];
+        if (!file) continue;
+        var packed = await resizeImage(file);
+        var path = "assets/builds/" + next.category + "-" + next.id + "-" + key + "." + packed.ext;
+        var existing = await readRaw(path);
+        await writeBinary(path, packed.b64, existing && existing.sha, "Update build image " + next.name + " " + key);
+        var previousImage = next.slots[key].image;
+        next.slots[key].image = path;
+        if (previousImage && previousImage !== path && previousImage.indexOf("assets/builds/") === 0) {
+          var old = await readRaw(previousImage);
+          if (old && old.sha) await deletePath(previousImage, old.sha, "Replace build image " + next.id);
+        }
+      }
+      var idx = findBuildIndex(editingBuildKey);
+      if (idx >= 0) buildsDoc.builds[idx] = next;
+      else buildsDoc.builds.push(next);
+      var saved = await writeFile("data/builds.json", buildsDoc, buildsSha, "Update build " + next.name);
+      buildsSha = saved.content.sha;
+      editingBuildKey = buildKey(next);
+      renderBuildSelect();
+      setStatus("Saved " + next.name + ". It shows in " + (CAT_LABEL[next.category] || next.category) + " after the site publishes, about a minute.", true);
+    } catch (err) {
+      setStatus(err.message || "Save failed.");
+    }
+  });
+
+  document.getElementById("build-delete").addEventListener("click", async function () {
+    var idx = findBuildIndex(editingBuildKey);
+    if (idx < 0) return;
+    var row = buildsDoc.builds[idx];
+    if (!confirm("Delete " + (row.name || row.id) + "?")) return;
+    setStatus("Deleting build…");
+    var removed = buildsDoc.builds.splice(idx, 1)[0];
+    try {
+      var saved = await writeFile("data/builds.json", buildsDoc, buildsSha, "Delete build " + (removed.name || removed.id));
+      buildsSha = saved.content.sha;
+      var slots = removed.slots || {};
+      var keys = Object.keys(slots);
+      for (var i = 0; i < keys.length; i++) {
+        var image = slots[keys[i]] && slots[keys[i]].image;
+        if (!image || image.indexOf("assets/builds/") !== 0) continue;
+        var old = await readRaw(image);
+        if (old && old.sha) await deletePath(image, old.sha, "Remove build image " + removed.id);
+      }
+      editingBuildKey = "";
+      renderBuildSelect();
+      setStatus("Deleted " + (removed.name || "build") + ". Live in about a minute.", true);
+    } catch (err) {
+      buildsDoc.builds.splice(idx, 0, removed);
+      setStatus(err.message || "Delete failed.");
     }
   });
 

@@ -6,8 +6,7 @@
   <meta name="theme-color" content="#0B0C0E">
   <title>Season — Shade Task Force Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
-  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css">
+  <link rel="stylesheet" href="styles.css?v=20261029c">
 </head>
 <body>
   <div id="topbar-root"></div>
@@ -20,25 +19,22 @@
     <div class="subtabs" id="season-tabs" role="tablist" aria-label="Season sections">
       <button type="button" class="subtab" role="tab" data-panel="manhunts" aria-selected="true">Manhunts</button>
       <button type="button" class="subtab" role="tab" data-panel="journey" aria-selected="false">Journey</button>
-      <button type="button" class="subtab" role="tab" data-panel="maps" aria-selected="false">Maps</button>
       <button type="button" class="subtab" role="tab" data-panel="modifiers" aria-selected="false">Modifiers</button>
     </div>
     <p class="season-theme" id="season-theme" hidden></p>
 
     <div id="panel-manhunts" class="season-panel active season-list" role="tabpanel"></div>
     <div id="panel-journey" class="season-panel season-list" role="tabpanel"></div>
-    <div id="panel-maps" class="season-panel season-list" role="tabpanel"></div>
     <div id="panel-modifiers" class="season-panel season-list" role="tabpanel"></div>
 
     <footer class="site-foot">
       Season detail opens from the season card on Updates or Events. It is not a bottom-nav tab.
-      Theme, journey, manhunt, modifiers, and maps are edited in <code>admin.html</code>.
+      Theme, journey, manhunt, and modifiers are edited in <code>admin.html</code>.
     </footer>
   </main>
 
   <div id="bottomnav-root"></div>
-  <script src="js/common.js"></script>
-  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
-  <script src="js/season.js"></script>
+  <script src="js/common.js?v=20261029c"></script>
+  <script src="js/season.js?v=20261029c"></script>
 </body>
 </html>

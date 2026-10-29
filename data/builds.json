@@ -1,0 +1,2059 @@
+{
+  "builds": [
+    {
+      "id": "striker",
+      "name": "Striker",
+      "category": "solo",
+      "role": "damage",
+      "roleLabel": "DPS",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "hollow-man",
+      "name": "Hollow Man",
+      "category": "solo",
+      "role": "damage",
+      "roleLabel": "DPS",
+      "description": "DPS support — creates status effects.",
+      "playstyle": "Use cover and the big Alejandro or any machine gun to spray and mark enemies with status effects. Offer crowd control support whilst team DPS eliminates marked enemies to proc hollow point bullets.\n\nStay in cover. Do not greed marks in the open. Pair with a tank or healer.",
+      "slots": {
+        "signature": {
+          "name": "Minigun",
+          "brand": "Gunner",
+          "rarity": "high-end",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/specializations/gunner.png"
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "St. Elmo's Engine",
+          "brand": "Exotic",
+          "rarity": "exotic",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "Machine gun",
+          "brand": "",
+          "rarity": "high-end",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "chest": {
+          "name": "Grupo Sombra",
+          "brand": "Grupo Sombra",
+          "rarity": "high-end",
+          "talent": "Obliterate",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/brands/grupo-logo.png"
+        },
+        "holster": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "backpack": {
+          "name": "Memento",
+          "brand": "Memento",
+          "rarity": "exotic",
+          "talent": "Trophies",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/exotics/memento.png"
+        },
+        "gloves": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "kneepads": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "skill1": {
+          "name": "Crusader Shield",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "Reviver Hive",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "Gunner",
+          "brand": "Gunner",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/specializations/gunner.png"
+        }
+      }
+    },
+    {
+      "id": "oneshot",
+      "name": "Oneshot",
+      "category": "solo",
+      "role": "damage",
+      "roleLabel": "DPS",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "hollow-man",
+      "name": "Hollow Man",
+      "category": "team",
+      "role": "damage",
+      "roleLabel": "Damage support",
+      "description": "DPS support — creates status effects.",
+      "playstyle": "Use cover and the big Alejandro or any machine gun to spray and mark enemies with status effects. Offer crowd control support whilst team DPS eliminates marked enemies to proc hollow point bullets.\n\nStay in cover. Do not greed marks in the open. Pair with a tank or healer.",
+      "slots": {
+        "signature": {
+          "name": "Minigun",
+          "brand": "Gunner",
+          "rarity": "high-end",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/specializations/gunner.png"
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "St. Elmo's Engine",
+          "brand": "Exotic",
+          "rarity": "exotic",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "Machine gun",
+          "brand": "",
+          "rarity": "high-end",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "chest": {
+          "name": "Grupo Sombra",
+          "brand": "Grupo Sombra",
+          "rarity": "high-end",
+          "talent": "Obliterate",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/brands/grupo-logo.png"
+        },
+        "holster": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "backpack": {
+          "name": "Memento",
+          "brand": "Memento",
+          "rarity": "exotic",
+          "talent": "Trophies",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/exotics/memento.png"
+        },
+        "gloves": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "kneepads": {
+          "name": "Striker's Battlegear",
+          "brand": "Striker's Battlegear",
+          "rarity": "gear-set",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/gearsets/strikers-battlegear.png"
+        },
+        "skill1": {
+          "name": "Crusader Shield",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "Reviver Hive",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "Gunner",
+          "brand": "Gunner",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": "assets/icons/specializations/gunner.png"
+        }
+      }
+    },
+    {
+      "id": "capin-murica",
+      "name": "Capin Murica",
+      "category": "team",
+      "role": "damage",
+      "roleLabel": "Damage support",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "splooge",
+      "name": "Splooge",
+      "category": "team",
+      "role": "cc",
+      "roleLabel": "Crowd control",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "medic",
+      "name": "Medic",
+      "category": "team",
+      "role": "healer",
+      "roleLabel": "Healer",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "juggernaut",
+      "name": "Juggernaut",
+      "category": "incursion",
+      "role": "tank",
+      "roleLabel": "Tank support",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "measured",
+      "name": "Measured",
+      "category": "incursion",
+      "role": "healer",
+      "roleLabel": "Healer",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "attack",
+      "name": "Attack",
+      "category": "incursion",
+      "role": "damage",
+      "roleLabel": "Damage",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "splooge",
+      "name": "Splooge",
+      "category": "escalation",
+      "role": "cc",
+      "roleLabel": "Crowd control",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "striker",
+      "name": "Striker",
+      "category": "escalation",
+      "role": "damage",
+      "roleLabel": "Damage",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "medic",
+      "name": "Medic",
+      "category": "escalation",
+      "role": "healer",
+      "roleLabel": "Healer",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "striker",
+      "name": "Striker",
+      "category": "raid",
+      "role": "damage",
+      "roleLabel": "Damage",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    },
+    {
+      "id": "up-close",
+      "name": "Up Close",
+      "category": "pvp",
+      "role": "damage",
+      "roleLabel": "Damage",
+      "description": "",
+      "playstyle": "",
+      "slots": {
+        "signature": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "grenade": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "primary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "secondary": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "sidearm": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "mask": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "chest": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "holster": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "backpack": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "gloves": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "kneepads": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill1": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "skill2": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        },
+        "specialization": {
+          "name": "",
+          "brand": "",
+          "rarity": "",
+          "talent": "",
+          "core": "",
+          "attributes": "",
+          "image": ""
+        }
+      }
+    }
+  ]
+}

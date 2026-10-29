@@ -37,6 +37,31 @@
     return new Date(guess);
   }
 
+  function eventRemainLabel(startIso, endIso, now) {
+    now = now || Date.now();
+    var start = new Date(startIso).getTime();
+    var end = new Date(endIso).getTime();
+    function parts(ms) {
+      var mins = Math.floor(Math.max(0, ms) / 60000);
+      var days = Math.floor(mins / (60 * 24));
+      var hours = Math.floor((mins % (60 * 24)) / 60);
+      var rem = mins % 60;
+      if (days > 0) return days + "d " + hours + "h";
+      if (hours > 0) return hours + "h " + rem + "m";
+      return (ms > 0 && rem < 1 ? 1 : rem) + "m";
+    }
+    if (!(start > 0) || !(end > 0)) return "";
+    if (now >= end) return "Ended";
+    if (now < start) return "Starts in " + parts(start - now);
+    return parts(end - now);
+  }
+
+  function paintRemain() {
+    document.querySelectorAll(".hero-remain[data-remain-end]").forEach(function (el) {
+      el.textContent = eventRemainLabel(el.getAttribute("data-remain-start"), el.getAttribute("data-remain-end"));
+    });
+  }
+
   function countdownLabel(target) {
     var ms = target.getTime() - Date.now();
     if (ms <= 0) return "Started";
@@ -111,6 +136,15 @@
 
   var detail = document.getElementById("event-detail");
   var catalog = [];
+  var altarsDoc = { altars: [] };
+  var eventMap = null;
+
+  function clearEventMap() {
+    if (eventMap) {
+      eventMap.remove();
+      eventMap = null;
+    }
+  }
 
   function melbourneRange(start, end) {
     var fmt = new Intl.DateTimeFormat("en-AU", {
@@ -145,6 +179,7 @@
   }
 
   function showRail() {
+    clearEventMap();
     rail.hidden = false;
     if (detail) {
       detail.hidden = true;
@@ -179,9 +214,32 @@
     var suggested = type.suggested
       ? "<details class=\"event-suggested\"><summary>Suggested note</summary><p>" + STF.esc(type.suggested) + "</p></details>"
       : "";
-    var mapBtn = item.mapImage
-      ? '<p><button type="button" class="guide-btn" id="event-map-open">Map</button></p>'
-      : "";
+    var redMoon = item.type && item.type.id === "red-moon-unleashed";
+    var mapBlock = "";
+    if (redMoon && item.mapImage) {
+      mapBlock =
+        '<h2 class="upd-h">Map</h2>' +
+        '<button type="button" class="map-shot" id="event-map-open">' +
+        '<img src="' + STF.esc(item.mapImage) + '" alt="Red Moon Unleashed map">' +
+        "</button>" +
+        (item.mapCaption ? '<p class="lede map-note">' + STF.esc(item.mapCaption) + "</p>" : "") +
+        '<p class="lede map-note">Tap the map to open it full screen. Pinch to zoom.</p>';
+    } else if (redMoon) {
+      var altarList = (altarsDoc.altars || []).map(function (altar) {
+        var coords = "Menu " + (altar.menu || []).join(", ");
+        if (altar.map) coords += " · map " + altar.map.join(", ");
+        return (
+          "<li><strong>" + STF.esc(altar.n + ". " + altar.zone) + "</strong> " +
+          STF.esc(altar.where) + ' <span class="coords">' + STF.esc(coords) + "</span></li>"
+        );
+      }).join("");
+      mapBlock =
+        '<h2 class="upd-h">Map</h2>' +
+        '<div id="altar-leaflet" role="region" aria-label="Red Moon altar map"></div>' +
+        '<ol class="altar-list">' + altarList + "</ol>";
+    } else if (item.mapImage) {
+      mapBlock = '<p><button type="button" class="guide-btn" id="event-map-open">Map</button></p>';
+    }
     detail.innerHTML =
       "<h1>" + STF.esc(type.name || "Event") + "</h1>" +
       '<p class="upd-posted">Starts · ' + STF.esc(melWhen(item.start)) + "</p>" +
@@ -192,18 +250,47 @@
       block("Rewards", type.rewards) +
       block("Modifiers", type.modifiers) +
       block("Tasks", type.tasks) +
-      mapBtn +
+      mapBlock +
       (type.source ? '<p class="src-line">' + STF.esc(type.source) + "</p>" : "") +
       suggested;
+    rail.hidden = true;
+    detail.hidden = false;
+    setEventsBack(true);
     var mapOpen = document.getElementById("event-map-open");
-    if (mapOpen) {
+    if (mapOpen && item.mapImage) {
       mapOpen.addEventListener("click", function () {
         STF.openMap(item.mapImage, item.mapCaption || "");
       });
     }
-    rail.hidden = true;
-    detail.hidden = false;
-    setEventsBack(true);
+    var altarEl = document.getElementById("altar-leaflet");
+    if (altarEl && window.L) {
+      clearEventMap();
+      eventMap = L.map(altarEl, { scrollWheelZoom: false });
+      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
+        maxZoom: 19,
+        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+      }).addTo(eventMap);
+      var bounds = [];
+      (altarsDoc.altars || []).forEach(function (altar) {
+        if (altar.lat == null || altar.lon == null) return;
+        var icon = L.divIcon({
+          className: "altar-pin",
+          html: "<span>" + altar.n + "</span>",
+          iconSize: [28, 28],
+          iconAnchor: [14, 14]
+        });
+        L.marker([altar.lat, altar.lon], { icon: icon, title: String(altar.n) })
+          .addTo(eventMap)
+          .bindPopup("<strong>" + altar.n + ". " + STF.esc(altar.zone) + "</strong><br>" + STF.esc(altar.where));
+        bounds.push([altar.lat, altar.lon]);
+      });
+      if (bounds.length) eventMap.fitBounds(bounds, { padding: [28, 28] });
+      setTimeout(function () {
+        if (!eventMap) return;
+        eventMap.invalidateSize();
+        if (bounds.length) eventMap.fitBounds(bounds, { padding: [28, 28] });
+      }, 80);
+    }
     window.scrollTo(0, 0);
   }
 
@@ -219,7 +306,8 @@
       STF.fetchJSON("data/season.json"),
       STF.fetchJSON("data/raids.json"),
       STF.fetchJSON("data/event-types.json").catch(function () { return { types: [] }; }),
-      STF.fetchJSON("data/events.json").catch(function () { return { events: [] }; })
+      STF.fetchJSON("data/events.json").catch(function () { return { events: [] }; }),
+      STF.fetchJSON("data/altars.json").catch(function () { return { altars: [] }; })
     ]);
     var season = results[0] || {};
     var raids = ((results[1] && results[1].raids) || []).slice().sort(function (a, b) {
@@ -227,6 +315,7 @@
       var kb = (b.date || "") + " " + (b.time || "");
       return ka < kb ? -1 : ka > kb ? 1 : 0;
     });
+    altarsDoc = results[4] || { altars: [] };
     var typeById = {};
     ((results[2] && results[2].types) || []).forEach(function (type) { typeById[type.id] = type; });
     var now = Date.now();
@@ -264,7 +353,9 @@
         title: item.type.name || "Event",
         kicker: melbourneRange(item.start, item.end),
         sub: item.type.description || "",
-        label: item.type.name || "Event"
+        label: item.type.name || "Event",
+        remainStart: item.start,
+        remainEnd: item.end
       });
     });
 
@@ -276,7 +367,7 @@
       chipClass: "",
       title: "Current Season",
       kicker: seasonLine,
-      sub: "Manhunt · Journey · Maps · Modifiers",
+      sub: "Manhunt · Journey · Modifiers",
       label: "Open current season"
     });
 
@@ -313,6 +404,9 @@
     rail.innerHTML = slides
       .map(function (slide, i) {
         var kicker = slide.kickerHtml || (slide.kicker ? STF.esc(slide.kicker) : "");
+        var remain = slide.remainEnd
+          ? '<span class="hero-remain" data-remain-start="' + STF.esc(slide.remainStart) + '" data-remain-end="' + STF.esc(slide.remainEnd) + '">' + STF.esc(eventRemainLabel(slide.remainStart, slide.remainEnd)) + "</span>"
+          : "";
         var photo = slide.image && /^assets\/[a-z0-9._/-]+$/i.test(slide.image)
           ? '<div class="hero-photo" style="background-image:url(\'' + slide.image + '\')"></div>'
           : '<div class="hero-photo"></div>';
@@ -321,7 +415,7 @@
           '<div class="hero-copy">' +
           '<span class="hero-chip' + slide.chipClass + '">' + STF.esc(slide.chip) + "</span>" +
           "<h2>" + STF.esc(slide.title) + "</h2>" +
-          (kicker ? '<p class="hero-kicker">' + kicker + "</p>" : "") +
+          (remain || (kicker ? '<p class="hero-kicker">' + kicker + "</p>" : "")) +
           (slide.sub ? '<p class="hero-sub">' + STF.esc(slide.sub) + "</p>" : "") +
           dots(i, count) +
           "</div>";
@@ -371,6 +465,7 @@
     });
     window.addEventListener("hashchange", routeEvent);
     routeEvent();
+    setInterval(paintRemain, 60000);
   } catch (err) {
     rail.innerHTML = '<p class="lede hero-loading">Could not load events.</p>';
     console.error(err);

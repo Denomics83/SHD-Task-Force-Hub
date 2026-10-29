@@ -1,4 +1,4 @@
-/* Resources landing. Maps, Hunters, Manhunts, and Creators open a short detail. Events opens admin. */
+/* Resources landing. Maps, Hunter Guides, and Creators open a short detail. Events opens admin. */
 (function () {
   STF.mountChrome("resources");
 

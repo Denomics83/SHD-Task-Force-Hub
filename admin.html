@@ -6,7 +6,7 @@
   <meta name="theme-color" content="#0B0D10">
   <title>Admin — Shade Task Force Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css">
+  <link rel="stylesheet" href="styles.css?v=20261029c">
 </head>
 <body class="page-admin is-logged-out">
   <div id="topbar-root"></div>
@@ -107,7 +107,7 @@
 
       <section class="admin-card" data-admin-extra>
         <h2>Map image</h2>
-        <p class="lede">Jpg, png, or webp. The image is resized to 1600px wide before it is committed.</p>
+        <p class="lede">Jpg, png, or webp, resized to 1600px wide. This defaults to Red Moon Unleashed. A season upload still saves, and it is not shown on the season page.</p>
         <form id="map-form">
           <label>Season or event
             <select id="map-target" required></select>
@@ -122,9 +122,47 @@
           </p>
         </form>
       </section>
+
+      <section class="admin-card" data-admin-extra id="builds-admin">
+        <h2>Builds</h2>
+        <p class="lede">Add, edit, or delete a build. Saving writes <code>data/builds.json</code> and the category list updates when the site publishes.</p>
+        <label>Build
+          <select id="build-select"></select>
+        </label>
+        <form id="build-form">
+          <label>Name <input name="name" id="build-name" required></label>
+          <label>Id <input name="id" id="build-id" required pattern="[a-z0-9-]+" title="Lowercase letters, numbers, hyphens"></label>
+          <label>Category
+            <select name="category" id="build-category" required>
+              <option value="solo">Solo</option>
+              <option value="team">Team</option>
+              <option value="incursion">Incursion</option>
+              <option value="raid">Raid</option>
+              <option value="pvp">PvP</option>
+              <option value="escalation">Escalation</option>
+            </select>
+          </label>
+          <label>Role
+            <select name="role" id="build-role" required>
+              <option value="damage">Damage</option>
+              <option value="support">Support</option>
+              <option value="cc">CC</option>
+              <option value="healer">Healer</option>
+              <option value="tank">Tank</option>
+            </select>
+          </label>
+          <label>Short description <input name="description" id="build-description"></label>
+          <label>Playstyle <textarea name="playstyle" id="build-playstyle" rows="4"></textarea></label>
+          <div id="build-slots"></div>
+          <p class="admin-row">
+            <button class="admin-btn" type="submit">Save build</button>
+            <button type="button" class="admin-btn admin-btn-ghost" id="build-delete" hidden>Delete build</button>
+          </p>
+        </form>
+      </section>
     </div>
   </main>
-  <script src="js/common.js"></script>
-  <script src="js/admin.js"></script>
+  <script src="js/common.js?v=20261029c"></script>
+  <script src="js/admin.js?v=20261029c"></script>
 </body>
 </html>

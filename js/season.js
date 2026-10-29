@@ -9,7 +9,6 @@
   var panels = {
     manhunts: document.getElementById("panel-manhunts"),
     journey: document.getElementById("panel-journey"),
-    maps: document.getElementById("panel-maps"),
     modifiers: document.getElementById("panel-modifiers")
   };
   var themeEl = document.getElementById("season-theme");
@@ -50,51 +49,43 @@
     var missions = (pack && pack.missions) || [];
     if (!missions.length) return '<p class="lede">No journey missions for this season.</p>';
     return missions.map(function (mission, index) {
-      var tasks = (mission.tasks || []).map(function (task) {
+      var tasks = mission.tasks || [];
+      var taskHtml = tasks.map(function (task) {
         return "<li>" + STF.esc(task) + "</li>";
       }).join("");
+      var countLabel = tasks.length === 1 ? "1 task" : tasks.length + " tasks";
       var unlocks = mission.unlocks
         ? '<p class="unlocks-line">Unlocks ' + STF.esc(mission.unlocks) + "</p>"
         : "";
+      var name = mission.name || ("Mission " + (index + 1));
+      var panelId = "journey-panel-" + index;
       return (
-        '<article class="season-item journey-mission">' +
-        "<h3>" + STF.esc(mission.name || ("Mission " + (index + 1))) + "</h3>" +
+        '<article class="journey-mission">' +
+        '<button type="button" class="journey-bar" aria-expanded="false" aria-controls="' + panelId + '">' +
+        '<span class="journey-name">' + STF.esc(name) + "</span>" +
+        '<span class="journey-count">' + countLabel + "</span>" +
+        '<svg class="journey-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        "</button>" +
+        '<div class="journey-panel" id="' + panelId + '" role="region">' +
+        '<div class="journey-panel-inner">' +
         unlocks +
-        '<ol class="task-list">' + tasks + "</ol>" +
-        "</article>"
+        '<ol class="task-list">' + taskHtml + "</ol>" +
+        "</div></div></article>"
       );
     }).join("");
   }
 
   function bindJourney(root) {
-    if (!root) return;
+    if (!root || root.dataset.journeyBound) return;
+    root.dataset.journeyBound = "1";
     root.addEventListener("click", function (e) {
-      var btn = e.target.closest(".journey-toggle");
+      var btn = e.target.closest(".journey-bar");
       if (!btn || !root.contains(btn)) return;
-      var list = btn.parentElement.querySelector(".task-list");
-      if (!list) return;
-      var open = list.hidden;
-      list.hidden = !open;
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+      if (!panel) return;
+      var open = btn.getAttribute("aria-expanded") !== "true";
       btn.setAttribute("aria-expanded", open ? "true" : "false");
-    });
-  }
-
-  function imageMapHTML(src, caption) {
-    return (
-      '<button type="button" class="map-shot" data-map="' + STF.esc(src) + '" data-caption="' + STF.esc(caption || "") + '">' +
-      '<img src="' + STF.esc(src) + '" alt="Season map">' +
-      "</button>" +
-      (caption ? '<p class="lede map-note">' + STF.esc(caption) + "</p>" : "") +
-      '<p class="lede map-note">Tap the map to open it full screen. Pinch to zoom.</p>'
-    );
-  }
-
-  function bindMapZoom(root) {
-    if (!root) return;
-    root.addEventListener("click", function (e) {
-      var btn = e.target.closest("[data-map]");
-      if (!btn || !root.contains(btn)) return;
-      STF.openMap(btn.getAttribute("data-map"), btn.getAttribute("data-caption") || "");
+      panel.classList.toggle("is-open", open);
     });
   }
 
@@ -109,52 +100,6 @@
         STF.esc(item.description) + "</p>" + guide + "</article>"
       );
     }).join("");
-  }
-
-  function mapHTML(data) {
-    var list = (data.altars || [])
-      .map(function (altar) {
-        var coords = "Menu " + (altar.menu || []).join(", ");
-        if (altar.map) coords += " · map " + altar.map.join(", ");
-        return (
-          "<li><strong>" + STF.esc(altar.zone) + "</strong> " +
-          STF.esc(altar.where) + ' <span class="coords">' + STF.esc(coords) + "</span></li>"
-        );
-      })
-      .join("");
-    return '<div id="altar-leaflet" role="region" aria-label="Washington D.C. map"></div><ol class="altar-list">' + list + "</ol>";
-  }
-
-  var altarMap = null;
-  var altarBounds = null;
-
-  function mountAltarMap(data) {
-    var el = document.getElementById("altar-leaflet");
-    if (!el || !window.L) return;
-    if (altarMap) {
-      altarMap.remove();
-      altarMap = null;
-    }
-    altarMap = L.map(el, { scrollWheelZoom: false });
-    L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-      maxZoom: 19,
-      attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-    }).addTo(altarMap);
-    altarBounds = [];
-    (data.altars || []).forEach(function (altar) {
-      if (altar.lat == null || altar.lon == null) return;
-      var icon = L.divIcon({
-        className: "altar-pin",
-        html: "<span>" + altar.n + "</span>",
-        iconSize: [28, 28],
-        iconAnchor: [14, 14]
-      });
-      L.marker([altar.lat, altar.lon], { icon: icon, title: String(altar.n) })
-        .addTo(altarMap)
-        .bindPopup("<strong>" + altar.n + ". " + STF.esc(altar.zone) + "</strong><br>" + STF.esc(altar.where));
-      altarBounds.push([altar.lat, altar.lon]);
-    });
-    if (altarBounds.length) altarMap.fitBounds(altarBounds, { padding: [28, 28] });
   }
 
   function modifierCard(item) {
@@ -198,12 +143,6 @@
       Object.keys(panels).forEach(function (key) {
         if (panels[key]) panels[key].classList.toggle("active", key === id);
       });
-      if (id === "maps" && altarMap) {
-        setTimeout(function () {
-          altarMap.invalidateSize();
-          if (altarBounds && altarBounds.length) altarMap.fitBounds(altarBounds, { padding: [28, 28] });
-        }, 60);
-      }
     });
   }
 
@@ -211,15 +150,13 @@
     var loaded = await Promise.all([
       STF.fetchJSON("data/season.json"),
       STF.fetchJSON("data/manhunt.json"),
-      STF.fetchJSON("data/altars.json"),
       STF.fetchJSON("data/modifiers.json"),
       STF.fetchJSON("data/journey.json").catch(function () { return { seasons: {} }; })
     ]);
     var season = loaded[0];
     var manhunt = loaded[1];
-    var altars = loaded[2];
-    var modifiers = loaded[3];
-    var journey = loaded[4] || { seasons: {} };
+    var modifiers = loaded[2];
+    var journey = loaded[3] || { seasons: {} };
 
     var themeText = String(season.theme || "").trim();
     if (themeEl) {
@@ -245,17 +182,9 @@
     if (panels.journey) {
       var pack = (journey.seasons && journey.seasons[season.id]) || { missions: [] };
       panels.journey.innerHTML = journeyHTML(pack);
+      bindJourney(panels.journey);
     }
 
-    if (panels.maps) {
-      if (season.mapImage) {
-        panels.maps.innerHTML = imageMapHTML(season.mapImage, season.mapCaption || "");
-        bindMapZoom(panels.maps);
-      } else {
-        panels.maps.innerHTML = mapHTML(altars);
-        mountAltarMap(altars);
-      }
-    }
     if (panels.modifiers) panels.modifiers.innerHTML = modifiersHTML(modifiers);
   } catch (e) {
     if (summary) summary.textContent = "Could not load season data.";
