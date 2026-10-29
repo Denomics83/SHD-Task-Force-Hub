@@ -51,10 +51,9 @@
           '<a class="upd-entry" href="#' + STF.esc(item.id) + '">' +
           "<div>" +
           "<h2>" + STF.esc(item.title) + "</h2>" +
-          '<p class="upd-line">' +
-          (desc ? '<span class="upd-desc">' + STF.esc(desc) + "</span>" : "") +
+          (desc ? '<p class="upd-desc">' + STF.esc(desc) + "</p>" : "") +
           (when ? '<time class="upd-stamp" datetime="' + STF.esc(item.date) + '">' + STF.esc(when) + "</time>" : "") +
-          "</p></div>" +
+          "</div>" +
           '<div class="upd-ico ' + item.type + '" aria-hidden="true">' + GLYPH[item.type] + "</div>" +
           "</a>"
         );
