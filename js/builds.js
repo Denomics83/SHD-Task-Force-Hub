@@ -15,6 +15,21 @@
 
   var STRIKER = "assets/icons/gearsets/strikers-battlegear.png";
 
+  var ROLE_ICONS = {
+    dps: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="3.1" fill="none" stroke="#fff" stroke-width="1.8"/><path d="M12 3.4v3.1M12 17.5v3.1M3.4 12h3.1M17.5 12h3.1" fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round"/></svg>',
+    cc: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 13.7 8l5.3.5-4.1 3.4 1.4 5.1L12 14.2 7.7 17l1.4-5.1L5 8.5 10.3 8Z" fill="#fff"/></svg>',
+    heal: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.1 4.2h3.8V10h5.9v3.8H13.9v5.8h-3.8v-5.8H4.2V10h5.9Z" fill="#fff"/></svg>',
+    tank: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.1 19.2 6v6.1c0 4.3-2.9 6.8-7.2 8.4-4.3-1.6-7.2-4.1-7.2-8.4V6Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>'
+  };
+
+  function roleKind(role) {
+    var text = String(role || "").toLowerCase();
+    if (text.indexOf("heal") !== -1) return "heal";
+    if (text.indexOf("tank") !== -1) return "tank";
+    if (text.indexOf("crowd") !== -1 || text.indexOf("cc") !== -1) return "cc";
+    return "dps";
+  }
+
   var CATS = [
     { id: "solo", label: "Solo", art: "assets/tiles/builds-solo.jpg" },
     { id: "team", label: "Team", art: "assets/tiles/builds-team.jpg" },
@@ -100,12 +115,36 @@
     );
   }
 
+  function setListBack(on) {
+    var top = document.querySelector(".topbar");
+    var pill = document.querySelector(".hub-pill");
+    var back = document.getElementById("builds-back");
+    if (pill) pill.hidden = !!on;
+    if (!on) {
+      if (back) back.remove();
+      return;
+    }
+    if (back || !top) return;
+    back = document.createElement("button");
+    back.type = "button";
+    back.id = "builds-back";
+    back.className = "upd-header-back";
+    back.setAttribute("aria-label", "Back to Builds");
+    back.innerHTML = '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5 8 12l7 7" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"/></svg>';
+    back.addEventListener("click", function () {
+      history.pushState({}, "", "builds.html");
+      showGrid();
+    });
+    top.appendChild(back);
+  }
+
   function showGrid() {
     document.body.classList.add("is-grid");
     document.body.classList.remove("is-list");
     stage.hidden = false;
     listView.hidden = true;
     detailView.hidden = true;
+    setListBack(false);
     window.scrollTo(0, 0);
   }
 
@@ -117,18 +156,17 @@
     stage.hidden = true;
     detailView.hidden = true;
     listView.hidden = false;
+    setListBack(true);
     if (listTitle) listTitle.textContent = cat.label;
     var rows = LISTS[catId] || [];
     listRows.innerHTML = rows
       .map(function (row) {
-        var icon = row.icon
-          ? '<img src="' + row.icon + '" alt="" class="' + (row.icon.indexOf("strikers") !== -1 ? "is-banner" : "") + '">'
-          : '<span class="role-mark tone-' + row.tone + '" aria-hidden="true"></span>';
+        var kind = roleKind(row.role);
         return (
-          '<button type="button" class="build-row tone-' + row.tone + '" data-build="' + row.id + '">' +
-          '<span class="build-logo">' + icon + "</span>" +
-          "<span><strong>" + STF.esc(row.name) + "</strong>" +
-          '<em class="tone-' + row.tone + '">' + STF.esc(row.role) + "</em></span>" +
+          '<button type="button" class="build-row" data-build="' + row.id + '">' +
+          '<span class="build-copy"><strong>' + STF.esc(row.name) + "</strong>" +
+          "<em>" + STF.esc(row.role) + "</em></span>" +
+          '<span class="role-ico ' + kind + '" aria-hidden="true">' + ROLE_ICONS[kind] + "</span>" +
           "</button>"
         );
       })
@@ -146,6 +184,7 @@
     stage.hidden = true;
     listView.hidden = true;
     detailView.hidden = false;
+    setListBack(false);
     detailBody.innerHTML = row.detail === "hollow-man" ? hollowDetail(row) : placeholderDetail(row);
     if (detailBack) detailBack.textContent = "← " + cat.label;
     window.scrollTo(0, 0);

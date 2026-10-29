@@ -932,28 +932,34 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
 .build-rows { display: grid; gap: 10px; }
 .build-row {
   display: grid;
-  grid-template-columns: 42px 1fr;
+  grid-template-columns: minmax(0, 1fr) 46px;
   gap: 12px;
   align-items: center;
   width: 100%;
   text-align: left;
   padding: 12px 14px;
   border-radius: 14px;
-  background: rgba(255,255,255,.03);
+  background: rgba(255,255,255,.035);
   border: 1px solid rgba(255,255,255,.1);
   color: inherit;
   font: inherit;
   cursor: pointer;
 }
-.build-row.tone-dps { border-color: rgba(196, 58, 58, .45); }
-.build-row.tone-tank { border-color: rgba(61, 108, 181, .5); }
-.build-row.tone-skill { border-color: rgba(201, 162, 55, .5); }
-.build-row.tone-heal { border-color: rgba(46, 140, 90, .5); }
 .build-row strong { display: block; font-size: 1.02rem; }
 .build-row em {
   display: block; margin-top: 2px; font-style: normal;
-  font-size: .78rem; font-weight: 700; letter-spacing: .02em;
+  font-size: .78rem; font-weight: 600; letter-spacing: .02em;
+  color: #8a9099;
 }
+.role-ico {
+  width: 46px; height: 46px; border-radius: 12px;
+  display: grid; place-items: center; justify-self: end;
+}
+.role-ico svg { width: 24px; height: 24px; display: block; }
+.role-ico.dps { background: #dc2626; }
+.role-ico.cc { background: #eab308; }
+.role-ico.heal { background: #16a34a; }
+.role-ico.tank { background: #2563eb; }
 .build-row em.tone-dps, .build-role.tone-dps { color: #e07070; }
 .build-row em.tone-tank, .build-role.tone-tank { color: #8eb4e8; }
 .build-row em.tone-skill, .build-role.tone-skill { color: #e2c56a; }
