@@ -752,24 +752,39 @@ body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
   font-style: italic;
 }
 .loot-ico {
-  width: 34px;
-  height: 34px;
+  width: 39px;
+  height: 39px;
   margin-left: auto;
   flex: 0 0 auto;
-  border-radius: 8px;
+  border-radius: 9px;
   display: grid;
   place-items: center;
-  background: rgba(255,255,255,.05);
-  border: 1px solid rgba(255,255,255,.08);
+  background: #2a3140;
+  border: 0;
 }
 .loot-row-dz .dz-badge { margin-left: auto; }
 .loot-row-dz .loot-ico { margin-left: 0; }
-.loot-ico img { width: 26px; height: 26px; object-fit: contain; display: block; }
-.loot-ico.kind-gearset { background: rgba(1,255,144,.14); }
-.loot-ico.kind-brand { background: rgba(255,196,64,.14); }
+.loot-ico img {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+  display: block;
+  filter: saturate(1.4) brightness(1.35) contrast(1.15) drop-shadow(0 0 5px rgba(255,255,255,.9));
+}
+.loot-ico.kind-gearset {
+  background: #00c853;
+  box-shadow: 0 0 10px rgba(0, 200, 83, .7);
+}
+.loot-ico.kind-brand {
+  background: #f5a623;
+  box-shadow: 0 0 10px rgba(245, 166, 35, .7);
+}
 .loot-ico.kind-slot,
-.loot-ico.kind-weapon { background: rgba(255,255,255,.06); }
-.loot-ico.is-empty { background: rgba(255,255,255,.03); }
+.loot-ico.kind-weapon {
+  background: #4d5d78;
+  box-shadow: 0 0 8px rgba(210, 224, 245, .55);
+}
+.loot-ico.is-empty { background: rgba(255,255,255,.03); box-shadow: none; }
 .dz-badge {
   justify-self: end;
   font-size: 10px;
