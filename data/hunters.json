@@ -1,0 +1,1445 @@
+{
+  "imageCredit": "Mask images: The Division Wiki (Fandom)",
+  "imageCreditUrl": "https://thedivision.fandom.com/wiki/Hunters",
+  "groups": [
+    {
+      "id": "dc",
+      "title": "Washington DC"
+    },
+    {
+      "id": "ny",
+      "title": "New York",
+      "note": "Warlords of New York. Camo, Carbon, Drama, Weirdo, and Angel are fought in Washington, D.C., but they need the expansion."
+    },
+    {
+      "id": "brooklyn",
+      "title": "Brooklyn"
+    },
+    {
+      "id": "mission",
+      "title": "Mission & Event Hunters"
+    }
+  ],
+  "hunters": [
+    {
+      "id": "demon",
+      "name": "Demon",
+      "group": "dc",
+      "area": "Downtown East, east of the White House",
+      "time": "No night requirement is stated. The guide suggests trying it in daytime if it will not start.",
+      "steps": [
+        "Finish the Agent Edwards Support side mission first. That fight is this same courtyard, and the hunter leaves.",
+        "In the courtyard by the Demolition Site control point, shoot the window targets from left to right.",
+        "Hit each target once. Avoid automatic fire.",
+        "The hunter spawns in smoke in the courtyard."
+      ],
+      "headsUp": "The guide's comments say this one sometimes will not start while a global event or modifier is active. The guide suggests turning those off.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/demon.webp"
+    },
+    {
+      "id": "ghoul",
+      "name": "Ghoul",
+      "group": "dc",
+      "area": "West Potomac Park, near the Lincoln Memorial",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "Enter the sewer east of the Lincoln Memorial (the guide prefers the entrance it circles).",
+        "Turn left, go up the stairs by the hanging bulb, and use the laptop in front of the map marked with a moon.",
+        "After 21:00, go to that marked water-supply node.",
+        "Shoot the light bulb in the small lookout. The hunter spawns there."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/ghoul.webp"
+    },
+    {
+      "id": "midas",
+      "name": "Midas",
+      "group": "dc",
+      "area": "West End",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "After 21:00, clear any activity inside the C-shaped building. The pool path stays locked while an activity is up.",
+        "Drop into the empty pool. The guide says the pool lights should be red.",
+        "Stand by the box and use the jumping-jacks emote.",
+        "Midas and Revenant both spawn on the floor above."
+      ],
+      "notes": "Shares the fight with Revenant.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/midas.webp"
+    },
+    {
+      "id": "revenant",
+      "name": "Revenant",
+      "group": "dc",
+      "area": "West End",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "Same puzzle and fight as Midas.",
+        "After 21:00, use the jumping-jacks emote in the red-lit empty pool.",
+        "Both hunters spawn together."
+      ],
+      "notes": "Shares the fight with Midas.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/revenant.webp"
+    },
+    {
+      "id": "cross",
+      "name": "Cross",
+      "group": "dc",
+      "area": "East Mall, water supply north of the Sinkhole control point",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "After 21:00, go to the water node with the Christmas tree, north of the Sinkhole control point.",
+        "The Steam guide says the puzzle uses the caf\u00e9 and the Christmas tree, including a hidden lever.",
+        "Four hunters spawn: Cross, Diamond, Death, and Phantom."
+      ],
+      "headsUp": "The switch order is shown in the Steam guide's screenshots. The text does not list that order, so it is not repeated here.",
+      "notes": "Four-hunter fight, shared with Diamond, Death, and Phantom.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/cross.webp"
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond",
+      "group": "dc",
+      "area": "East Mall, same water node as Cross",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "Same night puzzle and four-hunter fight as Cross."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/diamond.webp"
+    },
+    {
+      "id": "death",
+      "name": "Death",
+      "group": "dc",
+      "area": "East Mall, same water node as Cross",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "Same night puzzle and four-hunter fight as Cross."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/death.webp"
+    },
+    {
+      "id": "phantom",
+      "name": "Phantom",
+      "group": "dc",
+      "area": "Downtown East, F Street NW \u2014 the wiki also ties this mask to the East Mall four-hunter fight",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "The Steam guide treats Phantom as one of the four hunters at the East Mall Christmas-tree water node, after 21:00."
+      ],
+      "headsUp": "The wiki places the Phantom mask at F Street NW in Downtown East. The Steam guide places the fight with Cross, Diamond, and Death at the East Mall water node. Both are cited; this page does not pick one.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/phantom.webp"
+    },
+    {
+      "id": "crimson",
+      "name": "Crimson",
+      "group": "dc",
+      "area": "Downtown East, courtyard south of District Union Arena",
+      "time": "No night requirement is stated. There is a short timer between the two phones.",
+      "steps": [
+        "At the rectangular building by District Union Arena, interact with the phone at one reception desk.",
+        "Cross the courtyard and interact with the phone at the opposite desk before the timer ends.",
+        "The hunter spawns in the courtyard."
+      ],
+      "headsUp": "The guide says a separate stalker can appear in this courtyard at night. It cannot be killed and is not this encounter.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/crimson.webp"
+    },
+    {
+      "id": "wraith",
+      "name": "Wraith",
+      "group": "dc",
+      "area": "Southwest, memorial east of the Capitol Hill safe house",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "After 21:00, face the memorial wall and shoot out the light.",
+        "Stand by the flagpole so the whole wall is on screen.",
+        "Use the Salute emote. In a group, the guide says a second player may also need to salute.",
+        "The hunter spawns behind the wall."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/wraith.webp"
+    },
+    {
+      "id": "ghost",
+      "name": "Ghost",
+      "group": "dc",
+      "area": "West Potomac Park, Washington Monument",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "steps": [
+        "Capture the Washington Monument control point so the supply-room terminal is reachable.",
+        "After 21:00, use that terminal. It marks three graves.",
+        "At each grave, salute while you can see the monument. The screen fizzles if it counted.",
+        "Return to the monument. The hunter spawns to the east, on a marked circle."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/ghost.webp"
+    },
+    {
+      "id": "specter",
+      "name": "Specter",
+      "group": "dc",
+      "area": "Southwest, the mausoleum east of the Castle",
+      "time": "No night requirement is stated in the guide text.",
+      "steps": [
+        "Climb the truck facing the mausoleum so the windows are in view.",
+        "Shoot the lower windows in the order shown in the Steam guide's picture.",
+        "The hunter spawns to the right of the truck."
+      ],
+      "headsUp": "The window order is only in that guide's image, not in its text, so it is not copied here.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/specter.webp"
+    },
+    {
+      "id": "psycho",
+      "name": "Psycho",
+      "group": "ny",
+      "area": "New York, Civic Center",
+      "time": "The guide says the fight is after 21:00.",
+      "steps": [
+        "In the Financial District, after 21:00, use the generator and place four flags on the poles.",
+        "The first flag the guide names is just outside the Foodbank safehouse.",
+        "Psycho and Drip spawn together."
+      ],
+      "headsUp": "A comment on the Steam guide says the fuse collection can be done before 21:00, and only the turn-in is time-gated. The guide text itself says the puzzle is only available after 21:00.",
+      "notes": "Shares the fight with Drip. Needs Warlords of New York.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/psycho.webp"
+    },
+    {
+      "id": "drip",
+      "name": "Drip",
+      "group": "ny",
+      "area": "New York, Civic Center",
+      "time": "See Psycho.",
+      "steps": [
+        "Same puzzle and fight as Psycho."
+      ],
+      "notes": "Shares the fight with Psycho.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/drip.webp"
+    },
+    {
+      "id": "divide",
+      "name": "Divide",
+      "group": "ny",
+      "area": "New York, Financial District",
+      "time": "",
+      "steps": [
+        "The wiki lists this mask in the Financial District. The Steam guide covers it with the other New York puzzles."
+      ],
+      "headsUp": "A step-by-step that is only in screenshots is not repeated here.",
+      "sources": [
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/divide.webp"
+    },
+    {
+      "id": "angel",
+      "name": "Angel",
+      "group": "ny",
+      "area": "Washington, D.C., Constitution Hall. Requires Warlords of New York.",
+      "time": "The statue sequence is described as a night encounter.",
+      "steps": [
+        "Collect six lion eyes from refrigerators at food spots. The guide says these can be picked up in any order.",
+        "At Constitution Hall, interact with six lion statues on foot.",
+        "Do not fast travel between the statues. If you die, the eyes and the statues both have to be done again."
+      ],
+      "notes": "Fought in D.C., but the guide says it needs the New York expansion.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/angel.webp"
+    },
+    {
+      "id": "drama",
+      "name": "Drama",
+      "group": "ny",
+      "area": "Washington, D.C., Downtown East. Requires Warlords of New York.",
+      "time": "The guide says after 21:00. A comment says only the generators are time-gated.",
+      "steps": [
+        "Collect two presents: one between the Carbon building and District Union Arena, and one at the White House Christmas market.",
+        "After 21:00, at the Crimson courtyard's outdoor market, start two green generators and flip the switches the cables lead to.",
+        "Drama and Weirdo spawn together."
+      ],
+      "headsUp": "A Steam-guide comment says you are not time-gated until the generators. The guide text says to do this after 21:00.",
+      "notes": "Fought in D.C. Shares the fight with Weirdo.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/drama.webp"
+    },
+    {
+      "id": "weirdo",
+      "name": "Weirdo",
+      "group": "ny",
+      "area": "Washington, D.C., Downtown East. Requires Warlords of New York.",
+      "time": "See Drama.",
+      "steps": [
+        "Same puzzle and fight as Drama."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/weirdo.webp"
+    },
+    {
+      "id": "carbon",
+      "name": "Carbon",
+      "group": "ny",
+      "area": "Washington, D.C., Judiciary Square and Downtown West. Requires Warlords of New York.",
+      "time": "No night requirement is stated for the sewer boxes.",
+      "steps": [
+        "Finish the Missing Wire Scavengers side mission. The guide says the second building stays locked until then.",
+        "From the Toxic Alley control point, enter the sewer and shoot four yellow power boxes in the corners.",
+        "The guide says the boxes turn black after they count, so a first attempt should still show them yellow."
+      ],
+      "notes": "Fought in D.C.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/carbon.webp"
+    },
+    {
+      "id": "camo",
+      "name": "Camo",
+      "group": "ny",
+      "area": "Washington, D.C., Southwest and Downtown East. Requires Warlords of New York.",
+      "time": "The second half is after 21:00.",
+      "steps": [
+        "Near Space Administration HQ, use the tablet in the hallway by the red tourist bus. The room turns orange if it counted.",
+        "After 21:00, at the water node by the Red Dragon control point, use the button on the blue-covered box.",
+        "Follow the spotlights from memory. The guide does not print that path in text."
+      ],
+      "notes": "Fought in D.C.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/camo.webp"
+    },
+    {
+      "id": "neurotic",
+      "name": "Neurotic",
+      "group": "ny",
+      "area": "New York, Battery Park",
+      "time": "The guide gives two daytime windows, then a night window.",
+      "steps": [
+        "Between in-game 17:30 and 17:45, use the exposed circuit panel in the construction room by the Boathouse control point. Do not touch it outside that window.",
+        "Between 19:00 and 19:15, use the wall tablet by the east exit of the Trinity Church safehouse.",
+        "After dark, between 21:00 and 21:15, go to the pier by the Boathouse control point for the spawn."
+      ],
+      "headsUp": "Those clock windows are narrow. The guide says leaving the session before the night step makes you start over.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/neurotic.webp"
+    },
+    {
+      "id": "trip",
+      "name": "Trip",
+      "group": "ny",
+      "area": "New York, Two Bridges",
+      "time": "",
+      "steps": [
+        "The wiki lists Trip at Two Bridges with Lucky, Paranoid, and Veil."
+      ],
+      "headsUp": "The Steam guide's text for this spawn is image-led. The order is not copied from a picture.",
+      "sources": [
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/trip.webp"
+    },
+    {
+      "id": "lucky",
+      "name": "Lucky",
+      "group": "ny",
+      "area": "New York, Two Bridges",
+      "time": "",
+      "steps": [
+        "The wiki lists Lucky at Two Bridges with Trip, Paranoid, and Veil."
+      ],
+      "sources": [
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/lucky.webp"
+    },
+    {
+      "id": "paranoid",
+      "name": "Paranoid",
+      "group": "ny",
+      "area": "New York, Two Bridges",
+      "time": "",
+      "steps": [
+        "The wiki lists Paranoid at Two Bridges with Trip, Lucky, and Veil."
+      ],
+      "sources": [
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/paranoid.webp"
+    },
+    {
+      "id": "veil",
+      "name": "Veil",
+      "group": "ny",
+      "area": "New York, Two Bridges",
+      "time": "",
+      "steps": [
+        "The wiki lists Veil at Two Bridges with Trip, Lucky, and Paranoid."
+      ],
+      "sources": [
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/veil.webp"
+    },
+    {
+      "id": "cipher",
+      "name": "Cipher",
+      "group": "brooklyn",
+      "area": "Dumbo, building with letters on the vents",
+      "time": "No night requirement.",
+      "steps": [
+        "Shoot the vents to spell R-O-B-O-T-O. Hit each letter once.",
+        "Use a precise weapon, not full auto. A wrong letter means logging out to reset.",
+        "The hunter spawns in front of you."
+      ],
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "image": "assets/hunters/cipher.webp"
+    },
+    {
+      "id": "lumen",
+      "name": "Lumen",
+      "group": "brooklyn",
+      "area": "Brooklyn Heights, under the Brooklyn Bridge",
+      "time": "GameRant says this one is at night.",
+      "steps": [
+        "GameRant: at night, use the switch inside the shutter under the bridge.",
+        "Follow the black-light graffiti to the spawn."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/lumen.webp"
+    },
+    {
+      "id": "merry",
+      "name": "Merry",
+      "group": "brooklyn",
+      "area": "Brooklyn waterfront carousel",
+      "time": "",
+      "steps": [
+        "GameRant: collect seven wooden-horse parts around Brooklyn.",
+        "Assemble them at the carousel to spawn the hunter."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/merry.webp"
+    },
+    {
+      "id": "redtail",
+      "name": "Redtail",
+      "group": "brooklyn",
+      "area": "Dumbo, underground room",
+      "time": "",
+      "steps": [
+        "GameRant: disable nine antennas around Brooklyn.",
+        "In the underground room in Dumbo, shut the system down, then go back outside for the spawn."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/redtail.webp"
+    },
+    {
+      "id": "tracker",
+      "name": "Tracker",
+      "group": "brooklyn",
+      "area": "Dumbo, building by the control point",
+      "time": "",
+      "steps": [
+        "GameRant: walk a zigzag through the room, then pull the lever at the end.",
+        "Doing that correctly spawns the hunter."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/tracker.webp"
+    },
+    {
+      "id": "craver",
+      "name": "Craver",
+      "group": "brooklyn",
+      "area": "Brooklyn Heights waterfront",
+      "time": "",
+      "steps": [
+        "GameRant: interact with four gas cylinders around Brooklyn.",
+        "On the boat at the Brooklyn Heights waterfront, use the pile of cylinders to spawn the hunter."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/craver.webp"
+    },
+    {
+      "id": "conqueror",
+      "name": "Conqueror",
+      "group": "brooklyn",
+      "area": "Furman Street, Brooklyn Heights",
+      "time": "",
+      "steps": [
+        "GameRant: shoot seven stuffed animals around Brooklyn.",
+        "On Furman Street, interact with the stuffed monkey that has the toys beside it."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/conqueror.webp"
+    },
+    {
+      "id": "necronos",
+      "name": "Necronos",
+      "group": "brooklyn",
+      "area": "Dumbo, Division 1 safehouse by the Warehouse control point",
+      "time": "No night requirement is stated.",
+      "steps": [
+        "The Steam guide says this stays locked until the other Brooklyn hunters before it are done. Phoenix is separate and comes after.",
+        "Upstairs in that safehouse, interact with the drawing board.",
+        "Follow the black-light arrows to the roof. The hunter spawns there."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "GameRant \u2014 Brooklyn hunter masks",
+          "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/necronos.webp"
+    },
+    {
+      "id": "phoenix",
+      "name": "Phoenix",
+      "group": "brooklyn",
+      "area": "Dumbo, several spots used by the earlier Brooklyn hunters",
+      "time": "No night requirement is stated.",
+      "image": "",
+      "steps": [
+        "Own Battle for Brooklyn and already have the eight earlier Brooklyn masks, including Necronos.",
+        "The Steam guide starts at a burning pile on the roof where Necronos spawned. Walk up to it.",
+        "Trip the wire at the Tracker caf\u00e9, then turn two yellow valves to put the fires out.",
+        "In the Redtail sewer, trip the wire and shoot the red pipes to clear the fire.",
+        "At the Cipher building, shoot the vents to spell P-H-O-E-N-I-X, once each.",
+        "The hunter spawns when you drop into the room under the bridge. Do not need another interact."
+      ],
+      "headsUp": "Steam-guide comments say the letter vents at the Cipher building can fail to register. The May 2026 write-ups also disagree on the first rooftop clue, so treat a stuck step as a reset: fast travel off the map and come back.",
+      "notes": "No mask image is included. The wiki file named Phoenix.png is a different picture and is not used.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "Destructoid \u2014 Phoenix hunter mask",
+          "url": "https://www.destructoid.com/how-to-get-the-phoenix-hunter-mask-in-the-division-2/",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "subtitle": "",
+      "limited": false,
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ]
+    },
+    {
+      "id": "deceit",
+      "name": "Deceit",
+      "group": "mission",
+      "area": "Coney Island",
+      "subtitle": "Schaeffer manhunt",
+      "time": "Once per mission run.",
+      "steps": [
+        "Run the Bardon Schaeffer manhunt mission.",
+        "The hunter is in that mission. The Steam guide says a death ends the chance for that run.",
+        "Reset the whole mission, not a checkpoint, if you die before the mask drops.",
+        "The guide suggests Normal if you only want the mask."
+      ],
+      "tips": [
+        "If you die, restart the mission from the beginning. A checkpoint restart does not bring the hunter back."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "image": "assets/hunters/deceit.webp"
+    },
+    {
+      "id": "freedom",
+      "name": "Freedom",
+      "group": "mission",
+      "area": "New York",
+      "subtitle": "Kelso tanker mission",
+      "time": "Once per mission run.",
+      "steps": [
+        "Run the Kelso tanker mission in New York.",
+        "The mask drops only if you kill this hunter during that run.",
+        "A death means restarting the whole mission, same as Deceit."
+      ],
+      "tips": [
+        "Restart the mission from the start after a wipe. The guide says a checkpoint does not replay the fight."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "image": "assets/hunters/freedom.webp"
+    },
+    {
+      "id": "wolves",
+      "name": "Wolves",
+      "group": "mission",
+      "area": "Roosevelt Island",
+      "subtitle": "Kelso climax, Master",
+      "time": "Master difficulty.",
+      "image": "",
+      "steps": [
+        "Start the Roosevelt Island Kelso climax mission on Master.",
+        "After the True Sons in the circular garden are dead, four hunters spawn.",
+        "You do not have to finish the mission. Winning that fight is what drops the mask.",
+        "Dying sends you to the start. The guide says there is no checkpoint before the fight."
+      ],
+      "tips": [
+        "The Steam guide calls this the hardest mission hunter and points at a Master-difficulty video for the fight."
+      ],
+      "notes": "No separate mask image was on the wiki under a Wolves filename.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "limited": false,
+      "headsUp": ""
+    },
+    {
+      "id": "wright",
+      "name": "Wright",
+      "group": "mission",
+      "area": "Incursion",
+      "subtitle": "Incursion, all 4 stages",
+      "time": "",
+      "steps": [
+        "Finish all four stages of the Incursion.",
+        "The Steam guide says this hunter only uses melee and incendiary grenades.",
+        "Those grenades apply a burn the guide calls Greek fire, which stops an armour kit from fully healing until it ends."
+      ],
+      "tips": [
+        "Do not expect a gunfight. The guide says the damage is melee and fire."
+      ],
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "limited": false,
+      "notes": "",
+      "headsUp": "",
+      "image": "assets/hunters/wright.webp"
+    },
+    {
+      "id": "ruin",
+      "name": "Ruin",
+      "group": "mission",
+      "area": "Anderson Foundry",
+      "subtitle": "Foundry climax, Master",
+      "time": "At the very start of the mission.",
+      "image": "",
+      "steps": [
+        "Run the Anderson Foundry climax mission on Master.",
+        "The hunter is behind glass at the start and the guide says bullets, grenades, and skills do not reach.",
+        "Damage has to come from an area effect: the Reanimated global event, or Turmoil kneepads, close enough to the glass.",
+        "The guide says this has to happen at the start of the mission."
+      ],
+      "notes": "No mask image is included.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "limited": false,
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ]
+    },
+    {
+      "id": "adamant-julmust",
+      "name": "Adamant",
+      "mask": "Julmust",
+      "group": "mission",
+      "area": "The Summit",
+      "subtitle": "Summit floor 100",
+      "time": "Any difficulty. Julmust is December only.",
+      "steps": [
+        "Climb The Summit to floor 100. The Steam guide says any difficulty.",
+        "Two hunters spawn on that floor. Killing them ends the floor and drops the masks.",
+        "Adamant is the floor-100 mask outside the holiday.",
+        "Julmust drops from the same floor only during December, the in-game holiday."
+      ],
+      "headsUp": "These are two masks from the same floor. Julmust is not a year-round drop. The guide says December only.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        },
+        {
+          "name": "The Division Wiki \u2014 Hunters",
+          "url": "https://thedivision.fandom.com/wiki/Hunters",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "limited": false,
+      "notes": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ],
+      "image": "assets/hunters/adamant-julmust.webp"
+    },
+    {
+      "id": "houndsman",
+      "name": "Houndsman",
+      "group": "mission",
+      "area": "Washington, D.C.",
+      "subtitle": "2025 Halloween bounty",
+      "time": "Only while that bounty is in the game.",
+      "limited": true,
+      "steps": [
+        "The Division Wiki lists The Houndsman as a named bounty for the 2025 Halloween event, not an open-world puzzle.",
+        "The wiki says the fight includes named mini-warhounds and that status effects do not stick."
+      ],
+      "tips": [
+        "The wiki says only weapon damage gets through. Status effects do not."
+      ],
+      "sources": [
+        {
+          "name": "The Division Wiki \u2014 The Houndsman",
+          "url": "https://thedivision.fandom.com/wiki/The_Houndsman",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "notes": "",
+      "headsUp": "",
+      "image": "assets/hunters/houndsman.webp"
+    },
+    {
+      "id": "scoured",
+      "name": "Scoured",
+      "group": "mission",
+      "area": "New York, freeroam",
+      "subtitle": "Dust event",
+      "time": "Random while the Dust event is active.",
+      "limited": true,
+      "image": "",
+      "steps": [
+        "During the Dust event in New York, the Steam guide says this hunter can spawn at random in freeroam.",
+        "You do not choose the spawn.",
+        "Killing it once drops the mask. Later spawns do not drop it again."
+      ],
+      "notes": "No mask image is included.",
+      "sources": [
+        {
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
+          "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
+          "date": "29 Oct 2026"
+        }
+      ],
+      "mask": "",
+      "headsUp": "",
+      "tips": [
+        "The Steam guide says hunters hack drones, turrets, hives, seekers, and fireflies. It recommends riot foam, a decoy, and a shield instead.",
+        "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
+        "If everyone in the area dies, the puzzle resets."
+      ]
+    }
+  ]
+}

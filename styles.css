@@ -938,6 +938,78 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   cursor: pointer;
 }
 .res-detail h1, .build-detail h1, .build-list h1 { margin-top: 0; }
+.hunter-sec {
+  margin: 18px 0 8px;
+  font-size: 1.05rem;
+  font-weight: 800;
+}
+.hunter-sec span {
+  color: #8a9099;
+  font-weight: 700;
+  font-size: .85rem;
+}
+.hunter-note { margin-top: -4px; }
+.hunter-row {
+  display: grid;
+  grid-template-columns: 56px minmax(0, 1fr);
+  gap: 12px;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  margin: 0 0 8px;
+  padding: 10px 12px;
+  border-radius: 14px;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.1);
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+}
+.hunter-mask, .hunter-fallback {
+  width: 56px; height: 56px; border-radius: 10px;
+  background: #101318; object-fit: contain; display: block;
+}
+.hunter-fallback {
+  display: grid; place-items: center; color: #9aa0a6;
+}
+.hunter-fallback svg { width: 32px; height: 32px; }
+.hunter-row strong { display: block; font-size: 1rem; }
+.hunter-row em {
+  display: inline; margin-left: 6px; font-style: normal;
+  color: #8a9099; font-size: .82rem;
+}
+.hunter-row small, .hunter-area {
+  display: block; margin-top: 2px; color: #8a9099; font-size: .78rem;
+}
+.hunter-tag {
+  display: inline-block; margin-top: 4px;
+  font-size: .65rem; font-weight: 800; letter-spacing: .04em;
+  text-transform: uppercase; color: #c9a227;
+  font-style: normal;
+}
+.hunter-hero {
+  width: min(220px, 70%); height: auto; margin: 0 0 12px;
+  background: #101318; border-radius: 12px;
+}
+.hunter-hero.hunter-fallback { height: 120px; }
+.hunter-steps, .hunter-tips { margin: 0 0 12px; padding-left: 1.2em; color: #d5d8de; }
+.hunter-steps li, .hunter-tips li { margin: 0 0 6px; }
+.hunter-headsup {
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.1);
+  border-radius: 12px;
+  padding: 10px 12px;
+  color: #c5cad3;
+  font-size: .88rem;
+}
+.hunter-headsup strong {
+  display: block; margin-bottom: 4px;
+  font-size: .68rem; letter-spacing: .08em; text-transform: uppercase; color: #9aa0a6;
+}
+.hunter-sources, .hunter-credit {
+  margin-top: 14px; font-size: .72rem; color: #8a9099; line-height: 1.45;
+}
+.hunter-sources a, .hunter-credit a { color: #c5cad3; }
 .detail-rail {
   display: flex;
   overflow-x: auto;
