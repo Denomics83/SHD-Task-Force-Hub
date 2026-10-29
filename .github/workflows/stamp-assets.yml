@@ -1,0 +1,32 @@
+name: Stamp asset versions
+
+# After each push to main, point CSS/JS ?v= and data/build-version.json at that commit.
+# The follow-up commit is marked [cache-bust] so this workflow does not run again.
+on:
+  push:
+    branches: [main]
+
+permissions:
+  contents: write
+
+jobs:
+  stamp:
+    if: ${{ !contains(github.event.head_commit.message, '[cache-bust]') }}
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Rewrite cache-bust query strings
+        run: python3 scripts/stamp-assets.py "${GITHUB_SHA::7}"
+
+      - name: Commit the stamped version
+        run: |
+          if git diff --quiet; then
+            echo "Version already matches ${GITHUB_SHA::7}."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add index.html builds.html events.html loot.html resources.html season.html admin.html data/build-version.json
+          git commit -m "Stamp asset cache version [cache-bust]"
+          git push

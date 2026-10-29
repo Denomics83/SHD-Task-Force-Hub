@@ -2,7 +2,8 @@
 window.STF = window.STF || {};
 
 STF.fetchJSON = async function (path) {
-  const res = await fetch(path, { cache: "no-store" });
+  var sep = path.indexOf("?") >= 0 ? "&" : "?";
+  var res = await fetch(path + sep + "t=" + Date.now(), { cache: "no-store" });
   if (!res.ok) throw new Error("Failed to load " + path);
   return res.json();
 };

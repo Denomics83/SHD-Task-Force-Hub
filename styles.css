@@ -1284,6 +1284,12 @@ body.page-events.is-event-detail .bottom-nav { position: fixed; left: 0; right: 
   font-size: .68rem; color: #6c7380; letter-spacing: .04em;
 }
 body.is-event-detail .admin-link { display: none; }
+.build-toast {
+  position: fixed; left: 12px; right: 12px; z-index: 80;
+  bottom: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px) + 10px);
+  border: 0; border-radius: 999px; padding: 12px 16px;
+  background: #ff7f00; color: #1a1004; font-weight: 800; font-size: .88rem;
+}
 body.page-admin { background: #0b0d10; background-image: none; }
 body.page-admin.is-logged-out .admin-main {
   min-height: calc(100dvh - 64px - var(--nav-h) - env(safe-area-inset-bottom, 0px));
