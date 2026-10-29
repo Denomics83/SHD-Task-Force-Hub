@@ -33,46 +33,64 @@
       .join("");
   }
 
+  var TASK_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 8.2v7.6M8.2 12h7.6" stroke="currentColor" stroke-width="1.4"/></svg>';
+  var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
+
+  function pad2(n) {
+    return (n < 10 ? "0" : "") + n;
+  }
+
+  function taskRows(tasks) {
+    return (tasks || []).map(function (task, index) {
+      return (
+        '<div class="j-task"><span>' + STF.esc(task) + "</span>" +
+        '<span class="j-meta"><b>' + pad2(index + 1) + "</b>" + TASK_ICO + "</span></div>"
+      );
+    }).join("");
+  }
+
   function weekHTML(week) {
-    var tasks = (week.tasks || []).slice(0, 3)
-      .map(function (task) { return "<li>" + STF.esc(task) + "</li>"; })
-      .join("");
+    var tasks = (week.tasks || []).slice(0, 3);
     var title = "Week " + week.week + (week.scout ? " · " + week.scout : "");
     if (week.label) title += " · " + week.label;
     return (
-      '<article class="season-item"><h3>' + STF.esc(title) + "</h3>" +
-      '<ul class="task-list">' + tasks + "</ul></article>"
+      '<article class="mh-week">' +
+      '<h3><span class="j-roman">' + STF.esc(ROMAN[(week.week || 1) - 1] || String(week.week)) + "</span>" + STF.esc(title) + "</h3>" +
+      taskRows(tasks) +
+      "</article>"
     );
   }
 
   function journeyHTML(pack) {
     var missions = (pack && pack.missions) || [];
     if (!missions.length) return '<p class="lede">No journey missions for this season.</p>';
-    return missions.map(function (mission, index) {
+    return '<div class="journey-list">' + missions.map(function (mission, index) {
       var tasks = mission.tasks || [];
-      var taskHtml = tasks.map(function (task) {
-        return "<li>" + STF.esc(task) + "</li>";
+      var taskHtml = tasks.map(function (task, t) {
+        return (
+          '<button type="button" class="j-task j-pick" aria-pressed="false">' +
+          "<span>" + STF.esc(task) + "</span>" +
+          '<span class="j-meta"><b>' + pad2(t + 1) + "</b>" + TASK_ICO + "</span>" +
+          '<span class="j-obj"><em>Objective</em>' + STF.esc(task) + "</span>" +
+          "</button>"
+        );
       }).join("");
-      var countLabel = tasks.length === 1 ? "1 task" : tasks.length + " tasks";
       var unlocks = mission.unlocks
-        ? '<p class="unlocks-line">Unlocks ' + STF.esc(mission.unlocks) + "</p>"
+        ? '<p class="unlocks-line">Rewards · ' + STF.esc(mission.unlocks) + "</p>"
         : "";
       var name = mission.name || ("Mission " + (index + 1));
       var panelId = "journey-panel-" + index;
       return (
         '<article class="journey-mission">' +
         '<button type="button" class="journey-bar" aria-expanded="false" aria-controls="' + panelId + '">' +
+        '<span class="j-roman">' + (ROMAN[index] || String(index + 1)) + "</span>" +
         '<span class="journey-name">' + STF.esc(name) + "</span>" +
-        '<span class="journey-count">' + countLabel + "</span>" +
-        '<svg class="journey-chevron" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 9l6 6 6-6" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>' +
+        '<span class="j-ring">' + pad2(tasks.length) + "</span>" +
         "</button>" +
         '<div class="journey-panel" id="' + panelId + '" role="region">' +
-        '<div class="journey-panel-inner">' +
-        unlocks +
-        '<ol class="task-list">' + taskHtml + "</ol>" +
-        "</div></div></article>"
+        '<div class="journey-panel-inner">' + unlocks + taskHtml + "</div></div></article>"
       );
-    }).join("");
+    }).join("") + "</div>";
   }
 
   function bindJourney(root) {
@@ -86,6 +104,23 @@
       var open = btn.getAttribute("aria-expanded") !== "true";
       btn.setAttribute("aria-expanded", open ? "true" : "false");
       panel.classList.toggle("is-open", open);
+      btn.classList.toggle("is-on", open);
+    });
+    root.addEventListener("click", function (e) {
+      var row = e.target.closest(".j-pick");
+      if (!row || !root.contains(row)) return;
+      var on = row.getAttribute("aria-pressed") !== "true";
+      var mission = row.closest(".journey-mission");
+      if (mission) {
+        mission.querySelectorAll(".j-pick").forEach(function (el) {
+          el.setAttribute("aria-pressed", "false");
+          el.classList.remove("is-on");
+        });
+      }
+      if (on) {
+        row.setAttribute("aria-pressed", "true");
+        row.classList.add("is-on");
+      }
     });
   }
 

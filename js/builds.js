@@ -137,7 +137,7 @@
     var lvl = filled ? '<span class="td-lvl">40</span>' : "";
     var title = filled ? item.name : spec.label;
     return (
-      '<div class="td-slot">' +
+      '<button type="button" class="td-slot" data-slot="' + spec.key + '">' +
       '<div class="td-face rarity-' + rarity + '">' +
       lvl +
       '<span class="td-art">' + art + "</span>" +
@@ -145,7 +145,40 @@
       (dots ? '<span class="td-dots">' + dots + "</span>" : "") +
       "</div>" +
       '<span class="td-title">' + STF.esc(title) + "</span>" +
-      "</div>"
+      "</button>"
+    );
+  }
+
+  function barWidth(text) {
+    var match = String(text || "").match(/(\d+(?:\.\d+)?)\s*%/);
+    if (!match) return 100;
+    return Math.max(8, Math.min(100, parseFloat(match[1])));
+  }
+
+  function slotPanel(row, key) {
+    var spec = null;
+    for (var i = 0; i < GRID.length; i++) if (GRID[i].key === key) spec = GRID[i];
+    if (!spec && key === "specialization") spec = { key: "specialization", label: "Specialization" };
+    var item = slotOf(row, key);
+    var title = item.name || (spec ? spec.label : "Slot");
+    var rarity = item.name ? (item.rarity || "high-end") : "empty";
+    var lines = [];
+    if (item.core) lines.push({ k: "Core", v: item.core });
+    if (item.talent) lines.push({ k: "Talent", v: item.talent });
+    String(item.attributes || "").split(/[\n,]/).forEach(function (part) {
+      if (part.trim()) lines.push({ k: "Attribute", v: part.trim() });
+    });
+    var bars = lines.map(function (line) {
+      return (
+        '<div class="attr-line"><span>' + STF.esc(line.k) + "</span><strong>" + STF.esc(line.v) + "</strong>" +
+        '<i style="width:' + barWidth(line.v) + '%"></i></div>'
+      );
+    }).join("");
+    return (
+      '<p class="slot-rarity">' + STF.esc(rarity === "empty" ? "Empty" : rarity) + "</p>" +
+      "<h2>" + STF.esc(title) + "</h2>" +
+      (item.brand ? "<p>" + STF.esc(item.brand) + "</p>" : "") +
+      (bars || '<p class="lede">No core, talent, or attributes stored for this slot.</p>')
     );
   }
 
@@ -162,7 +195,13 @@
       rows[spec.row].push(tdSlot(row, spec));
     });
     if (current) html += '<div class="td-row td-row-' + current + '">' + rows[current].join("") + "</div>";
-    return '<div class="td-loadout" aria-label="Gear loadout">' + html + "</div>";
+    return (
+      '<div class="build-sheet">' +
+      '<div class="td-loadout" aria-label="Gear loadout">' + html + "</div>" +
+      '<aside class="slot-detail" id="slot-detail" hidden><p class="lede">Tap a slot.</p></aside>' +
+      "</div>" +
+      '<p class="pad-hints"><span><i>Tap</i> Inspect</span><span><i>Esc</i> Back</span></p>'
+    );
   }
 
   function playstyleHTML(row) {
@@ -285,23 +324,53 @@
     listView.hidden = true;
     detailView.hidden = false;
     setHeaderBack("detail", cat);
+    openBuild = row;
     detailBody.innerHTML = detailHTML(row);
     window.scrollTo(0, 0);
     if (push) history.pushState({ cat: catId, build: buildId }, "", "#" + catId + "/" + buildId);
+  }
+
+  var CAT_ICONS = {
+    solo: '<svg viewBox="0 0 24 24"><circle cx="12" cy="8" r="3"/><path d="M6 19c1-3.2 3-4.8 6-4.8s5 1.6 6 4.8"/></svg>',
+    team: '<svg viewBox="0 0 24 24"><circle cx="8" cy="9" r="2.4"/><circle cx="16" cy="9" r="2.4"/><path d="M3.5 19c.8-2.6 2.4-4 4.5-4s3.7 1.4 4.5 4M12 19c.8-2.4 2.2-3.6 4-3.6s3.2 1.2 4 3.6"/></svg>',
+    incursion: '<svg viewBox="0 0 24 24"><path d="M12 4 19 8.2v7.6L12 20l-7-4.2V8.2z"/></svg>',
+    escalation: '<svg viewBox="0 0 24 24"><path d="M5 18h4V8H5zM10 18h4V5h-4zM15 18h4v-7h-4z"/></svg>',
+    raid: '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3.5v3M12 17.5v3M3.5 12h3M17.5 12h3"/></svg>',
+    pvp: '<svg viewBox="0 0 24 24"><path d="M5 6h6l2 3h6M5 18h6l2-3h6"/></svg>'
+  };
+
+  function pad2(n) {
+    return (n < 10 ? "0" : "") + n;
   }
 
   function paintGrid() {
     stage.innerHTML =
       '<div class="cat-grid">' +
       CATS.map(function (cat) {
+        var count = buildsIn(cat.id).length;
         return (
-          '<button type="button" class="cat-tile" data-cat="' + cat.id + '">' +
-          '<img src="' + cat.art + '" alt="' + STF.esc(cat.label) + '">' +
+          '<button type="button" class="cat-tile col-tile" data-cat="' + cat.id + '">' +
+          '<span class="col-title">' + STF.esc(cat.label) + "</span>" +
+          '<span class="col-ring">' + CAT_ICONS[cat.id] + "</span>" +
+          '<span class="col-count">' + pad2(count) + "</span>" +
           "</button>"
         );
       }).join("") +
       "</div>";
   }
+
+  var openBuild = null;
+  detailBody.addEventListener("click", function (e) {
+    var btn = e.target.closest(".td-slot");
+    if (!btn || !openBuild || !detailBody.contains(btn)) return;
+    detailBody.querySelectorAll(".td-slot").forEach(function (el) { el.classList.remove("is-picked"); });
+    btn.classList.add("is-picked");
+    var panel = document.getElementById("slot-detail");
+    if (!panel) return;
+    panel.hidden = false;
+    panel.innerHTML = slotPanel(openBuild, btn.getAttribute("data-slot"));
+    panel.scrollIntoView({ block: "nearest" });
+  });
 
   stage.addEventListener("click", function (e) {
     var btn = e.target.closest("[data-cat]");
@@ -346,6 +415,7 @@
   paintGrid();
   STF.fetchJSON("data/builds.json").then(function (doc) {
     BUILDS = (doc && doc.builds) || [];
+    paintGrid();
     route(false);
   }).catch(function (err) {
     console.error(err);

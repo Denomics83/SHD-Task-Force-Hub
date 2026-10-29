@@ -37,6 +37,17 @@
     return new Date(guess);
   }
 
+  function endedAgo(iso) {
+    var days = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 86400000));
+    return "Event Ended " + days + (days === 1 ? " day ago" : " days ago");
+  }
+
+  function shownReward(text) {
+    var value = String(text || "").trim();
+    if (!value || value === "add details" || value === "details coming soon") return "";
+    return value;
+  }
+
   function eventRemainLabel(startIso, endIso, now) {
     now = now || Date.now();
     var start = new Date(startIso).getTime();
@@ -261,19 +272,42 @@
     } else if (item.mapImage) {
       mapBlock = '<p><button type="button" class="guide-btn" id="event-map-open">Map</button></p>';
     }
+    var active = item.state === "active";
+    var endedState = item.state === "ended";
+    var flag = active ? "ACTIVATED" : endedState ? "ENDED" : "COMING SOON";
+    var timeLine = endedState
+      ? endedAgo(item.end)
+      : "Time Remaining " + eventRemainLabel(item.start, item.end);
+    function geRows(text) {
+      var parts = String(text || "").split(/\n+/).map(function (line) { return line.trim(); }).filter(Boolean);
+      if (!parts.length) parts = [text || "add details"];
+      return parts.map(function (line, index) {
+        var n = index + 1;
+        return (
+          '<div class="ge-row"><span class="ge-ring" aria-hidden="true"></span><span>' + STF.esc(line) + "</span>" +
+          "<b>" + (n < 10 ? "0" : "") + n + "</b></div>"
+        );
+      }).join("");
+    }
+    var rewardTitle = endedState ? "Bonus reward" : "Rewards";
+    var rewardState = endedState ? "ENDED" : active ? "IN PROGRESS" : "COMING SOON";
     detail.innerHTML =
+      '<p class="ge-time">' + STF.esc(timeLine) + ' <span class="ge-flag">' + flag + "</span></p>" +
       "<h1>" + STF.esc(type.name || "Event") + "</h1>" +
       '<p class="upd-posted">Starts · ' + STF.esc(melWhen(item.start)) + "</p>" +
       '<p class="upd-posted">Ends · ' + STF.esc(melWhen(item.end)) + "</p>" +
-      '<p class="upd-pill">' + STF.esc(detailCountdown(item)) + "</p>" +
       (item.note ? "<p>" + STF.esc(item.note) + "</p>" : "") +
-      "<h2 class=\"upd-h\">Specifics</h2><p>" + STF.esc(type.description || "add details") + "</p>" +
-      block("Rewards", type.rewards) +
-      block("Modifiers", type.modifiers) +
-      block("Tasks", type.tasks) +
+      '<section class="ge-reward' + (endedState ? " is-bonus" : "") + '">' +
+      "<h2>" + rewardTitle + "</h2>" +
+      '<p class="ge-kicker">' + rewardState + "</p>" +
+      "<p>" + STF.esc(type.rewards || "add details") + "</p></section>" +
+      "<h2 class=\"upd-h\">Requirement</h2><p>" + STF.esc(type.description || "add details") + "</p>" +
+      "<h2 class=\"upd-h\">Challenges</h2>" + geRows(type.tasks) +
+      "<h2 class=\"upd-h\">Modifiers</h2>" + geRows(type.modifiers) +
       mapBlock +
       (type.source ? '<p class="src-line">' + STF.esc(type.source) + "</p>" : "") +
-      suggested;
+      suggested +
+      '<p class="pad-hints"><span><i>Esc</i> Back</span></p>';
     var screen = document.getElementById("tl-screen");
     if (screen) screen.hidden = true;
     rail.hidden = true;
@@ -424,21 +458,21 @@
       });
     });
 
-    if (ended.length) {
+    ended.forEach(function (item) {
       slides.push({
-        kind: "recent",
-        href: "",
-        chip: "Recent",
-        chipClass: "",
-        title: "Recently ended",
-        sub: ended.map(function (row) { return row.type.name || row.id; }).join(" · "),
-        label: "Recently ended events",
-        accent: "#6e7480",
-        cardLabel: "Ended",
-        icon: "hex",
-        state: "ended"
+        kind: "event",
+        href: "#" + item.id,
+        image: item.type.image || "",
+        title: item.type.name || "Event",
+        label: item.type.name || "Event",
+        state: "ended",
+        accent: item.type.accent || "#6e7480",
+        cardLabel: item.type.cardLabel || "Season Event",
+        icon: emblemKind(item.type.id),
+        endedLine: endedAgo(item.end),
+        bonus: shownReward(item.type.rewards)
       });
-    }
+    });
 
     var head = document.getElementById("tl-head");
     if (head) {
@@ -458,12 +492,16 @@
             : "");
         var top = upcoming
           ? '<div class="tl-soon-head"><span>Coming Soon</span>' + remain + "</div>"
-          : '<span class="tl-tag">' + (ended ? "ENDED" : "ONGOING") + "</span>" + remain;
+          : ended
+            ? '<span class="tl-tag">ENDED</span>' + (slide.endedLine ? '<span class="hero-remain">' + STF.esc(slide.endedLine) + "</span>" : "")
+            : '<span class="tl-tag">ONGOING</span>' + remain;
         var lock = upcoming
           ? '<svg class="tl-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="11" width="10" height="8" fill="#f4f4f4"/><path d="M9 11V8.4a3 3 0 0 1 6 0V11" fill="none" stroke="#f4f4f4" stroke-width="1.7"/></svg>'
           : "";
         var soonPill = upcoming ? '<span class="tl-soon-pill">COMING SOON</span>' : "";
-        var extra = slide.kind === "recent" && slide.sub ? '<em>' + STF.esc(slide.sub) + "</em>" : "";
+        var extra = slide.bonus
+          ? '<span class="tl-bonus">BONUS REWARD</span><em>' + STF.esc(slide.bonus) + "</em>"
+          : "";
         var kicker = slide.kickerHtml || (slide.kicker ? STF.esc(slide.kicker) : "");
         var inner =
           '<div class="tl-art' + (photo ? " has-photo" : "") + '"' +

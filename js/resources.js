@@ -161,15 +161,28 @@
     if (push) history.pushState({ res: id }, "", "#" + id);
   }
 
+  function paintHunterCount() {
+    var el = document.getElementById("col-hunters");
+    if (!el || !hunterData || !hunterData.hunters) return;
+    var n = hunterData.hunters.length;
+    el.textContent = (n < 10 ? "0" : "") + n;
+  }
+
   function ensureHunters(done) {
-    if (hunterData) return done();
+    if (hunterData) {
+      paintHunterCount();
+      return done();
+    }
     STF.fetchJSON("data/hunters.json").then(function (data) {
       hunterData = data;
+      paintHunterCount();
       done();
     }).catch(function () {
       if (resBody) resBody.innerHTML = '<p class="lede">Could not load hunter guides.</p>';
     });
   }
+
+  ensureHunters(function () {});
 
   if (landing) {
     landing.addEventListener("click", function (e) {

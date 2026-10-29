@@ -17,10 +17,26 @@
 
   <main>
     <section class="res-landing" id="res-landing" aria-label="Resource categories">
-      <button type="button" class="cat-tile" data-res="maps"><img src="assets/tiles/res-maps.jpg" alt="Maps"></button>
-      <button type="button" class="cat-tile" data-res="hunters"><img src="assets/tiles/res-hunters.jpg" alt="Hunter Guides"></button>
-      <button type="button" class="cat-tile" data-res="creators"><img src="assets/tiles/res-creators.jpg" alt="Creators"></button>
-      <a class="cat-tile" href="admin.html#events"><img src="assets/tiles/res-events.jpg" alt="Events"></a>
+      <button type="button" class="cat-tile col-tile" data-res="maps">
+        <span class="col-title">Maps</span>
+        <span class="col-ring"><svg viewBox="0 0 24 24"><path d="M4 6.5 9 4.5l6 2 5-2v13l-5 2-6-2-5 2z"/><path d="M9 4.5v13M15 6.5v13"/></svg></span>
+        <span class="col-count">—</span>
+      </button>
+      <button type="button" class="cat-tile col-tile" data-res="hunters">
+        <span class="col-title">Hunter Guides</span>
+        <span class="col-ring"><svg viewBox="0 0 24 24"><path d="M5 11c1.4-4 12.6-4 14 0v4.5c-1.6 3.6-12.4 3.6-14 0z"/><path d="M9 12.2h.1M15 12.2h.1"/></svg></span>
+        <span class="col-count" id="col-hunters">—</span>
+      </button>
+      <button type="button" class="cat-tile col-tile" data-res="creators">
+        <span class="col-title">Creators</span>
+        <span class="col-ring"><svg viewBox="0 0 24 24"><rect x="4" y="7" width="12" height="9"/><path d="M16 10.5 20 8.5v7l-4-2z"/></svg></span>
+        <span class="col-count">—</span>
+      </button>
+      <a class="cat-tile col-tile" href="admin.html#events">
+        <span class="col-title">Events</span>
+        <span class="col-ring"><svg viewBox="0 0 24 24"><rect x="4" y="5" width="16" height="15"/><path d="M8 3.5v3M16 3.5v3M4 9.5h16"/></svg></span>
+        <span class="col-count">—</span>
+      </a>
     </section>
 
     <section class="wrap res-detail" id="res-detail" hidden>
