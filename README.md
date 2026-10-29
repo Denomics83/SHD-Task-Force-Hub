@@ -30,7 +30,7 @@ Open `http://localhost:8080/` (fetch of `data/*.json` needs a server, not `file:
 | File | Purpose |
 |------|---------|
 | `data/news.json` | Event / announcement feed |
-| `data/loot.json` | Targeted loot “Today” strip |
+| `data/loot.json` | Escalations, Proto caches, and Dark Zone rows |
 | `data/escalations.json` | Weekly escalations strip |
 | `data/season.json` | Season detail panels |
 | `data/raids.json` | Seed raid schedule |

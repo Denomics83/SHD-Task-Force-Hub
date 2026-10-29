@@ -11,45 +11,20 @@
 <body>
   <div id="topbar-root"></div>
 
-  <main class="wrap">
-    <div class="eyebrow">Clan toolkit</div>
-    <h1>Resources</h1>
-    <p class="lede">Maps, build sites, and the Shade Task Force raid planner (browser MVP).</p>
+  <main>
+    <section class="res-landing" id="res-landing" aria-label="Resource categories">
+      <button type="button" class="cat-tile" data-res="maps"><img src="assets/tiles/res-maps.jpg" alt="Maps"></button>
+      <button type="button" class="cat-tile" data-res="hunters"><img src="assets/tiles/res-hunters.jpg" alt="Hunter Guides"></button>
+      <button type="button" class="cat-tile" data-res="manhunts"><img src="assets/tiles/res-manhunts.jpg" alt="Manhunts"></button>
+      <button type="button" class="cat-tile" data-res="creators"><img src="assets/tiles/res-creators.jpg" alt="Creators"></button>
+    </section>
 
-    <div class="section-label">Links</div>
-    <div class="res-grid">
-      <a class="res-card" href="https://division2map.com/" target="_blank" rel="noopener">
-        <span class="tag">Map</span>
-        <h3>division2map.com</h3>
-        <p>SHD Tech caches and open-world markers. Hide all → enable SHD Tech.</p>
-      </a>
-      <a class="res-card" href="https://overgear.com/guides/division-2/best-builds-for-any-activities/" target="_blank" rel="noopener">
-        <span class="tag">Builds</span>
-        <h3>Overgear builds guide</h3>
-        <p>Y8S3 Red Horizon loadout reference (Sep 2026 update).</p>
-      </a>
-      <a class="res-card" href="https://prototrack.gg/division2-sets.php" target="_blank" rel="noopener">
-        <span class="tag">Sets</span>
-        <h3>ProtoTrack brand / gear sets</h3>
-        <p>Set bonuses and core typing cheat-sheet.</p>
-      </a>
-      <a class="res-card" href="https://www.ubisoft.com/en-us/game/the-division/the-division-2" target="_blank" rel="noopener">
-        <span class="tag">Official</span>
-        <h3>Ubisoft — The Division 2</h3>
-        <p>Patch notes and official news.</p>
-      </a>
-      <a class="res-card" href="builds.html">
-        <span class="tag">Clan</span>
-        <h3>Shade Task Force Builds</h3>
-        <p>Our inventory-style encyclopedia for duo + hardcore kits.</p>
-      </a>
-      <a class="res-card" href="season.html">
-        <span class="tag">Season</span>
-        <h3>Red Horizon detail</h3>
-        <p>Manhunts, maps, modifiers (also linked from Events).</p>
-      </a>
-    </div>
+    <section class="wrap res-detail" id="res-detail" hidden>
+      <button type="button" class="back-link" id="res-back">← Resources</button>
+      <div id="res-detail-body"></div>
+    </section>
 
+    <div class="wrap res-planner">
     <div class="section-label" id="raids">Raid planner</div>
     <p class="lede" style="margin-top:0">Upcoming runs from <code>data/raids.json</code>. RSVP + admin add are stored in <strong>this browser only</strong> (localStorage MVP).</p>
 
@@ -106,7 +81,12 @@
 
     <footer class="site-foot">
       Raid RSVP stays on this page, in this browser only. The Events tab shows the schedule — confirm here.
+      Also:
+      <a href="https://overgear.com/guides/division-2/best-builds-for-any-activities/" rel="noopener" target="_blank">Overgear builds</a>
+      · <a href="https://prototrack.gg/division2-sets.php" rel="noopener" target="_blank">ProtoTrack sets</a>
+      · <a href="https://www.ubisoft.com/en-us/game/the-division/the-division-2" rel="noopener" target="_blank">Ubisoft</a>.
     </footer>
+    </div>
   </main>
 
   <div id="bottomnav-root"></div>

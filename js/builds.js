@@ -1,13 +1,24 @@
 (function () {
   STF.mountChrome("builds", "Builds");
 
-  const FILTERS = window.BUILD_FILTERS || [];
   const builds = window.CLAN_BUILDS || [];
-  const filtersEl = document.getElementById("filters");
   const rail = document.getElementById("build-rail");
   const empty = document.getElementById("empty-state");
   const countEl = document.getElementById("build-count");
-  if (!filtersEl || !rail) return;
+  const stage = document.getElementById("cat-stage");
+  const detail = document.getElementById("build-detail");
+  const titleEl = document.getElementById("build-title");
+  const backBtn = document.getElementById("build-back");
+  if (!rail || !stage) return;
+
+  const TILES = [
+    { id: "solo", label: "Solo", art: "assets/tiles/builds-solo.jpg", match: ["solo-hybrid", "solo-damage"] },
+    { id: "team", label: "Team", art: "assets/tiles/builds-team.jpg", match: ["team-tank", "skill-support", "dps-support", "healer"] },
+    { id: "incursion", label: "Incursion", art: "assets/tiles/builds-incursion.jpg", match: ["incursion"] },
+    { id: "escalation", label: "Escalation", art: "assets/tiles/builds-escalation.jpg", match: ["escalation"] },
+    { id: "raid", label: "Raid", art: "assets/tiles/builds-raid.jpg", match: ["raid"] },
+    { id: "pvp", label: "PvP", art: "assets/tiles/builds-pvp.jpg", match: ["pvp"] }
+  ];
 
   function coresHTML(cores) {
     if (!cores || !cores.length) return '<span class="core core-u"></span>';
@@ -268,39 +279,76 @@
     openGearModal(findGear(btn.getAttribute("data-build-id"), btn.getAttribute("data-slot")));
   });
 
-  filtersEl.innerHTML = FILTERS.map(function (f, i) {
-    return (
-      '<button type="button" class="chip" data-filter="' +
-      f.id +
-      '" aria-pressed="' +
-      (i === 0 ? "true" : "false") +
-      '">' +
-      STF.esc(f.label) +
-      "</button>"
-    );
-  }).join("");
-
   rail.innerHTML = builds.map(renderCard).join("");
 
-  function apply(id) {
-    filtersEl.querySelectorAll(".chip").forEach(function (btn) {
-      btn.setAttribute("aria-pressed", btn.getAttribute("data-filter") === id ? "true" : "false");
-    });
-    let n = 0;
+  function showGrid() {
+    document.body.classList.add("is-grid");
+    stage.hidden = false;
+    if (detail) detail.hidden = true;
+    window.scrollTo(0, 0);
+  }
+
+  function apply(ids) {
+    var n = 0;
     rail.querySelectorAll(".inv-card").forEach(function (card) {
-      const list = (card.getAttribute("data-categories") || "").split(/\s+/);
-      const show = id === "all" || list.indexOf(id) !== -1;
+      var list = (card.getAttribute("data-categories") || "").split(/\s+/);
+      var show = list.some(function (c) { return ids.indexOf(c) !== -1; });
       card.classList.toggle("hidden", !show);
       if (show) n++;
     });
-    if (countEl) countEl.textContent = n + " build" + (n === 1 ? "" : "s");
+    if (countEl) {
+      countEl.textContent = n
+        ? n + " seeded build" + (n === 1 ? "" : "s")
+        : "No seeded builds in this category yet.";
+    }
     if (empty) empty.classList.toggle("visible", n === 0);
   }
 
-  filtersEl.addEventListener("click", function (e) {
-    const btn = e.target.closest(".chip");
-    if (btn) apply(btn.getAttribute("data-filter"));
+  function openTile(tile, push) {
+    if (!tile) return showGrid();
+    document.body.classList.remove("is-grid");
+    stage.hidden = true;
+    if (detail) detail.hidden = false;
+    if (titleEl) titleEl.textContent = tile.label;
+    apply(tile.match);
+    window.scrollTo(0, 0);
+    if (push) history.pushState({ tile: tile.id }, "", "#" + tile.id);
+  }
+
+  stage.innerHTML =
+    '<div class="cat-grid">' +
+    TILES.map(function (tile) {
+      return (
+        '<button type="button" class="cat-tile" data-tile="' + tile.id + '">' +
+        '<img src="' + tile.art + '" alt="' + STF.esc(tile.label) + '">' +
+        "</button>"
+      );
+    }).join("") +
+    "</div>";
+
+  stage.addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-tile]");
+    if (!btn) return;
+    var tile = TILES.filter(function (t) { return t.id === btn.getAttribute("data-tile"); })[0];
+    openTile(tile, true);
   });
 
-  apply("all");
+  if (backBtn) {
+    backBtn.addEventListener("click", function () {
+      history.pushState({ tile: null }, "", "builds.html");
+      showGrid();
+    });
+  }
+
+  window.addEventListener("popstate", function () {
+    var id = (location.hash || "").replace("#", "");
+    var tile = TILES.filter(function (t) { return t.id === id; })[0];
+    if (tile) openTile(tile, false);
+    else showGrid();
+  });
+
+  var initial = (location.hash || "").replace("#", "");
+  var initialTile = TILES.filter(function (t) { return t.id === initial; })[0];
+  if (initialTile) openTile(initialTile, false);
+  else showGrid();
 })();

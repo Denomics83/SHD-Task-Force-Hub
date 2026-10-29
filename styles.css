@@ -660,6 +660,204 @@ a.hero-card:hover { text-decoration: none; color: #fff; }
 .hero-dots span { width: 7px; height: 7px; border-radius: 50%; background: rgba(255,255,255,.28); }
 .hero-dots span.on { background: #ff7f00; }
 
+/* ===== Loot: one phone screen, soft HUD ===== */
+body.page-loot {
+  height: 100dvh;
+  max-height: 100dvh;
+  overflow: hidden;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0b0d10;
+  background-image: none;
+  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Text", "Segoe UI", system-ui, sans-serif;
+}
+body.page-loot .topbar { position: relative; flex: 0 0 auto; min-height: 52px; padding: 8px 16px 6px; }
+body.page-loot .brand-text strong { font-size: 1.05rem; }
+body.page-loot .brand-text span { margin-top: 1px; font-size: .68rem; }
+body.page-loot .bottom-nav { position: relative; flex: 0 0 auto; }
+.loot-screen {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  padding: 2px 14px 0;
+  overflow: hidden;
+}
+.loot-block { display: flex; flex-direction: column; min-height: 0; }
+.loot-esc { flex: 5.6; }
+.loot-proto { flex: 2.35; }
+.loot-dz { flex: 3.45; }
+.loot-block h2 {
+  margin: 0;
+  padding: 5px 2px 2px;
+  font-size: 15px;
+  font-weight: 700;
+  letter-spacing: -.02em;
+  color: #f5f5f7;
+  flex: 0 0 auto;
+}
+.loot-rows {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+  flex-direction: column;
+  background: rgba(255,255,255,.035);
+  border: 1px solid rgba(255,255,255,.06);
+  border-radius: 12px;
+  padding: 0 10px;
+}
+.loot-row {
+  flex: 1 1 0;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 26px max-content;
+  column-gap: 8px;
+  align-items: center;
+  border-bottom: 1px solid rgba(255,255,255,.06);
+}
+.loot-row:last-child { border-bottom: 0; }
+.loot-row-dz { grid-template-columns: max-content 26px minmax(0, 1fr) max-content; }
+.loot-name {
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: -.02em;
+  color: #f5f5f7;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.loot-pri {
+  color: #ff7f00;
+  font-size: 8px;
+  margin-right: 4px;
+  vertical-align: 1px;
+}
+.loot-val {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: -.015em;
+  color: #ebebf0;
+  text-align: right;
+  white-space: nowrap;
+}
+.loot-val.is-placeholder {
+  color: #8e8e93;
+  font-weight: 500;
+  font-style: italic;
+}
+.loot-chip {
+  width: 26px;
+  height: 26px;
+  border-radius: 7px;
+  display: grid;
+  place-items: center;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: #f5f5f7;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.08);
+}
+.loot-chip.kind-named { color: #ffb066; background: rgba(255,127,0,.14); }
+.loot-chip.kind-brand { color: #b7d0ff; background: rgba(90,140,255,.14); }
+.loot-chip.kind-gearset { color: #8dffc0; background: rgba(1,255,144,.1); }
+.loot-chip.kind-weapon { color: #ffe08a; background: rgba(255,214,10,.1); }
+.loot-chip.kind-slot { color: #d1d1d6; }
+.loot-chip.kind-unknown { color: #8e8e93; }
+.dz-badge {
+  justify-self: end;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .02em;
+  color: #f5f5f7;
+  background: rgba(255,127,0,.16);
+  border: 1px solid rgba(255,127,0,.28);
+  border-radius: 999px;
+  padding: 3px 7px;
+  white-space: nowrap;
+}
+.dz-badge.is-empty {
+  color: #8e8e93;
+  font-weight: 600;
+  background: transparent;
+  border-style: dashed;
+  border-color: rgba(255,255,255,.18);
+}
+.loot-credit {
+  flex: 0 0 auto;
+  margin: 3px 2px 0;
+  font-size: 10px;
+  line-height: 1.3;
+  color: #6e6e73;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.loot-credit a { color: #8e8e93; }
+
+/* ===== Category tiles (Builds landing + Resources landing) ===== */
+body.page-builds.is-grid {
+  height: 100dvh;
+  overflow: hidden;
+  padding-bottom: 0;
+  display: flex;
+  flex-direction: column;
+  background: #0b0d10;
+  background-image: none;
+}
+body.page-builds.is-grid .topbar { position: relative; flex: 0 0 auto; }
+body.page-builds.is-grid .bottom-nav { position: relative; flex: 0 0 auto; }
+body.page-builds.is-grid .cat-stage { flex: 1 1 auto; min-height: 0; display: flex; }
+.cat-grid, .res-landing {
+  flex: 1;
+  min-height: 0;
+  display: grid;
+  gap: 10px;
+  padding: 12px 14px 8px;
+}
+.cat-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); }
+.res-landing {
+  min-height: calc(100dvh - 72px - var(--nav-h) - env(safe-area-inset-bottom, 0px) - 8px);
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+}
+.cat-tile {
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 18px;
+  overflow: hidden;
+  background: #0b0d10;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+}
+.cat-tile img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center;
+  display: block;
+  pointer-events: none;
+}
+.res-landing .cat-tile img { object-fit: contain; }
+.back-link {
+  appearance: none;
+  border: 0;
+  background: transparent;
+  color: var(--orange);
+  font: inherit;
+  font-weight: 700;
+  padding: 0 0 8px;
+  cursor: pointer;
+}
+.res-detail h1, .build-detail h1 { margin-top: 0; }
+.res-detail .muted { color: var(--muted); }
+.res-planner { padding-top: 8px; }
+
 /* Inactive season sub-tabs stay hidden. .season-list { display:grid } would otherwise show every panel. */
 .season-panel.season-list { display: none; }
 .season-panel.season-list.active { display: grid; }

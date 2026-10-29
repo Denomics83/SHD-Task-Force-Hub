@@ -1,63 +1,76 @@
-/* Targeted loot — data/loot.json only, not a live in-game feed. */
+/* One-screen targeted loot. Escalations + proto caches from ProtoTrack.
+   DZ loot and weekly mode are placeholders until an admin fills data/loot.json. */
 (async function () {
   STF.mountChrome("loot");
-  var list = document.getElementById("loot-list");
-  var weekEl = document.getElementById("loot-week");
-  var weekLabel = document.getElementById("loot-week-label");
-  var noteEl = document.getElementById("loot-note");
-  if (!list) return;
+  var root = document.getElementById("loot-screen");
+  if (!root) return;
 
-  var ICON =
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.4" fill="none" stroke="#fff" stroke-width="1.8"/><path fill="none" stroke="#fff" stroke-width="1.8" stroke-linecap="round" d="M12 2.4v3M12 18.6v3M2.4 12h3M18.6 12h3"/></svg>';
+  function chip(row) {
+    return (
+      '<span class="loot-chip kind-' + STF.esc(row.kind || "unknown") + '" aria-hidden="true">' +
+      STF.esc(row.mark || "·") +
+      "</span>"
+    );
+  }
+
+  function rowHTML(name, row) {
+    var pri = row.priority ? '<span class="loot-pri" title="Priority on ProtoTrack">●</span>' : "";
+    var placeholder = row.loot === "confirm in-game";
+    return (
+      '<div class="loot-row">' +
+      '<span class="loot-name">' + pri + STF.esc(name) + "</span>" +
+      chip(row) +
+      '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
+      "</div>"
+    );
+  }
+
+  function badgeHTML(zone) {
+    var badge = (zone.badge || "").trim();
+    if (!badge) {
+      return '<span class="dz-badge is-empty" title="Set badge in data/loot.json: PvE · Toxic, PvP · Blackout, or PvP · Balanced">mode</span>';
+    }
+    return '<span class="dz-badge">' + STF.esc(badge) + "</span>";
+  }
 
   try {
-    var loot = await STF.fetchJSON("data/loot.json");
-    var today = loot.today || [];
-    var weekOf = loot.weekOf ? "Week of " + STF.formatDate(loot.weekOf) : "";
+    var data = await STF.fetchJSON("data/loot.json");
+    var esc = (data.escalations || [])
+      .map(function (row) { return rowHTML(row.mission, row); })
+      .join("");
+    var caches = (data.protoCaches || [])
+      .map(function (row) { return rowHTML(row.cache, row); })
+      .join("");
+    var dz = (data.darkZone || [])
+      .map(function (row) {
+        var placeholder = row.loot === "confirm in-game";
+        return (
+          '<div class="loot-row loot-row-dz">' +
+          '<span class="loot-name">' + STF.esc(row.map) + "</span>" +
+          chip(row) +
+          '<span class="loot-val' + (placeholder ? " is-placeholder" : "") + '">' + STF.esc(row.loot || "") + "</span>" +
+          badgeHTML(row) +
+          "</div>"
+        );
+      })
+      .join("");
 
-    if (!today.length) {
-      list.innerHTML = '<p class="lede">No targeted loot listed for this week.</p>';
-    } else {
-      list.innerHTML = today
-        .map(function (row) {
-          return (
-            '<article class="upd-entry">' +
-            "<div>" +
-            '<span class="upd-chip">Today</span>' +
-            "<h2>" + STF.esc(row.loot || "Targeted loot") + "</h2>" +
-            (row.zone ? '<p class="upd-desc">' + STF.esc(row.zone) + "</p>" : "") +
-            (weekOf ? "<time>" + STF.esc(weekOf) + "</time>" : "") +
-            "</div>" +
-            '<div class="upd-ico news" aria-hidden="true">' + ICON + "</div>" +
-            "</article>"
-          );
-        })
-        .join("");
-    }
-
-    var week = loot.week || [];
-    if (weekEl && week.length) {
-      if (weekLabel) weekLabel.hidden = false;
-      weekEl.innerHTML = week
-        .map(function (row) {
-          return (
-            '<article class="loot-week-row">' +
-            '<span class="loot-day">' + STF.esc(row.day || "") + "</span>" +
-            "<span>" + STF.esc(row.highlight || "") + "</span>" +
-            "</article>"
-          );
-        })
-        .join("");
-    }
-
-    if (noteEl) {
-      var bits = [];
-      if (loot.note) bits.push(loot.note);
-      bits.push("Listed from the clan JSON. Confirm the live rotation in-game before you farm.");
-      noteEl.textContent = bits.join(" ");
-    }
+    var creditDate = data.lootDate ? STF.formatDate(data.lootDate) : "";
+    root.innerHTML =
+      '<section class="loot-block loot-esc">' +
+      "<h2>Escalations</h2>" +
+      '<div class="loot-rows">' + esc + "</div></section>" +
+      '<section class="loot-block loot-proto">' +
+      "<h2>Proto Caches</h2>" +
+      '<div class="loot-rows">' + caches + "</div></section>" +
+      '<section class="loot-block loot-dz">' +
+      "<h2>Dark Zone</h2>" +
+      '<div class="loot-rows">' + dz + "</div></section>" +
+      '<p class="loot-credit">Source: <a href="' + STF.esc(data.source || "https://prototrack.gg/target-loot/target-loot.php") + '" rel="noopener" target="_blank">ProtoTrack</a>' +
+      (creditDate ? " · " + STF.esc(creditDate) : "") +
+      ". DZ loot and mode: confirm in-game.</p>";
   } catch (err) {
-    list.innerHTML = '<p class="lede">Could not load targeted loot.</p>';
+    root.innerHTML = '<p class="lede">Could not load targeted loot.</p>';
     console.error(err);
   }
 })();
