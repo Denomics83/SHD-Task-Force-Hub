@@ -1,4 +1,4 @@
-/* Shade Task Force — seed builds Y8S3 Red Horizon (Overgear Sep 2026).
+/* Shade Hub — seed builds Y8S3 Red Horizon (Overgear Sep 2026).
    Attribute lines are priorities only — no invented numeric rolls.
    Gear fields: attrs = priority secondaries; mods = recommended gear mods
    (empty when the slot/exotic has no mod). Gloves & Holster have no mod slots. */

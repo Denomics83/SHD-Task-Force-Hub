@@ -1,4 +1,4 @@
-# Shade Task Force Hub
+# Shade Hub
 
 Mobile-first static clan site for *Tom Clancy's The Division 2*.
 
@@ -12,7 +12,7 @@ Mobile-first static clan site for *Tom Clancy's The Division 2*.
 | **Events** | `events.html` | Full-bleed season and raid cards (swipe) |
 | **Loot** | `loot.html` | Targeted loot from `data/loot.json` |
 | **Builds** | `builds.html` | Inventory-style loadout cards |
-| **Resources** | `resources.html` | Maps, Hunter Guides, Creators, Manhunts |
+| **Resources** | `resources.html` | Builds, Maps, Hunters, Creators |
 
 **Season is not a bottom tab.** Open it from the season card on Updates or Events → `season.html` (sub-tabs: Manhunts · Maps · Modifiers).
 
@@ -84,4 +84,4 @@ Any static host (GitHub Pages / Netlify / Cloudflare Pages). No build step. Do n
 
 ## Branding
 
-Replace `assets/clan-mark.svg` when you have a final Shade Task Force logo. Site strings already use **Shade Task Force Hub**.
+Replace `assets/clan-mark.svg` when you have a final Shade Hub logo. Site strings already use **Shade Hub**.

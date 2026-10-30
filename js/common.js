@@ -1,4 +1,4 @@
-/* Shared helpers — Shade Task Force Hub */
+/* Shared helpers — Shade Hub */
 window.STF = window.STF || {};
 
 STF.fetchJSON = async function (path) {
@@ -68,8 +68,7 @@ STF.topbarHTML = function () {
   return (
     '<header class="topbar">' +
     '<a class="brand" href="index.html">' +
-    "<strong>Shade Task Force</strong>" +
-    '<span class="hub-pill">Clan Hub</span></a>' +
+    "<strong>Shade Hub</strong></a>" +
     '<button type="button" class="profile-btn" id="profile-btn" aria-label="Sign in">' +
     '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8.2" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M5.5 19.2c1.1-3.1 3.2-4.6 6.5-4.6s5.4 1.5 6.5 4.6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>' +
     "</button></header>"
