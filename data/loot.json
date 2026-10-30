@@ -1,61 +1,55 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-10-29",
+  "lootDate": "2026-10-30",
   "weekOf": "2026-10-27",
   "weekEnd": "2026-11-02",
-  "updated": "2026-10-29T08:47",
-  "note": "Escalation targeted loot for 2026-10-29 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-10-30T08:58",
+  "note": "Escalation targeted loot for 2026-10-30 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "Coney Island Ballpark",
-      "loot": "Ongoing Directive",
-      "kind": "gearset",
-      "icon": "assets/icons/gearsets/ongoing-directive.png",
-      "priority": true
+      "loot": "Rigger",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "Coney Island Amusement Park",
-      "loot": "Belstone Armory",
+      "loot": "Alps Summit Armaments",
       "kind": "brand",
-      "icon": "assets/icons/brands/belstone-mark.png",
-      "tone": "belstone"
+      "icon": "assets/icons/brands/alps-logo.png"
     },
     {
       "mission": "ViewPoint Museum",
-      "loot": "Wyvern Wear",
-      "kind": "brand",
-      "icon": "assets/icons/brands/wyvern-mark.png",
-      "tone": "wyvern"
+      "loot": "5.11 Tactical",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "Capitol Building",
-      "loot": "Murakami Industries",
+      "loot": "Providence Defense",
       "kind": "brand",
-      "icon": "assets/icons/brands/murakami.png",
-      "tone": "murakami"
+      "icon": "assets/icons/brands/providence-logo.png"
     },
     {
       "mission": "Potomac Event Center",
-      "loot": "Airaldi Holdings",
-      "kind": "brand",
-      "icon": "assets/icons/brands/airaldi.png",
-      "priority": true,
-      "tone": "airaldi"
+      "loot": "Tip of the Spear",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
-      "loot": "Kneepads",
-      "kind": "slot",
-      "icon": "assets/icons/slots/kneepads.png"
+      "loot": "Gloves",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "cache": "Prototype Weapon Cache",
-      "loot": "Pistols",
-      "kind": "weapon",
-      "icon": "assets/icons/weapons/pistol.png"
+      "loot": "LMGs",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     }
   ],
   "darkZone": [
