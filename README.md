@@ -40,22 +40,9 @@ Open `http://localhost:8080/` (fetch of `data/*.json` needs a server, not `file:
 | `data/journey.json` | Journey missions per season |
 | `data/global-modifiers.json` | Unused by the season page. Modifiers come from `data/modifiers.json` |
 
-## How to add events
+## Admin
 
-There is no server. `admin.html` commits JSON to `main` with a GitHub token that stays in this browser.
-
-1. GitHub → **Settings → Developer settings → Personal access tokens → Fine-grained tokens → Generate new token**.
-2. Repository access: only `Denomics83/SHD-Task-Force-Hub`.
-3. Permissions: **Contents: Read and write**.
-4. Open `admin.html`. The Resources **Events** tile goes straight to the event editor (`admin.html#events`). There is also an Admin link on the Events page.
-5. Paste the token and log in. It is stored in `localStorage` on this device and is never committed.
-6. **Event type:** choose New type, or an existing type, and edit every field. Save. The type appears in the schedule dropdown immediately. Delete warns when scheduled events still use that type. Seed types are placeholders (`add details`) for you to replace.
-7. **Schedule an event:** pick a saved type, set start and end in Melbourne time, and save. Times are stored as UTC. Tap a live card on Events for the one-pager: start, end, countdown, and that type’s specifics (description, rewards, modifiers, tasks).
-8. **Season theme:** one paragraph under the season tabs. The line stays hidden while it is empty or still `Add the season theme here`.
-9. **Configure manhunt / Configure journey:** tap a week or mission, tap a task, type, then save. Journey is keyed by season in `data/journey.json`. Manhunt weeks default to 13, with 3 tasks each.
-10. **Map image:** pick a season, event type, or scheduled event, upload jpg/png/webp (resized to 1600px wide), and save. Uploading again replaces it. Remove map clears it. A season with no image shows the OpenStreetMap altar plot. An event with no image hides Map.
-
-Saves land on `main`. GitHub Pages usually updates within a minute. Log out to drop the token from this browser.
+`/admin.html` is a desktop panel and is not linked from the public pages. Log in with email and password. The account must have `profiles.is_admin`. Updates, events, templates, and builds save to Supabase. Images go in the public `media` bucket (5MB). Season theme, journey, and manhunt still live in their JSON files.
 
 ## Builds
 

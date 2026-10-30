@@ -1,0 +1,53 @@
+{
+  "source": "Talent names only. Gear-set chest and backpack talents are copied from the wiki gear-set table in gearsets.json. Brand chest/backpack and weapon talent descriptions were not re-fetched.",
+  "weapon": [
+    "Boomerang",
+    "Close & Personal",
+    "Eyeless",
+    "Fast Hands",
+    "Flatline",
+    "Frenzy",
+    "Future Perfect",
+    "Ignited",
+    "In Sync",
+    "Killer",
+    "Measured",
+    "Optimist",
+    "Overflowing",
+    "Preservation",
+    "Ranger",
+    "Sadist",
+    "Strained",
+    "Streamline",
+    "Unhinged"
+  ],
+  "chest": [
+    "Efficient",
+    "Entrench",
+    "Focus",
+    "Glass Cannon",
+    "Headhunter",
+    "Intimidate",
+    "Kinetic Momentum",
+    "Obliterate",
+    "Overwatch",
+    "Spark",
+    "Spotter",
+    "Tamper Proof",
+    "Unbreakable",
+    "Vanguard"
+  ],
+  "backpack": [
+    "Combined Arms",
+    "Companion",
+    "Composure",
+    "Concussion",
+    "Opportunistic",
+    "Overclock",
+    "Safeguard",
+    "Shock and Awe",
+    "Tech Support",
+    "Vigilance",
+    "Wicked"
+  ]
+}

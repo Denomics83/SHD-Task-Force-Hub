@@ -209,6 +209,7 @@
 
   function playstyleHTML(row) {
     var bits = [];
+    if (row.notesHtml) bits.push('<div class="detail-blurb rich-html">' + STF.safeHTML(row.notesHtml) + "</div>");
     if (row.description) bits.push('<p class="detail-blurb">' + STF.esc(row.description) + "</p>");
     String(row.playstyle || "").split(/\n\s*\n/).forEach(function (para) {
       if (para.trim()) bits.push('<p class="detail-blurb">' + STF.esc(para.trim()) + "</p>");
@@ -418,7 +419,7 @@
     var tab = new URLSearchParams(location.search).get("tab") || "builds";
     var hash = (location.hash || "").replace("#", "");
     if (hash === "hunters" || hash.indexOf("hunters/") === 0) return false;
-    return tab !== "maps" && tab !== "hunters";
+    return tab !== "maps" && tab !== "hunters" && tab !== "creators";
   }
 
   function route(push) {
@@ -431,13 +432,80 @@
     else showGrid();
   }
 
+  function slotFromLoadout(item) {
+    item = item || {};
+    var attrs = item.attributes;
+    var attrText = Array.isArray(attrs)
+      ? attrs.map(function (attr) { return [attr.name, attr.value].filter(Boolean).join(" "); }).join("\n")
+      : (attrs || "");
+    return {
+      name: item.name || "",
+      brand: item.brand || "",
+      rarity: item.rarity || "",
+      talent: item.talent || "",
+      core: item.core || "",
+      attributes: attrText,
+      image: item.image || ""
+    };
+  }
+
+  function fromRemoteBuild(row) {
+    var load = row.loadout || {};
+    var spec = load.specialization && load.specialization.name ? load.specialization : { name: load.specialization || "" };
+    var grenade = load.grenade && load.grenade.name ? load.grenade : { name: load.grenade || "" };
+    var style = row.playstyle || "";
+    var role = "damage";
+    var lower = style.toLowerCase();
+    if (lower.indexOf("tank") >= 0) role = "tank";
+    else if (lower.indexOf("heal") >= 0) role = "healer";
+    else if (lower.indexOf("crowd") >= 0) role = "cc";
+    else if (lower.indexOf("skill") >= 0 || lower.indexOf("hybrid") >= 0 || lower.indexOf("support") >= 0) role = "support";
+    return {
+      id: row.id,
+      name: row.name,
+      category: row.category,
+      role: role,
+      roleLabel: style || "Damage",
+      description: row.short_description || "",
+      playstyle: "",
+      notesHtml: row.notes_html || "",
+      slots: {
+        signature: slotFromLoadout(spec),
+        grenade: slotFromLoadout(grenade),
+        primary: slotFromLoadout(load.primary),
+        secondary: slotFromLoadout(load.secondary),
+        sidearm: slotFromLoadout(load.sidearm),
+        mask: slotFromLoadout(load.mask),
+        chest: slotFromLoadout(load.chest),
+        holster: slotFromLoadout(load.holster),
+        backpack: slotFromLoadout(load.backpack),
+        gloves: slotFromLoadout(load.gloves),
+        kneepads: slotFromLoadout(load.kneepads),
+        skill1: slotFromLoadout(load.skill1),
+        skill2: slotFromLoadout(load.skill2)
+      }
+    };
+  }
+
   paintGrid();
-  STF.fetchJSON("data/builds.json").then(function (doc) {
-    BUILDS = (doc && doc.builds) || [];
+  (async function loadBuilds() {
+    var local = [];
+    try {
+      var doc = await STF.fetchJSON("data/builds.json");
+      local = (doc && doc.builds) || [];
+    } catch (err) {
+      console.error(err);
+    }
+    var remote = [];
+    if (STF.sb) {
+      var res = await STF.sb.from("builds").select("id, category, playstyle, name, short_description, notes_html, loadout, published").eq("published", true);
+      if (!res.error && res.data) remote = res.data.map(fromRemoteBuild);
+    }
+    var seen = {};
+    remote.forEach(function (row) { seen[row.id] = 1; });
+    BUILDS = remote.concat(local.filter(function (row) { return !seen[row.id]; }));
     paintGrid();
     route(false);
-  }).catch(function (err) {
-    console.error(err);
-    listRows.innerHTML = '<p class="lede">Could not load builds.</p>';
-  });
+    if (!BUILDS.length) listRows.innerHTML = '<p class="lede">Could not load builds.</p>';
+  })();
 })();

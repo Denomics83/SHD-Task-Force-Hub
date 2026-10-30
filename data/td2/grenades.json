@@ -1,0 +1,29 @@
+{
+  "source": "Specialization grenades. Proper names were not re-fetched (wiki returned 403); labels include the specialization so the slot is still the real grenade for that spec.",
+  "items": [
+    {
+      "name": "Flashbang Grenade",
+      "specialization": "Sharpshooter"
+    },
+    {
+      "name": "Demolitionist Grenade",
+      "specialization": "Demolitionist"
+    },
+    {
+      "name": "Incendiary Grenade",
+      "specialization": "Survivalist"
+    },
+    {
+      "name": "Gunner Grenade",
+      "specialization": "Gunner"
+    },
+    {
+      "name": "Technician Grenade",
+      "specialization": "Technician"
+    },
+    {
+      "name": "Firewall Grenade",
+      "specialization": "Firewall"
+    }
+  ]
+}

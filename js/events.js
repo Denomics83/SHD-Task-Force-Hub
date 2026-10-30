@@ -67,6 +67,13 @@
     return parts(end - now);
   }
 
+  function safePhoto(src) {
+    var value = String(src || "");
+    if (/^assets\/[a-z0-9._/-]+$/i.test(value)) return value;
+    if (/^https:\/\/egojdxwpfjfwihykhnik\.supabase\.co\/storage\/v1\/object\/public\/media\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
+    return "";
+  }
+
   function paintRemain() {
     document.querySelectorAll(".hero-remain[data-remain-end]").forEach(function (el) {
       el.textContent = eventRemainLabel(el.getAttribute("data-remain-start"), el.getAttribute("data-remain-end"));
@@ -181,7 +188,14 @@
       timeZone: "Australia/Melbourne",
       day: "numeric", month: "short", hour: "numeric", minute: "2-digit"
     });
-    return fmt.format(new Date(start)) + " – " + fmt.format(new Date(end)) + " Melbourne";
+    function part(iso) {
+      var date = new Date(iso);
+      return isNaN(date.getTime()) ? "" : fmt.format(date);
+    }
+    var left = part(start);
+    var right = part(end);
+    if (left && right) return left + " – " + right + " Melbourne";
+    return (left || right) + (left || right ? " Melbourne" : "");
   }
 
   function setEventsBack(on) {
@@ -237,8 +251,95 @@
     return countdownLabel(new Date(item.end));
   }
 
+  async function paintAttendance(item) {
+    var box = document.getElementById("attendance-box");
+    if (!box || !STF.sb) return;
+    var pack = await STF.profile();
+    var actions = box.querySelector(".attendance-actions");
+    var list = box.querySelector(".attendance-going");
+    if (!pack || !pack.session) {
+      actions.innerHTML = '<p class="lede">Sign in to confirm attendance.</p>';
+      return;
+    }
+    if (!pack.profile || !pack.profile.is_member) {
+      actions.innerHTML = '<p class="lede">Awaiting clan approval.</p>';
+      return;
+    }
+    var mine = await STF.sb.from("attendance").select("status").eq("event_id", item.id).eq("user_id", pack.session.user.id).maybeSingle();
+    var current = (mine.data && mine.data.status) || "";
+    actions.innerHTML = ["going", "maybe", "out"].map(function (status) {
+      var label = status === "going" ? "Going" : status === "maybe" ? "Maybe" : "Out";
+      return '<button type="button" class="admin-btn admin-btn-ghost" data-attend="' + status + '"' + (current === status ? ' aria-pressed="true"' : "") + ">" + label + "</button>";
+    }).join("");
+    actions.onclick = async function (e) {
+      var btn = e.target.closest("[data-attend]");
+      if (!btn) return;
+      var status = btn.getAttribute("data-attend");
+      var write = await STF.sb.from("attendance").upsert({
+        event_id: item.id,
+        user_id: pack.session.user.id,
+        status: status,
+        updated_at: new Date().toISOString()
+      }, { onConflict: "event_id,user_id" });
+      if (write.error) {
+        list.innerHTML = '<li>' + STF.esc(write.error.message) + "</li>";
+        return;
+      }
+      paintAttendance(item);
+    };
+    var going = await STF.sb.from("attendance").select("status, profiles(gamer_tag)").eq("event_id", item.id).eq("status", "going");
+    if (going.error) {
+      list.innerHTML = "<li>" + STF.esc(going.error.message) + "</li>";
+      return;
+    }
+    var names = (going.data || []).map(function (row) {
+      return (row.profiles && row.profiles.gamer_tag) || "Agent";
+    });
+    list.innerHTML = names.length
+      ? names.map(function (name) { return "<li>" + STF.esc(name) + "</li>"; }).join("")
+      : "<li>Nobody marked going yet.</li>";
+  }
+
+  function showRemoteDetail(item) {
+    var endedState = item.state === "ended";
+    var active = item.state === "active";
+    var flag = active ? "ACTIVATED" : endedState ? "ENDED" : "COMING SOON";
+    var timeLine = !item.end
+      ? (item.state === "upcoming" ? "Starts soon" : "Live")
+      : endedState
+        ? endedAgo(item.end)
+        : "Time Remaining " + eventRemainLabel(item.start, item.end);
+    var photo = safePhoto(item.type.image);
+    detail.innerHTML =
+      '<p class="ge-time">' + STF.esc(timeLine) + ' <span class="ge-flag">' + flag + "</span></p>" +
+      "<h1>" + STF.esc(item.type.name || "Event") + "</h1>" +
+      '<p class="upd-posted">Starts · ' + STF.esc(melWhen(item.start)) + "</p>" +
+      (item.end ? '<p class="upd-posted">Ends · ' + STF.esc(melWhen(item.end)) + "</p>" : "") +
+      (photo ? '<figure class="upd-banner"><img src="' + STF.esc(photo) + '" alt=""></figure>' : "") +
+      '<div class="rich-html">' + STF.safeHTML(item.htmlDescription || "") + "</div>" +
+      (item.kind === "clan"
+        ? '<section class="attendance-box" id="attendance-box"><h2 class="upd-h">Attendance</h2><div class="attendance-actions"></div><ul class="attendance-going"></ul></section>'
+        : "") +
+      '<p class="pad-hints"><span><i>Esc</i> Back</span></p>';
+    var screen = document.getElementById("tl-screen");
+    if (screen) screen.hidden = true;
+    rail.hidden = true;
+    detail.hidden = false;
+    setEventsBack(true);
+    if (item.kind === "clan") paintAttendance(item);
+    window.scrollTo(0, 0);
+  }
+
+  STF.onAuth = function () {
+    if (!document.getElementById("attendance-box")) return;
+    var id = (location.hash || "").replace("#", "");
+    var item = catalog.filter(function (row) { return row.id === id; })[0];
+    if (item) paintAttendance(item);
+  };
+
   function showEventDetail(item) {
     if (!detail || !item) return showRail();
+    if (item.remote) return showRemoteDetail(item);
     var type = item.type || {};
     function block(label, text) {
       return "<h2 class=\"upd-h\">" + STF.esc(label) + "</h2><p>" + STF.esc(text || "add details") + "</p>";
@@ -393,6 +494,37 @@
         chip: chip
       };
     });
+    if (STF.sb) {
+      var remoteEvents = await STF.sb.from("events").select("*").order("starts_at", { ascending: true });
+      (remoteEvents.data || []).forEach(function (row) {
+        var startMs = new Date(row.starts_at).getTime();
+        var endMs = row.ends_at ? new Date(row.ends_at).getTime() : 0;
+        var state = endMs && now >= endMs ? "ended" : now < startMs ? "upcoming" : "active";
+        var chip = state === "upcoming" ? countdownLabel(new Date(row.starts_at)) : state === "active" ? "Live" : "Ended";
+        var cardLabel = row.kind === "clan" ? "Clan" : row.kind === "special" ? "Special" : "Rotation";
+        joined.push({
+          id: row.id,
+          remote: true,
+          kind: row.kind,
+          htmlDescription: row.description_html || "",
+          type: {
+            id: row.kind,
+            name: row.title,
+            description: "",
+            image: row.image_url || "",
+            cardLabel: cardLabel,
+            accent: "#FF6D10"
+          },
+          start: row.starts_at,
+          end: row.ends_at || "",
+          note: "",
+          mapImage: "",
+          mapCaption: "",
+          state: state,
+          chip: chip
+        });
+      });
+    }
     catalog = joined;
     var live = joined.filter(function (row) { return row.state !== "ended"; })
       .sort(function (a, b) { return a.start < b.start ? -1 : 1; });
@@ -471,7 +603,8 @@
       .map(function (slide) {
         var upcoming = slide.state === "upcoming";
         var ended = slide.state === "ended";
-        var photo = slide.image && /^assets\/[a-z0-9._/-]+$/i.test(slide.image);
+        var photo = safePhoto(slide.image);
+        slide.image = photo;
         var remain = slide.remainEnd
           ? '<span class="hero-remain" data-remain-start="' + STF.esc(slide.remainStart) + '" data-remain-end="' + STF.esc(slide.remainEnd) + '">' + STF.esc(eventRemainLabel(slide.remainStart, slide.remainEnd)) + "</span>"
           : (slide.kind === "raid" && slide.chip

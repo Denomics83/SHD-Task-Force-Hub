@@ -5,12 +5,12 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="stf-build" content="209a60a">
+  <meta name="stf-build" content="20261030b">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0B0C0E">
   <title>Season — Shade Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=209a60a">
+  <link rel="stylesheet" href="styles.css?v=20261030b">
 </head>
 <body>
   <div id="topbar-root"></div>
@@ -33,13 +33,16 @@
 
     <footer class="site-foot">
       Season detail opens from the season card on Updates or Events. It is not a bottom-nav tab.
-      Theme, journey, manhunt, and modifiers are edited in <code>admin.html</code>.
+      Theme, journey, manhunt, and modifiers stay in the season JSON files.
     </footer>
   </main>
 
   <div id="bottomnav-root"></div>
-  <script src="js/common.js?v=209a60a"></script>
-  <script src="js/season.js?v=209a60a"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+  <script src="js/supabase.js?v=20261030b"></script>
+  <script src="js/common.js?v=20261030b"></script>
+  <script src="js/season.js?v=20261030b"></script>
 <script data-stf-toast>
 (function () {
   var meta = document.querySelector('meta[name="stf-build"]');

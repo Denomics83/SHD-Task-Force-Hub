@@ -2,147 +2,165 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="stf-build" content="209a60a">
-  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="stf-build" content="20261030b">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0B0D10">
   <title>Admin — Shade Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=209a60a">
+  <link rel="stylesheet" href="styles.css?v=20261030b">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
 </head>
 <body class="page-admin is-logged-out">
-  <div id="topbar-root"></div>
-  <main class="wrap admin-main">
-    <section id="login-box" class="admin-card admin-login">
-      <label>GitHub token
-        <input id="token-input" type="password" autocomplete="off" placeholder="github_pat_…">
-      </label>
-      <button type="button" class="admin-btn" id="login-btn">Log in</button>
-      <p id="login-status" class="admin-status" role="status" hidden></p>
+  <header class="desk-top">
+    <a class="brand" href="index.html"><strong>Shade Hub</strong></a>
+    <span class="desk-kicker">Admin</span>
+    <button type="button" class="admin-btn admin-btn-ghost" id="desk-logout" hidden>Log out</button>
+  </header>
+
+  <main class="desk">
+    <section data-view="login" class="desk-login">
+      <form id="admin-login" class="desk-card">
+        <h1>Admin</h1>
+        <p class="lede">Email and password. Access is profiles.is_admin.</p>
+        <label>Email <input name="email" type="email" autocomplete="username" required></label>
+        <label>Password <input name="password" type="password" autocomplete="current-password" minlength="8" required></label>
+        <button class="admin-btn" type="submit">Log in</button>
+        <p id="admin-login-status" class="admin-status" role="status"></p>
+        <p class="lede">A new account is not an admin until is_admin is set on its profile.</p>
+      </form>
     </section>
 
-    <div id="app-box" hidden>
-      <p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" id="logout-btn">Log out</button></p>
-      <p id="admin-status" class="admin-status" role="status" hidden></p>
-
-      <div id="events-admin">
-      <section class="admin-card">
-        <h2>Event type</h2>
-        <label>Existing type
-          <select id="type-select"></select>
-        </label>
-        <form id="type-form">
-          <label>Id <input name="id" required pattern="[a-z0-9-]+" title="Lowercase letters, numbers, hyphens"></label>
-          <label>Name <input name="name" required></label>
-          <label>Short description <input name="description" required></label>
-          <label>Rewards <textarea name="rewards" rows="3"></textarea></label>
-          <label>Modifiers <textarea name="modifiers" rows="3"></textarea></label>
-          <label>Tasks / notes <textarea name="tasks" rows="3"></textarea></label>
-          <label>Card label <input name="cardLabel" placeholder="Season Event"></label>
-          <label>Accent colour <input name="accent" type="color" value="#ff6d10"></label>
-          <label>Image path <input name="image" placeholder="assets/events/season-hero.jpg"></label>
-          <label>Card background <input id="type-bg" type="file" accept="image/jpeg,image/png,image/webp"></label>
-          <p class="lede">Optional. A dark gradient is used when no image is set.</p>
-          <label>Source line <input name="source" placeholder="Source · checked 29 Oct 2026"></label>
-          <label>Suggested note <textarea name="suggested" rows="2" placeholder="Optional. Not shown as the main detail."></textarea></label>
-          <p class="admin-row">
-            <button class="admin-btn" type="submit">Save type</button>
-            <button type="button" class="admin-btn admin-btn-ghost" id="type-delete" hidden>Delete type</button>
-          </p>
-        </form>
-      </section>
-
-      <section class="admin-card">
-        <h2>Schedule an event</h2>
-        <p class="lede">Times are Melbourne. They are stored as UTC.</p>
-        <form id="event-form">
-          <label>Type
-            <select name="typeId" id="event-type" required></select>
-          </label>
-          <label>Start <input name="start" type="datetime-local" required></label>
-          <label>End <input name="end" type="datetime-local" required></label>
-          <label>Note <input name="note" placeholder="Optional"></label>
-          <button class="admin-btn" type="submit">Save event</button>
-        </form>
-        <h3 class="admin-sub">Scheduled</h3>
-        <div id="instance-list"></div>
-      </section>
+    <section data-view="dash" hidden>
+      <div class="desk-actions">
+        <button type="button" class="desk-action" data-go="update">Add update</button>
+        <button type="button" class="desk-action" data-go="event">Add event</button>
+        <button type="button" class="desk-action" data-go="build">Add build</button>
       </div>
+      <div class="desk-lists">
+        <section>
+          <h2>Updates</h2>
+          <div id="list-updates"></div>
+        </section>
+        <section>
+          <h2>Events</h2>
+          <div id="list-events"></div>
+        </section>
+        <section>
+          <h2>Builds</h2>
+          <div id="list-builds"></div>
+        </section>
+      </div>
+      <p id="dash-status" class="admin-status" role="status"></p>
+    </section>
 
-      <section class="admin-card" data-admin-extra>
-        <h2>Season theme</h2>
-        <p class="lede">One paragraph for the whole season. It stays under the tabs on every tab. Leave the placeholder and the line stays hidden.</p>
-        <form id="theme-form">
-          <label>Season theme
-            <textarea name="theme" id="theme-input" rows="4"></textarea>
-          </label>
-          <label>Season card background <input id="theme-bg" type="file" accept="image/jpeg,image/png,image/webp"></label>
-          <p class="lede">Optional art behind the season card on Events. Dark gradient if empty.</p>
-          <button class="admin-btn" type="submit">Save theme</button>
-        </form>
-      </section>
-
-      <section class="admin-card" data-admin-extra>
-        <h2>Configure manhunt</h2>
-        <p class="lede">Tap a week, then a task, and type. Saves <code>data/manhunt.json</code>.</p>
-        <form id="manhunt-form">
-          <label>Season label <input name="season" id="mh-season" required></label>
-          <label>Note <textarea name="note" id="mh-note" rows="2"></textarea></label>
-          <label>Weeks <input name="count" id="mh-count" type="number" min="1" max="20" value="13"></label>
-          <div id="mh-weeks"></div>
-          <h3 class="admin-sub">Climax mission</h3>
-          <label>Title <input id="mh-climax-title" placeholder="Optional"></label>
-          <label>Task <textarea id="mh-climax-task" rows="2" placeholder="Optional"></textarea></label>
-          <button class="admin-btn" type="submit">Save manhunt</button>
-        </form>
-      </section>
-
-      <section class="admin-card" data-admin-extra>
-        <h2>Configure journey</h2>
-        <p class="lede">Tap a mission, then a task, and type. Journey missions unlock global modifiers. Saves <code>data/journey.json</code>.</p>
-        <form id="journey-form">
-          <label>Season
-            <select id="journey-season"></select>
-          </label>
-          <div id="journey-missions"></div>
-          <p class="admin-row">
-            <button type="button" class="admin-btn admin-btn-ghost" id="journey-add">Add mission</button>
-          </p>
-          <button class="admin-btn" type="submit">Save journey</button>
-        </form>
-      </section>
-
-      <section class="admin-card" data-admin-extra>
-        <h2>Map image</h2>
-        <p class="lede">Jpg, png, or webp, resized to 1600px wide. This defaults to Red Moon Unleashed. A season upload still saves, and it is not shown on the season page.</p>
-        <form id="map-form">
-          <label>Season or event
-            <select id="map-target" required></select>
-          </label>
-          <p id="map-current" class="lede"></p>
-          <img id="map-preview" alt="" hidden>
-          <label>Image file <input id="map-file" type="file" accept="image/jpeg,image/png,image/webp"></label>
-          <label>Caption <input id="map-caption" placeholder="Optional, e.g. Altars can be shot once every 24h"></label>
-          <p class="admin-row">
-            <button class="admin-btn" type="submit">Save map</button>
-            <button type="button" class="admin-btn admin-btn-ghost" id="map-remove">Remove map</button>
-          </p>
-        </form>
-      </section>
-
-      <section class="admin-card" data-admin-extra id="builds-admin">
-        <h2>Builds</h2>
-        <p class="lede">Add, edit, or delete a build. Saving writes <code>data/builds.json</code> and the category list updates when the site publishes.</p>
-        <label>Build
-          <select id="build-select"></select>
+    <section data-view="update" hidden>
+      <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
+      <h1 id="update-heading">Add update</h1>
+      <form id="update-form" class="desk-form">
+        <input type="hidden" name="id" id="update-id">
+        <label>Type
+          <select name="type" id="update-type" required>
+            <option value="maintenance">Scheduled Maintenance</option>
+            <option value="reminder">Reminder</option>
+            <option value="patch">Downloadable Update</option>
+          </select>
         </label>
-        <form id="build-form">
-          <label>Name <input name="name" id="build-name" required></label>
-          <label>Id <input name="id" id="build-id" required pattern="[a-z0-9-]+" title="Lowercase letters, numbers, hyphens"></label>
+        <label>Title <input name="title" id="update-title" required></label>
+        <label>Description</label>
+        <div id="update-body" class="rich-editor"></div>
+        <div id="update-patch-wrap" hidden>
+          <label>Patch notes</label>
+          <div id="update-patch" class="rich-editor"></div>
+        </div>
+        <label>Scheduled date and time
+          <input name="scheduled_at" id="update-when" type="datetime-local" required>
+        </label>
+        <p class="lede">Times use this computer's timezone and are stored in UTC.</p>
+        <label>Published
+          <input id="update-published" readonly>
+        </label>
+        <p class="admin-row">
+          <button type="button" class="admin-btn admin-btn-ghost" id="update-preview">Preview</button>
+          <button class="admin-btn" type="submit">Publish</button>
+        </p>
+        <p id="update-status" class="admin-status" role="status"></p>
+      </form>
+    </section>
+
+    <section data-view="event" hidden>
+      <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
+      <h1 id="event-heading">Add event</h1>
+      <form id="event-form" class="desk-form">
+        <input type="hidden" name="id" id="event-id">
+        <label>Kind
+          <select name="kind" id="event-kind" required>
+            <option value="rotation">Rotation (from template)</option>
+            <option value="special">Special</option>
+            <option value="clan">Clan</option>
+          </select>
+        </label>
+        <div id="event-rotation">
+          <label>Template
+            <select id="event-template"></select>
+          </label>
+          <p><button type="button" class="admin-btn admin-btn-ghost" data-go="templates">Manage templates</button></p>
+        </div>
+        <label>Title <input name="title" id="event-title" required></label>
+        <label>Description</label>
+        <div id="event-body" class="rich-editor"></div>
+        <label>Start <input id="event-start" type="datetime-local" required></label>
+        <label id="event-end-label">End <input id="event-end" type="datetime-local"></label>
+        <p class="lede">Times use this computer's timezone and are stored in UTC. Rotation end starts from the template duration and stays editable. Clan end is optional.</p>
+        <label>Card image
+          <input id="event-image" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+        </label>
+        <img id="event-image-preview" alt="" hidden>
+        <input type="hidden" id="event-image-url">
+        <p class="admin-row">
+          <button class="admin-btn" type="submit">Save event</button>
+        </p>
+        <p id="event-status" class="admin-status" role="status"></p>
+      </form>
+    </section>
+
+    <section data-view="templates" hidden>
+      <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="event">Back to event</button></p>
+      <h1>Manage templates</h1>
+      <div class="desk-split">
+        <form id="template-form" class="desk-form">
+          <input type="hidden" id="template-id">
+          <label>Name <input id="template-name" required placeholder="Overdrive"></label>
+          <label>Title <input id="template-title" required></label>
+          <label>Description</label>
+          <div id="template-body" class="rich-editor"></div>
+          <label>Default duration (hours) <input id="template-hours" type="number" min="1" step="1" value="168" required></label>
+          <label>Image
+            <input id="template-image" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+          </label>
+          <img id="template-image-preview" alt="" hidden>
+          <input type="hidden" id="template-image-url">
+          <p class="admin-row">
+            <button class="admin-btn" type="submit">Save template</button>
+            <button type="button" class="admin-btn admin-btn-ghost" id="template-new">New</button>
+          </p>
+          <p id="template-status" class="admin-status" role="status"></p>
+        </form>
+        <div id="template-list"></div>
+      </div>
+    </section>
+
+    <section data-view="build" hidden>
+      <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
+      <h1 id="build-heading">Add build</h1>
+      <form id="build-form" class="desk-form">
+        <input type="hidden" id="build-id">
+        <div class="ba-meta">
           <label>Category
-            <select name="category" id="build-category" required>
+            <select id="build-category" required>
               <option value="solo">Solo</option>
               <option value="team">Team</option>
               <option value="incursion">Incursion</option>
@@ -151,28 +169,46 @@
               <option value="escalation">Escalation</option>
             </select>
           </label>
-          <label>Role
-            <select name="role" id="build-role" required>
-              <option value="damage">Damage</option>
-              <option value="support">Support</option>
-              <option value="cc">CC</option>
-              <option value="healer">Healer</option>
-              <option value="tank">Tank</option>
-            </select>
+          <label>Playstyle
+            <select id="build-playstyle" required></select>
           </label>
-          <label>Short description <input name="description" id="build-description"></label>
-          <label>Playstyle <textarea name="playstyle" id="build-playstyle" rows="4"></textarea></label>
-          <div id="build-slots"></div>
-          <p class="admin-row">
-            <button class="admin-btn" type="submit">Save build</button>
-            <button type="button" class="admin-btn admin-btn-ghost" id="build-delete" hidden>Delete build</button>
-          </p>
-        </form>
-      </section>
-    </div>
+          <label>Name <input id="build-name" required></label>
+          <label>Short description
+            <input id="build-short" maxlength="140" required>
+            <small id="build-short-count">0 / 140</small>
+          </label>
+          <label class="ba-check"><input id="build-published" type="checkbox" checked> Published</label>
+        </div>
+        <div id="build-board"></div>
+        <label>Notes</label>
+        <div id="build-notes" class="rich-editor"></div>
+        <p class="lede">Item lists are in data/td2/. Gaps are listed in data/td2/gaps.json.</p>
+        <p class="admin-row">
+          <button class="admin-btn" type="submit">Save build</button>
+        </p>
+        <p id="build-status" class="admin-status" role="status"></p>
+      </form>
+    </section>
   </main>
-  <script src="js/common.js?v=209a60a"></script>
-  <script src="js/admin.js?v=209a60a"></script>
+
+  <div id="preview-modal" class="desk-modal" hidden>
+    <div class="desk-sheet">
+      <button type="button" class="desk-x" id="preview-close" aria-label="Close">×</button>
+      <h2>Preview</h2>
+      <div id="preview-body"></div>
+      <p class="admin-row">
+        <button type="button" class="admin-btn" id="preview-publish">Publish</button>
+      </p>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
+  <script src="js/supabase.js?v=20261030b"></script>
+  <script src="js/common.js?v=20261030b"></script>
+  <script src="js/build-admin.js?v=20261030b"></script>
+  <script src="js/admin.js?v=20261030b"></script>
 <script data-stf-toast>
 (function () {
   var meta = document.querySelector('meta[name="stf-build"]');

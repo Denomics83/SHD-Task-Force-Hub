@@ -1,0 +1,138 @@
+{
+  "source": "Gear set names and chest/backpack talent names from The Division Wiki gear-set table, except Core Strength, which is named in the Buildstation Y8S1 changelog without its bonuses.",
+  "items": [
+    {
+      "name": "Aces & Eights",
+      "talent": "Dead Man's Hand",
+      "chestTalent": "No Limit",
+      "backpackTalent": "Ace in the Sleeve",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Cavalier",
+      "talent": "Charging",
+      "chestTalent": "Overcharging",
+      "backpackTalent": "Safe Charging",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Eclipse Protocol",
+      "talent": "Indirect Transmission",
+      "chestTalent": "Proliferation",
+      "backpackTalent": "Symptom Aggravator",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Foundry Bulwark",
+      "talent": "Makeshift Repairs",
+      "chestTalent": "Process Refinery",
+      "backpackTalent": "Improved Materials",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Future Initiative",
+      "talent": "Ground Control",
+      "chestTalent": "Tactical Superiority",
+      "backpackTalent": "Strategic Combat Support",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Hard Wired",
+      "talent": "Feedback Loop",
+      "chestTalent": "Positive Reinforcement",
+      "backpackTalent": "Short Circuit",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Heartbreaker",
+      "talent": "Heartstopper",
+      "chestTalent": "Max BPM",
+      "backpackTalent": "Cold",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Hotshot",
+      "talent": "Headache",
+      "chestTalent": "Daring",
+      "backpackTalent": "Blessed",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Hunter's Fury",
+      "talent": "Apex Predator",
+      "chestTalent": "Endless Hunger",
+      "backpackTalent": "Overwhelming Force",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Negotiator's Dilemma",
+      "talent": "Hostile Negotiations",
+      "chestTalent": "Target Rich Environment",
+      "backpackTalent": "Critical Measures",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Ongoing Directive",
+      "talent": "Rules of Engagement",
+      "chestTalent": "Parabellum Rounds",
+      "backpackTalent": "Trauma Specialist",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Ortiz: Exuro",
+      "talent": "Ortiz Incinerator Turret Prototype",
+      "chestTalent": "Chain Combustion",
+      "backpackTalent": "Heatstroke",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Rigger",
+      "talent": "Tend and Befriend",
+      "chestTalent": "Best Buds",
+      "backpackTalent": "Complete Uptime",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Striker's Battlegear",
+      "talent": "Striker's Gamble",
+      "chestTalent": "Press the Advantage",
+      "backpackTalent": "Risk Management",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "System Corruption",
+      "talent": "Hackstep Protocol",
+      "chestTalent": "Compiler Optimization",
+      "backpackTalent": "Multithreaded Execution",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Tip of the Spear",
+      "talent": "Aggressive Recon",
+      "chestTalent": "Crossbow Expert",
+      "backpackTalent": "Specialized Destruction",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "True Patriot",
+      "talent": "Red, White and Blue",
+      "chestTalent": "Waving the Flag",
+      "backpackTalent": "Patriotic Boost",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Umbra Initiative",
+      "talent": "From the Shadows",
+      "chestTalent": "From the Shadows",
+      "backpackTalent": "Into the Light",
+      "rarity": "gear-set"
+    },
+    {
+      "name": "Core Strength",
+      "talent": "",
+      "chestTalent": "",
+      "backpackTalent": "",
+      "rarity": "gear-set"
+    }
+  ]
+}

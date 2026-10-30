@@ -1,0 +1,584 @@
+{
+  "source": "Exotic, named, and high-end models used in the game. Agitator, Whiplash, Robin, Bulldog, Interchange, and Trader are named in the Buildstation Y8S1 changelog; their weapon types were not stated there, so type is blank. This is not every high-end model.",
+  "types": [
+    "AR",
+    "SMG",
+    "LMG",
+    "Rifle",
+    "MMR",
+    "Shotgun",
+    "Pistol"
+  ],
+  "items": [
+    {
+      "name": "Eagle Bearer",
+      "type": "AR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "St. Elmo's Engine",
+      "type": "AR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Capacitor",
+      "type": "AR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Chameleon",
+      "type": "AR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Bighorn",
+      "type": "AR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Invisible Hand",
+      "type": "AR",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Burn Out",
+      "type": "AR",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "FAMAS 2010",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Police M4",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Custom P416 G3",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Carbine 7",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "CTAR-21",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "FAL",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "AK-M",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Honey Badger",
+      "type": "AR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Ouroboros",
+      "type": "SMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Chatterbox",
+      "type": "SMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Lady Death",
+      "type": "SMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Backfire",
+      "type": "SMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Dark Winter",
+      "type": "SMG",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "The Apartment",
+      "type": "SMG",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Safety Distance",
+      "type": "SMG",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "MP5",
+      "type": "SMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Vector SBR .45 ACP",
+      "type": "SMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "AUG A3-CQC",
+      "type": "SMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "PP-19",
+      "type": "SMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "P90",
+      "type": "SMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "MP7",
+      "type": "SMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Bullet King",
+      "type": "LMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Pestilence",
+      "type": "LMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Bluescreen",
+      "type": "LMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Carnage",
+      "type": "LMG",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Sleipnir",
+      "type": "LMG",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Black Friday",
+      "type": "LMG",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "M60",
+      "type": "LMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "M249 B",
+      "type": "LMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "RPK-74",
+      "type": "LMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "MG5",
+      "type": "LMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Infantry MG5",
+      "type": "LMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Stoner LAMG",
+      "type": "LMG",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Diamondback",
+      "type": "Rifle",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Ravenous",
+      "type": "Rifle",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Merciless",
+      "type": "Rifle",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Doctor Home",
+      "type": "Rifle",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Baker's Dozen",
+      "type": "Rifle",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Virginian",
+      "type": "Rifle",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Harmony",
+      "type": "Rifle",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Classic M1A",
+      "type": "Rifle",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "M1A",
+      "type": "Rifle",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "SIG 716",
+      "type": "Rifle",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Urban MDR",
+      "type": "Rifle",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Mk17",
+      "type": "Rifle",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "UIC15 MOD2",
+      "type": "Rifle",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Nemesis",
+      "type": "MMR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Mantis",
+      "type": "MMR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Dread Edict",
+      "type": "MMR",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "The White Death",
+      "type": "MMR",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Designated Hitter",
+      "type": "MMR",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Model 700",
+      "type": "MMR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "M44 Custom",
+      "type": "MMR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "SRS",
+      "type": "MMR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "SVD",
+      "type": "MMR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "SR-1",
+      "type": "MMR",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Scorpio",
+      "type": "Shotgun",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Tsunami",
+      "type": "Shotgun",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Sweet Dreams",
+      "type": "Shotgun",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "The Mop",
+      "type": "Shotgun",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Rock n' Roll",
+      "type": "Shotgun",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Emeline's Guard",
+      "type": "Shotgun",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "ACS-12",
+      "type": "Shotgun",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Super 90",
+      "type": "Shotgun",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "SASG-12",
+      "type": "Shotgun",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "SPAS-12",
+      "type": "Shotgun",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "M870 Express",
+      "type": "Shotgun",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Double Barrel Shotgun",
+      "type": "Shotgun",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Regulus",
+      "type": "Pistol",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Liberty",
+      "type": "Pistol",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Orbit",
+      "type": "Pistol",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Busy Little Bee",
+      "type": "Pistol",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "TDI Kard Custom",
+      "type": "Pistol",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Prophet",
+      "type": "Pistol",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Mozambique Special",
+      "type": "Pistol",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "D50",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "M1911",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "686 Magnum",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "X-45",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "PF45",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "93R",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Diceros Special",
+      "type": "Pistol",
+      "rarity": "high-end",
+      "talent": ""
+    },
+    {
+      "name": "Agitator",
+      "type": "",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Whiplash",
+      "type": "",
+      "rarity": "exotic",
+      "talent": ""
+    },
+    {
+      "name": "Robin",
+      "type": "",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Bulldog",
+      "type": "",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Interchange",
+      "type": "",
+      "rarity": "named",
+      "talent": ""
+    },
+    {
+      "name": "Trader",
+      "type": "",
+      "rarity": "named",
+      "talent": ""
+    }
+  ]
+}

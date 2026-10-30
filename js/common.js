@@ -76,6 +76,7 @@ STF.topbarHTML = function () {
 };
 
 STF.openSignIn = function () {
+  if (typeof STF.openAccount === "function") return STF.openAccount();
   var old = document.getElementById("signin-panel");
   if (old) {
     old.remove();

@@ -5,7 +5,7 @@
   var detail = document.getElementById("update-detail");
   if (!feed || !detail) return;
 
-  var ALLOWED = { announcement: 1, maintenance: 1, patch: 1 };
+  var ALLOWED = { announcement: 1, maintenance: 1, patch: 1, reminder: 1 };
   var byId = {};
 
   var GLYPH = {
@@ -14,7 +14,9 @@
     maintenance:
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M14.2 6.2 17.8 9.8l2.2-2.2a4.6 4.6 0 0 1-6.2 6.1L7.2 20.3a1.6 1.6 0 0 1-2.3-2.3l6.6-6.6a4.6 4.6 0 0 1 6.1-6.2z"/></svg>',
     patch:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>'
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>',
+    reminder:
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 4.2a6.2 6.2 0 0 1 6.2 6.2v3.1l1.3 2.2H4.5l1.3-2.2V10.4A6.2 6.2 0 0 1 12 4.2z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M10 18.2a2 2 0 0 0 4 0"/></svg>'
   };
 
   function shortDate(iso) {
@@ -70,7 +72,10 @@
     var image = item.image && item.image.src
       ? '<figure class="upd-banner"><img src="' + STF.esc(item.image.src) + '" alt="' + STF.esc(item.image.alt || "") + '"></figure>'
       : "";
-    var sections = (item.sections || []).map(sectionHTML).join("");
+    var sections = item.bodyHtml
+      ? '<div class="rich-html">' + STF.safeHTML(item.bodyHtml) + "</div>" +
+        (item.patchHtml ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(item.patchHtml) + "</div>" : "")
+      : (item.sections || []).map(sectionHTML).join("");
     var seasonLink = item.id === "ann-season-window"
       ? '<p class="upd-more"><a href="season.html">Season detail — manhunts, maps, modifiers</a></p>'
       : "";
@@ -139,10 +144,28 @@
     var news = await STF.fetchJSON("data/news.json");
     var items = (news.items || [])
       .filter(function (item) { return ALLOWED[item.type]; })
-      .slice()
-      .sort(function (a, b) {
-        return (a.priority || 99) - (b.priority || 99);
-      });
+      .slice();
+    if (STF.sb) {
+      var remote = await STF.sb.from("updates").select("*").order("published_at", { ascending: false });
+      if (!remote.error) {
+        (remote.data || []).forEach(function (row) {
+          items.push({
+            id: row.id,
+            type: row.type,
+            title: row.title,
+            summary: STF.plainText(row.body_html),
+            date: (row.published_at || "").slice(0, 10),
+            schedule: row.scheduled_at ? new Date(row.scheduled_at).toLocaleString() : "",
+            bodyHtml: row.body_html || "",
+            patchHtml: row.patch_notes_html || "",
+            priority: 0
+          });
+        });
+      }
+    }
+    items.sort(function (a, b) {
+      return String(b.date || "").localeCompare(String(a.date || "")) || ((a.priority || 99) - (b.priority || 99));
+    });
     items.forEach(function (item) { byId[item.id] = item; });
 
     if (!items.length) {

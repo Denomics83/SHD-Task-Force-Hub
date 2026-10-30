@@ -1,0 +1,13 @@
+{
+  "gaps": [
+    "Fandom returned 403 and Buildstation has no public JSON API, so this catalog is not a full item dump.",
+    "Attribute max values are stored only for Weapon Damage (15%), Critical Hit Chance (6%), and Critical Hit Damage (12%), from the Coyote's Mask and Ridgeway's Pride wiki pages. Other attributes have no max.",
+    "Per-brand hex colours were not in a source I could fetch. Builder tiles use rarity gradients (green gear set, gold high-end, orange exotic) like the Buildstation board.",
+    "Weapon talent descriptions and brand chest/backpack talent descriptions are not stored.",
+    "Agitator, Whiplash, Robin, Bulldog, Interchange, and Trader have no weapon type in the Buildstation changelog, so they show under Unclassified.",
+    "Core Strength bonuses were not on the fetched wiki gear-set table.",
+    "Specialization grenade proper names were not re-fetched; each row is tied to its specialization.",
+    "High-end weapon models are a working set, not every blueprint in the game.",
+    "Skill variants may miss a variant added after the list was written."
+  ]
+}

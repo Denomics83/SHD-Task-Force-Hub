@@ -1,0 +1,98 @@
+{
+  "source": "Max values are only included where a Division wiki page states them. Coyote's Mask and Ridgeway's Pride both list Weapon Damage max 15%, Critical Hit Chance max 6%, Critical Hit Damage max 12%. Other attributes are real gear stats with no max stored.",
+  "cores": [
+    {
+      "name": "Weapon Damage",
+      "max": 15,
+      "unit": "%"
+    },
+    {
+      "name": "Armor",
+      "max": null,
+      "unit": ""
+    },
+    {
+      "name": "Skill Tier",
+      "max": 1,
+      "unit": ""
+    }
+  ],
+  "minors": [
+    {
+      "name": "Critical Hit Chance",
+      "max": 6,
+      "unit": "%"
+    },
+    {
+      "name": "Critical Hit Damage",
+      "max": 12,
+      "unit": "%"
+    },
+    {
+      "name": "Headshot Damage",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Weapon Handling",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Armor Regeneration",
+      "max": null,
+      "unit": ""
+    },
+    {
+      "name": "Armor on Kill",
+      "max": null,
+      "unit": ""
+    },
+    {
+      "name": "Health",
+      "max": null,
+      "unit": ""
+    },
+    {
+      "name": "Hazard Protection",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Skill Damage",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Skill Haste",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Skill Repair",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Status Effects",
+      "max": null,
+      "unit": "%"
+    },
+    {
+      "name": "Repair Skills",
+      "max": null,
+      "unit": "%"
+    }
+  ],
+  "mods": [
+    "Critical Hit Chance",
+    "Critical Hit Damage",
+    "Headshot Damage",
+    "Skill Haste",
+    "Skill Duration",
+    "Repair Skills",
+    "Protection from Elites",
+    "Incoming Repairs",
+    "Armor on Kill"
+  ]
+}

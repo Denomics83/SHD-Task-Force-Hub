@@ -1,0 +1,201 @@
+{
+  "source": "Division 2 skill variants. The wiki skills page returned 403, so variant lists were not re-checked against that page and may miss a seasonal variant.",
+  "items": [
+    {
+      "name": "Assault Turret",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Incinerator Turret",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Sniper Turret",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Artillery Turret",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Striker Drone",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Bombardier Drone",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Fixer Drone",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Defender Drone",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Cluster Seeker Mine",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Explosive Seeker Mine",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Airburst Seeker Mine",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Mender Seeker Mine",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Reinforcer Chem Launcher",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Firestarter Chem Launcher",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Oxidizer Chem Launcher",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Reviver Hive",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Stinger Hive",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Restorer Hive",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Booster Hive",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Bulwark Ballistic Shield",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Crusader Ballistic Shield",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Striker Ballistic Shield",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Deflector Ballistic Shield",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Riot Foam Chem Launcher",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Blinder Firefly",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Burster Firefly",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Demolisher Firefly",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Pulse",
+      "variants": [
+        "Scanner",
+        "Remote",
+        "Jammer",
+        "Banshee"
+      ]
+    },
+    {
+      "name": "Decoy",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Shock Trap",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Repair Trap",
+      "variants": [
+        "Base"
+      ]
+    },
+    {
+      "name": "Sticky Bomb",
+      "variants": [
+        "Explosive",
+        "Burn"
+      ]
+    }
+  ]
+}

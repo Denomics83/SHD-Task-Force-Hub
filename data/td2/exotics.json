@@ -1,0 +1,110 @@
+{
+  "source": "Exotic armour pieces. Pack Instincts and Bleeding Edge are the talents stated on the Division wiki pages for Coyote's Mask and Ridgeway's Pride. Other talent names are left blank.",
+  "items": [
+    {
+      "name": "Coyote's Mask",
+      "slot": "mask",
+      "talent": "Pack Instincts"
+    },
+    {
+      "name": "Catharsis",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "Chill Out",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "Nightwatcher",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "Punch Drunk",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "Vile",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "The Hollow Man",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "Investor",
+      "slot": "mask",
+      "talent": ""
+    },
+    {
+      "name": "Memento",
+      "slot": "backpack",
+      "talent": ""
+    },
+    {
+      "name": "Acosta's Go-Bag",
+      "slot": "backpack",
+      "talent": ""
+    },
+    {
+      "name": "NinjaBike Messenger Bag",
+      "slot": "backpack",
+      "talent": ""
+    },
+    {
+      "name": "Ridgeway's Pride",
+      "slot": "chest",
+      "talent": "Bleeding Edge"
+    },
+    {
+      "name": "Tardigrade Armor System",
+      "slot": "chest",
+      "talent": ""
+    },
+    {
+      "name": "Zero F's",
+      "slot": "chest",
+      "talent": ""
+    },
+    {
+      "name": "The Sacrifice",
+      "slot": "chest",
+      "talent": ""
+    },
+    {
+      "name": "BTSU Datagloves",
+      "slot": "gloves",
+      "talent": ""
+    },
+    {
+      "name": "Imperial Dynasty",
+      "slot": "holster",
+      "talent": ""
+    },
+    {
+      "name": "Waveform",
+      "slot": "holster",
+      "talent": ""
+    },
+    {
+      "name": "Dodge City Gunslinger's Holster",
+      "slot": "holster",
+      "talent": ""
+    },
+    {
+      "name": "Sawyer's Kneepads",
+      "slot": "kneepads",
+      "talent": ""
+    },
+    {
+      "name": "NinjaBike Kneepads",
+      "slot": "kneepads",
+      "talent": ""
+    }
+  ]
+}
