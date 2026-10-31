@@ -1,39 +1,39 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-10-30",
+  "lootDate": "2026-10-31",
   "weekOf": "2026-10-27",
   "weekEnd": "2026-11-02",
-  "updated": "2026-10-30T08:58",
-  "note": "Escalation targeted loot for 2026-10-30 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-10-31T08:50",
+  "note": "Escalation targeted loot for 2026-10-31 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "Coney Island Ballpark",
-      "loot": "Rigger",
+      "loot": "Eclipse Protocol",
       "kind": "unknown",
       "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "Coney Island Amusement Park",
-      "loot": "Alps Summit Armaments",
-      "kind": "brand",
-      "icon": "assets/icons/brands/alps-logo.png"
+      "loot": "Umbra Initiative",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "ViewPoint Museum",
-      "loot": "5.11 Tactical",
+      "loot": "Aegis",
       "kind": "unknown",
       "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "Capitol Building",
-      "loot": "Providence Defense",
-      "kind": "brand",
-      "icon": "assets/icons/brands/providence-logo.png"
+      "loot": "Cavalier",
+      "kind": "unknown",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "Potomac Event Center",
-      "loot": "Tip of the Spear",
+      "loot": "Douglas &amp; Harding",
       "kind": "unknown",
       "icon": "assets/icons/loot/generic.svg"
     }
@@ -47,7 +47,7 @@
     },
     {
       "cache": "Prototype Weapon Cache",
-      "loot": "LMGs",
+      "loot": "Rifles",
       "kind": "unknown",
       "icon": "assets/icons/loot/generic.svg"
     }
