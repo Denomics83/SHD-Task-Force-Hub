@@ -402,7 +402,31 @@
     $("build-short-count").textContent = ($("build-short").value.length) + " / 140";
     $("build-published").checked = record ? !!record.published : true;
     setQuill("build-notes", record ? record.notes_html || "" : "");
+    $("build-source-url").value = record && record.source_url ? record.source_url : "";
+    $("build-source-id").value = record && record.source_id ? record.source_id : "";
+    $("build-import-url").value = record && record.source_url ? record.source_url : "";
+    $("build-resync").hidden = !(record && record.source_url);
+    $("build-form")._sourceRaw = record && record.source_raw ? record.source_raw : null;
     await BuildAdmin.mount($("build-board"), record);
+  }
+  async function importBuildStation(url) {
+    var link = (url || "").trim();
+    if (!link) throw new Error("Paste a Build Station link.");
+    var res = await sb.functions.invoke("buildstation-import", { body: { url: link } });
+    if (res.error) throw new Error(res.error.message || "Import failed.");
+    var data = res.data || {};
+    if (data.error) throw new Error(data.error);
+    if (!data.normalized) throw new Error("Build Station did not return a build.");
+    if (!$("build-name").value.trim() && data.name) $("build-name").value = data.name;
+    $("build-source-url").value = data.source_url || link;
+    $("build-source-id").value = data.source_id || "";
+    $("build-import-url").value = data.source_url || link;
+    $("build-form")._sourceRaw = data.raw || null;
+    $("build-resync").hidden = false;
+    var misses = BuildAdmin.applyImport(data.normalized);
+    if (misses.length) {
+      throw new Error("Imported, with catalog gaps: " + misses.join(", "));
+    }
   }
   async function saveBuild() {
     var short = $("build-short").value.trim();
@@ -414,7 +438,10 @@
       short_description: short,
       notes_html: quillHTML("build-notes"),
       loadout: BuildAdmin.read(),
-      published: $("build-published").checked
+      published: $("build-published").checked,
+      source_url: $("build-source-url").value.trim() || null,
+      source_id: $("build-source-id").value.trim() || null,
+      source_raw: $("build-form")._sourceRaw || null
     };
     if (!payload.name) throw new Error("Name is required.");
     var id = $("build-id").value;
@@ -631,6 +658,24 @@
   $("template-new").addEventListener("click", resetTemplate);
   $("build-short").addEventListener("input", function () {
     $("build-short-count").textContent = $("build-short").value.length + " / 140";
+  });
+  $("build-import").addEventListener("click", async function () {
+    try {
+      status("build-import-status", "Importing…");
+      await importBuildStation($("build-import-url").value);
+      status("build-import-status", "Imported onto our catalog. Review the slots, then save.", "ok");
+    } catch (err) {
+      status("build-import-status", err.message || String(err), "err");
+    }
+  });
+  $("build-resync").addEventListener("click", async function () {
+    try {
+      status("build-import-status", "Re-syncing…");
+      await importBuildStation($("build-source-url").value || $("build-import-url").value);
+      status("build-import-status", "Re-synced onto our catalog. Save to keep it.", "ok");
+    } catch (err) {
+      status("build-import-status", err.message || String(err), "err");
+    }
   });
   $("build-form").addEventListener("submit", async function (e) {
     e.preventDefault();

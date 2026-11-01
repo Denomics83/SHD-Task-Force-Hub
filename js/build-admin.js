@@ -59,7 +59,7 @@ window.BuildAdmin = (function () {
   }
 
   async function loadCatalogs() {
-    var names = ["playstyles", "specializations", "grenades", "attributes", "gearsets", "brands", "exotics", "weapons", "talents", "skills", "named"];
+    var names = ["playstyles", "specializations", "grenades", "attributes", "gearsets", "brands", "exotics", "weapons", "talents", "skills", "named", "index"];
     var out = {};
     await Promise.all(names.map(async function (name) {
       out[name] = await STF.fetchJSON("data/td2/" + name + ".json");
@@ -71,6 +71,49 @@ window.BuildAdmin = (function () {
     var doc = cat[name];
     if (Array.isArray(doc)) return doc;
     return (doc && doc.items) || [];
+  }
+
+  function catalogKey(name) {
+    return String(name || "").toLowerCase().replace(/&/g, " and ").replace(/[^a-z0-9]+/g, " ").trim();
+  }
+
+  function findCatalog(name, kinds) {
+    var want = catalogKey(name);
+    if (!want) return null;
+    var rows = items("index");
+    for (var i = 0; i < rows.length; i++) {
+      var row = rows[i];
+      if (kinds && kinds.indexOf(row.kind) < 0) continue;
+      if (catalogKey(row.name) === want) return row;
+      var aliases = row.aliases || [];
+      for (var a = 0; a < aliases.length; a++) {
+        if (catalogKey(aliases[a]) === want) return row;
+      }
+    }
+    return null;
+  }
+
+  function mapImportedSlot(slot, kinds) {
+    var source = slot || {};
+    var hit = findCatalog(source.name, kinds);
+    var attrs = source.attributes;
+    return {
+      name: (hit && hit.name) || source.name || "",
+      catalogId: hit ? hit.id : "",
+      catalogMiss: !!(source.name && !hit),
+      brand: source.brand || "",
+      rarity: source.rarity || "",
+      talent: source.talent || "",
+      talentText: source.talentText || "",
+      core: source.core || "",
+      coreValue: source.coreValue || "",
+      attributes: Array.isArray(attrs) ? attrs : [],
+      mod: source.mod || "",
+      variant: source.variant || "",
+      type: source.type || "",
+      image: "",
+      icon: hit && hit.icon ? hit.icon : ""
+    };
   }
 
   function rarityClass(item) {
@@ -167,6 +210,7 @@ window.BuildAdmin = (function () {
     return (
       "<p class=\"slot-rarity\">" + STF.esc(item.rarity || "Weapon") + "</p>" +
       "<h3>" + STF.esc(item.name || label(key)) + "</h3>" +
+      (item.catalogMiss ? '<p class="catalog-miss">Not in our catalog.</p>' : "") +
       '<p><button type="button" class="admin-btn" data-change="' + key + '">Choose weapon</button></p>' +
       "<label>Talent <select data-field=\"talent\"" + (locked ? " disabled" : "") + ">" + optionList(pool, item.talent || "") + "</select></label>" +
       (locked && named.perfectText ? '<p class="lede">' + STF.esc(named.perfectText) + "</p>" : "") +
@@ -213,6 +257,7 @@ window.BuildAdmin = (function () {
     return (
       "<p class=\"slot-rarity\">" + STF.esc(item.rarity || "Gear") + "</p>" +
       "<h3>" + STF.esc(item.name || label(key)) + "</h3>" +
+      (item.catalogMiss ? '<p class="catalog-miss">Not in our catalog.</p>' : "") +
       '<p><button type="button" class="admin-btn" data-change="' + key + '">Choose piece</button></p>' +
       '<label>Core <select data-field="core">' + optionList(cores, item.core || "") + "</select></label>" +
       '<label>Core value <input data-field="coreValue" inputmode="decimal" value="' + STF.esc(item.coreValue || "") + '"> <small>' + STF.esc(maxHint(item.core)) + "</small></label>" +
@@ -229,6 +274,7 @@ window.BuildAdmin = (function () {
     return (
       "<p class=\"slot-rarity\">Skill</p>" +
       "<h3>" + STF.esc(item.name || label(key)) + "</h3>" +
+      (item.catalogMiss ? '<p class="catalog-miss">Not in our catalog.</p>' : "") +
       '<p><button type="button" class="admin-btn" data-change="' + key + '">Choose skill</button></p>' +
       "<label>Variant <select data-field=\"variant\">" + optionList(variants, item.variant || "") + "</select></label>"
     );
@@ -288,7 +334,7 @@ window.BuildAdmin = (function () {
       }
       if (!rows.length) return '<p class="lede">No weapons in this type.</p>';
       return '<div class="ba-grid">' + rows.map(function (row) {
-        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-weapon="' + STF.esc(row.name) + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
+        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-weapon="' + STF.esc(row.name) + '" data-id="' + STF.esc(row.id || "") + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
       }).join("") + "</div>";
     }
     var chips = types.map(function (type, index) {
@@ -311,10 +357,14 @@ window.BuildAdmin = (function () {
         var named = namedWeapon(found.name);
         state[key] = {
           name: found.name,
+          catalogId: found.id || pick.getAttribute("data-id") || "",
+          catalogMiss: false,
           type: found.type || (named && named.type) || "",
           rarity: found.rarity || (named ? "named" : ""),
           talent: (named && named.perfectTalent) || found.talent || "",
-          attributes: state[key].attributes || []
+          attributes: state[key].attributes || [],
+          image: "",
+          icon: found.icon || ""
         };
         selected = key;
         closeModal();
@@ -328,25 +378,25 @@ window.BuildAdmin = (function () {
       var rows = [];
       if (tab === "sets") {
         rows = items("gearsets").map(function (row) {
-          return { name: row.name, rarity: "gear-set", brand: row.name, talent: key === "chest" ? row.chestTalent : key === "backpack" ? row.backpackTalent : "", icon: row.icon || "" };
+          return { id: row.id || "", name: row.name, rarity: "gear-set", brand: row.name, talent: key === "chest" ? row.chestTalent : key === "backpack" ? row.backpackTalent : "", icon: row.icon || "" };
         });
       } else if (tab === "brands") {
         rows = items("brands").map(function (row) {
           var name = row.name || row;
-          return { name: name, rarity: "high-end", brand: name, talent: "", icon: row.icon || "" };
+          return { id: row.id || "", name: name, rarity: "high-end", brand: name, talent: "", icon: row.icon || "" };
         });
       } else if (tab === "named") {
         rows = (namedDoc().gear || []).filter(function (row) { return row.slot === key; }).map(function (row) {
-          return { name: row.name, rarity: "named", brand: row.brand || "", talent: row.perfectTalent || "", icon: row.icon || "" };
+          return { id: row.id || "", name: row.name, rarity: "named", brand: row.brand || "", talent: row.perfectTalent || "", icon: row.icon || "" };
         });
       } else {
         rows = items("exotics").filter(function (row) { return row.kind !== "weapon" && row.slot === key; }).map(function (row) {
-          return { name: row.name, rarity: "exotic", brand: "", talent: row.talent || "", icon: row.icon || "" };
+          return { id: row.id || "", name: row.name, rarity: "exotic", brand: "", talent: row.talent || "", icon: row.icon || "" };
         });
       }
       if (!rows.length) return '<p class="lede">Nothing in this list for this slot.</p>';
       return '<div class="ba-grid">' + rows.map(function (row) {
-        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-gear="' + STF.esc(row.name) + '" data-rarity="' + STF.esc(row.rarity) + '" data-brand="' + STF.esc(row.brand || "") + '" data-talent="' + STF.esc(row.talent || "") + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
+        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-gear="' + STF.esc(row.name) + '" data-id="' + STF.esc(row.id || "") + '" data-rarity="' + STF.esc(row.rarity) + '" data-brand="' + STF.esc(row.brand || "") + '" data-talent="' + STF.esc(row.talent || "") + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
       }).join("") + "</div>";
     }
     openModal(
@@ -371,13 +421,17 @@ window.BuildAdmin = (function () {
         }) : null;
         state[key] = {
           name: pickedName,
+          catalogId: pick.getAttribute("data-id") || "",
+          catalogMiss: false,
           brand: pick.getAttribute("data-brand") || "",
           rarity: pick.getAttribute("data-rarity") || "",
           core: prev.core || "",
           coreValue: prev.coreValue || "",
           attributes: fixed || prev.attributes || [],
           mod: prev.mod || "",
-          talent: (named && named.perfectTalent) || pick.getAttribute("data-talent") || ""
+          talent: (named && named.perfectTalent) || pick.getAttribute("data-talent") || "",
+          image: "",
+          icon: ""
         };
         selected = key;
         closeModal();
@@ -390,14 +444,21 @@ window.BuildAdmin = (function () {
     var rows = items("skills");
     openModal(
       "<h3>Choose a skill</h3><div class=\"ba-grid\">" + rows.map(function (row) {
-        return '<button type="button" class="ba-pick" data-skill="' + STF.esc(row.name) + '"><strong>' + STF.esc(row.name) + "</strong></button>";
+        return '<button type="button" class="ba-pick" data-skill="' + STF.esc(row.name) + '" data-id="' + STF.esc(row.id || "") + '"><strong>' + STF.esc(row.name) + "</strong></button>";
       }).join("") + "</div>",
       function (e) {
         var pick = e.target.closest("[data-skill]");
         if (!pick) return;
         var name = pick.getAttribute("data-skill");
         var skill = rows.filter(function (row) { return row.name === name; })[0];
-        state[key] = { name: name, variant: (skill && skill.variants && skill.variants[0]) || "" };
+        state[key] = {
+          name: name,
+          catalogId: pick.getAttribute("data-id") || "",
+          catalogMiss: false,
+          variant: (skill && skill.variants && skill.variants[0]) || "",
+          image: "",
+          icon: (skill && skill.icon) || ""
+        };
         selected = key;
         closeModal();
         paint();
@@ -487,5 +548,38 @@ window.BuildAdmin = (function () {
     return load;
   }
 
-  return { mount: mount, read: read };
+  function applyImport(normalized) {
+    var load = normalized || {};
+    var gearKinds = ["gearset", "brand", "named-gear", "exotic-gear"];
+    var weaponKinds = ["weapon", "named-weapon", "exotic-weapon"];
+    ["primary", "secondary", "sidearm"].forEach(function (key) {
+      load[key] = mapImportedSlot(load[key], weaponKinds);
+    });
+    ["mask", "chest", "backpack", "gloves", "holster", "kneepads"].forEach(function (key) {
+      load[key] = mapImportedSlot(load[key], gearKinds);
+    });
+    ["skill1", "skill2"].forEach(function (key) {
+      load[key] = mapImportedSlot(load[key], ["skill"]);
+    });
+    if (load.specialization && load.specialization.name) {
+      var spec = findCatalog(load.specialization.name, ["specialization"]);
+      load.specialization = {
+        name: spec ? spec.name : load.specialization.name,
+        catalogId: spec ? spec.id : "",
+        catalogMiss: !spec
+      };
+    }
+    state = fromRecord({ loadout: load });
+    selected = "primary";
+    paint();
+    return misses();
+  }
+
+  function misses() {
+    return ["primary", "secondary", "sidearm", "mask", "chest", "backpack", "gloves", "holster", "kneepads", "skill1", "skill2"].filter(function (key) {
+      return state[key] && state[key].catalogMiss;
+    }).map(function (key) { return state[key].name || key; });
+  }
+
+  return { mount: mount, read: read, applyImport: applyImport, misses: misses };
 })();

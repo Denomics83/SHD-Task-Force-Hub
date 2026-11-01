@@ -123,6 +123,12 @@
     return Math.min(3, parts.length);
   }
 
+  function localArt(value) {
+    var image = String(value || "");
+    if (!image || /^https?:/i.test(image)) return "";
+    return image;
+  }
+
   function libraryIcon(item) {
     if (!filledName(item) || !STF.iconFor) return null;
     return STF.iconFor(item.brand) || STF.iconFor(item.name) || STF.iconFor(item.type) || null;
@@ -137,8 +143,9 @@
     var rarity = faceClass(item, spec.force);
     var filled = filledName(item);
     var hit = libraryIcon(item);
-    var art = filled && item.image
-      ? '<img src="' + STF.esc(item.image) + '" alt="">'
+    var own = localArt(item.image) || localArt(item.icon);
+    var art = filled && own
+      ? '<img src="' + STF.esc(own) + '" alt="">'
       : (hit
         ? '<img class="is-mark" src="' + STF.esc(hit.file) + '" alt="">'
         : (SLOT_ART[spec.art] || SLOT_ART.skill));
@@ -460,7 +467,9 @@
       talent: item.talent || "",
       core: item.core || "",
       attributes: attrText,
-      image: item.image || ""
+      image: /^https?:/i.test(String(item.image || "")) ? "" : (item.image || ""),
+      icon: /^https?:/i.test(String(item.icon || "")) ? "" : (item.icon || ""),
+      catalogId: item.catalogId || ""
     };
   }
 
