@@ -1,5 +1,5 @@
 /* Builds: category grid → name/role list → detail.
-   Loadouts come from data/builds.json. The owner's second "Incursion" block is Escalation. */
+   Published loadouts come from Supabase public.builds only. */
 (function () {
   if (!document.querySelector(".bottom-nav")) STF.mountChrome("builds");
   window.addEventListener("stf-tab", function (e) {
@@ -334,7 +334,7 @@
           "</button>"
         );
       }).join("")
-      : '<p class="lede">No builds in this category yet.</p>';
+      : '<p class="lede">No builds yet.</p>';
     window.scrollTo(0, 0);
     if (push) history.pushState({ cat: catId }, "", buildsURL("#" + catId));
   }
@@ -505,23 +505,13 @@
   paintGrid();
   (async function loadBuilds() {
     try { await STF.loadIcons(); } catch (err) { console.error(err); }
-    var local = [];
-    try {
-      var doc = await STF.fetchJSON("data/builds.json");
-      local = (doc && doc.builds) || [];
-    } catch (err) {
-      console.error(err);
-    }
     var remote = [];
     if (STF.sb) {
       var res = await STF.sb.from("builds").select("id, category, playstyle, name, short_description, notes_html, loadout, published").eq("published", true);
       if (!res.error && res.data) remote = res.data.map(fromRemoteBuild);
     }
-    var seen = {};
-    remote.forEach(function (row) { seen[row.id] = 1; });
-    BUILDS = remote.concat(local.filter(function (row) { return !seen[row.id]; }));
+    BUILDS = remote;
     paintGrid();
     route(false);
-    if (!BUILDS.length) listRows.innerHTML = '<p class="lede">Could not load builds.</p>';
   })();
 })();
