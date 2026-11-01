@@ -321,7 +321,7 @@
     if (tab === "creators") loadCreators();
     if (tab === "mutators") loadMutators();
     if (tab === "hunters") ensureHunters(hunterRoute);
-    if (tab === "builds") window.dispatchEvent(new CustomEvent("stf-tab", { detail: "builds" }));
+    window.dispatchEvent(new CustomEvent("stf-tab", { detail: tab }));
     if (push) {
       var next = "resources.html?tab=" + tab;
       if (tab === "hunters" && location.hash && !BUILD_HASH[(location.hash || "").replace("#", "").split("/")[0]]) next += location.hash;

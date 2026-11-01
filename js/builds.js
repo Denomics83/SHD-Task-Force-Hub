@@ -4,6 +4,7 @@
   if (!document.querySelector(".bottom-nav")) STF.mountChrome("builds");
   window.addEventListener("stf-tab", function (e) {
     if (e.detail === "builds") route(false);
+    else setHeaderBack("off");
   });
 
   var stage = document.getElementById("cat-stage");
@@ -470,7 +471,6 @@
       { id: "playstyle", label: "Play style" }
     ];
     return (
-      '<p class="build-kicker">' + STF.esc(row.name) + " · " + STF.esc(roleText(row)) + "</p>" +
       '<div class="build-tabs" role="tablist">' + tabs.map(function (tab) {
         var on = tab.id === "loadout" ? ' aria-current="true"' : "";
         return '<button type="button" role="tab" data-build-tab="' + tab.id + '"' + on + ">" + tab.label + "</button>";
@@ -519,11 +519,25 @@
     return hash ? "builds.html" + hash : "builds.html";
   }
 
+  function setBrand(row) {
+    var top = document.querySelector(".topbar");
+    var brand = top && top.querySelector(".brand");
+    if (!brand) return;
+    if (top) top.classList.toggle("is-build-title", !!row);
+    brand.classList.toggle("is-build", !!row);
+    if (!row) {
+      brand.innerHTML = "<strong>Shade Hub</strong>";
+      return;
+    }
+    brand.innerHTML = "<strong>" + STF.esc(row.name) + "</strong><em>" + STF.esc(roleText(row)) + "</em>";
+  }
+
   function setHeaderBack(mode, cat) {
     var top = document.querySelector(".topbar");
     var pill = document.querySelector(".hub-pill");
     var back = document.getElementById("builds-back");
     if (pill) pill.hidden = mode !== "off";
+    if (mode !== "detail") setBrand(null);
     if (mode === "off") {
       if (back) back.remove();
       return;
@@ -599,6 +613,7 @@
     listView.hidden = true;
     detailView.hidden = false;
     setHeaderBack("detail", cat);
+    setBrand(row);
     openBuild = row;
     detailBody.innerHTML = detailHTML(row);
     var rail = detailBody.querySelector(".build-rail");
