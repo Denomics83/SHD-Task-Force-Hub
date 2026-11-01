@@ -38,10 +38,32 @@
     if (isNaN(d.getTime())) return "";
     return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + "T" + pad(d.getHours()) + ":" + pad(d.getMinutes());
   }
+  function parseLocal(value) {
+    var text = String(value || "").trim();
+    if (!text) return null;
+    var match = text.match(/^(\d{4})-(\d{2})-(\d{2})T(\d{2}):(\d{2})/);
+    if (!match) return null;
+    var d = new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), Number(match[4]), Number(match[5]), 0, 0);
+    return isNaN(d.getTime()) ? null : d;
+  }
   function fromLocal(value) {
-    if (!value) return null;
-    var d = new Date(value);
-    return isNaN(d.getTime()) ? null : d.toISOString();
+    var d = parseLocal(value);
+    return d ? d.toISOString() : null;
+  }
+  function setTimeError(msg) {
+    var node = $("event-time-error");
+    if (!node) return;
+    node.hidden = !msg;
+    node.textContent = msg || "";
+  }
+  function eventTimeError() {
+    var endText = String($("event-end").value || "").trim();
+    if (!endText) return "";
+    var end = parseLocal(endText);
+    if (!end) return "End time must be after the start";
+    var start = parseLocal($("event-start").value);
+    if (start && end.getTime() < start.getTime()) return "End time must be after the start";
+    return "";
   }
   function stamp(iso) {
     if (!iso) return "";
@@ -293,10 +315,25 @@
       setMapPreview($("event-map-url"), $("event-map-preview"), row.map_image || "");
       $("event-map-caption").value = row.map_caption || "";
     }
-    if ($("event-start").value && row.duration_hours) {
-      var start = new Date($("event-start").value);
-      $("event-end").value = toLocal(new Date(start.getTime() + row.duration_hours * 3600000).toISOString());
-    }
+    fillRotationEnd();
+  }
+  function templateDurationMs() {
+    var id = $("event-template").value;
+    var row = ($("event-template")._rows || []).filter(function (item) { return item.id === id; })[0];
+    var hours = row ? Number(row.duration_hours) : 0;
+    if (!hours || hours <= 0) return 0;
+    return hours * 3600000;
+  }
+  function fillRotationEnd() {
+    if ($("event-kind").value !== "rotation") return;
+    var start = parseLocal($("event-start").value);
+    var ms = templateDurationMs();
+    if (!start || !ms) return;
+    $("event-end").value = toLocal(new Date(start.getTime() + ms).toISOString());
+  }
+  function onEventTimeChanged() {
+    if ($("event-kind").value === "rotation") fillRotationEnd();
+    setTimeError(eventTimeError());
   }
   function toggleEventKind() {
     var kind = $("event-kind").value;
@@ -304,6 +341,8 @@
     $("event-activity-label").hidden = kind !== "clan";
     $("event-end").required = kind !== "clan";
     $("event-end-label").hidden = false;
+    if (kind === "rotation") fillRotationEnd();
+    setTimeError(eventTimeError());
   }
   function resetEvent() {
     $("event-form").reset();
@@ -314,10 +353,23 @@
     $("event-map-caption").value = "";
     $("event-activity").dataset.manual = "";
     setQuill("event-body", "");
+    $("event-start").value = "";
+    $("event-end").value = "";
+    setTimeError("");
     toggleEventKind();
   }
   async function saveEvent() {
+    if ($("event-kind").value === "rotation") fillRotationEnd();
+    var timeError = eventTimeError();
+    if (timeError) {
+      setTimeError(timeError);
+      throw new Error(timeError);
+    }
+    setTimeError("");
     var kind = $("event-kind").value;
+    var endText = String($("event-end").value || "").trim();
+    var endsAt = endText ? fromLocal(endText) : null;
+    if (kind === "clan" && !endText) endsAt = null;
     var payload = {
       kind: kind,
       template_id: kind === "rotation" ? ($("event-template").value || null) : null,
@@ -328,10 +380,11 @@
       map_caption: $("event-map-caption").value.trim() || null,
       activity_type: kind === "clan" ? ($("event-activity").value || null) : null,
       starts_at: fromLocal($("event-start").value),
-      ends_at: fromLocal($("event-end").value)
+      ends_at: endsAt
     };
     if (!payload.title || !payload.starts_at) throw new Error("Title and start are required.");
     if (kind !== "clan" && !payload.ends_at) throw new Error("End time is required.");
+    if (payload.ends_at && payload.ends_at < payload.starts_at) throw new Error("End time must be after the start");
     if (kind === "rotation" && !payload.map_image) {
       var template = ($("event-template")._rows || []).filter(function (item) { return item.id === payload.template_id; })[0];
       if (template) {
@@ -666,9 +719,10 @@
     $("event-activity").dataset.manual = "1";
   });
   $("event-template").addEventListener("change", applyTemplate);
-  $("event-start").addEventListener("change", function () {
-    if ($("event-kind").value === "rotation") applyTemplate();
-  });
+  $("event-start").addEventListener("change", onEventTimeChanged);
+  $("event-start").addEventListener("input", onEventTimeChanged);
+  $("event-end").addEventListener("change", function () { setTimeError(eventTimeError()); });
+  $("event-end").addEventListener("input", function () { setTimeError(eventTimeError()); });
   $("event-form").addEventListener("submit", async function (e) {
     e.preventDefault();
     try {

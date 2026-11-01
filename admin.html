@@ -6,12 +6,12 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="stf-build" content="125bfe6">
+  <meta name="stf-build" content="event-times1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0B0D10">
   <title>Admin — Shade Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=125bfe6">
+  <link rel="stylesheet" href="styles.css?v=event-times1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
 </head>
 <body class="page-admin is-logged-out">
@@ -125,6 +125,7 @@
         <div id="event-body" class="rich-editor"></div>
         <label>Start <input id="event-start" type="datetime-local" required></label>
         <label id="event-end-label">End <input id="event-end" type="datetime-local"></label>
+        <p id="event-time-error" class="admin-status is-err" role="alert" hidden></p>
         <p class="lede">Times use this computer's timezone and are stored in UTC. Rotation end starts from the template duration and stays editable. Clan end is optional.</p>
         <label>Card image
           <input id="event-image" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
@@ -251,17 +252,17 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
-<script src="js/supabase.js?v=125bfe6"></script>
-  <script src="js/common.js?v=125bfe6"></script>
-  <script src="js/event-cards.js?v=125bfe6"></script>
-  <script src="js/icons.js?v=125bfe6"></script>
-  <script src="js/build-admin.js?v=125bfe6"></script>
-  <script src="js/builder/engine.js?v=125bfe6"></script>
-  <script src="js/builder/catalog.js?v=125bfe6"></script>
-  <script src="js/builder/calc.js?v=125bfe6"></script>
-  <script src="js/builder/calc-ui.js?v=125bfe6"></script>
-  <script src="js/builder/ui.js?v=125bfe6"></script>
-  <script src="js/admin.js?v=125bfe6"></script>
+<script src="js/supabase.js?v=event-times1"></script>
+  <script src="js/common.js?v=event-times1"></script>
+  <script src="js/event-cards.js?v=event-times1"></script>
+  <script src="js/icons.js?v=event-times1"></script>
+  <script src="js/build-admin.js?v=event-times1"></script>
+  <script src="js/builder/engine.js?v=event-times1"></script>
+  <script src="js/builder/catalog.js?v=event-times1"></script>
+  <script src="js/builder/calc.js?v=event-times1"></script>
+  <script src="js/builder/calc-ui.js?v=event-times1"></script>
+  <script src="js/builder/ui.js?v=event-times1"></script>
+  <script src="js/admin.js?v=event-times1"></script>
 <script data-stf-toast>
 (function () {
   var meta = document.querySelector('meta[name="stf-build"]');
