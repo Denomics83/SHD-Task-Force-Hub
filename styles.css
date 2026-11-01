@@ -1860,15 +1860,15 @@ body.page-events .tl-art {
 .tl-card.is-selected .tl-foot strong { color: #fff; }
 .tl-foot { background: #14161a; }
 .ev-page { padding-bottom: 12px; }
-.ev-emblem { width: 168px; height: 168px; margin: 4px auto 14px; display: block; }
 .ev-status-row { margin: 0; }
-.ev-ticker {
+.event-detail .ev-ticker {
   margin: 8px 0 12px;
   font-family: var(--display);
   font-size: clamp(1.6rem, 7vw, 2.1rem);
   font-weight: 700;
   letter-spacing: .02em;
   line-height: 1;
+  color: #fff;
 }
 .ev-dates { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
 .ev-date {
@@ -1885,7 +1885,7 @@ body.page-events .tl-art {
   letter-spacing: .12em;
   text-transform: uppercase;
 }
-.ev-cat {
+.event-detail .ev-cat {
   margin: 0 0 4px;
   color: var(--orange);
   font-family: var(--display);
@@ -1901,15 +1901,19 @@ body.page-events .tl-art {
   letter-spacing: 0;
   text-transform: none;
 }
-.ev-buffs { margin: 8px 0 12px; }
-.ev-buff {
-  margin: 0 0 4px;
-  color: #8fd4ff;
-  font-weight: 650;
-  font-size: 1.05rem;
-  line-height: 1.35;
+.ev-buffs { margin: 10px 0 14px; }
+.event-detail .ev-buff {
+  margin: 0 0 2px;
+  color: #67f0ff;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.28rem;
+  letter-spacing: .01em;
+  line-height: 1.2;
 }
-.ev-note, .ev-copy, .ev-rules p { margin: 0 0 8px; color: #e6e8ee; }
+.event-detail .ev-note,
+.event-detail .ev-copy,
+.event-detail .ev-rules p { margin: 0 0 8px; color: #f2f4f7; font-size: 1rem; font-weight: 500; line-height: 1.4; }
 .ev-rules { margin-top: 8px; }
 body.page-events.is-event-detail .event-detail { padding-top: 8px; }
 

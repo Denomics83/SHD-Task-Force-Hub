@@ -462,7 +462,6 @@
     var type = item.type || {};
     var state = item.state || "active";
     var statusClass = state === "ended" ? "is-ended" : state === "upcoming" ? "is-soon" : "is-live";
-    var emblem = emblemSrc(item);
     var buffs = splitBits(type.modifiers);
     var rules = splitBits(type.tasks);
     var note = !isPlaceholder(type.note) ? type.note : (!isPlaceholder(item.note) ? item.note : "");
@@ -491,7 +490,6 @@
     }
     detail.innerHTML =
       '<article class="ev-page">' +
-      '<img class="ev-emblem" src="' + STF.esc(emblem) + '" alt="">' +
       '<p class="ev-status-row"><span class="tl-tag ' + statusClass + '">' + statusLabel(state) + "</span></p>" +
       '<p class="ev-ticker" data-ticker data-state="' + STF.esc(state) + '" data-remain-start="' + STF.esc(item.start || "") + '" data-remain-end="' + STF.esc(item.end || "") + '">' + STF.esc(tickerFor(item)) + "</p>" +
       '<p class="ev-dates">' + dateTag(item.start, "Start") + dateTag(item.end, "End") + "</p>" +
