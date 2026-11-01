@@ -567,10 +567,18 @@
       if (old) old.remove();
     }
 
+    function brandLogo(name) {
+      var row = (catalog.brands || []).filter(function (item) { return key(item.name) === key(name); })[0];
+      return row && row.icon ? row.icon : "";
+    }
+
     function grid(rows, attr, label) {
       if (!rows.length) return '<p class="lede">Nothing in this list.</p>';
       return '<div class="bb-grid">' + rows.map(function (row) {
-        return '<button type="button" class="bb-pick rarity-' + rarityClass(row) + '" ' + attr + '="' + esc(row.name) + '"><strong>' + esc(row.name) + "</strong><small>" + esc(label(row)) + "</small></button>";
+        var logo = row.icon ? '<img class="bb-logo" src="' + esc(row.icon) + '" alt="">' : "";
+        return '<button type="button" class="bb-pick rarity-' + rarityClass(row) + '" ' + attr + '="' + esc(row.name) + '">' +
+          '<span class="bb-pick-copy"><strong>' + esc(row.name) + "</strong><small>" + esc(label(row)) + "</small></span>" +
+          logo + "</button>";
       }).join("") + "</div>";
     }
 
@@ -584,6 +592,14 @@
           if (quality !== "all" && row.rarity !== quality) return false;
           if (query && row.name.toLowerCase().indexOf(query) < 0) return false;
           return true;
+        }).map(function (row) {
+          var exotic = catalog.exoticByName[key(row.name)];
+          return {
+            name: row.name,
+            type: row.type,
+            rarity: row.rarity,
+            icon: (row.rarity === "exotic" && exotic && exotic.icon) || row.icon || ""
+          };
         });
       }
       function html() {
@@ -656,17 +672,17 @@
       function rows() {
         var list = [];
         if (tab === "brand") {
-          list = catalog.brands.map(function (row) { return { name: row.name, rarity: "high-end", brand: row.name, id: row.id }; });
+          list = catalog.brands.map(function (row) { return { name: row.name, rarity: "high-end", brand: row.name, id: row.id, icon: row.icon || "" }; });
         } else if (tab === "gearset") {
-          list = catalog.gearsets.map(function (row) { return { name: row.name, rarity: "gear-set", brand: row.name, id: row.id }; });
+          list = catalog.gearsets.map(function (row) { return { name: row.name, rarity: "gear-set", brand: row.name, id: row.id, icon: row.icon || "" }; });
         } else if (tab === "named") {
           list = catalog.namedGear.filter(function (row) { return key(row.slot) === key(selected); }).map(function (row) {
-            return { name: row.name, rarity: "named", brand: row.brand, id: row.id };
+            return { name: row.name, rarity: "named", brand: row.brand, id: row.id, icon: brandLogo(row.brand) };
           });
         } else {
           list = catalog.exotics.filter(function (row) {
             return key(row.kind) !== "weapon" && key(row.slot) === key(selected);
-          }).map(function (row) { return { name: row.name, rarity: "exotic", brand: "", id: row.id }; });
+          }).map(function (row) { return { name: row.name, rarity: "exotic", brand: "", id: row.id, icon: row.icon || "" }; });
         }
         if (!query) return list;
         return list.filter(function (row) { return row.name.toLowerCase().indexOf(query) >= 0; });

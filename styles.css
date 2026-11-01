@@ -2612,12 +2612,18 @@ body.page-admin [hidden] { display: none !important; }
   min-height: 72px; padding: 8px; text-align: left;
   border: 1px solid rgba(255,255,255,.2); color: #1a0d00;
 }
+.bb-pick {
+  display: flex; flex-direction: row; align-items: center; justify-content: space-between; gap: 8px;
+}
+.bb-pick-copy { display: grid; gap: 2px; min-width: 0; flex: 1; }
+.bb-logo { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; filter: brightness(0); }
 .bb-tile span, .bb-pick small { font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
 .bb-tile strong, .bb-pick strong { font-family: var(--display); letter-spacing: .03em; text-transform: uppercase; font-size: .78rem; line-height: 1.15; overflow-wrap: anywhere; }
 .bb-tile.rarity-empty { background: #12151a; color: #d5d8de; }
 .bb-tile.rarity-gearset, .bb-pick.rarity-gearset { background: linear-gradient(180deg, #3ddc84, #0d7a45); }
 .bb-tile.rarity-exotic, .bb-pick.rarity-exotic { background: linear-gradient(180deg, #ff8a4a, #c2410c); }
-.bb-tile.rarity-named, .bb-tile.rarity-gold, .bb-pick.rarity-named, .bb-pick.rarity-gold { background: linear-gradient(180deg, #f2c14b, #c49220); }
+.bb-tile.rarity-gold, .bb-pick.rarity-gold { background: linear-gradient(180deg, #f2c14b, #c49220); }
+.bb-tile.rarity-named, .bb-pick.rarity-named { background: linear-gradient(180deg, #f6d36b, #b8860b); }
 .bb-tile.is-on { outline: 2px solid #fff; outline-offset: 2px; }
 .bb-proto { font-style: normal; font-size: .58rem; letter-spacing: .08em; text-transform: uppercase; }
 .bb-editor label, .bb-stats label, .bb-meta label, .bb-notes-label {
