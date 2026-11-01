@@ -1726,6 +1726,7 @@ body.page-events .hero-slide {
   height: 100%;
   min-height: 0;
   padding: 0;
+  scroll-snap-align: center;
 }
 .tl-card {
   height: 100%;
@@ -2426,7 +2427,11 @@ body.page-resources.is-grid #tab-builds { overflow: hidden; }
   line-height: 1; font-weight: 700;
 }
 body.page-events .hero-slide {
-  flex: 0 0 85vw; width: 85vw; height: auto; align-self: stretch;
+  flex: 0 0 78%;
+  width: 78%;
+  height: auto;
+  align-self: stretch;
+  scroll-snap-align: center;
 }
 body.page-events .tl-card {
   height: auto; aspect-ratio: 4 / 5; max-height: calc(100dvh - 250px);
