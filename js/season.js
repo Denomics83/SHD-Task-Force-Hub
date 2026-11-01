@@ -132,29 +132,33 @@
         STF.esc(numeral) + "</button>"
       );
     }).join("");
-    var panels = missions.map(function (mission, index) {
+    var heads = missions.map(function (mission, index) {
       var realName = isBlankCopy(mission.name) ? "" : String(mission.name).trim();
-      var tasks = (mission.tasks || []).map(taskParts).filter(Boolean);
       var required = requiredLine(mission);
+      return (
+        '<header class="jy-head" data-mission="' + index + '"' + (index === 0 ? "" : " hidden") + ">" +
+        "<h2>Journey Mission " + (index + 1) + "</h2>" +
+        (realName ? '<p class="jy-name">' + STF.esc(realName) + "</p>" : "") +
+        (required ? '<p class="jy-req">' + STF.esc(required) + "</p>" : "") +
+        "</header>"
+      );
+    }).join("");
+    var panels = missions.map(function (mission, index) {
+      var tasks = (mission.tasks || []).map(taskParts).filter(Boolean);
       var body = tasks.length
-        ? tasks.map(function (task, t) {
+        ? tasks.map(function (task) {
           var count = task.count ? '<b>' + STF.esc(task.count) + "</b>" : "";
-          return (
-            '<button type="button" class="jy-task' + (t === 0 ? " is-on" : "") + '" aria-pressed="' + (t === 0 ? "true" : "false") + '">' +
-            count + "<span>" + STF.esc(task.text) + "</span></button>"
-          );
+          return '<div class="jy-task">' + count + "<span>" + STF.esc(task.text) + "</span></div>";
         }).join("")
         : '<p class="jy-empty">Tasks not confirmed yet</p>';
       return (
         '<section class="jy-mission' + (index === 0 ? " is-on" : "") + '" id="jy-mission-' + index + '" role="tabpanel"' + (index === 0 ? "" : " hidden") + ">" +
-        '<header class="jy-head"><h2>Journey Mission ' + (index + 1) + "</h2>" +
-        (realName ? '<p class="jy-name">' + STF.esc(realName) + "</p>" : "") +
-        (required ? '<p class="jy-req">' + STF.esc(required) + "</p>" : "") +
-        "</header>" + body + "</section>"
+        body + "</section>"
       );
     }).join("");
     return (
       '<div class="jy-board">' +
+      '<div class="jy-heads">' + heads + "</div>" +
       '<div class="jy-nav" role="tablist" aria-label="Journey missions">' + nav + "</div>" +
       '<div class="jy-detail">' + panels + "</div></div>"
     );
@@ -177,17 +181,10 @@
           panel.classList.toggle("is-on", on);
           panel.hidden = !on;
         });
-        return;
+        root.querySelectorAll(".jy-head").forEach(function (head) {
+          head.hidden = head.getAttribute("data-mission") !== id;
+        });
       }
-      var row = e.target.closest(".jy-task");
-      if (!row || !root.contains(row)) return;
-      var mission = row.closest(".jy-mission");
-      if (!mission) return;
-      mission.querySelectorAll(".jy-task").forEach(function (el) {
-        var on = el === row;
-        el.classList.toggle("is-on", on);
-        el.setAttribute("aria-pressed", on ? "true" : "false");
-      });
     });
   }
 
