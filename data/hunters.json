@@ -36,12 +36,12 @@
       "headsUp": "The guide's comments say this one sometimes will not start while a global event or modifier is active. The guide suggests turning those off.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -56,14 +56,15 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/demon.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=160s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=160s",
+      "mask_img": "assets/hunters/masks/demon.webp"
     },
     {
       "id": "ghoul",
       "name": "Ghoul",
       "group": "dc",
       "area": "West Potomac Park, near the Lincoln Memorial",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "Enter the sewer east of the Lincoln Memorial (the guide prefers the entrance it circles).",
         "Turn left, go up the stairs by the hanging bulb, and use the laptop in front of the map marked with a moon.",
@@ -72,12 +73,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -93,14 +94,15 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/ghoul.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=312s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=312s",
+      "mask_img": "assets/hunters/masks/ghoul.webp"
     },
     {
       "id": "midas",
       "name": "Midas",
       "group": "dc",
       "area": "West End",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "After 21:00, clear any activity inside the C-shaped building. The pool path stays locked while an activity is up.",
         "Drop into the empty pool. The guide says the pool lights should be red.",
@@ -110,12 +112,12 @@
       "notes": "Shares the fight with Revenant.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -130,14 +132,15 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/midas.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=461s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=461s",
+      "mask_img": "assets/hunters/masks/midas.webp"
     },
     {
       "id": "revenant",
       "name": "Revenant",
       "group": "dc",
       "area": "West End",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "Same puzzle and fight as Midas.",
         "After 21:00, use the jumping-jacks emote in the red-lit empty pool.",
@@ -146,12 +149,12 @@
       "notes": "Shares the fight with Midas.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -166,29 +169,30 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/revenant.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=461s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=461s",
+      "mask_img": "assets/hunters/masks/revenant.webp"
     },
     {
       "id": "cross",
       "name": "Cross",
       "group": "dc",
       "area": "East Mall, water supply north of the Sinkhole control point",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "After 21:00, go to the water node with the Christmas tree, north of the Sinkhole control point.",
-        "The Steam guide says the puzzle uses the café and the Christmas tree, including a hidden lever.",
+        "The Steam guide says the puzzle uses the caf\u00e9 and the Christmas tree, including a hidden lever.",
         "Four hunters spawn: Cross, Diamond, Death, and Phantom."
       ],
       "headsUp": "The switch order is shown in the Steam guide's screenshots. The text does not list that order, so it is not repeated here.",
       "notes": "Four-hunter fight, shared with Diamond, Death, and Phantom.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -202,25 +206,26 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/cross.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s",
+      "mask_img": "assets/hunters/masks/cross.webp"
     },
     {
       "id": "diamond",
       "name": "Diamond",
       "group": "dc",
       "area": "East Mall, same water node as Cross",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "Same night puzzle and four-hunter fight as Cross."
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -236,25 +241,26 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/diamond.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s",
+      "mask_img": "assets/hunters/masks/diamond.webp"
     },
     {
       "id": "death",
       "name": "Death",
       "group": "dc",
       "area": "East Mall, same water node as Cross",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "Same night puzzle and four-hunter fight as Cross."
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -270,26 +276,27 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/death.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s",
+      "mask_img": "assets/hunters/masks/death.webp"
     },
     {
       "id": "phantom",
       "name": "Phantom",
       "group": "dc",
-      "area": "Downtown East, F Street NW — the wiki also ties this mask to the East Mall four-hunter fight",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "area": "Downtown East, F Street NW \u2014 the wiki also ties this mask to the East Mall four-hunter fight",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "The Steam guide treats Phantom as one of the four hunters at the East Mall Christmas-tree water node, after 21:00."
       ],
       "headsUp": "The wiki places the Phantom mask at F Street NW in Downtown East. The Steam guide places the fight with Cross, Diamond, and Death at the East Mall water node. Both are cited; this page does not pick one.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -304,7 +311,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/phantom.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=39s",
+      "mask_img": "assets/hunters/masks/phantom.webp"
     },
     {
       "id": "crimson",
@@ -320,12 +328,12 @@
       "headsUp": "The guide says a separate stalker can appear in this courtyard at night. It cannot be killed and is not this encounter.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -340,14 +348,15 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/crimson.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=404s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=404s",
+      "mask_img": "assets/hunters/masks/crimson.webp"
     },
     {
       "id": "wraith",
       "name": "Wraith",
       "group": "dc",
       "area": "Southwest, memorial east of the Capitol Hill safe house",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "After 21:00, face the memorial wall and shoot out the light.",
         "Stand by the flagpole so the whole wall is on screen.",
@@ -356,12 +365,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -377,14 +386,15 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/wraith.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=236s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=236s",
+      "mask_img": "assets/hunters/masks/wraith.webp"
     },
     {
       "id": "ghost",
       "name": "Ghost",
       "group": "dc",
       "area": "West Potomac Park, Washington Monument",
-      "time": "In-game night, about 21:00–05:00. The guide says not to change sessions while a night puzzle is in progress.",
+      "time": "In-game night, about 21:00\u201305:00. The guide says not to change sessions while a night puzzle is in progress.",
       "steps": [
         "Capture the Washington Monument control point so the supply-room terminal is reachable.",
         "After 21:00, use that terminal. It marks three graves.",
@@ -393,12 +403,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -414,7 +424,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/ghost.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=543s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=543s",
+      "mask_img": "assets/hunters/masks/ghost.webp"
     },
     {
       "id": "specter",
@@ -430,12 +441,12 @@
       "headsUp": "The window order is only in that guide's image, not in its text, so it is not copied here.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -450,7 +461,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/specter.webp",
-      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=543s"
+      "youtube": "https://www.youtube.com/watch?v=c4tABOV1ldU&t=543s",
+      "mask_img": "assets/hunters/masks/specter.webp"
     },
     {
       "id": "psycho",
@@ -467,12 +479,12 @@
       "notes": "Shares the fight with Drip. Needs Warlords of New York.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -486,7 +498,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/psycho.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1795s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1795s",
+      "mask_img": "assets/hunters/masks/psycho.webp"
     },
     {
       "id": "drip",
@@ -500,12 +513,12 @@
       "notes": "Shares the fight with Psycho.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -520,7 +533,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/drip.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1795s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1795s",
+      "mask_img": "assets/hunters/masks/drip.webp"
     },
     {
       "id": "divide",
@@ -534,12 +548,12 @@
       "headsUp": "A step-by-step that is only in screenshots is not repeated here.",
       "sources": [
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         },
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -554,7 +568,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/divide.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=771s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=771s",
+      "mask_img": "assets/hunters/masks/divide.webp"
     },
     {
       "id": "angel",
@@ -570,12 +585,12 @@
       "notes": "Fought in D.C., but the guide says it needs the New York expansion.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -590,7 +605,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/angel.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=41s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=41s",
+      "mask_img": "assets/hunters/masks/angel.webp"
     },
     {
       "id": "drama",
@@ -607,12 +623,12 @@
       "notes": "Fought in D.C. Shares the fight with Weirdo.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -626,7 +642,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/drama.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1111s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1111s",
+      "mask_img": "assets/hunters/masks/drama.webp"
     },
     {
       "id": "weirdo",
@@ -639,12 +656,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -660,7 +677,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/weirdo.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1111s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1111s",
+      "mask_img": "assets/hunters/masks/weirdo.webp"
     },
     {
       "id": "carbon",
@@ -676,12 +694,12 @@
       "notes": "Fought in D.C.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -696,7 +714,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/carbon.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1361s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=1361s",
+      "mask_img": "assets/hunters/masks/carbon.webp"
     },
     {
       "id": "camo",
@@ -712,12 +731,12 @@
       "notes": "Fought in D.C.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -732,7 +751,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/camo.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=549s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=549s",
+      "mask_img": "assets/hunters/masks/camo.webp"
     },
     {
       "id": "neurotic",
@@ -748,12 +768,12 @@
       "headsUp": "Those clock windows are narrow. The guide says leaving the session before the night step makes you start over.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -768,7 +788,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/neurotic.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2320s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2320s",
+      "mask_img": "assets/hunters/masks/neurotic.webp"
     },
     {
       "id": "trip",
@@ -782,12 +803,12 @@
       "headsUp": "The Steam guide's text for this spawn is image-led. The order is not copied from a picture.",
       "sources": [
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         },
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -802,7 +823,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/trip.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s",
+      "mask_img": "assets/hunters/masks/trip.webp"
     },
     {
       "id": "lucky",
@@ -815,12 +837,12 @@
       ],
       "sources": [
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         },
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -836,7 +858,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/lucky.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s",
+      "mask_img": "assets/hunters/masks/lucky.webp"
     },
     {
       "id": "paranoid",
@@ -849,12 +872,12 @@
       ],
       "sources": [
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         },
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -870,7 +893,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/paranoid.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s",
+      "mask_img": "assets/hunters/masks/paranoid.webp"
     },
     {
       "id": "veil",
@@ -883,12 +907,12 @@
       ],
       "sources": [
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         },
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -904,7 +928,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/veil.webp",
-      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s"
+      "youtube": "https://www.youtube.com/watch?v=fzHBsCdcV7M&t=2499s",
+      "mask_img": "assets/hunters/masks/veil.webp"
     },
     {
       "id": "cipher",
@@ -924,12 +949,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -940,7 +965,8 @@
       "notes": "",
       "headsUp": "",
       "image": "assets/hunters/cipher.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/cipher.webp"
     },
     {
       "id": "lumen",
@@ -954,12 +980,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -975,7 +1001,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/lumen.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/lumen.webp"
     },
     {
       "id": "merry",
@@ -989,12 +1016,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -1010,7 +1037,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/merry.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/merry.webp"
     },
     {
       "id": "redtail",
@@ -1024,12 +1052,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -1045,7 +1073,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/redtail.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/redtail.webp"
     },
     {
       "id": "tracker",
@@ -1059,12 +1088,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -1080,7 +1109,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/tracker.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/tracker.webp"
     },
     {
       "id": "craver",
@@ -1094,12 +1124,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -1115,7 +1145,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/craver.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/craver.webp"
     },
     {
       "id": "conqueror",
@@ -1129,12 +1160,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -1150,7 +1181,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/conqueror.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/conqueror.webp"
     },
     {
       "id": "necronos",
@@ -1165,12 +1197,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "GameRant — Brooklyn hunter masks",
+          "name": "GameRant \u2014 Brooklyn hunter masks",
           "url": "https://gamerant.com/all-hunter-masks-division-2-battle-for-brooklyn-dlc/",
           "date": "29 Oct 2026"
         }
@@ -1186,7 +1218,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/necronos.webp",
-      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0"
+      "youtube": "https://www.youtube.com/watch?v=dPvGGc4YRn0",
+      "mask_img": "assets/hunters/masks/necronos.webp"
     },
     {
       "id": "phoenix",
@@ -1198,7 +1231,7 @@
       "steps": [
         "Own Battle for Brooklyn and already have the eight earlier Brooklyn masks, including Necronos.",
         "The Steam guide starts at a burning pile on the roof where Necronos spawned. Walk up to it.",
-        "Trip the wire at the Tracker café, then turn two yellow valves to put the fires out.",
+        "Trip the wire at the Tracker caf\u00e9, then turn two yellow valves to put the fires out.",
         "In the Redtail sewer, trip the wire and shoot the red pipes to clear the fire.",
         "At the Cipher building, shoot the vents to spell P-H-O-E-N-I-X, once each.",
         "The hunter spawns when you drop into the room under the bridge. Do not need another interact."
@@ -1207,12 +1240,12 @@
       "notes": "No mask image is included. The wiki file named Phoenix.png is a different picture and is not used.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "Destructoid — Phoenix hunter mask",
+          "name": "Destructoid \u2014 Phoenix hunter mask",
           "url": "https://www.destructoid.com/how-to-get-the-phoenix-hunter-mask-in-the-division-2/",
           "date": "29 Oct 2026"
         }
@@ -1225,7 +1258,8 @@
         "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
         "If everyone in the area dies, the puzzle resets."
       ],
-      "youtube": "https://www.youtube.com/watch?v=GsrX1KIhrbE"
+      "youtube": "https://www.youtube.com/watch?v=GsrX1KIhrbE",
+      "mask_img": ""
     },
     {
       "id": "deceit",
@@ -1245,12 +1279,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -1260,7 +1294,8 @@
       "notes": "",
       "headsUp": "",
       "image": "assets/hunters/deceit.webp",
-      "youtube": "https://www.youtube.com/watch?v=lQ97Goyv5NM"
+      "youtube": "https://www.youtube.com/watch?v=lQ97Goyv5NM",
+      "mask_img": "assets/hunters/masks/deceit.webp"
     },
     {
       "id": "freedom",
@@ -1279,12 +1314,12 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -1294,7 +1329,8 @@
       "notes": "",
       "headsUp": "",
       "image": "assets/hunters/freedom.webp",
-      "youtube": "https://www.youtube.com/watch?v=BaCftnDSfu4"
+      "youtube": "https://www.youtube.com/watch?v=BaCftnDSfu4",
+      "mask_img": "assets/hunters/masks/freedom.webp"
     },
     {
       "id": "wolves",
@@ -1316,14 +1352,15 @@
       "notes": "No separate mask image was on the wiki under a Wolves filename.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
       ],
       "mask": "",
       "limited": false,
-      "headsUp": ""
+      "headsUp": "",
+      "mask_img": "assets/hunters/masks/wolves.webp"
     },
     {
       "id": "wright",
@@ -1342,7 +1379,7 @@
       ],
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -1352,7 +1389,8 @@
       "notes": "",
       "headsUp": "",
       "image": "assets/hunters/wright.webp",
-      "youtube": "https://www.youtube.com/watch?v=wbi3v9-dEsw"
+      "youtube": "https://www.youtube.com/watch?v=wbi3v9-dEsw",
+      "mask_img": "assets/hunters/masks/wright.webp"
     },
     {
       "id": "ruin",
@@ -1371,7 +1409,7 @@
       "notes": "No mask image is included.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -1384,7 +1422,8 @@
         "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
         "If everyone in the area dies, the puzzle resets."
       ],
-      "youtube": "https://www.youtube.com/watch?v=EpAz2klVv34"
+      "youtube": "https://www.youtube.com/watch?v=EpAz2klVv34",
+      "mask_img": ""
     },
     {
       "id": "adamant-julmust",
@@ -1403,12 +1442,12 @@
       "headsUp": "These are two masks from the same floor. Julmust is not a year-round drop. The guide says December only.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         },
         {
-          "name": "The Division Wiki — Hunters",
+          "name": "The Division Wiki \u2014 Hunters",
           "url": "https://thedivision.fandom.com/wiki/Hunters",
           "date": "29 Oct 2026"
         }
@@ -1421,7 +1460,8 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "image": "assets/hunters/adamant-julmust.webp",
-      "youtube": "https://www.youtube.com/watch?v=H1f4SZlvHgI"
+      "youtube": "https://www.youtube.com/watch?v=H1f4SZlvHgI",
+      "mask_img": "assets/hunters/masks/adamant-julmust.webp"
     },
     {
       "id": "houndsman",
@@ -1440,7 +1480,7 @@
       ],
       "sources": [
         {
-          "name": "The Division Wiki — The Houndsman",
+          "name": "The Division Wiki \u2014 The Houndsman",
           "url": "https://thedivision.fandom.com/wiki/The_Houndsman",
           "date": "29 Oct 2026"
         }
@@ -1448,7 +1488,8 @@
       "mask": "",
       "notes": "",
       "headsUp": "",
-      "image": "assets/hunters/houndsman.webp"
+      "image": "assets/hunters/houndsman.webp",
+      "mask_img": "assets/hunters/masks/houndsman.webp"
     },
     {
       "id": "scoured",
@@ -1467,7 +1508,7 @@
       "notes": "No mask image is included.",
       "sources": [
         {
-          "name": "Steam guide — ALL HUNTER MASK PUZZLES + DLC",
+          "name": "Steam guide \u2014 ALL HUNTER MASK PUZZLES + DLC",
           "url": "https://steamcommunity.com/sharedfiles/filedetails/?id=3009550728",
           "date": "29 Oct 2026"
         }
@@ -1479,7 +1520,8 @@
         "These open-world encounters do not start on Story difficulty. The guide suggests Normal.",
         "If everyone in the area dies, the puzzle resets."
       ],
-      "youtube": "https://www.youtube.com/watch?v=8FcsSk233V8"
+      "youtube": "https://www.youtube.com/watch?v=8FcsSk233V8",
+      "mask_img": ""
     }
   ]
 }

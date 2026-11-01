@@ -112,13 +112,29 @@
     if (push) history.pushState({ res: "hunters" }, "", "resources.html?tab=hunters");
   }
 
+  function hunterSub(hunter) {
+    var sub = String(hunter.subtitle || "").trim();
+    if (sub) return sub;
+    var area = String(hunter.area || "").split(",")[0].trim();
+    if (area) return area;
+    if (String(hunter.youtube || "").trim()) return "Guide";
+    return "";
+  }
+
+  function maskArt(hunter) {
+    var src = String(hunter.mask_img || "").trim();
+    if (src) return '<span class="hunter-float"><img src="' + STF.esc(src) + '" alt=""></span>';
+    return '<span class="hunter-float is-fallback" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 10.2c1.3-4.2 12.7-4.2 14 0v4.4c-1.4 3.8-12.6 3.8-14 0z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8.2 12.2h2.2M13.6 12.2h2.2" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></svg></span>';
+  }
+
   function maskRow(hunter, region) {
-    var art = hunter.image
-      ? '<img class="hunter-mask-zoom" src="' + STF.esc(hunter.image) + '" alt="">'
-      : '<span class="hunter-mask-fallback" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M4.5 11c1.2-4.6 13.8-4.6 15 0v4.2c-1.3 4-13.7 4-15 0z" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M8 12.4h2.4M13.6 12.4H16" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="square"/></svg></span>';
+    var sub = hunterSub(hunter);
     return (
-      '<button type="button" class="hunter-mask-row" data-hunter="' + STF.esc(hunter.id) + '" data-region="' + region + '" aria-label="' + STF.esc(hunter.name) + '">' +
-      art +
+      '<button type="button" class="hunter-row" data-hunter="' + STF.esc(hunter.id) + '" data-region="' + region + '" aria-label="' + STF.esc(hunter.name) + '">' +
+      '<span class="hunter-copy"><strong>' + STF.esc(hunter.name) + "</strong>" +
+      (sub ? "<small>" + STF.esc(sub) + "</small>" : "") +
+      "</span>" +
+      maskArt(hunter) +
       "</button>"
     );
   }
@@ -158,8 +174,9 @@
     document.body.classList.remove("is-hunter-home", "is-grid", "is-list");
     document.body.classList.add("is-hunter");
     setHunterBack("detail", regionId);
-    var hero = hunter.image
-      ? '<img class="hunter-hero" src="' + STF.esc(hunter.image) + '" alt="">'
+    var heroSrc = String(hunter.mask_img || hunter.image || "").trim();
+    var hero = heroSrc
+      ? '<img class="hunter-hero' + (hunter.mask_img ? " is-mask" : "") + '" src="' + STF.esc(heroSrc) + '" alt="">'
       : '<span class="hunter-hero hunter-fallback" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 10c1.4-4 12.6-4 14 0v5c-1.5 4-12.5 4-14 0z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>';
     var steps = (hunter.steps || []).map(function (step) { return "<li>" + STF.esc(step) + "</li>"; }).join("");
     var tips = (hunter.tips || []).map(function (tip) { return "<li>" + STF.esc(tip) + "</li>"; }).join("");
