@@ -33,7 +33,6 @@
       .join("");
   }
 
-  var TASK_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 8.2v7.6M8.2 12h7.6" stroke="currentColor" stroke-width="1.4"/></svg>';
   var SCOUT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.6" cy="14" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.4" cy="14" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.7 14h2.6M7.6 10.9V8.2M16.4 10.9V8.2M5.4 8.2h4.4M14.2 8.2h4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
   var HVT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>';
   var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
@@ -91,66 +90,103 @@
     });
   }
 
+  function isBlankCopy(text) {
+    var value = String(text || "").trim().toLowerCase();
+    if (!value) return true;
+    return /add name|add task|add details|details coming soon|confirm in-game/.test(value);
+  }
+
+  function taskParts(task) {
+    if (task && typeof task === "object") {
+      var text = task.text || task.task || task.name || "";
+      var count = task.count || task.progress || task.need || "";
+      if (isBlankCopy(text)) return null;
+      return { text: String(text).trim(), count: isBlankCopy(count) ? "" : String(count).trim() };
+    }
+    var raw = String(task || "").trim();
+    if (isBlankCopy(raw)) return null;
+    var lead = raw.match(/^(\d+\s*\/\s*\d+)\s+(.+)$/);
+    if (lead && !isBlankCopy(lead[2])) return { text: lead[2].trim(), count: lead[1].replace(/\s+/g, "") };
+    return { text: raw, count: "" };
+  }
+
+  function requiredLine(mission) {
+    var raw = mission.required != null ? mission.required : mission.requiredToComplete;
+    if (raw == null || raw === "") raw = mission.need;
+    if (raw == null || String(raw).trim() === "" || isBlankCopy(raw)) return "";
+    var num = parseInt(raw, 10);
+    var label = !isNaN(num) && String(raw).trim() === String(num) ? pad2(num) : String(raw).trim();
+    return label + " Required to Complete";
+  }
+
   function journeyHTML(pack) {
     var missions = (pack && pack.missions) || [];
     if (!missions.length) return '<p class="lede">No journey missions for this season.</p>';
-    return '<div class="journey-list">' + missions.map(function (mission, index) {
-      var tasks = mission.tasks || [];
-      var taskHtml = tasks.map(function (task, t) {
-        return (
-          '<button type="button" class="j-task j-pick" aria-pressed="false">' +
-          "<span>" + STF.esc(task) + "</span>" +
-          '<span class="j-meta"><b>' + pad2(t + 1) + "</b>" + TASK_ICO + "</span>" +
-          '<span class="j-obj"><em>Objective</em>' + STF.esc(task) + "</span>" +
-          "</button>"
-        );
-      }).join("");
-      var unlocks = mission.unlocks
-        ? '<p class="unlocks-line">Rewards · ' + STF.esc(mission.unlocks) + "</p>"
-        : "";
-      var name = mission.name || ("Mission " + (index + 1));
-      var panelId = "journey-panel-" + index;
+    var nav = missions.map(function (mission, index) {
+      var on = index === 0;
+      var numeral = ROMAN[index] || String(index + 1);
       return (
-        '<article class="journey-mission">' +
-        '<button type="button" class="journey-bar" aria-expanded="false" aria-controls="' + panelId + '">' +
-        '<span class="j-roman">' + (ROMAN[index] || String(index + 1)) + "</span>" +
-        '<span class="journey-name">' + STF.esc(name) + "</span>" +
-        '<span class="j-ring">' + pad2(tasks.length) + "</span>" +
-        "</button>" +
-        '<div class="journey-panel" id="' + panelId + '" role="region">' +
-        '<div class="journey-panel-inner">' + unlocks + taskHtml + "</div></div></article>"
+        '<button type="button" class="jy-num' + (on ? " is-on" : "") + '" role="tab" data-mission="' + index + '"' +
+        ' aria-selected="' + (on ? "true" : "false") + '" aria-controls="jy-mission-' + index + '">' +
+        STF.esc(numeral) + "</button>"
       );
-    }).join("") + "</div>";
+    }).join("");
+    var panels = missions.map(function (mission, index) {
+      var realName = isBlankCopy(mission.name) ? "" : String(mission.name).trim();
+      var tasks = (mission.tasks || []).map(taskParts).filter(Boolean);
+      var required = requiredLine(mission);
+      var body = tasks.length
+        ? tasks.map(function (task, t) {
+          var count = task.count ? '<b>' + STF.esc(task.count) + "</b>" : "";
+          return (
+            '<button type="button" class="jy-task' + (t === 0 ? " is-on" : "") + '" aria-pressed="' + (t === 0 ? "true" : "false") + '">' +
+            count + "<span>" + STF.esc(task.text) + "</span></button>"
+          );
+        }).join("")
+        : '<p class="jy-empty">Tasks not confirmed yet</p>';
+      return (
+        '<section class="jy-mission' + (index === 0 ? " is-on" : "") + '" id="jy-mission-' + index + '" role="tabpanel"' + (index === 0 ? "" : " hidden") + ">" +
+        '<header class="jy-head"><h2>Journey Mission ' + (index + 1) + "</h2>" +
+        (realName ? '<p class="jy-name">' + STF.esc(realName) + "</p>" : "") +
+        (required ? '<p class="jy-req">' + STF.esc(required) + "</p>" : "") +
+        "</header>" + body + "</section>"
+      );
+    }).join("");
+    return (
+      '<div class="jy-board">' +
+      '<div class="jy-nav" role="tablist" aria-label="Journey missions">' + nav + "</div>" +
+      '<div class="jy-detail">' + panels + "</div></div>"
+    );
   }
 
   function bindJourney(root) {
     if (!root || root.dataset.journeyBound) return;
     root.dataset.journeyBound = "1";
     root.addEventListener("click", function (e) {
-      var btn = e.target.closest(".journey-bar");
-      if (!btn || !root.contains(btn)) return;
-      var panel = document.getElementById(btn.getAttribute("aria-controls"));
-      if (!panel) return;
-      var open = btn.getAttribute("aria-expanded") !== "true";
-      btn.setAttribute("aria-expanded", open ? "true" : "false");
-      panel.classList.toggle("is-open", open);
-      btn.classList.toggle("is-on", open);
-    });
-    root.addEventListener("click", function (e) {
-      var row = e.target.closest(".j-pick");
-      if (!row || !root.contains(row)) return;
-      var on = row.getAttribute("aria-pressed") !== "true";
-      var mission = row.closest(".journey-mission");
-      if (mission) {
-        mission.querySelectorAll(".j-pick").forEach(function (el) {
-          el.setAttribute("aria-pressed", "false");
-          el.classList.remove("is-on");
+      var num = e.target.closest(".jy-num");
+      if (num && root.contains(num)) {
+        var id = num.getAttribute("data-mission");
+        root.querySelectorAll(".jy-num").forEach(function (btn) {
+          var on = btn === num;
+          btn.classList.toggle("is-on", on);
+          btn.setAttribute("aria-selected", on ? "true" : "false");
         });
+        root.querySelectorAll(".jy-mission").forEach(function (panel) {
+          var on = panel.id === "jy-mission-" + id;
+          panel.classList.toggle("is-on", on);
+          panel.hidden = !on;
+        });
+        return;
       }
-      if (on) {
-        row.setAttribute("aria-pressed", "true");
-        row.classList.add("is-on");
-      }
+      var row = e.target.closest(".jy-task");
+      if (!row || !root.contains(row)) return;
+      var mission = row.closest(".jy-mission");
+      if (!mission) return;
+      mission.querySelectorAll(".jy-task").forEach(function (el) {
+        var on = el === row;
+        el.classList.toggle("is-on", on);
+        el.setAttribute("aria-pressed", on ? "true" : "false");
+      });
     });
   }
 
