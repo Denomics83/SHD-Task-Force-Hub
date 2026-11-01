@@ -1474,8 +1474,11 @@ body.page-builds.is-list {
 .role-ico.support { background: transparent; }
 .build-row em.tone-dps, .build-role.tone-dps { color: #e07070; }
 .build-row em.tone-tank, .build-role.tone-tank { color: #8eb4e8; }
-.build-row em.tone-skill, .build-role.tone-skill { color: #e2c56a; }
+.build-row em.tone-cc, .build-role.tone-cc { color: #d7a15a; }
+.build-row em.tone-skill, .build-role.tone-skill,
+.build-row em.tone-support, .build-role.tone-support { color: #e2c56a; }
 .build-row em.tone-heal, .build-role.tone-heal { color: #7dcea0; }
+.build-row em.tone-hybrid, .build-role.tone-hybrid { color: #c9a6e8; }
 .build-logo {
   width: 42px; height: 42px; border-radius: 10px; overflow: hidden;
   display: grid; place-items: center; background: #101318;
@@ -2996,6 +2999,7 @@ body.page-admin [hidden] { display: none !important; }
   padding: 14px 16px;
 }
 .bb-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: end; }
+#bb-playstyle-help { display: block; margin-top: 4px; text-transform: none; letter-spacing: 0; font-weight: 500; font-size: .78rem; color: #b7bcc4; line-height: 1.35; }
 .bb-meta .admin-row, .bb-meta .admin-status, .bb-meta .bb-kicker,
 .bb-meta .bb-notes-label, .bb-meta .rich-editor, .bb-meta .ql-toolbar, .bb-meta .ql-container { grid-column: 1 / -1; }
 .bb-kicker {

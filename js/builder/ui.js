@@ -54,6 +54,14 @@
     }
     host._shadeBuilder = 1;
     options = options || {};
+    var PLAYSTYLES = [
+      ["DPS", "Purely to deal max damage."],
+      ["Tank", "Stay alive, take the brute force and draw threat."],
+      ["Healer", "Priority is keeping members alive and not much else."],
+      ["Crowd Control", "Cause chaos and keep enemies busy, suppressed or staggered."],
+      ["Support", "Team buffs and enemy debuffs, sometimes heals."],
+      ["Hybrid", "A combination of 2 or 3 of the others."]
+    ];
     var catalog = null;
     var state = null;
     var selected = "primary";
@@ -65,7 +73,7 @@
         id: record && record.id || "",
         name: record && record.name || "",
         category: record && record.category || "solo",
-        playstyle: record && record.playstyle || "",
+        playstyle: canonicalPlaystyle(record && record.playstyle),
         published: record ? !!record.published : true,
         notesHtml: record && record.notes_html || ""
       };
@@ -122,6 +130,28 @@
     var panel = "build";
     var notesQuill = null;
     var CATEGORIES = ["solo", "team", "incursion", "raid", "pvp", "escalation"];
+
+    function canonicalPlaystyle(value) {
+      var key = String(value || "").trim().toLowerCase();
+      var legacy = {
+        "healer/support": "Healer",
+        "skill": "Support",
+        "cc": "Crowd Control",
+        "damage": "DPS"
+      };
+      if (legacy[key]) return legacy[key];
+      for (var i = 0; i < PLAYSTYLES.length; i++) {
+        if (PLAYSTYLES[i][0].toLowerCase() === key) return PLAYSTYLES[i][0];
+      }
+      return value ? String(value) : "DPS";
+    }
+
+    function playHelp(value) {
+      for (var i = 0; i < PLAYSTYLES.length; i++) {
+        if (PLAYSTYLES[i][0] === value) return PLAYSTYLES[i][1];
+      }
+      return "";
+    }
 
     function categoryLabel(name) {
       if (name === "pvp") return "PvP";
@@ -1134,8 +1164,8 @@
     }
 
     function shell() {
-      var plays = (catalog.playstyles || ["DPS"]).slice();
-      if (meta.playstyle && plays.indexOf(meta.playstyle) < 0) plays.unshift(meta.playstyle);
+      var plays = PLAYSTYLES.slice();
+      if (meta.playstyle && !playHelp(meta.playstyle)) plays.push([meta.playstyle, ""]);
       var categories = CATEGORIES.slice();
       if (meta.category && categories.indexOf(meta.category) < 0) categories.unshift(meta.category);
       host.innerHTML =
@@ -1146,9 +1176,10 @@
           return '<option value="' + esc(name) + '"' + (name === meta.category ? " selected" : "") + ">" + esc(categoryLabel(name)) + "</option>";
         }).join("") + "</select></label>" +
         "<label>Playstyle <select id=\"bb-playstyle\" required>" +
-        plays.map(function (name) {
-          return '<option value="' + esc(name) + '"' + (name === meta.playstyle ? " selected" : "") + ">" + esc(name) + "</option>";
-        }).join("") + "</select></label>" +
+        plays.map(function (pair) {
+          return '<option value="' + esc(pair[0]) + '"' + (pair[0] === meta.playstyle ? " selected" : "") + ">" + esc(pair[0]) + "</option>";
+        }).join("") + "</select>" +
+        '<small id="bb-playstyle-help">' + esc(playHelp(meta.playstyle)) + "</small></label>" +
         '<label>Name <input id="bb-name" required value="' + esc(meta.name) + '"></label>' +
         '<label class="bb-check"><input id="bb-published" type="checkbox"' + (meta.published ? " checked" : "") + "> Published</label>" +
         '<label class="bb-notes-label">Notes</label>' +
@@ -1281,6 +1312,11 @@
         return;
       }
       if (e.target.getAttribute("data-watch")) return;
+      if (e.target.id === "bb-playstyle") {
+        var help = host.querySelector("#bb-playstyle-help");
+        if (help) help.textContent = playHelp(e.target.value);
+        return;
+      }
       if (e.target.id && e.target.id.indexOf("bb-") === 0 && e.target.id !== "bb-form") return;
       var effect = applyField(e.target);
       if (effect === "editor") paint();
@@ -1323,8 +1359,7 @@
       var doc = await (options.fetchJSON || STF.fetchJSON)("data/td2/builder/sample-eclipse.json");
       state = ShadeCatalog.fromSaved({ loadout: doc }, catalog);
       if (!meta.name) meta.name = "Eclipse Protocol";
-      if (catalog.playstyles.indexOf("Skill") >= 0) meta.playstyle = "Skill";
-      else if (!meta.playstyle) meta.playstyle = catalog.playstyles[0] || "";
+      if (!meta.playstyle) meta.playstyle = "Support";
       var name = host.querySelector("#bb-name");
       var play = host.querySelector("#bb-playstyle");
       if (name && !name.value) name.value = meta.name;
@@ -1342,7 +1377,7 @@
     ShadeCatalog.load(options.fetchJSON || STF.fetchJSON).then(function (loaded) {
       catalog = loaded;
       state = ShadeCatalog.fromSaved(options.record || { loadout: {} }, catalog);
-      if (!meta.playstyle) meta.playstyle = (catalog.playstyles || [])[0] || "";
+      if (!meta.playstyle) meta.playstyle = "DPS";
       shell();
       mountNotes();
       paint();

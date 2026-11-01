@@ -22,7 +22,8 @@
     cc: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2.8 13.7 8l5.3.5-4.1 3.4 1.4 5.1L12 14.2 7.7 17l1.4-5.1L5 8.5 10.3 8Z" fill="#fff"/></svg>',
     heal: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M10.1 4.2h3.8V10h5.9v3.8H13.9v5.8h-3.8v-5.8H4.2V10h5.9Z" fill="#fff"/></svg>',
     tank: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.1 19.2 6v6.1c0 4.3-2.9 6.8-7.2 8.4-4.3-1.6-7.2-4.1-7.2-8.4V6Z" fill="none" stroke="#fff" stroke-width="1.8" stroke-linejoin="round"/></svg>',
-    support: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="15.2" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/></svg>'
+    support: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="8" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/><circle cx="15.2" cy="12" r="3.2" fill="none" stroke="#fff" stroke-width="1.7"/></svg>',
+    hybrid: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 14 9h6l-4.8 3.5 1.8 5.8L12 15.2 7 18.3l1.8-5.8L4 9h6z" fill="none" stroke="#fff" stroke-width="1.5"/></svg>'
   };
 
   var ROLE_LABEL = {
@@ -37,6 +38,7 @@
     if (role === "healer") return "heal";
     if (role === "tank") return "tank";
     if (role === "cc") return "cc";
+    if (role === "hybrid") return "hybrid";
     if (role === "support") return "support";
     return "dps";
   }
@@ -606,7 +608,7 @@
         return (
           '<button type="button" class="build-row" data-build="' + STF.esc(row.id) + '">' +
           '<span class="build-copy"><strong>' + STF.esc(row.name) + "</strong>" +
-          "<em>" + STF.esc(roleText(row) + " · " + (cat ? cat.label : row.category)) + "</em></span>" +
+          '<em class="tone-' + kind + '">' + STF.esc(roleText(row) + " · " + (cat ? cat.label : row.category)) + "</em></span>" +
           '<span class="role-ico ' + kind + '" aria-hidden="true">' + ROLE_ICONS[kind] + "</span>" +
           "</button>"
         );
@@ -807,7 +809,8 @@
     if (lower.indexOf("tank") >= 0) role = "tank";
     else if (lower.indexOf("heal") >= 0) role = "healer";
     else if (lower.indexOf("crowd") >= 0) role = "cc";
-    else if (lower.indexOf("skill") >= 0 || lower.indexOf("hybrid") >= 0 || lower.indexOf("support") >= 0) role = "support";
+    else if (lower.indexOf("hybrid") >= 0) role = "hybrid";
+    else if (lower.indexOf("support") >= 0 || lower.indexOf("skill") >= 0) role = "support";
     return {
       id: row.id,
       name: row.name,
