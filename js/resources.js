@@ -137,7 +137,7 @@
       (rows.length
         ? rows.map(function (hunter) { return maskRow(hunter, regionId); }).join("")
         : '<p class="lede">No hunters in this area.</p>') +
-      '<p class="hunter-credit">Mask images: <a href="' + STF.esc(hunterData.imageCreditUrl || "https://thedivision.fandom.com/wiki/Hunters") + '" target="_blank" rel="noopener">The Division Wiki (Fandom)</a></p>';
+      "";
     window.scrollTo(0, 0);
     if (push) history.pushState({ res: "hunters", region: regionId }, "", "resources.html?tab=hunters#" + regionId);
   }
@@ -165,10 +165,6 @@
       : '<span class="hunter-hero hunter-fallback" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 10c1.4-4 12.6-4 14 0v5c-1.5 4-12.5 4-14 0z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>';
     var steps = (hunter.steps || []).map(function (step) { return "<li>" + STF.esc(step) + "</li>"; }).join("");
     var tips = (hunter.tips || []).map(function (tip) { return "<li>" + STF.esc(tip) + "</li>"; }).join("");
-    var sources = (hunter.sources || []).map(function (src) {
-      return '<a href="' + STF.esc(src.url) + '" target="_blank" rel="noopener">' + STF.esc(src.name) + "</a>" +
-        (src.date ? " · " + STF.esc(src.date) : "");
-    }).join("<br>");
     resBody.innerHTML =
       hero +
       "<h1>" + STF.esc(hunter.name) + "</h1>" +
@@ -181,8 +177,6 @@
       (hunter.time ? "<h2>Time</h2><p>" + STF.esc(hunter.time) + "</p>" : "") +
       (hunter.notes ? "<h2>Notes</h2><p>" + STF.esc(hunter.notes) + "</p>" : "") +
       (hunter.headsUp ? '<p class="hunter-headsup"><strong>Heads up</strong> ' + STF.esc(hunter.headsUp) + "</p>" : "") +
-      (sources ? '<p class="hunter-sources">' + sources + "</p>" : "") +
-      '<p class="hunter-credit">Mask images: <a href="https://thedivision.fandom.com/wiki/Hunters" target="_blank" rel="noopener">The Division Wiki (Fandom)</a></p>' +
       youtubeBlock(hunter);
     window.scrollTo(0, 0);
     if (push) history.pushState({ res: "hunters", region: regionId, hunter: id }, "", "resources.html?tab=hunters#" + regionId + "/" + id);

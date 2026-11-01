@@ -148,9 +148,6 @@
     var actives = (data.actives || []).map(modifierCard).join("");
     var hostiles = (data.hostiles || []).map(modifierCard).join("");
     var passives = (data.passives || []).map(modifierCard).join("");
-    var sources = (data.sources || [])
-      .map(function (src) { return sourceLine(src.name + " — " + src.covers, src.url); })
-      .join("");
     return (
       '<article class="season-item"><span class="status">Global</span><h3>' +
       STF.esc(data.global.name) + "</h3><p>" + STF.esc(data.global.effect) + "</p></article>" +
@@ -159,8 +156,7 @@
       '<h3 class="mod-label">Hostile</h3>' + hostiles +
       '<h3 class="mod-label">Passive</h3>' +
       '<p class="caveat">Passive numbers are from the 13 Aug 2026 PTS notes. Ubisoft’s live season article names the system but does not reprint every passive. Exact live values can differ.</p>' +
-      passives +
-      sources
+      passives
     );
   }
 

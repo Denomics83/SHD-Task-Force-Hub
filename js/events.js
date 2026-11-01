@@ -69,14 +69,160 @@
 
   function safePhoto(src) {
     var value = String(src || "");
+    if (/season-hero|raid-hero/.test(value)) return "";
     if (/^assets\/[a-z0-9._/-]+$/i.test(value)) return value;
     if (/^https:\/\/egojdxwpfjfwihykhnik\.supabase\.co\/storage\/v1\/object\/public\/media\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
     return "";
   }
 
+  var EMBLEMS = {
+    "assault": "assets/events/assault.webp",
+    "ambush": "assets/events/ambush.webp",
+    "shd-exposed": "assets/events/shd-exposed.webp",
+    "vanguard-overdrive": "assets/events/vanguard-overdrive.webp",
+    "redline-overdrive": "assets/events/redline-overdrive.webp",
+    "deadeye-overdrive": "assets/events/deadeye-overdrive.webp",
+    "tech-overdrive": "assets/events/tech-overdrive.webp",
+    "expertise-surge": "assets/events/expertise-surge.webp",
+    "optimization-surge": "assets/events/optimization-surge.webp",
+    "retaliation-surge": "assets/events/retaliation-surge.webp",
+    "dark-zone-surge": "assets/events/dark-zone-surge.webp",
+    "countdown-surge": "assets/events/countdown-surge.webp",
+    "prototype-surge": "assets/events/prototype-surge.webp",
+    "proficiency-xp": "assets/events/proficiency-xp.webp",
+    "proficiency-xp-event": "assets/events/proficiency-xp.webp",
+    "xp-x5": "assets/events/xp-x5.webp",
+    "x5-xp": "assets/events/xp-x5.webp",
+    "x5-xp-event": "assets/events/xp-x5.webp",
+    "shepherd-xp": "assets/events/shepherd-xp.webp",
+    "red-moon-unleashed": "assets/events/red-moon-unleashed.webp",
+    "red-moon-rising": "assets/events/red-moon-rising.webp",
+    "creator-collaboration": "assets/events/creator-collaboration.webp",
+    "raid": "assets/events/raid.webp"
+  };
+
+  function titleSlug(name) {
+    return String(name || "")
+      .toLowerCase()
+      .replace(/:.*/, "")
+      .replace(/&/g, " ")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-|-$/g, "");
+  }
+
+  function emblemSrc(item) {
+    var type = (item && item.type) || {};
+    var override = safePhoto(type.image_url || type.emblem || "");
+    if (!override && type.image && !/season-hero|raid-hero/.test(type.image)) override = safePhoto(type.image);
+    if (override) return override;
+    var slug = titleSlug(type.name || item.title || "");
+    if (EMBLEMS[type.id]) return EMBLEMS[type.id];
+    if (EMBLEMS[slug]) return EMBLEMS[slug];
+    if (/overdrive/.test(slug)) {
+      if (/redline/.test(slug)) return EMBLEMS["redline-overdrive"];
+      if (/deadeye/.test(slug)) return EMBLEMS["deadeye-overdrive"];
+      if (/tech/.test(slug)) return EMBLEMS["tech-overdrive"];
+      return EMBLEMS["vanguard-overdrive"];
+    }
+    if (/surge/.test(slug)) {
+      if (/expertise/.test(slug)) return EMBLEMS["expertise-surge"];
+      if (/optimi/.test(slug)) return EMBLEMS["optimization-surge"];
+      if (/retali/.test(slug)) return EMBLEMS["retaliation-surge"];
+      if (/countdown/.test(slug)) return EMBLEMS["countdown-surge"];
+      if (/prototype/.test(slug)) return EMBLEMS["prototype-surge"];
+      if (/dark-zone|darkzone/.test(slug)) return EMBLEMS["dark-zone-surge"];
+      return EMBLEMS["prototype-surge"];
+    }
+    if (/shepherd/.test(slug)) return EMBLEMS["shepherd-xp"];
+    if (/proficiency/.test(slug)) return EMBLEMS["proficiency-xp"];
+    if (/x5|xp-event|season-pass-xp/.test(slug)) return EMBLEMS["xp-x5"];
+    if (item.kind === "raid") return EMBLEMS.raid;
+    return "assets/events/emblem-placeholder.webp";
+  }
+
+  function stripSourceHTML(html) {
+    var node = document.createElement("div");
+    node.innerHTML = STF.safeHTML(html || "");
+    Array.prototype.forEach.call(node.querySelectorAll("p, li, div"), function (el) {
+      if (/^\s*source\s*:/i.test(el.textContent || "")) el.remove();
+    });
+    return node.innerHTML;
+  }
+
+  function isPlaceholder(text) {
+    var value = String(text || "").trim().toLowerCase();
+    return !value || value === "add details" || value === "details coming soon" || value === "confirm in-game";
+  }
+
+  function splitBits(text) {
+    return String(text || "")
+      .split(/\s*[·\n]\s*/)
+      .map(function (line) { return line.trim(); })
+      .filter(function (line) { return line && !isPlaceholder(line); });
+  }
+
+  function categoryFor(item) {
+    var type = (item && item.type) || {};
+    if (type.category) return type.category;
+    if (item.kind === "clan") return "Clan";
+    if (item.kind === "raid") return "Raid";
+    var name = String(type.name || "").toLowerCase();
+    if (/dark zone|red moon rising/.test(name)) return "Dark Zone Event";
+    if (/assault|ambush|shd exposed|reanimated|golden bullet|polarity/.test(name)) return "Global Event";
+    return "Season Event";
+  }
+
+  function clockParts(ms) {
+    var mins = Math.floor(Math.max(0, ms) / 60000);
+    var days = Math.floor(mins / 1440);
+    var hours = Math.floor((mins % 1440) / 60);
+    var rem = mins % 60;
+    if (days > 0) return days + "d " + hours + "h";
+    if (hours > 0) return hours + "h " + rem + "m";
+    return Math.max(1, rem) + "m";
+  }
+
+  function tickerFor(item) {
+    var now = Date.now();
+    var start = new Date(item.start || item.remainStart || 0).getTime();
+    var end = item.end || item.remainEnd ? new Date(item.end || item.remainEnd).getTime() : 0;
+    var state = item.state;
+    if (!state) {
+      if (end && now >= end) state = "ended";
+      else if (start && now < start) state = "upcoming";
+      else state = "active";
+    }
+    if (state === "ended") return end ? "Ended " + clockParts(now - end) + " ago" : "Ended";
+    if (state === "upcoming") return start ? "Starts in " + clockParts(start - now) : "Coming soon";
+    return end ? clockParts(end - now) + " left" : "Live";
+  }
+
+  function statusLabel(state) {
+    if (state === "ended") return "ENDED";
+    if (state === "upcoming") return "COMING SOON";
+    return "ONGOING";
+  }
+
+  function dateTag(iso, label) {
+    if (!iso) return "";
+    var date = new Date(iso);
+    if (isNaN(date.getTime())) return "";
+    var text = new Intl.DateTimeFormat("en-AU", {
+      timeZone: "Australia/Melbourne",
+      weekday: "short", day: "numeric", month: "short",
+      hour: "numeric", minute: "2-digit"
+    }).format(date);
+    return '<span class="ev-date"><b>' + STF.esc(label) + "</b>" + STF.esc(text) + "</span>";
+  }
+
   function paintRemain() {
-    document.querySelectorAll(".hero-remain[data-remain-end]").forEach(function (el) {
-      el.textContent = eventRemainLabel(el.getAttribute("data-remain-start"), el.getAttribute("data-remain-end"));
+    document.querySelectorAll("[data-ticker]").forEach(function (el) {
+      if (el.getAttribute("data-static") === "1") return;
+      el.textContent = tickerFor({
+        start: el.getAttribute("data-remain-start"),
+        end: el.getAttribute("data-remain-end"),
+        state: el.getAttribute("data-state")
+      });
     });
   }
 
@@ -301,33 +447,7 @@
   }
 
   function showRemoteDetail(item) {
-    var endedState = item.state === "ended";
-    var active = item.state === "active";
-    var flag = active ? "ACTIVATED" : endedState ? "ENDED" : "COMING SOON";
-    var timeLine = !item.end
-      ? (item.state === "upcoming" ? "Starts soon" : "Live")
-      : endedState
-        ? endedAgo(item.end)
-        : "Time Remaining " + eventRemainLabel(item.start, item.end);
-    var photo = safePhoto(item.type.image);
-    detail.innerHTML =
-      '<p class="ge-time">' + STF.esc(timeLine) + ' <span class="ge-flag">' + flag + "</span></p>" +
-      "<h1>" + STF.esc(item.type.name || "Event") + "</h1>" +
-      '<p class="upd-posted">Starts · ' + STF.esc(melWhen(item.start)) + "</p>" +
-      (item.end ? '<p class="upd-posted">Ends · ' + STF.esc(melWhen(item.end)) + "</p>" : "") +
-      (photo ? '<figure class="upd-banner"><img src="' + STF.esc(photo) + '" alt=""></figure>' : "") +
-      '<div class="rich-html">' + STF.safeHTML(item.htmlDescription || "") + "</div>" +
-      (item.kind === "clan"
-        ? '<section class="attendance-box" id="attendance-box"><h2 class="upd-h">Attendance</h2><div class="attendance-actions"></div><ul class="attendance-going"></ul></section>'
-        : "") +
-      '<p class="pad-hints"><span><i>Esc</i> Back</span></p>';
-    var screen = document.getElementById("tl-screen");
-    if (screen) screen.hidden = true;
-    rail.hidden = true;
-    detail.hidden = false;
-    setEventsBack(true);
-    if (item.kind === "clan") paintAttendance(item);
-    window.scrollTo(0, 0);
+    showEventDetail(item);
   }
 
   STF.onAuth = function () {
@@ -339,76 +459,53 @@
 
   function showEventDetail(item) {
     if (!detail || !item) return showRail();
-    if (item.remote) return showRemoteDetail(item);
     var type = item.type || {};
-    function block(label, text) {
-      return "<h2 class=\"upd-h\">" + STF.esc(label) + "</h2><p>" + STF.esc(text || "add details") + "</p>";
+    var state = item.state || "active";
+    var statusClass = state === "ended" ? "is-ended" : state === "upcoming" ? "is-soon" : "is-live";
+    var emblem = emblemSrc(item);
+    var buffs = splitBits(type.modifiers);
+    var rules = splitBits(type.tasks);
+    var note = !isPlaceholder(type.note) ? type.note : (!isPlaceholder(item.note) ? item.note : "");
+    var showCopy = item.remote ? item.kind !== "rotation" : !!type.show_description;
+    var copy = "";
+    if (showCopy && item.remote && item.htmlDescription && STF.plainText(item.htmlDescription)) {
+      copy = '<div class="rich-html ev-copy">' + stripSourceHTML(item.htmlDescription) + "</div>";
+    } else if (showCopy && !isPlaceholder(type.description)) {
+      copy = '<p class="ev-copy">' + STF.esc(type.description) + "</p>";
     }
-    var suggested = type.suggested
-      ? "<details class=\"event-suggested\"><summary>Suggested note</summary><p>" + STF.esc(type.suggested) + "</p></details>"
+    var buffHtml = buffs.length
+      ? '<div class="ev-buffs">' + buffs.map(function (line) { return '<p class="ev-buff">' + STF.esc(line) + "</p>"; }).join("") + "</div>"
       : "";
-    var redMoon = item.type && item.type.id === "red-moon-unleashed";
+    var ruleHtml = rules.length
+      ? '<div class="ev-rules">' + rules.map(function (line) { return "<p>" + STF.esc(line) + "</p>"; }).join("") + "</div>"
+      : "";
+    var redMoon = type.id === "red-moon-unleashed";
     var mapBlock = "";
     if (redMoon && item.mapImage) {
       mapBlock =
-        '<h2 class="upd-h">Map</h2>' +
         '<button type="button" class="map-shot" id="event-map-open">' +
         '<img src="' + STF.esc(item.mapImage) + '" alt="Red Moon Unleashed map">' +
-        "</button>" +
-        (item.mapCaption ? '<p class="lede map-note">' + STF.esc(item.mapCaption) + "</p>" : "") +
-        '<p class="lede map-note">Tap the map to open it full screen. Pinch to zoom.</p>';
+        "</button>";
     } else if (redMoon) {
-      var altarList = (altarsDoc.altars || []).map(function (altar) {
-        var coords = "Menu " + (altar.menu || []).join(", ");
-        if (altar.map) coords += " · map " + altar.map.join(", ");
-        return (
-          "<li><strong>" + STF.esc(altar.n + ". " + altar.zone) + "</strong> " +
-          STF.esc(altar.where) + ' <span class="coords">' + STF.esc(coords) + "</span></li>"
-        );
-      }).join("");
-      mapBlock =
-        '<h2 class="upd-h">Map</h2>' +
-        '<div id="altar-leaflet" role="region" aria-label="Red Moon altar map"></div>' +
-        '<ol class="altar-list">' + altarList + "</ol>";
-    } else if (item.mapImage) {
-      mapBlock = '<p><button type="button" class="guide-btn" id="event-map-open">Map</button></p>';
+      mapBlock = '<div id="altar-leaflet" role="region" aria-label="Red Moon altar map"></div>';
     }
-    var active = item.state === "active";
-    var endedState = item.state === "ended";
-    var flag = active ? "ACTIVATED" : endedState ? "ENDED" : "COMING SOON";
-    var timeLine = endedState
-      ? endedAgo(item.end)
-      : "Time Remaining " + eventRemainLabel(item.start, item.end);
-    function geRows(text) {
-      var parts = String(text || "").split(/\n+/).map(function (line) { return line.trim(); }).filter(Boolean);
-      if (!parts.length) parts = [text || "add details"];
-      return parts.map(function (line, index) {
-        var n = index + 1;
-        return (
-          '<div class="ge-row"><span class="ge-ring" aria-hidden="true"></span><span>' + STF.esc(line) + "</span>" +
-          "<b>" + (n < 10 ? "0" : "") + n + "</b></div>"
-        );
-      }).join("");
-    }
-    var rewardTitle = endedState ? "Bonus reward" : "Rewards";
-    var rewardState = endedState ? "ENDED" : active ? "IN PROGRESS" : "COMING SOON";
     detail.innerHTML =
-      '<p class="ge-time">' + STF.esc(timeLine) + ' <span class="ge-flag">' + flag + "</span></p>" +
+      '<article class="ev-page">' +
+      '<img class="ev-emblem" src="' + STF.esc(emblem) + '" alt="">' +
+      '<p class="ev-status-row"><span class="tl-tag ' + statusClass + '">' + statusLabel(state) + "</span></p>" +
+      '<p class="ev-ticker" data-ticker data-state="' + STF.esc(state) + '" data-remain-start="' + STF.esc(item.start || "") + '" data-remain-end="' + STF.esc(item.end || "") + '">' + STF.esc(tickerFor(item)) + "</p>" +
+      '<p class="ev-dates">' + dateTag(item.start, "Start") + dateTag(item.end, "End") + "</p>" +
+      '<p class="ev-cat">' + STF.esc(categoryFor(item)) + "</p>" +
       "<h1>" + STF.esc(type.name || "Event") + "</h1>" +
-      '<p class="upd-posted">Starts · ' + STF.esc(melWhen(item.start)) + "</p>" +
-      '<p class="upd-posted">Ends · ' + STF.esc(melWhen(item.end)) + "</p>" +
-      (item.note ? "<p>" + STF.esc(item.note) + "</p>" : "") +
-      '<section class="ge-reward' + (endedState ? " is-bonus" : "") + '">' +
-      "<h2>" + rewardTitle + "</h2>" +
-      '<p class="ge-kicker">' + rewardState + "</p>" +
-      "<p>" + STF.esc(type.rewards || "add details") + "</p></section>" +
-      "<h2 class=\"upd-h\">Requirement</h2><p>" + STF.esc(type.description || "add details") + "</p>" +
-      "<h2 class=\"upd-h\">Challenges</h2>" + geRows(type.tasks) +
-      "<h2 class=\"upd-h\">Modifiers</h2>" + geRows(type.modifiers) +
+      (note ? '<p class="ev-note">' + STF.esc(note) + "</p>" : "") +
+      buffHtml +
+      copy +
+      ruleHtml +
       mapBlock +
-      (type.source ? '<p class="src-line">' + STF.esc(type.source) + "</p>" : "") +
-      suggested +
-      '<p class="pad-hints"><span><i>Esc</i> Back</span></p>';
+      (item.kind === "clan"
+        ? '<section class="attendance-box" id="attendance-box"><h2 class="upd-h">Attendance</h2><div class="attendance-actions"></div><ul class="attendance-going"></ul></section>'
+        : "") +
+      "</article>";
     var screen = document.getElementById("tl-screen");
     if (screen) screen.hidden = true;
     rail.hidden = true;
@@ -547,8 +644,10 @@
         remainEnd: item.end,
         state: item.state,
         accent: item.type.accent || "#FF6D10",
-        cardLabel: item.type.cardLabel || "Season Event",
-        icon: emblemKind(item.type.id)
+        cardLabel: categoryFor(item),
+        icon: emblemKind(item.type.id),
+        emblem: emblemSrc(item),
+        typeId: item.type.id
       });
     });
 
@@ -579,6 +678,7 @@
         accent: "#FF6D10",
         cardLabel: "Raid",
         icon: "raid",
+        emblem: EMBLEMS.raid,
         state: "upcoming"
       });
     });
@@ -592,49 +692,38 @@
         label: item.type.name || "Event",
         state: "ended",
         accent: item.type.accent || "#6e7480",
-        cardLabel: item.type.cardLabel || "Season Event",
+        cardLabel: categoryFor(item),
         icon: emblemKind(item.type.id),
-        endedLine: endedAgo(item.end),
-        bonus: shownReward(item.type.rewards)
+        emblem: emblemSrc(item),
+        remainStart: item.start,
+        remainEnd: item.end,
+        endedLine: endedAgo(item.end)
       });
     });
 
     rail.innerHTML = slides
       .map(function (slide) {
-        var upcoming = slide.state === "upcoming";
-        var ended = slide.state === "ended";
-        var photo = safePhoto(slide.image);
-        slide.image = photo;
-        var remain = slide.remainEnd
-          ? '<span class="hero-remain" data-remain-start="' + STF.esc(slide.remainStart) + '" data-remain-end="' + STF.esc(slide.remainEnd) + '">' + STF.esc(eventRemainLabel(slide.remainStart, slide.remainEnd)) + "</span>"
-          : (slide.kind === "raid" && slide.chip
-            ? '<span class="hero-remain">' + STF.esc(slide.chip) + "</span>"
-            : "");
-        var top = upcoming
-          ? '<div class="tl-soon-head"><span>Coming Soon</span>' + remain + "</div>"
-          : ended
-            ? '<span class="tl-tag">ENDED</span>' + (slide.endedLine ? '<span class="hero-remain">' + STF.esc(slide.endedLine) + "</span>" : "")
-            : '<span class="tl-tag">ONGOING</span>' + remain;
-        var lock = upcoming
-          ? '<svg class="tl-lock" viewBox="0 0 24 24" aria-hidden="true"><rect x="7" y="11" width="10" height="8" fill="#f4f4f4"/><path d="M9 11V8.4a3 3 0 0 1 6 0V11" fill="none" stroke="#f4f4f4" stroke-width="1.7"/></svg>'
-          : "";
-        var soonPill = upcoming ? '<span class="tl-soon-pill">COMING SOON</span>' : "";
-        var extra = slide.bonus
-          ? '<span class="tl-bonus">BONUS REWARD</span><em>' + STF.esc(slide.bonus) + "</em>"
-          : "";
-        var kicker = slide.kickerHtml || (slide.kicker ? STF.esc(slide.kicker) : "");
+        var statusClass = slide.state === "ended" ? "is-ended" : slide.state === "upcoming" ? "is-soon" : "is-live";
+        var ticker = tickerFor({
+          start: slide.remainStart,
+          end: slide.remainEnd,
+          state: slide.state
+        });
+        var tickerStatic = "";
+        if (slide.kind === "raid" && !slide.remainEnd) {
+          ticker = slide.chip || "Scheduled";
+          tickerStatic = ' data-static="1"';
+        }
+        var emblem = slide.emblem || EMBLEMS.raid;
         var inner =
-          '<div class="tl-art' + (photo ? " has-photo" : "") + '"' +
-          (photo ? ' style="background-image:url(\'' + slide.image + '\')"' : "") + ">" +
-          top +
-          '<div class="tl-emblem" style="--ring:' + STF.esc(slide.accent || "#FF6D10") + '">' +
-          emblemSVG(slide.icon || "shield") + lock + "</div></div>" +
-          '<div class="tl-foot' + (upcoming ? " is-hot" : "") + '">' +
+          '<div class="tl-art">' +
+          '<span class="tl-tag ' + statusClass + '">' + statusLabel(slide.state || "active") + "</span>" +
+          '<span class="tl-ticker" data-ticker' + tickerStatic + ' data-state="' + STF.esc(slide.state || "") + '" data-remain-start="' + STF.esc(slide.remainStart || "") + '" data-remain-end="' + STF.esc(slide.remainEnd || "") + '">' + STF.esc(ticker) + "</span>" +
+          '<img class="tl-emblem-img" src="' + STF.esc(emblem) + '" alt="">' +
+          "</div>" +
+          '<div class="tl-foot">' +
           '<span class="tl-kind">' + STF.esc(slide.cardLabel || "Season Event") + "</span>" +
           "<strong>" + STF.esc(slide.title) + "</strong>" +
-          (kicker && !slide.remainEnd ? '<small>' + kicker + "</small>" : "") +
-          extra + soonPill +
-          '<span class="tl-mini" aria-hidden="true">' + emblemSVG(slide.icon || "shield") + "</span>" +
           "</div>";
         var card = slide.href
           ? '<a class="hero-card tl-card is-' + slide.kind + '" href="' + slide.href + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</a>"
@@ -652,8 +741,31 @@
       thumb.style.width = width + "px";
       thumb.style.transform = "translateX(" + x + "px)";
     }
-    rail.addEventListener("scroll", moveThumb, { passive: true });
+    function markSelected() {
+      var slides = rail.querySelectorAll(".hero-slide");
+      if (!slides.length) return;
+      var mid = rail.scrollLeft + rail.clientWidth / 2;
+      var best = slides[0];
+      var bestDist = Infinity;
+      Array.prototype.forEach.call(slides, function (slide) {
+        var center = slide.offsetLeft + slide.offsetWidth / 2;
+        var dist = Math.abs(center - mid);
+        if (dist < bestDist) {
+          best = slide;
+          bestDist = dist;
+        }
+      });
+      Array.prototype.forEach.call(slides, function (slide) {
+        var card = slide.querySelector(".tl-card");
+        if (card) card.classList.toggle("is-selected", slide === best);
+      });
+    }
+    rail.addEventListener("scroll", function () {
+      moveThumb();
+      markSelected();
+    }, { passive: true });
     moveThumb();
+    markSelected();
 
     function openHashCard(href) {
       if (!href || href.charAt(0) !== "#") return;

@@ -1886,7 +1886,93 @@ body.page-events .hero-slide {
 body.page-events .tl-card {
   height: auto; aspect-ratio: 4 / 5; max-height: calc(100dvh - 250px);
 }
-body.page-events .tl-art { min-height: 0; }
+body.page-events .tl-art {
+  min-height: 0;
+  background: radial-gradient(circle at 50% 58%, #2c313a, #0c0d10 72%);
+  align-items: flex-start;
+  justify-content: flex-start;
+  padding: 12px 12px 0;
+}
+.tl-emblem-img {
+  width: min(46%, 168px);
+  height: auto;
+  margin: auto;
+  display: block;
+  align-self: center;
+}
+.tl-tag.is-live { background: var(--orange); color: #1a0d00; }
+.tl-tag.is-soon { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.7); }
+.tl-tag.is-ended { background: #3a3f48; color: #d5d8de; }
+.tl-ticker {
+  display: block;
+  margin: 8px 0 0;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .03em;
+  font-size: 1.05rem;
+  color: #fff;
+}
+.tl-card.is-selected .tl-foot,
+.tl-card.is-selected .tl-foot.is-hot {
+  background: var(--orange);
+  color: #fff;
+}
+.tl-card.is-selected .tl-kind,
+.tl-card.is-selected .tl-foot strong { color: #fff; }
+.tl-foot { background: #14161a; }
+.ev-page { padding-bottom: 12px; }
+.ev-emblem { width: 168px; height: 168px; margin: 4px auto 14px; display: block; }
+.ev-status-row { margin: 0; }
+.ev-ticker {
+  margin: 8px 0 12px;
+  font-family: var(--display);
+  font-size: clamp(1.6rem, 7vw, 2.1rem);
+  font-weight: 700;
+  letter-spacing: .02em;
+  line-height: 1;
+}
+.ev-dates { display: flex; flex-wrap: wrap; gap: 8px; margin: 0 0 14px; }
+.ev-date {
+  display: inline-flex; align-items: center; gap: 8px;
+  border: 1px solid rgba(255,255,255,.55);
+  padding: 6px 10px;
+  font-family: var(--display);
+  font-size: 1rem;
+  letter-spacing: .03em;
+}
+.ev-date b {
+  color: var(--orange);
+  font-size: .72rem;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+}
+.ev-cat {
+  margin: 0 0 4px;
+  color: var(--orange);
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: .95rem;
+}
+.ev-page h1 {
+  margin: 0 0 12px;
+  font-size: clamp(2rem, 9vw, 2.7rem);
+  line-height: .95;
+  letter-spacing: 0;
+  text-transform: none;
+}
+.ev-buffs { margin: 8px 0 12px; }
+.ev-buff {
+  margin: 0 0 4px;
+  color: #8fd4ff;
+  font-weight: 650;
+  font-size: 1.05rem;
+  line-height: 1.35;
+}
+.ev-note, .ev-copy, .ev-rules p { margin: 0 0 8px; color: #e6e8ee; }
+.ev-rules { margin-top: 8px; }
+body.page-events.is-event-detail .event-detail { padding-top: 8px; }
 
 .upd-entry {
   background: #121418;
