@@ -257,6 +257,23 @@
     refreshMemberBadge();
   }
 
+  async function recomputeAllBuilds() {
+    if (!window.ShadeCatalog || !window.ShadeCalc) throw new Error("Calculator is not loaded.");
+    var catalog = await ShadeCatalog.load(STF.fetchJSON);
+    var res = await sb.from("builds").select("id, name, loadout");
+    if (res.error) throw res.error;
+    var rows = res.data || [];
+    for (var i = 0; i < rows.length; i++) {
+      var loadout = JSON.parse(JSON.stringify(rows[i].loadout || {}));
+      var state = ShadeCatalog.fromSaved(loadout, catalog);
+      loadout.computed = ShadeCalc.summary(state, catalog);
+      var write = await sb.from("builds").update({ loadout: loadout }).eq("id", rows[i].id);
+      if (write.error) throw write.error;
+      status("dash-status", "Recomputed " + (i + 1) + " of " + rows.length + "…");
+    }
+    return rows.length;
+  }
+
   var memberRows = [];
   var memberSelf = "";
   var memberFilter = "all";
@@ -745,6 +762,19 @@
     }
   });
   $("template-new").addEventListener("click", resetTemplate);
+  $("recompute-builds").addEventListener("click", async function () {
+    var button = $("recompute-builds");
+    button.disabled = true;
+    try {
+      status("dash-status", "Recomputing…");
+      var count = await recomputeAllBuilds();
+      status("dash-status", "Recomputed " + count + " builds.", "ok");
+      loadDash();
+    } catch (err) {
+      status("dash-status", err.message || String(err), "err");
+    }
+    button.disabled = false;
+  });
   $("member-search").addEventListener("input", paintMembers);
   $("member-list").addEventListener("change", async function (e) {
     var input = e.target.closest("[data-member]");

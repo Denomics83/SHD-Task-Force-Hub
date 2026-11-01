@@ -293,35 +293,47 @@
     lines.push({ name: name, value: shown.join(" + ") });
   }
 
-  function damageRows(computed) {
-    if (!computed || typeof computed !== "object") return [];
-    var slots = [["primary", "Primary"], ["secondary", "Secondary"], ["sidearm", "Sidearm"]];
+  function dpsNum(value) {
+    var n = Number(value);
+    if (!isFinite(n)) return "—";
+    return Math.round(n).toLocaleString("en-US");
+  }
+
+  function weaponComputed(computed, slot) {
+    if (!computed || typeof computed !== "object") return null;
     var bag = computed.weapons && typeof computed.weapons === "object" ? computed.weapons : null;
-    if (!bag && (computed.primary || computed.secondary || computed.sidearm)) bag = computed;
+    if (bag && bag[slot]) return bag[slot];
+    if (computed.weapon === slot || (!computed.weapon && slot === "primary")) return computed;
+    return null;
+  }
+
+  function computedFresh(loadout, computed) {
+    if (!computed || !computed.weapons) return false;
+    var slots = ["primary", "secondary", "sidearm"];
+    for (var i = 0; i < slots.length; i++) {
+      var item = (loadout && loadout[slots[i]]) || {};
+      var saved = computed.weapons[slots[i]];
+      var name = item.name || "";
+      var savedName = saved && saved.name ? saved.name : "";
+      if (name !== savedName) return false;
+      if (name && (!saved || !("effDmgPerMag" in saved) || !("effAvgShot" in saved))) return false;
+    }
+    return true;
+  }
+
+  function damageRows(computed) {
+    var slots = [["primary", "Primary"], ["secondary", "Secondary"], ["sidearm", "Sidearm"]];
     var rows = [];
-    if (bag) {
-      slots.forEach(function (pair) {
-        var row = bag[pair[0]];
-        if (!row || typeof row !== "object") return;
-        if (!statPresent(row.effDmgPerMag) && !statPresent(row.effAvgShot)) return;
-        rows.push({
-          slot: pair[1],
-          name: row.name || "",
-          mag: statPresent(row.effDmgPerMag) ? row.effDmgPerMag : null,
-          shot: statPresent(row.effAvgShot) ? row.effAvgShot : null
-        });
-      });
-      return rows;
-    }
-    if (statPresent(computed.effDmgPerMag) || statPresent(computed.effAvgShot)) {
-      var slot = computed.weapon === "secondary" ? "Secondary" : computed.weapon === "sidearm" ? "Sidearm" : "Primary";
+    slots.forEach(function (pair) {
+      var row = weaponComputed(computed, pair[0]);
+      if (!row || !row.name) return;
       rows.push({
-        slot: slot,
-        name: computed.name || "",
-        mag: statPresent(computed.effDmgPerMag) ? computed.effDmgPerMag : null,
-        shot: statPresent(computed.effAvgShot) ? computed.effAvgShot : null
+        slot: pair[1],
+        name: row.name,
+        mag: row.effDmgPerMag,
+        shot: row.effAvgShot
       });
-    }
+    });
     return rows;
   }
 
@@ -329,11 +341,13 @@
     var rows = damageRows(computed);
     if (!rows.length) return "";
     return '<div class="dps-board">' + rows.map(function (row) {
-      var title = row.name ? row.slot + " · " + row.name : row.slot;
-      var cells = "";
-      if (row.mag != null) cells += '<div><span>Eff. Dmg / Mag</span><strong>' + STF.esc(statNum(row.mag, "")) + "</strong></div>";
-      if (row.shot != null) cells += '<div><span>Eff. Avg Shot</span><strong>' + STF.esc(statNum(row.shot, "")) + "</strong></div>";
-      return '<section class="dps-weapon"><h3>' + STF.esc(title) + '</h3><div class="dps-pair">' + cells + "</div></section>";
+      return '<section class="dps-weapon">' +
+        '<p class="dps-slot">' + STF.esc(row.slot) + "</p>" +
+        "<h3>" + STF.esc(row.name) + "</h3>" +
+        '<div class="dps-pair">' +
+        "<div><span>Eff. Dmg / Mag</span><strong>" + STF.esc(dpsNum(row.mag)) + "</strong></div>" +
+        "<div><span>Eff. Avg Shot</span><strong>" + STF.esc(dpsNum(row.shot)) + "</strong></div>" +
+        "</div></section>";
     }).join("") + "</div>";
   }
 
@@ -434,8 +448,14 @@
       return;
     }
     builderCatalog().then(function (catalog) {
-      var state = ShadeCatalog.fromSaved(row.loadout || {}, catalog);
-      var computed = (row.loadout && row.loadout.computed) || state.computed || null;
+      var loadout = row.loadout || {};
+      var state = ShadeCatalog.fromSaved(loadout, catalog);
+      var saved = loadout.computed || null;
+      var computed = computedFresh(state, saved) ? saved : null;
+      if (!computed && window.ShadeCalc) {
+        try { computed = ShadeCalc.summary(state, catalog); }
+        catch (err) { console.error(err); computed = saved; }
+      }
       node.innerHTML = renderStats(ShadeEngine.compute(state, catalog), computed);
     }).catch(function (err) {
       console.error(err);

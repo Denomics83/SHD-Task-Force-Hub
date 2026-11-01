@@ -2176,16 +2176,27 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
   border: 0;
   padding: 4px 12px 16px;
 }
-.dps-board { display: grid; gap: 8px; margin: 10px 0 4px; }
+.dps-board { display: grid; gap: 10px; margin: 0 0 8px; }
 .dps-weapon {
-  border: 1px solid rgba(255,109,16,.45);
-  padding: 8px 8px 10px;
+  border: 0;
+  border-bottom: 1px solid rgba(255,255,255,.12);
+  padding: 0 0 8px;
+  background: transparent;
+}
+.dps-slot {
+  margin: 0;
+  color: #9aa0a6;
+  font-family: var(--display);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
 }
 .dps-weapon h3 {
-  margin: 0 0 6px;
-  color: var(--orange);
-  font-size: .68rem;
-  letter-spacing: .12em;
+  margin: 1px 0 4px;
+  color: #fff;
+  font-size: .92rem;
+  letter-spacing: .04em;
   text-transform: uppercase;
 }
 .dps-pair { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
@@ -2198,8 +2209,10 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
 }
 .dps-pair strong {
   display: block;
+  margin-top: 2px;
+  color: var(--orange);
   font-family: var(--display);
-  font-size: 1.45rem;
+  font-size: clamp(1.35rem, 6.4vw, 1.7rem);
   line-height: 1;
   font-weight: 700;
   font-variant-numeric: tabular-nums;
