@@ -12,8 +12,8 @@
       "show_description": true,
       "note": "",
       "accent": "#c43b3b",
-      "image": "assets/events/red-moon-unleashed.webp",
-      "emblem": "assets/events/red-moon-unleashed.webp",
+      "image": "assets/event-cards/red-moon-unleashed.jpg",
+      "emblem": "assets/event-cards/red-moon-unleashed.jpg",
       "source": "ProtoTrack Seasonal Calendar · checked 1 Nov 2026",
       "suggested": ""
     },
@@ -29,8 +29,8 @@
       "show_description": false,
       "note": "Double Expertise upgrade materials from all sources, including Exotic Components.",
       "accent": "#d97706",
-      "image": "assets/events/expertise-surge.webp",
-      "emblem": "assets/events/expertise-surge.webp",
+      "image": "assets/event-cards/expertise-surge.jpg",
+      "emblem": "assets/event-cards/expertise-surge.jpg",
       "source": "ProtoTrack Seasonal Calendar · checked 1 Nov 2026",
       "suggested": ""
     },
@@ -46,8 +46,8 @@
       "category": "Season Event",
       "show_description": false,
       "accent": "#3b82f6",
-      "image": "assets/events/vanguard-overdrive.webp",
-      "emblem": "assets/events/vanguard-overdrive.webp",
+      "image": "assets/event-cards/vanguard-overdrive.jpg",
+      "emblem": "assets/event-cards/vanguard-overdrive.jpg",
       "source": "ProtoTrack Seasonal Calendar · checked 1 Nov 2026",
       "suggested": ""
     }

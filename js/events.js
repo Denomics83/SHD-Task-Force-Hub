@@ -112,9 +112,21 @@
 
   function emblemSrc(item) {
     var type = (item && item.type) || {};
-    var override = safePhoto(type.image_url || type.emblem || "");
-    if (!override && type.image && !/season-hero|raid-hero/.test(type.image)) override = safePhoto(type.image);
+    var override = safePhoto(type.image_url || "");
     if (override) return override;
+    var card = STF.eventCardPath && (
+      STF.eventCardPath(type.id) ||
+      STF.eventCardPath(type.name) ||
+      STF.eventCardPath(item.title) ||
+      STF.eventCardPath(item.activity) ||
+      STF.eventCardPath(type.category) ||
+      STF.eventCardPath(categoryFor(item))
+    );
+    if (card) return card;
+    if (type.emblem || type.image) {
+      var stored = safePhoto(type.emblem || type.image);
+      if (stored) return stored;
+    }
     var slug = titleSlug(type.name || item.title || "");
     if (EMBLEMS[type.id]) return EMBLEMS[type.id];
     if (EMBLEMS[slug]) return EMBLEMS[slug];
@@ -606,7 +618,8 @@
             id: row.kind,
             name: row.title,
             description: "",
-            image: row.image_url || "",
+            image_url: row.image_url || "",
+            image: "",
             cardLabel: cardLabel,
             accent: "#FF6D10"
           },
@@ -676,7 +689,8 @@
         accent: "#FF6D10",
         cardLabel: "Raid",
         icon: "raid",
-        emblem: EMBLEMS.raid,
+        emblem: (STF.eventCardPath && STF.eventCardPath(raid.activity)) || EMBLEMS.raid,
+        activity: raid.activity || "",
         state: "upcoming"
       });
     });
@@ -713,11 +727,15 @@
           tickerStatic = ' data-static="1"';
         }
         var emblem = slide.emblem || EMBLEMS.raid;
+        var fullBleed = /^assets\/event-cards\//.test(emblem) || /^https:\/\//.test(emblem);
+        var artOpen = fullBleed
+          ? '<div class="tl-art has-card" style="background-image:url(\'' + STF.esc(emblem) + '\')">'
+          : '<div class="tl-art">';
         var inner =
-          '<div class="tl-art">' +
+          artOpen +
           '<span class="tl-tag ' + statusClass + '">' + statusLabel(slide.state || "active") + "</span>" +
           '<span class="tl-ticker" data-ticker' + tickerStatic + ' data-state="' + STF.esc(slide.state || "") + '" data-remain-start="' + STF.esc(slide.remainStart || "") + '" data-remain-end="' + STF.esc(slide.remainEnd || "") + '">' + STF.esc(ticker) + "</span>" +
-          '<img class="tl-emblem-img" src="' + STF.esc(emblem) + '" alt="">' +
+          (fullBleed ? "" : '<img class="tl-emblem-img" src="' + STF.esc(emblem) + '" alt="">') +
           "</div>" +
           '<div class="tl-foot">' +
           '<span class="tl-kind">' + STF.esc(slide.cardLabel || "Season Event") + "</span>" +

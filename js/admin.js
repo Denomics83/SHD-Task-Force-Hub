@@ -103,14 +103,69 @@
     });
     input.click();
   }
+  function artHostFor(hidden) {
+    if (!hidden) return null;
+    if (hidden.id === "event-image-url") return $("event-art-pick");
+    if (hidden.id === "template-image-url") return $("template-art-pick");
+    return null;
+  }
+  function markArt(hidden) {
+    var host = artHostFor(hidden);
+    if (!host) return;
+    var value = hidden.value || "";
+    host.querySelectorAll("[data-art]").forEach(function (el) {
+      el.classList.toggle("is-on", el.getAttribute("data-art") === value);
+    });
+  }
+  function setCardImage(hidden, img, file, auto) {
+    hidden.value = file || "";
+    hidden.dataset.auto = auto ? "1" : "";
+    if (img) {
+      img.hidden = !file;
+      if (file) img.src = file;
+    }
+    markArt(hidden);
+  }
+  function mountArtPickers() {
+    if (!STF.EVENT_CARDS) return;
+    ["event-art-pick", "template-art-pick"].forEach(function (id) {
+      var host = $(id);
+      if (!host || host.dataset.ready) return;
+      host.dataset.ready = "1";
+      host.innerHTML = STF.EVENT_CARDS.map(function (card) {
+        return '<button type="button" class="art-thumb" data-art="' + STF.esc(card.file) + '" title="' + STF.esc(card.label) + '"><img src="' + STF.esc(card.file) + '" alt="' + STF.esc(card.label) + '"></button>';
+      }).join("");
+      host.addEventListener("click", function (e) {
+        var btn = e.target.closest("[data-art]");
+        if (!btn || !host.contains(btn)) return;
+        var isEvent = host.id === "event-art-pick";
+        setCardImage(
+          $(isEvent ? "event-image-url" : "template-image-url"),
+          $(isEvent ? "event-image-preview" : "template-image-preview"),
+          btn.getAttribute("data-art"),
+          false
+        );
+      });
+    });
+  }
+  function suggestClanArt() {
+    if (!$("event-kind") || $("event-kind").value !== "clan" || !STF.eventCardPath) return;
+    var hidden = $("event-image-url");
+    if (hidden.dataset.auto !== "1" && hidden.value) return;
+    var path = STF.eventCardPath($("event-title").value);
+    var img = $("event-image-preview");
+    if (!path) {
+      if (hidden.dataset.auto === "1") setCardImage(hidden, img, "", false);
+      return;
+    }
+    setCardImage(hidden, img, path, true);
+  }
   function previewFile(input, img, hidden) {
     input.addEventListener("change", async function () {
       if (!input.files[0]) return;
       try {
         var url = await uploadImage(input.files[0], input.id.indexOf("template") === 0 ? "templates" : "events");
-        hidden.value = url;
-        img.src = url;
-        img.hidden = false;
+        setCardImage(hidden, img, url, false);
       } catch (err) {
         status(input.id.indexOf("template") === 0 ? "template-status" : "event-status", err.message || String(err), "err");
       }
@@ -193,10 +248,7 @@
     if (!row) return;
     $("event-title").value = row.title || "";
     setQuill("event-body", row.description_html || "");
-    $("event-image-url").value = row.image_url || "";
-    var img = $("event-image-preview");
-    img.hidden = !row.image_url;
-    if (row.image_url) img.src = row.image_url;
+    setCardImage($("event-image-url"), $("event-image-preview"), row.image_url || "", false);
     if ($("event-start").value && row.duration_hours) {
       var start = new Date($("event-start").value);
       $("event-end").value = toLocal(new Date(start.getTime() + row.duration_hours * 3600000).toISOString());
@@ -212,8 +264,7 @@
     $("event-form").reset();
     $("event-id").value = "";
     $("event-heading").textContent = "Add event";
-    $("event-image-url").value = "";
-    $("event-image-preview").hidden = true;
+    setCardImage($("event-image-url"), $("event-image-preview"), "", false);
     setQuill("event-body", "");
     toggleEventKind();
   }
@@ -250,8 +301,7 @@
     $("template-name").value = "";
     $("template-title").value = "";
     $("template-hours").value = "168";
-    $("template-image-url").value = "";
-    $("template-image-preview").hidden = true;
+    setCardImage($("template-image-url"), $("template-image-preview"), "", false);
     setQuill("template-body", "");
   }
   async function saveTemplate() {
@@ -349,9 +399,7 @@
       setQuill("event-body", eventRow.description_html || "");
       $("event-start").value = toLocal(eventRow.starts_at);
       $("event-end").value = toLocal(eventRow.ends_at);
-      $("event-image-url").value = eventRow.image_url || "";
-      $("event-image-preview").hidden = !eventRow.image_url;
-      if (eventRow.image_url) $("event-image-preview").src = eventRow.image_url;
+      setCardImage($("event-image-url"), $("event-image-preview"), eventRow.image_url || "", false);
       return;
     }
     if (kind === "template") {
@@ -363,9 +411,7 @@
       $("template-name").value = found.name || "";
       $("template-title").value = found.title || "";
       $("template-hours").value = found.duration_hours || 168;
-      $("template-image-url").value = found.image_url || "";
-      $("template-image-preview").hidden = !found.image_url;
-      if (found.image_url) $("template-image-preview").src = found.image_url;
+      setCardImage($("template-image-url"), $("template-image-preview"), found.image_url || "", false);
       setQuill("template-body", found.description_html || "");
       return;
     }
@@ -483,7 +529,11 @@
       $("preview-modal").hidden = true;
     }
   });
-  $("event-kind").addEventListener("change", toggleEventKind);
+  $("event-kind").addEventListener("change", function () {
+    toggleEventKind();
+    suggestClanArt();
+  });
+  $("event-title").addEventListener("input", suggestClanArt);
   $("event-template").addEventListener("change", applyTemplate);
   $("event-start").addEventListener("change", function () {
     if ($("event-kind").value === "rotation") applyTemplate();
@@ -522,6 +572,7 @@
       status("build-status", err.message || String(err), "err");
     }
   });
+  mountArtPickers();
   previewFile($("event-image"), $("event-image-preview"), $("event-image-url"));
   previewFile($("template-image"), $("template-image-preview"), $("template-image-url"));
 
