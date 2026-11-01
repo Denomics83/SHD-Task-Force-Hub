@@ -1,13 +1,11 @@
-/* Resources: Builds, Maps, Hunters, and Creators. Builds is the default. */
+/* Resources: Builds, Hunters, and Creators. Map opens division2map.com. Builds is the default. */
 (function () {
   STF.mountChrome("resources");
 
   var resBody = document.getElementById("res-detail-body");
-  var mapsBody = document.getElementById("maps-body");
   var creatorsBody = document.getElementById("creators-body");
   var panels = {
     builds: document.getElementById("tab-builds"),
-    maps: document.getElementById("tab-maps"),
     hunters: document.getElementById("tab-hunters"),
     creators: document.getElementById("tab-creators")
   };
@@ -202,37 +200,6 @@
     });
   }
 
-  function renderMaps(doc) {
-    var groups = (doc && doc.groups) || [];
-    var html = groups.map(function (group) {
-      var links = (group.links || []).map(function (link) {
-        var meta = STF.esc(link.source || "");
-        if (link.updated) meta += (meta ? " · " : "") + "updated " + STF.esc(link.updated);
-        return (
-          '<a class="map-link" href="' + STF.esc(link.url) + '" target="_blank" rel="noopener">' +
-          "<strong>" + STF.esc(link.title) + "</strong>" +
-          '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 6h10v10"/><path d="M18 6 6 18"/></svg>' +
-          "<span>" + STF.esc(link.description || "") + "</span>" +
-          (meta ? "<small>" + meta + "</small>" : "") +
-          "</a>"
-        );
-      }).join("");
-      var heading = group.title ? '<h2 class="map-sec">' + STF.esc(group.title) + "</h2>" : "";
-      return heading + links;
-    }).join("");
-    mapsBody.innerHTML = html || '<p class="lede">No map links yet.</p>';
-  }
-
-  function loadMaps() {
-    if (mapsBody.dataset.ready) return;
-    STF.fetchJSON("data/maps.json").then(function (doc) {
-      mapsBody.dataset.ready = "1";
-      renderMaps(doc);
-    }).catch(function () {
-      mapsBody.innerHTML = '<p class="lede">Could not load maps.</p>';
-    });
-  }
-
   function platformMark(platform) {
     if (platform === "twitch") return TWITCH_MARK;
     if (platform === "youtube") return YT_MARK;
@@ -272,12 +239,12 @@
     var query = new URLSearchParams(location.search).get("tab");
     var hash = (location.hash || "").replace("#", "");
     if (hash === "hunters" || hash.indexOf("hunters/") === 0) return "hunters";
-    if (query === "maps" || query === "hunters" || query === "builds" || query === "creators") return query;
+    if (query === "hunters" || query === "builds" || query === "creators") return query;
     return "builds";
   }
 
   function showTab(tab, push) {
-    if (tab !== "builds" && tab !== "maps" && tab !== "hunters" && tab !== "creators") tab = "builds";
+    if (tab !== "builds" && tab !== "hunters" && tab !== "creators") tab = "builds";
     Object.keys(panels).forEach(function (key) {
       if (panels[key]) panels[key].hidden = key !== tab;
     });
@@ -293,7 +260,6 @@
       document.body.classList.remove("is-hunter-home");
       setHunterBack("off");
     }
-    if (tab === "maps") loadMaps();
     if (tab === "creators") loadCreators();
     if (tab === "hunters") ensureHunters(hunterRoute);
     if (tab === "builds") window.dispatchEvent(new CustomEvent("stf-tab", { detail: "builds" }));
@@ -333,9 +299,16 @@
       ensureHunters(function () { showHunterRegion(regionBtn.getAttribute("data-region"), true); });
     });
   }
+  function settleMapsLink() {
+    if (new URLSearchParams(location.search).get("tab") !== "maps") return;
+    history.replaceState({}, "", "resources.html?tab=builds" + (location.hash || ""));
+  }
+
   window.addEventListener("popstate", function () {
+    settleMapsLink();
     showTab(tabFromLocation(), false);
   });
 
+  settleMapsLink();
   showTab(tabFromLocation(), false);
 })();

@@ -431,9 +431,10 @@
   function buildsTabActive() {
     if (!document.body.classList.contains("page-resources")) return true;
     var tab = new URLSearchParams(location.search).get("tab") || "builds";
+    if (tab === "maps") tab = "builds";
     var hash = (location.hash || "").replace("#", "");
     if (hash === "hunters" || hash.indexOf("hunters/") === 0) return false;
-    return tab !== "maps" && tab !== "hunters" && tab !== "creators";
+    return tab !== "hunters" && tab !== "creators";
   }
 
   function route(push) {

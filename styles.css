@@ -1910,7 +1910,8 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
   display: grid; grid-template-columns: repeat(4, 1fr); gap: 6px;
   padding: 10px 12px 8px;
 }
-.res-tabs button {
+.res-tabs button,
+.res-tabs a {
   min-height: 40px;
   padding: 0 2px;
   border: 1px solid rgba(255,255,255,.55);
@@ -1919,6 +1920,16 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
   font-size: clamp(.62rem, 2.7vw, .82rem);
   letter-spacing: .04em; text-transform: uppercase;
 }
+.res-tabs a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  border-radius: 0;
+  text-decoration: none;
+}
+.res-tabs a svg { width: 11px; height: 11px; flex: 0 0 auto; }
+.res-tabs a:hover { text-decoration: none; color: #fff; }
 .res-tabs button[aria-selected="true"] {
   background: var(--orange); border-color: var(--orange); color: #1a0d00;
 }
