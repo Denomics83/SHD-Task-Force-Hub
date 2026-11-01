@@ -38,10 +38,6 @@
   var HVT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>';
   var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
 
-  function pad2(n) {
-    return (n < 10 ? "0" : "") + n;
-  }
-
   function weekIdentity(week) {
     var scout = String(week.scout || "");
     var hvt = scout.match(/HVT\s*(\d+)/i);
@@ -68,8 +64,7 @@
       '<article class="mh-week">' +
       '<button type="button" class="mh-head" aria-expanded="false" aria-controls="' + panelId + '">' +
       '<span class="mh-logo mh-logo-' + id.kind + '" aria-hidden="true">' + icon + "</span>" +
-      '<span class="mh-titles"><strong>' + STF.esc(id.title) + "</strong>" +
-      '<small>Week ' + STF.esc(week.week) + "</small></span>" +
+      '<span class="mh-titles"><strong>' + STF.esc(id.title) + "</strong></span>" +
       "</button>" +
       '<div class="mh-panel" id="' + panelId + '" role="region">' +
       '<div class="mh-panel-inner">' + rows + "</div></div></article>"
@@ -111,15 +106,6 @@
     return { text: raw, count: "" };
   }
 
-  function requiredLine(mission) {
-    var raw = mission.required != null ? mission.required : mission.requiredToComplete;
-    if (raw == null || raw === "") raw = mission.need;
-    if (raw == null || String(raw).trim() === "" || isBlankCopy(raw)) return "";
-    var num = parseInt(raw, 10);
-    var label = !isNaN(num) && String(raw).trim() === String(num) ? pad2(num) : String(raw).trim();
-    return label + " Required to Complete";
-  }
-
   function journeyHTML(pack) {
     var missions = (pack && pack.missions) || [];
     if (!missions.length) return '<p class="lede">No journey missions for this season.</p>';
@@ -130,17 +116,6 @@
         '<button type="button" class="jy-num' + (on ? " is-on" : "") + '" role="tab" data-mission="' + index + '"' +
         ' aria-selected="' + (on ? "true" : "false") + '" aria-controls="jy-mission-' + index + '">' +
         STF.esc(numeral) + "</button>"
-      );
-    }).join("");
-    var heads = missions.map(function (mission, index) {
-      var realName = isBlankCopy(mission.name) ? "" : String(mission.name).trim();
-      var required = requiredLine(mission);
-      return (
-        '<header class="jy-head" data-mission="' + index + '"' + (index === 0 ? "" : " hidden") + ">" +
-        "<h2>Journey Mission " + (index + 1) + "</h2>" +
-        (realName ? '<p class="jy-name">' + STF.esc(realName) + "</p>" : "") +
-        (required ? '<p class="jy-req">' + STF.esc(required) + "</p>" : "") +
-        "</header>"
       );
     }).join("");
     var panels = missions.map(function (mission, index) {
@@ -158,7 +133,6 @@
     }).join("");
     return (
       '<div class="jy-board">' +
-      '<div class="jy-heads">' + heads + "</div>" +
       '<div class="jy-nav" role="tablist" aria-label="Journey missions">' + nav + "</div>" +
       '<div class="jy-detail">' + panels + "</div></div>"
     );
@@ -180,9 +154,6 @@
           var on = panel.id === "jy-mission-" + id;
           panel.classList.toggle("is-on", on);
           panel.hidden = !on;
-        });
-        root.querySelectorAll(".jy-head").forEach(function (head) {
-          head.hidden = head.getAttribute("data-mission") !== id;
         });
       }
     });
@@ -316,9 +287,7 @@
       return modSection(group.label, items);
     }).join("");
     var rest = (data.passives || []).filter(function (item) { return !used[item.name]; });
-    var blurb = "Pressure builds as you fight and powers the season bonuses. It decays out of cover.";
     return (
-      '<p class="mod-blurb">' + STF.esc(blurb) + "</p>" +
       modSection("", data.actives || []) +
       groups +
       modSection(rest.length ? "More" : "", rest)
@@ -408,6 +377,8 @@
   }
 
   if (tabs) {
+    var tabCount = tabs.querySelectorAll(".subtab[data-panel]").length || 1;
+    tabs.style.setProperty("--season-tab-count", String(tabCount));
     tabs.addEventListener("click", function (e) {
       var btn = e.target.closest(".subtab");
       if (!btn || btn.id === "open-weeks") return;

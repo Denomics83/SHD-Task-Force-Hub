@@ -12,16 +12,20 @@
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=67986cf">
 </head>
-<body>
+<body class="page-season">
   <div id="topbar-root"></div>
 
   <main class="wrap">
-    <p class="season-kicker" id="season-kicker"></p>
-    <h1 id="season-title">Season</h1>
-    <p class="season-status" id="season-status">
-      <span class="season-tag">Ongoing</span>
-      <span class="season-remain" id="season-remain" hidden></span>
-    </p>
+    <header class="season-head">
+      <div class="season-copy">
+        <p class="season-kicker" id="season-kicker"></p>
+        <h1 id="season-title">Season</h1>
+      </div>
+      <p class="season-status" id="season-status">
+        <span class="season-tag">Ongoing</span>
+        <span class="season-remain" id="season-remain" hidden></span>
+      </p>
+    </header>
 
     <div class="subtabs" id="season-tabs" role="tablist" aria-label="Season sections">
       <button type="button" class="subtab" role="tab" data-panel="manhunts" aria-selected="true">Manhunts</button>
