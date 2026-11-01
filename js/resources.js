@@ -4,10 +4,12 @@
 
   var resBody = document.getElementById("res-detail-body");
   var creatorsBody = document.getElementById("creators-body");
+  var mutatorsBody = document.getElementById("mutators-body");
   var panels = {
     builds: document.getElementById("tab-builds"),
     hunters: document.getElementById("tab-hunters"),
-    creators: document.getElementById("tab-creators")
+    creators: document.getElementById("tab-creators"),
+    mutators: document.getElementById("tab-mutators")
   };
   var hunterData = null;
   var REGIONS = [
@@ -242,6 +244,38 @@
     }).join("");
   }
 
+  function renderMutators(doc) {
+    var groups = (doc && doc.groups) || [];
+    mutatorsBody.innerHTML = groups.map(function (group) {
+      var rows = (group.items || []).map(function (item) {
+        var lines = (item.lines || []).map(function (line) {
+          return (
+            '<p class="mut-line tint-' + STF.esc(line.color || "") + '"><b>' + STF.esc(line.label || "") + "</b> " +
+            STF.esc(line.effect || "") + "<span>" + STF.esc(line.clear || "") + "</span></p>"
+          );
+        }).join("");
+        return (
+          '<article class="mut-item">' +
+          '<button type="button" class="mut-row" aria-expanded="false">' +
+          '<img src="' + STF.esc(item.icon || "") + '" alt="">' +
+          "<strong>" + STF.esc(item.name || "") + "</strong></button>" +
+          '<div class="mut-panel"><p>' + STF.esc(item.description || "") + "</p>" + lines + "</div></article>"
+        );
+      }).join("");
+      return '<h2 class="mut-label">' + STF.esc(group.label || "") + "</h2>" + rows;
+    }).join("") || '<p class="lede">No mutators yet.</p>';
+  }
+
+  function loadMutators() {
+    if (!mutatorsBody || mutatorsBody.dataset.ready) return;
+    STF.fetchJSON("data/mutators.json").then(function (doc) {
+      mutatorsBody.dataset.ready = "1";
+      renderMutators(doc);
+    }).catch(function () {
+      mutatorsBody.innerHTML = '<p class="lede">Could not load mutators.</p>';
+    });
+  }
+
   function loadCreators() {
     if (!creatorsBody || creatorsBody.dataset.ready) return;
     STF.fetchJSON("data/creators.json").then(function (doc) {
@@ -256,12 +290,12 @@
     var query = new URLSearchParams(location.search).get("tab");
     var hash = (location.hash || "").replace("#", "");
     if (hash === "hunters" || hash.indexOf("hunters/") === 0) return "hunters";
-    if (query === "hunters" || query === "builds" || query === "creators") return query;
+    if (query === "hunters" || query === "builds" || query === "creators" || query === "mutators") return query;
     return "builds";
   }
 
   function showTab(tab, push) {
-    if (tab !== "builds" && tab !== "hunters" && tab !== "creators") tab = "builds";
+    if (tab !== "builds" && tab !== "hunters" && tab !== "creators" && tab !== "mutators") tab = "builds";
     Object.keys(panels).forEach(function (key) {
       if (panels[key]) panels[key].hidden = key !== tab;
     });
@@ -278,6 +312,7 @@
       setHunterBack("off");
     }
     if (tab === "creators") loadCreators();
+    if (tab === "mutators") loadMutators();
     if (tab === "hunters") ensureHunters(hunterRoute);
     if (tab === "builds") window.dispatchEvent(new CustomEvent("stf-tab", { detail: "builds" }));
     if (push) {
@@ -287,6 +322,24 @@
       history.pushState({ tab: tab }, "", next);
     }
     window.scrollTo(0, 0);
+  }
+
+  if (mutatorsBody) {
+    mutatorsBody.addEventListener("click", function (e) {
+      var row = e.target.closest(".mut-row");
+      if (!row || !mutatorsBody.contains(row)) return;
+      var item = row.closest(".mut-item");
+      var open = item.classList.contains("is-open");
+      mutatorsBody.querySelectorAll(".mut-item.is-open").forEach(function (el) {
+        el.classList.remove("is-open");
+        var btn = el.querySelector(".mut-row");
+        if (btn) btn.setAttribute("aria-expanded", "false");
+      });
+      if (!open) {
+        item.classList.add("is-open");
+        row.setAttribute("aria-expanded", "true");
+      }
+    });
   }
 
   document.querySelector(".res-tabs").addEventListener("click", function (e) {

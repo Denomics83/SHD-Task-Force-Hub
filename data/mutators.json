@@ -1,0 +1,78 @@
+{
+  "source": "https://prototrack.gg/escalation-info.php",
+  "groups": [
+    {
+      "id": "enemy",
+      "label": "Enemy Mutators",
+      "items": [
+        {
+          "slug": "harvester",
+          "name": "Harvester",
+          "icon": "assets/icons/mutators/harvester.png",
+          "description": "When this enemy deals damage, it restores its own Armor and Health. Damage it with a grenade or apply any Status Effect to disable Harvester.",
+          "lines": []
+        },
+        {
+          "slug": "one-for-all",
+          "name": "One-For-All",
+          "icon": "assets/icons/mutators/one-for-all.png",
+          "description": "Marked enemies give allies within 20 m 50% damage resistance. Damage dealt to the marked enemy also spreads to its allies within that radius.",
+          "lines": []
+        },
+        {
+          "slug": "aid-specialist",
+          "name": "Aid Specialist",
+          "icon": "assets/icons/mutators/aid-specialist.png",
+          "description": "Periodically repairs the Armor of nearby allies when they are heavily damaged.",
+          "lines": []
+        }
+      ]
+    },
+    {
+      "id": "global",
+      "label": "Global Mutators",
+      "items": [
+        {
+          "slug": "unyielding",
+          "name": "Unyielding",
+          "icon": "assets/icons/mutators/unyielding.png",
+          "description": "Each enemy cleanses its Status Effects once when it crosses a set Armor or Health threshold. Crowd control can be applied again after the cleanse.",
+          "lines": []
+        },
+        {
+          "slug": "variety-pack",
+          "name": "Variety Pack",
+          "icon": "assets/icons/mutators/variety-pack.png",
+          "description": "Repeated kills with the same weapon reduce its Weapon Damage. Switch weapons and get a kill or assist kill to clear the penalty.",
+          "lines": []
+        },
+        {
+          "slug": "isac-says",
+          "name": "ISAC Says",
+          "icon": "assets/icons/mutators/isac-says.png",
+          "description": "Assigns a random colored debuff. Complete its matching action to clear it and gain +30% Rate of Fire.",
+          "lines": [
+            {
+              "color": "red",
+              "label": "Red",
+              "effect": "−25% Weapon Damage",
+              "clear": "Destroy an enemy weakpoint."
+            },
+            {
+              "color": "blue",
+              "label": "Blue",
+              "effect": "−30% Weapon Handling",
+              "clear": "Get 3 kills or assist kills."
+            },
+            {
+              "color": "yellow",
+              "label": "Yellow",
+              "effect": "+30% Skill Cooldowns",
+              "clear": "Kill an enemy with your sidearm."
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}

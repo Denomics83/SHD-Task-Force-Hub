@@ -434,7 +434,7 @@
     if (tab === "maps") tab = "builds";
     var hash = (location.hash || "").replace("#", "");
     if (hash === "hunters" || hash.indexOf("hunters/") === 0) return false;
-    return tab !== "hunters" && tab !== "creators";
+    return tab !== "hunters" && tab !== "creators" && tab !== "mutators";
   }
 
   function route(push) {
