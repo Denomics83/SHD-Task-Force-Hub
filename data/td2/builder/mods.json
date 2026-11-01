@@ -1,29 +1,1452 @@
 {
-  "source": "Generic (non-exotic, non-specialization) attachment bonuses taken from the Build Station weaponMods collection in the saved share INlIgxZJ (1 Nov 2026). Values are the caps on those generic rows: 5% critical hit chance optics, muzzles and laser pointers, as on the FAMAS in that build; extended 5.56 magazines at +20 rounds and -10% reload. This is a working picker list, not all 260 attachments.",
+  "source": "Selectable weapon attachments from the Division 2 Community Data Hub weapons/weapon_mods.csv (https://github.com/div2hub/game-data, CC BY 4.0), the table ProtoTrack cites for attachment stats. Checked 2026-11-01. Each mod's fits list is the weapon classes whose non-exotic guns use a matching slot type. Magazine size without a percent sign is extra rounds, as published. 161 attachments with compatibility N/A are fixed to one exotic or named weapon and are not in these dropdowns.",
   "slots": {
     "optic": [
-      { "name": "Rugged Mini Reflex Sight", "stat": "Critical Hit Chance", "value": 5 },
-      { "name": "Russian Red Dot Sight", "stat": "Critical Hit Damage", "value": 10 },
-      { "name": "Reflex Sight", "stat": "Weapon Handling", "value": 12 },
-      { "name": "Small RDS Scope", "stat": "Stability", "value": 50, "statNeg": "Accuracy", "valueNeg": -20 },
-      { "name": "ACOG Scope (4x)", "stat": "Optimal Range", "value": 50 }
+      {
+        "name": "552 Holo Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Acog Scope (4x)",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 50,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "C79 Scope (3.4x)",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "CQBSS Scope (8x)",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Digital Scope",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 45,
+            "unit": "%"
+          },
+          {
+            "name": "Critical Hit Damage",
+            "value": -5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "EXPS3 Holo Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Low Reflex Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 15,
+            "unit": "%"
+          },
+          {
+            "name": "Optimal Range",
+            "value": -25,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Open Iron Sights",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "PRO Red Dot Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Reflex Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Weapon Handling",
+            "value": 12,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Rugged Mini Reflex Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Russian Red dot Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Small RDS Scope",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 50,
+            "unit": "%"
+          },
+          {
+            "name": "Accuracy",
+            "value": -20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Streamlined Iron Sights",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 14,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "T2 Micro Red Dot Sight",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "VX1 Scope (12x)",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 35,
+            "unit": "%"
+          },
+          {
+            "name": "Reload Speed",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Weighted Iron Sights",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      }
     ],
     "muzzle": [
-      { "name": "Muzzle Brake 5.56", "stat": "Critical Hit Chance", "value": 5 },
-      { "name": "Flash Hider 9mm", "stat": "Critical Hit Damage", "value": 10 },
-      { "name": "Compensator", "stat": "Stability", "value": 30 },
-      { "name": "Small Suppressor .45", "stat": "Accuracy", "value": 30 }
+      {
+        "name": "Compensator .45",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Compensator 5.56",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Compensator 7.62",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Compensator 9mm",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Flash Hider .45",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Flash Hider 5.56",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Flash Hider 7.62",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Flash Hider 9mm",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Large Suppressor 5.56",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Large Suppressor 7.62",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Loud Vent Brake .45",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 50,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Loud Vent Brake 5.56",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 50,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Loud Vent Brake 7.62",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 50,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Loud Vent Brake 9mm",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 50,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Muzzle Brake .45",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Muzzle Brake 5.56",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Muzzle Brake 7.62",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Muzzle Brake 9mm",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Omega 5.56 Rifle Suppressor",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 40,
+            "unit": "%"
+          },
+          {
+            "name": "Optimal Range",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Omega 7.62 Rifle Suppresor",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 40,
+            "unit": "%"
+          },
+          {
+            "name": "Optimal Range",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Osprey 45 Suppressor",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Osprey 9 Suppressor",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "QDC Sound Suppressor",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Small Suppressor .45",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Small Suppressor 9mm",
+        "fits": [
+          "SMG",
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      }
     ],
     "magazine": [
-      { "name": "Sturdy Extended 5.56 Mag", "stat": "Extra Rounds", "value": 20, "statNeg": "Reload Speed", "valueNeg": -10 },
-      { "name": "Tactical Mag", "stat": "Critical Hit Damage", "value": 10 },
-      { "name": "Lightweight Marksman Mag", "stat": "Reload Speed", "value": 20 }
+      {
+        "name": "Balanced Spring 5.56 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Calibrated Link",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Compensated Integrated Spring",
+        "fits": [
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Counter-Clockwise Tubular Spring",
+        "fits": [
+          "Rifle",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Extended .45 ACP Mag",
+        "fits": [
+          "Rifle",
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 15,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Extended 9mm Mag",
+        "fits": [
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 20,
+            "unit": ""
+          },
+          {
+            "name": "Reload Speed",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Extended Pistol Mag",
+        "fits": [
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 11,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Field Pistol Mag",
+        "fits": [
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Flexible tubular Spring",
+        "fits": [
+          "Rifle",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Force Feed .45 ACP Mag",
+        "fits": [
+          "Rifle",
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Rate of Fire",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Hard Tubular Spring",
+        "fits": [
+          "Rifle",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Rate of Fire",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Heavy Spring 9mm Mag",
+        "fits": [
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Infantry 5.56 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 70,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Large Pouch",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 35,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Large Pouch (Gunner mag)",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 50,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Light Extended 5.56 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 15,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Light Extended 7.62 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 15,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Lightweight Marksman Mag",
+        "fits": [
+          "Rifle",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Mended Marksman Mag",
+        "fits": [
+          "Rifle",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Optimal Range",
+            "value": 50,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Nimble Link Belt",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Rate of Fire",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Non-Disruptive Link",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Overbalanced Integrated Spring",
+        "fits": [
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Oversized .45 ACP Mag",
+        "fits": [
+          "Rifle",
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 20,
+            "unit": ""
+          },
+          {
+            "name": "Reload Speed",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Oversized 9mm Mag",
+        "fits": [
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 15,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Police Pistol Mag",
+        "fits": [
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Precision 7.62 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Precision Feeding .45 Mag",
+        "fits": [
+          "Rifle",
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Segmented 9mm Mag",
+        "fits": [
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Short Spring .45 ACP Mag",
+        "fits": [
+          "Rifle",
+          "SMG"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Speed Loading Revolver Drum",
+        "fits": [
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Stiff Integrated Spring",
+        "fits": [
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Weapon Damage",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Sturdy Extended 5.56 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 20,
+            "unit": ""
+          },
+          {
+            "name": "Reload Speed",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Sturdy Extended 7.62 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 20,
+            "unit": ""
+          },
+          {
+            "name": "Reload Speed",
+            "value": -10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Sturdy Marksman Mag",
+        "fits": [
+          "Rifle",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Tactical 5.56 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Tactical Small Pouch",
+        "fits": [
+          "LMG"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Thin 7.62 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Tightly Packed Marksman Mag",
+        "fits": [
+          "Rifle",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Extra Rounds",
+            "value": 5,
+            "unit": ""
+          }
+        ]
+      },
+      {
+        "name": "Underbalanced Integrated Spring",
+        "fits": [
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Rate of Fire",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Weighted 7.62 Mag",
+        "fits": [
+          "AR",
+          "Rifle",
+          "LMG",
+          "MMR"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 20,
+            "unit": "%"
+          }
+        ]
+      }
     ],
     "underbarrel": [
-      { "name": "Laser Pointer", "stat": "Critical Hit Chance", "value": 5 },
-      { "name": "Angled Grip", "stat": "Stability", "value": 30 },
-      { "name": "Vertical Grip", "stat": "Accuracy", "value": 30 },
-      { "name": "Handstop", "stat": "Reload Speed", "value": 10 }
+      {
+        "name": "Angled Grip",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Stability",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Compact Coupled Laser Pointer",
+        "fits": [
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Headshot Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Compact Coupled Small Laser Pointer",
+        "fits": [
+          "Pistol"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Handstop",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Reload Speed",
+            "value": 14,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Laser Pointer",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 5,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Short Grip",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 10,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Small Laser Pointer",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Chance",
+            "value": 7,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Tactical Short Grip",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Critical Hit Damage",
+            "value": 15,
+            "unit": "%"
+          }
+        ]
+      },
+      {
+        "name": "Vertical Grip",
+        "fits": [
+          "AR",
+          "Rifle",
+          "SMG",
+          "LMG",
+          "MMR",
+          "Shotgun"
+        ],
+        "stats": [
+          {
+            "name": "Accuracy",
+            "value": 30,
+            "unit": "%"
+          }
+        ]
+      }
     ]
   }
 }

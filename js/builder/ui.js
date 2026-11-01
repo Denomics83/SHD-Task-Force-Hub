@@ -3,6 +3,7 @@
   var GEAR = ["mask", "backpack", "chest", "gloves", "holster", "kneepads"];
   var WEAPONS = ["primary", "secondary", "sidearm"];
   var MOD_ORDER = ["optic", "muzzle", "magazine", "underbarrel"];
+  var MOD_LABEL = { optic: "Optic", muzzle: "Muzzle", magazine: "Magazine", underbarrel: "Underbarrel" };
   var LABELS = {
     primary: "Primary", secondary: "Secondary", sidearm: "Sidearm",
     mask: "Mask", backpack: "Backpack", chest: "Chest", gloves: "Gloves",
@@ -147,6 +148,31 @@
       return String(value || "").toLowerCase().replace(/\s+/g, " ").trim();
     }
 
+    function signedStat(stat) {
+      var n = Number(stat && stat.value);
+      if (!isFinite(n)) return "";
+      var sign = n > 0 ? "+" : "";
+      if (!stat.unit && stat.name === "Extra Rounds") return sign + n + " " + stat.name;
+      return sign + n + "% " + stat.name;
+    }
+
+    function modLine(mod) {
+      if (!mod || !mod.name) return "None";
+      var parts = (mod.stats || []).map(signedStat).filter(Boolean);
+      if (!parts.length && mod.stat) {
+        parts.push(signedStat({ name: mod.stat, value: mod.value, unit: "%" }));
+        if (mod.statNeg) parts.push(signedStat({ name: mod.statNeg, value: mod.valueNeg, unit: "%" }));
+      }
+      return parts.length ? mod.name + ", " + parts.join(", ") : mod.name;
+    }
+
+    function modsFor(slotName, type) {
+      var rows = (catalog.weaponMods[slotName] || []).slice();
+      var kind = ShadeEngine.weaponType(type);
+      if (!kind) return rows;
+      return rows.filter(function (row) { return (row.fits || []).indexOf(kind) >= 0; });
+    }
+
     function optionHTML(rows, current, labeler) {
       var html = '<option value="">—</option>';
       var seen = {};
@@ -179,11 +205,18 @@
       var limA = limits(minor.name, "weapon-minor");
       var talentLocked = item.talentLocked || item.rarity === "exotic";
       var notes = ShadeCatalog.fixedNotes(catalog, item);
-      var mods = MOD_ORDER.map(function (slot, index) {
-        var mod = (item.mods || []).filter(function (row) { return row.slot === slot; })[0] || { slot: slot, name: "", stat: "", value: "" };
-        var choices = catalog.weaponMods[slot] || [];
-        return '<label>' + esc(slot) +
-          '<select data-mod-slot="' + slot + '">' + optionHTML(choices, mod.name) + "</select></label>";
+      var mods = MOD_ORDER.map(function (slot) {
+        var mod = (item.mods || []).filter(function (row) { return row.slot === slot; })[0] || null;
+        var choices = modsFor(slot, item.type);
+        var options = '<li><button type="button" data-mod-pick="' + slot + '" data-mod-name="">None</button></li>' +
+          choices.map(function (row) {
+            var on = mod && mod.name === row.name ? " is-on" : "";
+            return '<li><button type="button" class="' + on.trim() + '" data-mod-pick="' + slot + '" data-mod-name="' + esc(row.name) + '">' + esc(modLine(row)) + "</button></li>";
+          }).join("");
+        if (!choices.length) options = '<li><button type="button" disabled>No attachments for this weapon</button></li>';
+        return '<div class="bb-mod"><span>' + MOD_LABEL[slot] + '</span>' +
+          '<button type="button" class="bb-mod-btn" data-mod-open="' + slot + '" aria-expanded="false" aria-haspopup="listbox">' + esc(mod ? modLine(mod) : "None") + "</button>" +
+          '<ul class="bb-mod-menu" hidden data-mod-menu="' + slot + '" role="listbox">' + options + "</ul></div>";
       }).join("");
       return head(item, "Choose weapon") +
         toggle(item) +
@@ -460,10 +493,7 @@
       if (modSlot) {
         var choice = (catalog.weaponMods[modSlot] || []).filter(function (row) { return row.name === target.value; })[0];
         item.mods = (item.mods || []).filter(function (row) { return row.slot !== modSlot; });
-        if (choice) item.mods.push({
-          slot: modSlot, name: choice.name, stat: choice.stat, value: choice.value,
-          statNeg: choice.statNeg || "", valueNeg: choice.valueNeg == null ? "" : choice.valueNeg
-        });
+        if (choice) item.mods.push(chosenMod(modSlot, choice));
         return "editor";
       }
       return "";
@@ -764,7 +794,52 @@
         '<label class="bb-notes-label">Notes <textarea id="bb-notes" rows="4">' + esc(meta.notes) + "</textarea></label>";
     }
 
+    function chosenMod(slotName, choice) {
+      var stats = (choice.stats || []).map(function (stat) {
+        return { name: stat.name, value: stat.value, unit: stat.unit || "" };
+      });
+      var first = stats[0] || { name: choice.stat || "", value: choice.value };
+      return {
+        slot: slotName,
+        name: choice.name,
+        stats: stats,
+        stat: first.name || "",
+        value: first.value == null ? "" : first.value,
+        statNeg: "",
+        valueNeg: ""
+      };
+    }
+
+    function closeModMenus() {
+      host.querySelectorAll(".bb-mod-menu").forEach(function (menu) { menu.hidden = true; });
+      host.querySelectorAll("[data-mod-open]").forEach(function (btn) { btn.setAttribute("aria-expanded", "false"); });
+    }
+
     host.addEventListener("click", function (e) {
+      var opener = e.target.closest("[data-mod-open]");
+      if (opener && host.contains(opener)) {
+        var menu = host.querySelector('[data-mod-menu="' + opener.getAttribute("data-mod-open") + '"]');
+        var willOpen = menu && menu.hidden;
+        closeModMenus();
+        if (menu && willOpen) {
+          menu.hidden = false;
+          opener.setAttribute("aria-expanded", "true");
+        }
+        return;
+      }
+      var modPick = e.target.closest("[data-mod-pick]");
+      if (modPick && host.contains(modPick)) {
+        var modSlotName = modPick.getAttribute("data-mod-pick");
+        var modName = modPick.getAttribute("data-mod-name") || "";
+        var item = state[selected];
+        var choice = (catalog.weaponMods[modSlotName] || []).filter(function (row) { return row.name === modName; })[0];
+        item.mods = (item.mods || []).filter(function (row) { return row.slot !== modSlotName; });
+        if (choice) item.mods.push(chosenMod(modSlotName, choice));
+        closeModMenus();
+        paint();
+        return;
+      }
+      if (!e.target.closest(".bb-mod")) closeModMenus();
       var slotBtn = e.target.closest("[data-slot]");
       if (slotBtn && host.contains(slotBtn)) {
         selected = slotBtn.getAttribute("data-slot");

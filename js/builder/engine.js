@@ -408,6 +408,12 @@
     }
     (item.mods || []).forEach(function (mod) {
       if (!mod) return;
+      if (Array.isArray(mod.stats) && mod.stats.length) {
+        mod.stats.forEach(function (stat) {
+          addStat(bag, statId(stat.name), num(stat.value));
+        });
+        return;
+      }
       take(mod.stat, mod.value, "mod");
       if (mod.statNeg) addStat(bag, statId(mod.statNeg), num(mod.valueNeg));
     });

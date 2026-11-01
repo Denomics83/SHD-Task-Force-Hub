@@ -240,7 +240,14 @@
             stat: mod.stat || "",
             value: mod.value === "" || mod.value == null ? "" : Number(mod.value),
             statNeg: mod.statNeg || "",
-            valueNeg: mod.valueNeg === "" || mod.valueNeg == null ? "" : Number(mod.valueNeg)
+            valueNeg: mod.valueNeg === "" || mod.valueNeg == null ? "" : Number(mod.valueNeg),
+            stats: (mod.stats || []).map(function (stat) {
+              return {
+                name: stat.name || "",
+                value: stat.value === "" || stat.value == null ? "" : Number(stat.value),
+                unit: stat.unit || ""
+              };
+            })
           };
         })
       };

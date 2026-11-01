@@ -299,3 +299,28 @@ test("legacy admin loadouts still sum", function () {
   assert.equal(sheet.stats.explosiveDamage, 10);
   assert.equal(sheet.stats.pulseResistance, 50);
 });
+
+test("weapon attachments add their bonuses and penalties", function () {
+  const optic = catalog.weaponMods.optic.find(function (row) { return row.name === "Digital Scope"; });
+  const mag = catalog.weaponMods.magazine.find(function (row) { return row.name === "Sturdy Extended 5.56 Mag"; });
+  assert.ok(optic.fits.includes("AR"));
+  assert.ok(optic.stats.some(function (stat) { return stat.value > 0; }));
+  assert.ok(optic.stats.some(function (stat) { return stat.value < 0; }));
+  assert.ok(mag.fits.includes("AR") && !mag.fits.includes("Pistol"));
+  const loadout = catalogApi.blank(catalog.watch);
+  loadout.primary = {
+    name: "FAMAS 2010",
+    type: "AR",
+    rarity: "high-end",
+    attributes: [],
+    mods: [
+      { slot: "optic", name: optic.name, stats: optic.stats },
+      { slot: "magazine", name: mag.name, stats: mag.stats }
+    ]
+  };
+  const sheet = engine.compute(loadout, catalog);
+  assert.equal(sheet.stats.headshotDamage, 45);
+  assert.equal(sheet.stats.criticalHitDamage, -5);
+  assert.equal(sheet.stats.extraRounds, 20);
+  assert.equal(sheet.stats.reloadSpeed, -10);
+});
