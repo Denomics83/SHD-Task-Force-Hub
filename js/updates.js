@@ -109,12 +109,12 @@
           : "";
         return (
           '<a class="upd-entry" href="#' + STF.esc(item.id) + '">' +
-          thumb +
           "<div>" +
           "<h2>" + STF.esc(item.title) + "</h2>" +
           (desc ? '<p class="upd-desc">' + STF.esc(desc) + "</p>" : "") +
           (when ? '<time class="upd-stamp" datetime="' + STF.esc(item.date) + '">' + STF.esc(when) + "</time>" : "") +
           "</div>" +
+          thumb +
           '<div class="upd-ico ' + face + '" aria-hidden="true">' + (GLYPH[face] || "") + "</div>" +
           "</a>"
         );
@@ -135,13 +135,17 @@
       ? '<div class="rich-html">' + STF.safeHTML(item.bodyHtml) + "</div>" +
         (item.patchHtml ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(item.patchHtml) + "</div>" : "")
       : (item.sections || []).map(sectionHTML).join("");
+    var source = item.source
+      ? '<p class="upd-source"><a href="' + STF.esc(item.source) + '" target="_blank" rel="noopener noreferrer">Source: Ubisoft</a></p>'
+      : "";
     detail.innerHTML =
       "<h1>" + STF.esc(item.title) + "</h1>" +
       (summary ? '<p class="upd-summary">' + STF.esc(summary) + "</p>" : "") +
       (posted ? '<p class="upd-posted">' + STF.esc(posted) + "</p>" : "") +
       pill +
       image +
-      sections;
+      sections +
+      source;
   }
 
   function setHeaderBack(on) {
@@ -207,6 +211,7 @@
         sortAt: row.published_at || row.scheduled_at || "",
         schedule: scheduleText(row.scheduled_at),
         image: safeImage(row.image_url),
+        source: safeImage(row.source_url),
         bodyHtml: row.body_html || "",
         patchHtml: row.patch_notes_html || "",
         priority: 0

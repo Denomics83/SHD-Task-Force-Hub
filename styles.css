@@ -2795,7 +2795,9 @@ body.page-events.is-event-detail .event-detail { padding-top: 8px; }
   width: 56px; height: 42px; object-fit: cover; display: block;
   border: 1px solid rgba(255,255,255,.28);
 }
-.upd-entry:has(.upd-thumb) { grid-template-columns: 56px minmax(0, 1fr) auto; }
+.upd-entry:has(.upd-thumb) { grid-template-columns: minmax(0, 1fr) 56px auto; }
+.upd-source { margin: 16px 0 0; }
+.upd-source a { color: var(--orange); font-weight: 700; }
 .upd-ico.announcement,
 .upd-ico.reminder { color: #e23b3b; }
 .upd-ico.maintenance { color: var(--orange); }
@@ -2937,6 +2939,10 @@ body.page-admin [hidden] { display: none !important; }
   font-family: var(--display); letter-spacing: .06em; text-transform: uppercase; padding: 4px 8px;
 }
 .desk-form { padding: 18px; display: grid; gap: 8px; }
+#update-image-preview {
+  width: min(100%, 360px); max-height: 180px; object-fit: cover;
+  border: 1px solid rgba(255,255,255,.35);
+}
 .desk-form label, .ba-editor label, .ba-top label, .ba-meta label {
   display: grid; gap: 4px; font-size: .72rem; font-weight: 700; letter-spacing: .06em; text-transform: uppercase; color: #9aa0a6;
 }

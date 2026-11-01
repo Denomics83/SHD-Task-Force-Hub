@@ -356,6 +356,7 @@
     $("update-published").value = "Stamped when you publish";
     setQuill("update-body", "");
     setQuill("update-patch", "");
+    setMapPreview($("update-image"), $("update-image-preview"), "");
     togglePatch();
   }
   function togglePatch() {
@@ -369,12 +370,20 @@
     if (type === "patch") return "Downloadable Update";
     return type || "";
   }
+  function httpUrl(value) {
+    var text = String(value || "").trim();
+    return /^https?:\/\/\S+$/i.test(text) ? text : "";
+  }
   function updatePayload() {
-    var image = ($("update-image").value || "").trim();
+    var image = httpUrl($("update-image").value);
+    var source = httpUrl($("update-source").value);
+    if (($("update-image").value || "").trim() && !image) throw new Error("Image URL must start with http:// or https://.");
+    if (($("update-source").value || "").trim() && !source) throw new Error("Source URL must start with http:// or https://.");
     return {
       type: $("update-type").value,
       title: $("update-title").value.trim(),
       image_url: image || null,
+      source_url: source || null,
       body_html: quillHTML("update-body"),
       patch_notes_html: $("update-type").value === "patch" ? quillHTML("update-patch") : "",
       scheduled_at: fromLocal($("update-when").value)
@@ -548,7 +557,8 @@
       $("update-heading").textContent = "Edit update";
       $("update-type").value = row.type;
       $("update-title").value = row.title || "";
-      $("update-image").value = row.image_url || "";
+      setMapPreview($("update-image"), $("update-image-preview"), row.image_url || "");
+      $("update-source").value = row.source_url || "";
       $("update-when").value = toLocal(row.scheduled_at);
       $("update-published").value = stamp(row.published_at);
       togglePatch();
@@ -638,9 +648,18 @@
   }
 
   function openPreview() {
-    var payload = updatePayload();
-    var previewImage = payload.image_url && /^https?:\/\/\S+$/i.test(payload.image_url)
+    var payload;
+    try {
+      payload = updatePayload();
+    } catch (err) {
+      status("update-status", err.message || String(err), "err");
+      return;
+    }
+    var previewImage = payload.image_url
       ? '<figure class="upd-banner"><img src="' + STF.esc(payload.image_url) + '" alt=""></figure>'
+      : "";
+    var previewSource = payload.source_url
+      ? '<p class="upd-source"><a href="' + STF.esc(payload.source_url) + '" target="_blank" rel="noopener noreferrer">Source: Ubisoft</a></p>'
       : "";
     $("preview-body").innerHTML =
       '<article class="upd-entry"><div><h2>' + STF.esc(payload.title || "Untitled") + "</h2>" +
@@ -648,7 +667,8 @@
       '<time class="upd-stamp">' + STF.esc(stamp(payload.scheduled_at)) + "</time></div></article>" +
       previewImage +
       '<div class="rich-html">' + STF.safeHTML(payload.body_html) + "</div>" +
-      (payload.patch_notes_html ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(payload.patch_notes_html) + "</div>" : "");
+      (payload.patch_notes_html ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(payload.patch_notes_html) + "</div>" : "") +
+      previewSource;
     $("preview-modal").hidden = false;
   }
 
@@ -824,6 +844,20 @@
   });
   mountArtPickers();
   previewFile($("event-image"), $("event-image-preview"), $("event-image-url"));
+  $("update-image-file").addEventListener("change", async function () {
+    var file = $("update-image-file").files[0];
+    if (!file) return;
+    try {
+      var uploaded = await uploadImage(file, "updates");
+      setMapPreview($("update-image"), $("update-image-preview"), uploaded);
+      status("update-status", "Image uploaded.", "ok");
+    } catch (err) {
+      status("update-status", err.message || String(err), "err");
+    }
+  });
+  $("update-image").addEventListener("input", function () {
+    setMapPreview($("update-image"), $("update-image-preview"), $("update-image").value.trim());
+  });
   bindMapFields("event");
   bindMapFields("template");
   previewFile($("template-image"), $("template-image-preview"), $("template-image-url"));
