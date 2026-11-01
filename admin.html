@@ -6,12 +6,12 @@
   <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
   <meta http-equiv="Pragma" content="no-cache">
   <meta http-equiv="Expires" content="0">
-  <meta name="stf-build" content="240bf48">
+  <meta name="stf-build" content="event-map1">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#0B0D10">
   <title>Admin — Shade Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
-  <link rel="stylesheet" href="styles.css?v=240bf48">
+  <link rel="stylesheet" href="styles.css?v=event-map1">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.snow.css">
 </head>
 <body class="page-admin is-logged-out">
@@ -132,6 +132,12 @@
         <div class="art-pick" id="event-art-pick"></div>
         <img id="event-image-preview" alt="" hidden>
         <input type="hidden" id="event-image-url">
+        <label>Map image
+          <input id="event-map-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+        </label>
+        <label>Map image URL <input id="event-map-url" type="text" placeholder="https://… or assets/maps/…"></label>
+        <img id="event-map-preview" alt="" hidden>
+        <label>Map caption <input id="event-map-caption" placeholder="Optional"></label>
         <p class="admin-row">
           <button class="admin-btn" type="submit">Save event</button>
         </p>
@@ -157,6 +163,12 @@
           <div class="art-pick" id="template-art-pick"></div>
           <img id="template-image-preview" alt="" hidden>
           <input type="hidden" id="template-image-url">
+          <label>Map image
+            <input id="template-map-file" type="file" accept="image/jpeg,image/png,image/webp,image/gif,image/avif">
+          </label>
+          <label>Map image URL <input id="template-map-url" type="text" placeholder="https://… or assets/maps/…"></label>
+          <img id="template-map-preview" alt="" hidden>
+          <label>Map caption <input id="template-map-caption" placeholder="Optional"></label>
           <p class="admin-row">
             <button class="admin-btn" type="submit">Save template</button>
             <button type="button" class="admin-btn admin-btn-ghost" id="template-new">New</button>
@@ -219,12 +231,12 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <script src="https://cdn.jsdelivr.net/npm/dompurify@3.2.4/dist/purify.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/quill@1.3.7/dist/quill.min.js"></script>
-  <script src="js/supabase.js?v=240bf48"></script>
-  <script src="js/common.js?v=240bf48"></script>
-  <script src="js/event-cards.js?v=240bf48"></script>
-  <script src="js/icons.js?v=240bf48"></script>
-  <script src="js/build-admin.js?v=240bf48"></script>
-  <script src="js/admin.js?v=240bf48"></script>
+  <script src="js/supabase.js?v=event-map1"></script>
+  <script src="js/common.js?v=event-map1"></script>
+  <script src="js/event-cards.js?v=event-map1"></script>
+  <script src="js/icons.js?v=event-map1"></script>
+  <script src="js/build-admin.js?v=event-map1"></script>
+  <script src="js/admin.js?v=event-map1"></script>
 <script data-stf-toast>
 (function () {
   var meta = document.querySelector('meta[name="stf-build"]');

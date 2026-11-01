@@ -5,7 +5,9 @@
       "typeId": "red-moon-unleashed",
       "start": "2026-10-14T13:00:00.000Z",
       "end": "2026-11-03T08:00:00.000Z",
-      "note": ""
+      "note": "",
+      "mapImage": "assets/maps/red-moon-altars.jpg",
+      "mapCaption": "20 Red Moon Altars on the D.C. map"
     },
     {
       "id": "vanguard-2026",

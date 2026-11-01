@@ -169,6 +169,33 @@
     setCardImage(hidden, img, path, true);
     suggestClanActivity();
   }
+  function setMapPreview(urlInput, img, url) {
+    urlInput.value = url || "";
+    if (!img) return;
+    img.hidden = !url;
+    if (url) img.src = url;
+  }
+  function bindMapFields(prefix) {
+    var file = $(prefix + "-map-file");
+    var url = $(prefix + "-map-url");
+    var img = $(prefix + "-map-preview");
+    if (file) {
+      file.addEventListener("change", async function () {
+        if (!file.files[0]) return;
+        try {
+          var uploaded = await uploadImage(file.files[0], "maps");
+          setMapPreview(url, img, uploaded);
+        } catch (err) {
+          status(prefix + "-status", err.message || String(err), "err");
+        }
+      });
+    }
+    if (url) {
+      url.addEventListener("input", function () {
+        setMapPreview(url, img, url.value.trim());
+      });
+    }
+  }
   function previewFile(input, img, hidden) {
     input.addEventListener("change", async function () {
       if (!input.files[0]) return;
@@ -242,7 +269,7 @@
   }
 
   async function loadTemplateSelect() {
-    var res = await sb.from("event_templates").select("id, name, title, description_html, image_url, duration_hours").order("name");
+    var res = await sb.from("event_templates").select("id, name, title, description_html, image_url, duration_hours, map_image, map_caption").order("name");
     var select = $("event-template");
     var current = select.value;
     select.innerHTML = '<option value="">Choose a template</option>' + (res.data || []).map(function (row) {
@@ -258,6 +285,10 @@
     $("event-title").value = row.title || "";
     setQuill("event-body", row.description_html || "");
     setCardImage($("event-image-url"), $("event-image-preview"), row.image_url || "", false);
+    if (!$("event-map-url").value.trim()) {
+      setMapPreview($("event-map-url"), $("event-map-preview"), row.map_image || "");
+      $("event-map-caption").value = row.map_caption || "";
+    }
     if ($("event-start").value && row.duration_hours) {
       var start = new Date($("event-start").value);
       $("event-end").value = toLocal(new Date(start.getTime() + row.duration_hours * 3600000).toISOString());
@@ -275,6 +306,8 @@
     $("event-id").value = "";
     $("event-heading").textContent = "Add event";
     setCardImage($("event-image-url"), $("event-image-preview"), "", false);
+    setMapPreview($("event-map-url"), $("event-map-preview"), "");
+    $("event-map-caption").value = "";
     $("event-activity").dataset.manual = "";
     setQuill("event-body", "");
     toggleEventKind();
@@ -287,12 +320,21 @@
       title: $("event-title").value.trim(),
       description_html: quillHTML("event-body"),
       image_url: $("event-image-url").value || null,
+      map_image: $("event-map-url").value.trim() || null,
+      map_caption: $("event-map-caption").value.trim() || null,
       activity_type: kind === "clan" ? ($("event-activity").value || null) : null,
       starts_at: fromLocal($("event-start").value),
       ends_at: fromLocal($("event-end").value)
     };
     if (!payload.title || !payload.starts_at) throw new Error("Title and start are required.");
     if (kind !== "clan" && !payload.ends_at) throw new Error("End time is required.");
+    if (kind === "rotation" && !payload.map_image) {
+      var template = ($("event-template")._rows || []).filter(function (item) { return item.id === payload.template_id; })[0];
+      if (template) {
+        payload.map_image = template.map_image || null;
+        if (!payload.map_caption) payload.map_caption = template.map_caption || null;
+      }
+    }
     var id = $("event-id").value;
     var res = id
       ? await sb.from("events").update(payload).eq("id", id).select("id").single()
@@ -314,6 +356,8 @@
     $("template-title").value = "";
     $("template-hours").value = "168";
     setCardImage($("template-image-url"), $("template-image-preview"), "", false);
+    setMapPreview($("template-map-url"), $("template-map-preview"), "");
+    $("template-map-caption").value = "";
     setQuill("template-body", "");
   }
   async function saveTemplate() {
@@ -322,7 +366,9 @@
       title: $("template-title").value.trim(),
       description_html: quillHTML("template-body"),
       duration_hours: Number($("template-hours").value),
-      image_url: $("template-image-url").value || null
+      image_url: $("template-image-url").value || null,
+      map_image: $("template-map-url").value.trim() || null,
+      map_caption: $("template-map-caption").value.trim() || null
     };
     if (!payload.name || !payload.title) throw new Error("Name and title are required.");
     var id = $("template-id").value;
@@ -414,6 +460,8 @@
       $("event-start").value = toLocal(eventRow.starts_at);
       $("event-end").value = toLocal(eventRow.ends_at);
       setCardImage($("event-image-url"), $("event-image-preview"), eventRow.image_url || "", false);
+      setMapPreview($("event-map-url"), $("event-map-preview"), eventRow.map_image || "");
+      $("event-map-caption").value = eventRow.map_caption || "";
       return;
     }
     if (kind === "template") {
@@ -426,6 +474,8 @@
       $("template-title").value = found.title || "";
       $("template-hours").value = found.duration_hours || 168;
       setCardImage($("template-image-url"), $("template-image-preview"), found.image_url || "", false);
+      setMapPreview($("template-map-url"), $("template-map-preview"), found.map_image || "");
+      $("template-map-caption").value = found.map_caption || "";
       setQuill("template-body", found.description_html || "");
       return;
     }
@@ -594,6 +644,8 @@
   });
   mountArtPickers();
   previewFile($("event-image"), $("event-image-preview"), $("event-image-url"));
+  bindMapFields("event");
+  bindMapFields("template");
   previewFile($("template-image"), $("template-image-preview"), $("template-image-url"));
 
   boot();

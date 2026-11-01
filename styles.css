@@ -1412,18 +1412,40 @@ body.page-builds.is-list {
 }
 .season-theme[hidden] { display: none !important; }
 .climax-line { margin: 4px 0 0; color: var(--text); font-size: .95rem; }
-#altar-leaflet {
-  height: min(68vh, 460px);
+.ev-map { margin: 16px 0 0; }
+.ev-map .map-shot {
+  display: block;
   width: 100%;
-  border-radius: 12px;
-  margin: 0 0 12px;
-  background: #d5dbe3;
+  padding: 8px;
+  border: 1px solid rgba(255,255,255,.55);
+  background:
+    linear-gradient(#fff, #fff) left top / 12px 1px no-repeat,
+    linear-gradient(#fff, #fff) left top / 1px 12px no-repeat,
+    linear-gradient(#fff, #fff) right top / 12px 1px no-repeat,
+    linear-gradient(#fff, #fff) right top / 1px 12px no-repeat,
+    linear-gradient(#fff, #fff) left bottom / 12px 1px no-repeat,
+    linear-gradient(#fff, #fff) left bottom / 1px 12px no-repeat,
+    linear-gradient(#fff, #fff) right bottom / 12px 1px no-repeat,
+    linear-gradient(#fff, #fff) right bottom / 1px 12px no-repeat,
+    #101114;
+  cursor: zoom-in;
 }
-.altar-pin { background: none; border: 0; }
-.altar-pin span {
-  width: 28px; height: 28px; display: grid; place-items: center;
-  border-radius: 50%; background: #c43b3b; color: #fff; font-weight: 800;
-  font-size: .78rem; border: 2px solid #fff; box-shadow: 0 1px 4px rgba(0,0,0,.4);
+.ev-map .map-shot img {
+  width: 100%;
+  max-width: 100%;
+  height: auto;
+  display: block;
+  border: 0;
+  border-radius: 0;
+}
+.ev-map figcaption {
+  margin: 8px 0 0;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .78rem;
+  color: var(--orange);
 }
 .journey-mission {
   background: rgba(255,255,255,.035);

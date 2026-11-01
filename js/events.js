@@ -331,15 +331,6 @@
 
   var detail = document.getElementById("event-detail");
   var catalog = [];
-  var altarsDoc = { altars: [] };
-  var eventMap = null;
-
-  function clearEventMap() {
-    if (eventMap) {
-      eventMap.remove();
-      eventMap = null;
-    }
-  }
 
   function melbourneRange(start, end) {
     var fmt = new Intl.DateTimeFormat("en-AU", {
@@ -381,7 +372,6 @@
   }
 
   function showRail() {
-    clearEventMap();
     var screen = document.getElementById("tl-screen");
     if (screen) screen.hidden = false;
     rail.hidden = false;
@@ -490,16 +480,14 @@
     var ruleHtml = rules.length
       ? '<div class="ev-rules">' + rules.map(function (line) { return "<p>" + STF.esc(line) + "</p>"; }).join("") + "</div>"
       : "";
-    var redMoon = type.id === "red-moon-unleashed";
-    var mapBlock = "";
-    if (redMoon && item.mapImage) {
-      mapBlock =
-        '<button type="button" class="map-shot" id="event-map-open">' +
-        '<img src="' + STF.esc(item.mapImage) + '" alt="Red Moon Unleashed map">' +
-        "</button>";
-    } else if (redMoon) {
-      mapBlock = '<div id="altar-leaflet" role="region" aria-label="Red Moon altar map"></div>';
-    }
+    var mapSrc = item.mapImage || "";
+    var mapCaption = item.mapCaption || "";
+    var mapBlock = mapSrc
+      ? '<figure class="ev-map"><button type="button" class="map-shot" id="event-map-open">' +
+        '<img src="' + STF.esc(mapSrc) + '" alt="' + STF.esc(mapCaption || "Event map") + '"></button>' +
+        (mapCaption ? "<figcaption>" + STF.esc(mapCaption) + "</figcaption>" : "") +
+        "</figure>"
+      : "";
     detail.innerHTML =
       '<article class="ev-page">' +
       '<p class="ev-status-row"><span class="tl-tag ' + statusClass + '">' + statusLabel(state) + "</span></p>" +
@@ -522,39 +510,10 @@
     detail.hidden = false;
     setEventsBack(true);
     var mapOpen = document.getElementById("event-map-open");
-    if (mapOpen && item.mapImage) {
+    if (mapOpen && mapSrc) {
       mapOpen.addEventListener("click", function () {
-        STF.openMap(item.mapImage, item.mapCaption || "");
+        STF.openMap(mapSrc, mapCaption);
       });
-    }
-    var altarEl = document.getElementById("altar-leaflet");
-    if (altarEl && window.L) {
-      clearEventMap();
-      eventMap = L.map(altarEl, { scrollWheelZoom: false });
-      L.tileLayer("https://tile.openstreetmap.org/{z}/{x}/{y}.png", {
-        maxZoom: 19,
-        attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
-      }).addTo(eventMap);
-      var bounds = [];
-      (altarsDoc.altars || []).forEach(function (altar) {
-        if (altar.lat == null || altar.lon == null) return;
-        var icon = L.divIcon({
-          className: "altar-pin",
-          html: "<span>" + altar.n + "</span>",
-          iconSize: [28, 28],
-          iconAnchor: [14, 14]
-        });
-        L.marker([altar.lat, altar.lon], { icon: icon, title: String(altar.n) })
-          .addTo(eventMap)
-          .bindPopup("<strong>" + altar.n + ". " + STF.esc(altar.zone) + "</strong><br>" + STF.esc(altar.where));
-        bounds.push([altar.lat, altar.lon]);
-      });
-      if (bounds.length) eventMap.fitBounds(bounds, { padding: [28, 28] });
-      setTimeout(function () {
-        if (!eventMap) return;
-        eventMap.invalidateSize();
-        if (bounds.length) eventMap.fitBounds(bounds, { padding: [28, 28] });
-      }, 80);
     }
     window.scrollTo(0, 0);
   }
@@ -571,8 +530,7 @@
       STF.fetchJSON("data/season.json"),
       STF.fetchJSON("data/raids.json"),
       STF.fetchJSON("data/event-types.json").catch(function () { return { types: [] }; }),
-      STF.fetchJSON("data/events.json").catch(function () { return { events: [] }; }),
-      STF.fetchJSON("data/altars.json").catch(function () { return { altars: [] }; })
+      STF.fetchJSON("data/events.json").catch(function () { return { events: [] }; })
     ]);
     var season = results[0] || {};
     var raids = ((results[1] && results[1].raids) || []).slice().sort(function (a, b) {
@@ -580,7 +538,6 @@
       var kb = (b.date || "") + " " + (b.time || "");
       return ka < kb ? -1 : ka > kb ? 1 : 0;
     });
-    altarsDoc = results[4] || { altars: [] };
     var typeById = {};
     ((results[2] && results[2].types) || []).forEach(function (type) { typeById[type.id] = type; });
     var now = Date.now();
@@ -602,13 +559,14 @@
       };
     });
     if (STF.sb) {
-      var remoteEvents = await STF.sb.from("events").select("*").order("starts_at", { ascending: true });
+      var remoteEvents = await STF.sb.from("events").select("*, event_templates(map_image, map_caption)").order("starts_at", { ascending: true });
       (remoteEvents.data || []).forEach(function (row) {
         var startMs = new Date(row.starts_at).getTime();
         var endMs = row.ends_at ? new Date(row.ends_at).getTime() : 0;
         var state = endMs && now >= endMs ? "ended" : now < startMs ? "upcoming" : "active";
         var chip = state === "upcoming" ? countdownLabel(new Date(row.starts_at)) : state === "active" ? "Live" : "Ended";
         var cardLabel = row.kind === "clan" ? "Clan" : row.kind === "special" ? "Special" : "Rotation";
+        var templateMap = row.event_templates || {};
         joined.push({
           id: row.id,
           remote: true,
@@ -627,8 +585,8 @@
           start: row.starts_at,
           end: row.ends_at || "",
           note: "",
-          mapImage: "",
-          mapCaption: "",
+          mapImage: row.map_image || templateMap.map_image || "",
+          mapCaption: row.map_caption || templateMap.map_caption || "",
           state: state,
           chip: chip
         });
