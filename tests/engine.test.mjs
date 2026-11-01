@@ -30,7 +30,8 @@ const catalog = catalogApi.adapt({
   armor: read("data/td2/builder/armor.json"),
   rules: read("data/td2/builder/rules.json"),
   mods: read("data/td2/builder/mods.json"),
-  coreRules: read("data/td2/builder/core-rules.json")
+  coreRules: read("data/td2/builder/core-rules.json"),
+  layouts: read("data/td2/builder/layouts.json")
 });
 
 function gear(name, brand, rarity, core, coreValue, attributes) {
@@ -211,6 +212,91 @@ test("only sourced fixed cores stay locked", function () {
   read("data/td2/exotics.json").items.filter(function (row) { return row.kind === "gear"; }).forEach(function (row) {
     assert.equal(catalogApi.coreRule(catalog, row).sourced, true, row.name);
   });
+});
+
+test("gear pieces use their catalog slot layout", function () {
+  const equalizer = catalogApi.slotPlan("chest", { name: "Equalizer", rarity: "named" }, catalog);
+  assert.equal(equalizer.minors, 2);
+  assert.equal(equalizer.mods, 1);
+  assert.equal(equalizer.talent, true);
+  const savedChest = catalogApi.fromSaved({
+    loadout: {
+      chest: {
+        name: "Equalizer",
+        rarity: "named",
+        core: "Weapon Damage",
+        coreValue: 15,
+        talent: "Perfect Obliterate",
+        attributes: [{ name: "Critical Hit Chance", value: 6 }]
+      }
+    }
+  }, catalog).chest;
+  assert.equal(savedChest.attributes.length, 2);
+  assert.equal(savedChest.attributes[0].name, "Critical Hit Chance");
+  assert.equal(savedChest.attributes[0].value, 6);
+  assert.equal(savedChest.attributes[1].name, "");
+  assert.equal(catalogApi.slotPlan("mask", { name: "Providence Defense", rarity: "high-end" }, catalog).minors, 2);
+  assert.equal(catalogApi.slotPlan("chest", { name: "Eclipse Protocol", rarity: "gear-set" }, catalog).minors, 1);
+  assert.equal(catalogApi.slotPlan("holster", { name: "Eclipse Protocol", rarity: "gear-set" }, catalog).mods, 0);
+
+  const chill = catalogApi.slotPlan("mask", { name: "Chill Out", rarity: "named" }, catalog);
+  assert.equal(chill.minors, 1);
+  assert.equal(chill.mods, 2);
+  assert.equal(chill.talent, false);
+  const chillItem = catalogApi.fromSaved({
+    loadout: {
+      mask: {
+        name: "Chill Out",
+        rarity: "named",
+        core: "Armor",
+        coreValue: 170000,
+        attributes: [{ name: "Hazard Protection", value: 8 }],
+        mod: "Skill Haste",
+        modValue: 12
+      }
+    }
+  }, catalog).mask;
+  assert.equal(chillItem.attributes.length, 1);
+  assert.equal(chillItem.mod, "Skill Haste");
+  chillItem.mod2 = "Critical Hit Chance";
+  chillItem.mod2Value = 6;
+  const chillSheet = engine.compute({ mask: chillItem }, catalog);
+  assert.equal(chillSheet.stats.skillHaste, 12);
+  assert.equal(chillSheet.stats.criticalHitChance, 6);
+
+  const investor = catalogApi.slotPlan("mask", { name: "Investor", rarity: "exotic" }, catalog);
+  assert.equal(investor.minors, 3);
+  assert.equal(investor.mods, 0);
+  assert.equal(investor.talent, true);
+  const investorItem = catalogApi.fromSaved({
+    loadout: {
+      mask: {
+        name: "Investor",
+        rarity: "exotic",
+        core: "Armor",
+        coreValue: 100000,
+        talent: "Slotted",
+        attributes: [{ name: "Critical Hit Chance", value: 4 }],
+        mod: "Skill Haste",
+        modValue: 12
+      }
+    }
+  }, catalog).mask;
+  assert.equal(investorItem.attributes.length, 3);
+  assert.equal(investorItem.attributes[0].value, 4);
+  assert.equal(investorItem.mod, "");
+  assert.deepEqual(investorItem.attributes[0].exclude, ["Headshot Damage", "Health", "Repair Skills"]);
+
+  const memento = catalogApi.fromSaved({
+    loadout: { backpack: { name: "Memento", rarity: "exotic", core: "Weapon Damage", coreValue: 12, attributes: [{ name: "Critical Hit Chance", value: 6 }] } }
+  }, catalog).backpack;
+  assert.equal(memento.attributes.length, 0);
+  assert.equal(memento.core2, "Armor");
+  assert.equal(memento.core3, "Skill Tier");
+  const sheet = engine.compute({ backpack: memento }, catalog);
+  assert.equal(sheet.stats.weaponDamage, 12);
+  assert.equal(sheet.skillTier, 1);
+  assert.equal(sheet.stats.criticalHitChance || 0, 0);
 });
 
 test("memento keeps all three fixed cores on the sheet", function () {

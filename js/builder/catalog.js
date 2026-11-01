@@ -10,7 +10,7 @@
     "weapons", "brands", "gearsets", "named", "exotics", "attributes", "talents",
     "skills", "specializations", "grenades", "playstyles"
   ];
-  var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules"];
+  var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules", "layouts"];
   var GEAR_CORES = ["Weapon Damage", "Armor", "Skill Tier"];
 
   function list(doc, key) {
@@ -67,7 +67,14 @@
         backpack: list(files.talents, "backpack")
       },
       gearCores: list(attributes, "cores"),
-      gearMinors: minors.filter(function (row) { return !row.group || row.group === "gear"; }),
+      gearMinors: (function () {
+        var rows = minors.filter(function (row) { return !row.group || row.group === "gear"; });
+        var categories = (files.layouts && files.layouts.minorCategories) || {};
+        rows.forEach(function (row) {
+          if (row && categories[row.name]) row.category = categories[row.name];
+        });
+        return rows;
+      })(),
       weaponMinors: minors.filter(function (row) { return row.group === "weapon"; }),
       modCaps: list(attributes, "modCaps"),
       modNames: list(attributes, "mods"),
@@ -82,6 +89,7 @@
       rules: files.rules || {},
       weaponMods: (files.mods && files.mods.slots) || {},
       coreRules: files.coreRules || { open: GEAR_CORES, items: [] },
+      layouts: files.layouts || {},
       namedWeaponByName: byName(namedWeapons),
       namedGearByName: byName(namedGear),
       exoticByName: byName(exotics),
@@ -123,7 +131,8 @@
       armor: files.armor,
       rules: files.rules,
       mods: files.mods,
-      coreRules: files.coreRules
+      coreRules: files.coreRules,
+      layouts: files.layouts
     });
     catalog.errors = errors;
     return catalog;
@@ -232,7 +241,10 @@
         next[key].mod = next[key].mod.stat || next[key].mod.name || "";
       }
       applyLegacyMax(next[key]);
-      if (next[key].name) assignCores(catalog, next[key]);
+      if (next[key].name) {
+        assignCores(catalog, next[key]);
+        applyLayout(catalog, next[key], key);
+      }
     });
     ["skill1", "skill2"].forEach(function (key) {
       if (load[key]) next[key] = Object.assign(emptySkill(), copy(load[key]));
@@ -323,7 +335,9 @@
           };
         }),
         mod: item.mod || "",
-        modValue: item.modValue === "" || item.modValue == null ? "" : Number(item.modValue)
+        modValue: item.modValue === "" || item.modValue == null ? "" : Number(item.modValue),
+        mod2: item.mod2 || "",
+        mod2Value: item.mod2Value === "" || item.mod2Value == null ? "" : Number(item.mod2Value)
       };
     });
     ["skill1", "skill2"].forEach(function (key) {
@@ -442,24 +456,136 @@
     return rule;
   }
 
-  function slotPlan(slot, item) {
-    var gear = {
-      mask: { minors: 1, mod: true, talent: false },
-      chest: { minors: 1, mod: true, talent: true },
-      backpack: { minors: 1, mod: true, talent: true },
-      gloves: { minors: 2, mod: false, talent: false },
-      holster: { minors: 2, mod: false, talent: false },
-      kneepads: { minors: 2, mod: false, talent: false }
-    }[slot];
-    if (!gear) return { minors: 1, mod: true, talent: true };
+  var LAYOUT_DEFAULTS = {
+    "high-end": {
+      mask: { cores: 1, minors: 2, mods: 1, talent: false },
+      chest: { cores: 1, minors: 2, mods: 1, talent: true },
+      backpack: { cores: 1, minors: 2, mods: 1, talent: true },
+      gloves: { cores: 1, minors: 2, mods: 0, talent: false },
+      holster: { cores: 1, minors: 2, mods: 0, talent: false },
+      kneepads: { cores: 1, minors: 2, mods: 0, talent: false }
+    },
+    named: {
+      mask: { cores: 1, minors: 2, mods: 1, talent: false },
+      chest: { cores: 1, minors: 2, mods: 1, talent: true, talentLocked: true },
+      backpack: { cores: 1, minors: 2, mods: 1, talent: true, talentLocked: true },
+      gloves: { cores: 1, minors: 2, mods: 0, talent: false },
+      holster: { cores: 1, minors: 2, mods: 0, talent: false },
+      kneepads: { cores: 1, minors: 2, mods: 0, talent: false }
+    },
+    "gear-set": {
+      mask: { cores: 1, minors: 1, mods: 1, talent: false },
+      chest: { cores: 1, minors: 1, mods: 1, talent: true, talentLocked: true },
+      backpack: { cores: 1, minors: 1, mods: 1, talent: true, talentLocked: true },
+      gloves: { cores: 1, minors: 1, mods: 0, talent: false },
+      holster: { cores: 1, minors: 1, mods: 0, talent: false },
+      kneepads: { cores: 1, minors: 1, mods: 0, talent: false }
+    },
+    exotic: {
+      mask: { cores: 1, minors: 2, mods: 1, talent: true, talentLocked: true },
+      chest: { cores: 1, minors: 2, mods: 1, talent: true, talentLocked: true },
+      backpack: { cores: 1, minors: 2, mods: 1, talent: true, talentLocked: true },
+      gloves: { cores: 1, minors: 2, mods: 0, talent: true, talentLocked: true },
+      holster: { cores: 1, minors: 2, mods: 0, talent: true, talentLocked: true },
+      kneepads: { cores: 1, minors: 2, mods: 0, talent: true, talentLocked: true }
+    }
+  };
+
+  function layoutFamily(item) {
     var rarity = keyOf(item && item.rarity);
-    if (rarity === "gear-set") {
-      return { minors: 1, mod: gear.mod, talent: slot === "chest" || slot === "backpack", coreLocked: false, talentLocked: true, prototype: true };
+    if (rarity === "gear-set" || rarity === "gearset" || rarity === "set") return "gear-set";
+    if (rarity === "exotic") return "exotic";
+    if (rarity === "named") return "named";
+    return "high-end";
+  }
+
+  function layoutRow(catalog, slot, item) {
+    var rows = (catalog && catalog.layouts && catalog.layouts.items) || [];
+    var name = coreKey(item && item.name);
+    for (var i = 0; i < rows.length; i++) {
+      if (coreKey(rows[i] && rows[i].name) !== name) continue;
+      if (rows[i].slot && rows[i].slot !== slot) continue;
+      return rows[i];
     }
-    if (rarity === "exotic") {
-      return { minors: Math.max(gear.minors, 1), mod: gear.mod, talent: true, coreLocked: false, talentLocked: true, prototype: false };
+    return null;
+  }
+
+  function layoutOf(catalog, slot, item) {
+    var family = layoutFamily(item);
+    var tables = (catalog && catalog.layouts && catalog.layouts.defaults) || LAYOUT_DEFAULTS;
+    var base = (tables[family] && tables[family][slot]) || LAYOUT_DEFAULTS[family][slot] || LAYOUT_DEFAULTS["high-end"][slot];
+    var row = layoutRow(catalog, slot, item);
+    var minorSlots = row && Array.isArray(row.minors) ? row.minors : null;
+    var minors = minorSlots ? minorSlots.length : (row && row.minors != null ? row.minors : base.minors);
+    var plan = {
+      cores: row && row.cores != null ? (Array.isArray(row.coreNames) ? row.coreNames.length : row.cores) : base.cores,
+      minors: minors,
+      minorSlots: minorSlots,
+      mods: row && row.mods != null ? row.mods : base.mods,
+      talent: row && row.talent != null ? !!row.talent : !!base.talent,
+      talentLocked: row && row.talentLocked != null ? !!row.talentLocked : !!base.talentLocked,
+      note: (row && row.note) || "",
+      sourced: !!row
+    };
+    var rule = coreRule(catalog, item);
+    plan.coreLocked = !!rule.locked && !rule.multi;
+    plan.prototype = family !== "exotic";
+    if (item && item.talentLocked) plan.talentLocked = true;
+    return plan;
+  }
+
+  function applyLayout(catalog, item, slot) {
+    if (!item || !item.name) return layoutOf(catalog, slot, item);
+    var plan = layoutOf(catalog, slot, item);
+    var specs = plan.minorSlots || [];
+    var count = plan.minors;
+    var current = item.attributes || [];
+    var next = [];
+    var i;
+    for (i = 0; i < count; i++) {
+      var spec = specs[i] || { locked: false };
+      var attr = current[i] ? copy(current[i]) : { name: "", value: "" };
+      if (spec.locked && spec.name) {
+        if (keyOf(attr.name) !== keyOf(spec.name)) {
+          attr = {
+            name: spec.name,
+            value: spec.max != null ? spec.max : "",
+            locked: true,
+            max: spec.max,
+            protoMax: spec.protoMax,
+            unit: spec.unit || "",
+            statId: spec.statId || ""
+          };
+        } else {
+          attr.locked = true;
+          attr.max = spec.max;
+          if (spec.protoMax != null) attr.protoMax = spec.protoMax;
+          if (spec.unit) attr.unit = spec.unit;
+          if (spec.statId) attr.statId = spec.statId;
+          if (attr.value === "" || attr.value == null) attr.value = spec.max != null ? spec.max : "";
+        }
+      } else {
+        attr.locked = false;
+        attr.exclude = spec.exclude || [];
+        attr.pool = spec.pool || "";
+      }
+      next.push(attr);
     }
-    return { minors: gear.minors, mod: gear.mod, talent: gear.talent, coreLocked: false, talentLocked: !!(item && item.talentLocked), prototype: true };
+    item.attributes = next;
+    if (plan.mods < 1) {
+      item.mod = "";
+      item.modValue = "";
+    }
+    if (plan.mods < 2) {
+      item.mod2 = "";
+      item.mod2Value = "";
+    }
+    if (plan.talentLocked) item.talentLocked = true;
+    return plan;
+  }
+
+  function slotPlan(slot, item, catalog) {
+    return layoutOf(catalog, slot, item);
   }
 
   function fixedTalent(catalog, item) {
@@ -493,6 +619,8 @@
     fromSaved: fromSaved,
     toPublic: toPublic,
     slotPlan: slotPlan,
+    layoutOf: layoutOf,
+    applyLayout: applyLayout,
     coreRule: coreRule,
     assignCores: assignCores,
     fixedTalent: fixedTalent,

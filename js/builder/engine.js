@@ -55,6 +55,7 @@
     optimalRange: { name: "Optimal Range", unit: "%", group: "offense" },
     swapSpeed: { name: "Swap Speed", unit: "%", group: "offense" },
     ammoCapacity: { name: "Ammo Capacity", unit: "%", group: "offense" },
+    meleeDamage: { name: "Melee Damage", unit: "%", group: "offense" },
     explosiveDamage: { name: "Explosive Damage", unit: "%", group: "offense" },
     totalArmor: { name: "Total Armor", unit: "%", group: "defense" },
     armorFlat: { name: "Armor", unit: "", group: "defense" },
@@ -78,12 +79,15 @@
     incomingRepairs: { name: "Incoming Repairs", unit: "%", group: "defense" },
     healthOnKill: { name: "Health on Kill", unit: "%", group: "defense" },
     increasedThreat: { name: "Increased Threat", unit: "%", group: "defense" },
+    reducedThreat: { name: "Reduced Threat", unit: "%", group: "defense" },
     skillTier: { name: "Skill Tier", unit: "", group: "skill" },
     skillDamage: { name: "Skill Damage", unit: "%", group: "skill" },
     skillHaste: { name: "Skill Haste", unit: "%", group: "skill" },
     skillRepair: { name: "Repair Skills", unit: "%", group: "skill" },
     skillDuration: { name: "Skill Duration", unit: "%", group: "skill" },
     skillHealth: { name: "Skill Health", unit: "%", group: "skill" },
+    shieldHealth: { name: "Shield Health", unit: "%", group: "skill" },
+    scannerPulseHaste: { name: "Scanner Pulse Haste", unit: "%", group: "skill" },
     skillEfficiency: { name: "Skill Efficiency", unit: "%", group: "skill" },
     statusEffects: { name: "Status Effects", unit: "%", group: "skill" },
     outgoingHealing: { name: "Outgoing Healing", unit: "%", group: "skill" },
@@ -148,6 +152,10 @@
     "optimal range": "optimalRange",
     "swap speed": "swapSpeed",
     "ammo capacity": "ammoCapacity",
+    "melee damage": "meleeDamage",
+    "reduced threat": "reducedThreat",
+    "shield health": "shieldHealth",
+    "scanner pulse haste": "scannerPulseHaste",
     "explosive damage": "explosiveDamage",
     "pulse resistance": "pulseResistance",
     "burn resistance": "burnResistance",
@@ -298,8 +306,24 @@
     return sameName(item.guaranteed, name);
   }
 
-  function effectiveValue(catalog, item, name, value, role, type, mode) {
+  function effectiveValue(catalog, item, name, value, role, type, mode, cap) {
     var range = rangeFor(catalog, name, role, type);
+    if (cap && cap.max != null && cap.max !== "") {
+      var max = num(cap.max);
+      var protoMax = cap.protoMax != null && cap.protoMax !== "" ? num(cap.protoMax) : max;
+      range = {
+        id: range.id,
+        min: 0,
+        max: max,
+        protoMax: protoMax,
+        prototype: protoMax !== max && range.id !== "skillTier",
+        unit: cap.unit || range.unit
+      };
+      if (range.id === "skillTier" && !rulesOf(catalog).skillTierCanPrototype) {
+        range.prototype = false;
+        range.protoMax = range.max;
+      }
+    }
     var proto = prototypeOn(item, catalog) && range.prototype;
     var amount = num(value);
     if (!range.id) return { id: "", value: 0, range: range };
@@ -420,9 +444,13 @@
       take(item.core2, item.core2Value, "gear-core");
       take(item.core3, item.core3Value, "gear-core");
       (item.attributes || []).forEach(function (attr) {
-        take(attr.name || attr.stat, attr.value, "gear-minor");
+        if (!attr) return;
+        var cap = attr.max != null && attr.max !== "" ? { max: attr.max, protoMax: attr.protoMax, unit: attr.unit } : null;
+        var hit = effectiveValue(catalog, item, attr.name || attr.stat, attr.value, "gear-minor", type, mode, cap);
+        addStat(bag, attr.statId || hit.id, hit.value);
       });
       if (item.mod) take(item.mod, item.modValue, "mod");
+      if (item.mod2) take(item.mod2, item.mod2Value, "mod");
     }
     (item.mods || []).forEach(function (mod) {
       if (!mod) return;

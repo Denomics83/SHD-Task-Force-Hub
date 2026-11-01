@@ -77,7 +77,7 @@
     }
 
     function plan() {
-      return ShadeCatalog.slotPlan(selected, state[selected]);
+      return ShadeCatalog.slotPlan(selected, state[selected], catalog);
     }
 
     function range(name, role) {
@@ -85,10 +85,22 @@
       return ShadeEngine.rangeFor(catalog, name, role, item.type);
     }
 
-    function limits(name, role) {
+    function limits(name, role, cap) {
       var item = state[selected] || {};
       var span = range(name, role);
-      var proto = !!(item.prototype && span.prototype && ShadeCatalog.slotPlan(selected, item).prototype !== false);
+      if (cap && cap.max != null && cap.max !== "") {
+        var max = num(cap.max);
+        var protoMax = cap.protoMax != null && cap.protoMax !== "" ? num(cap.protoMax) : max;
+        span = {
+          id: span.id,
+          min: 0,
+          max: max,
+          protoMax: protoMax,
+          prototype: protoMax !== max && span.id !== "skillTier",
+          unit: cap.unit || span.unit || ""
+        };
+      }
+      var proto = !!(item.prototype && span.prototype && ShadeCatalog.slotPlan(selected, item, catalog).prototype !== false);
       if (item.rarity === "exotic") proto = false;
       if (!span.prototype) proto = false;
       var min = proto ? span.max : 0;
@@ -246,33 +258,49 @@
         notesHTML(notes);
     }
 
+    function minorChoices(attr) {
+      return catalog.gearMinors.filter(function (row) {
+        if (attr.exclude && attr.exclude.indexOf(row.name) >= 0) return false;
+        if (attr.pool && row.category && row.category !== attr.pool) return false;
+        return true;
+      });
+    }
+
     function gearEditor() {
       var item = state[selected];
-      var layout = ShadeCatalog.slotPlan(selected, item);
-      while ((item.attributes || []).length < layout.minors) item.attributes.push({ name: "", value: "" });
+      var layout = ShadeCatalog.slotPlan(selected, item, catalog);
+      item.attributes = item.attributes || [];
+      while (item.attributes.length < layout.minors) item.attributes.push({ name: "", value: "" });
       var attrs = item.attributes.slice(0, layout.minors).map(function (attr, index) {
-        var lim = limits(attr.name, "gear-minor");
+        var lim = limits(attr.name, "gear-minor", attr);
         return '<label>Attribute ' + (index + 1) +
-          '<select data-minor="' + index + '"' + (attr.locked ? " disabled" : "") + ">" + optionHTML(catalog.gearMinors, attr.name) + "</select></label>" +
-          (attr.name ? slider(attr.name, attr.value, lim, "attr", index, attr.locked, attr.maxed) : "");
+          '<select data-minor="' + index + '"' + (attr.locked ? " disabled" : "") + ">" + optionHTML(minorChoices(attr), attr.name) + "</select></label>" +
+          (attr.name ? slider(attr.name, attr.value, lim, "attr", index, false, attr.maxed) : "");
       }).join("");
       var mod = "";
-      if (layout.mod) {
-        var modLim = limits(item.mod, "mod");
-        mod = "<h4>Mod</h4><label>Stat <select data-field=\"mod\">" + optionHTML(catalog.modNames.length ? catalog.modNames : catalog.modCaps, item.mod) + "</select></label>" +
-          (item.mod ? slider(item.mod, item.modValue, modLim, "mod") : "");
+      if (layout.mods > 0) {
+        mod = "<h4>Mod" + (layout.mods > 1 ? "s" : "") + "</h4>" + modField(item, "mod", item.mod, item.modValue);
+        if (layout.mods > 1) mod += modField(item, "mod2", item.mod2, item.mod2Value);
       }
       var talent = "";
       if (layout.talent) {
-        var pool = (selected === "chest" ? catalog.talents.chest : catalog.talents.backpack).slice();
+        var pool = (selected === "chest" ? catalog.talents.chest : selected === "backpack" ? catalog.talents.backpack : []).slice();
         talent = '<label>Talent <select data-field="talent"' + (item.talentLocked || layout.talentLocked ? " disabled" : "") + ">" + optionHTML(pool, item.talent) + "</select></label>";
       }
+      var note = layout.note ? '<p class="lede">' + esc(layout.note) + "</p>" : "";
       return head(item, "Choose piece") +
         (layout.prototype === false ? '<p class="lede">Exotics cannot be Prototype.</p>' : toggle(item)) +
         expertiseField(item) +
         coreFields(item) +
-        "<h4>Minor attributes</h4>" + attrs + mod + talent +
+        (layout.minors ? "<h4>Minor attributes</h4>" + attrs : "") +
+        note + mod + talent +
         notesHTML(ShadeCatalog.fixedNotes(catalog, item));
+    }
+
+    function modField(item, field, name, value) {
+      var lim = limits(name, "mod");
+      return '<label>Stat <select data-field="' + field + '">' + optionHTML(catalog.modNames.length ? catalog.modNames : catalog.modCaps, name) + "</select></label>" +
+        (name ? slider(name, value, lim, field) : "");
     }
 
     function coreFields(item) {
@@ -518,10 +546,11 @@
         setCoreValue(item, "coreValue", item.core, "gear-core");
         return "editor";
       }
-      if (field === "mod") {
-        item.mod = target.value;
-        var lim = limits(item.mod, "mod");
-        item.modValue = lim.max == null ? 0 : lim.max;
+      if (field === "mod" || field === "mod2") {
+        var modValueField = field === "mod" ? "modValue" : "mod2Value";
+        item[field] = target.value;
+        var lim = limits(item[field], "mod");
+        item[modValueField] = lim.max == null ? 0 : lim.max;
         return "editor";
       }
       var minor = target.getAttribute("data-minor");
@@ -529,6 +558,9 @@
         var row = item.attributes[Number(minor)] || { name: "", value: "" };
         row.name = target.value;
         row.locked = false;
+        row.max = null;
+        row.protoMax = null;
+        row.statId = "";
         var role = WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor";
         var limMinor = limits(row.name, role);
         row.value = limMinor.max == null ? 0 : (item.prototype && limMinor.proto ? limMinor.min : limMinor.max);
@@ -552,10 +584,12 @@
       var value = num(target.value);
       var index = target.getAttribute("data-index");
       if (bind === "mod") item.modValue = value;
+      else if (bind === "mod2") item.mod2Value = value;
       else {
         var name = boundStat(item, bind, index);
         var role = boundRole(bind);
-        var lim = limits(name, role);
+        var cap = bind === "attr" ? (item.attributes[Number(index)] || null) : null;
+        var lim = limits(name, role, cap);
         writeStat(item, bind, Number(index), value, atMax(value, lim));
       }
       var slide = target.closest(".bb-slide");
@@ -564,7 +598,8 @@
       if (maxBtn && bind !== "mod") {
         var nameOn = boundStat(item, bind, index);
         var roleOn = boundRole(bind);
-        var on = atMax(value, limits(nameOn, roleOn));
+        var capOn = bind === "attr" ? (item.attributes[Number(index)] || null) : null;
+        var on = atMax(value, limits(nameOn, roleOn, capOn));
         maxBtn.classList.toggle("is-on", on);
         maxBtn.setAttribute("aria-pressed", on ? "true" : "false");
       }
@@ -783,11 +818,9 @@
     }
 
     function chooseGear(name, tab) {
-      var layout = ShadeCatalog.slotPlan(selected, { rarity: tab === "gearset" ? "gear-set" : tab === "brand" ? "high-end" : tab });
       var next = ShadeCatalog.emptyGear();
       next.name = name;
       next.attributes = [];
-      for (var i = 0; i < layout.minors; i++) next.attributes.push({ name: "", value: "" });
       if (tab === "brand") {
         var brand = catalog.brands.filter(function (row) { return row.name === name; })[0] || {};
         next.catalogId = brand.id || "";
@@ -813,7 +846,6 @@
         next.coreValue = maxForCore(next.core);
         next.talent = named.perfectTalent || "";
         next.talentLocked = !!named.perfectTalent;
-        applyFixed(next, named.fixedAttributes);
       } else {
         var exotic = catalog.exotics.filter(function (row) { return row.name === name; })[0] || {};
         next.catalogId = exotic.id || "";
@@ -824,6 +856,7 @@
         next.coreValue = maxForCore(next.core);
         next.prototype = false;
       }
+      ShadeCatalog.applyLayout(catalog, next, selected);
       ShadeCatalog.assignCores(catalog, next);
       state[selected] = next;
       closeModal();
@@ -930,7 +963,8 @@
         var index = Number(maxBtn.getAttribute("data-index"));
         var name = boundStat(item, bind, index);
         var role = boundRole(bind);
-        var lim = limits(name, role);
+        var cap = bind === "attr" ? (item.attributes[index] || null) : null;
+        var lim = limits(name, role, cap);
         var on = maxBtn.classList.contains("is-on");
         writeStat(item, bind, index, on ? lim.min : lim.max, !on);
         paint();

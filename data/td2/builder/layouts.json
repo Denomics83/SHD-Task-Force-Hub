@@ -1,0 +1,1741 @@
+{
+  "source": "Division 2 Community Data Hub gear slot tables (https://github.com/div2hub/game-data, CC BY 4.0), checked 2026-11-01. Defaults are the repeated brand and gear-set rows. Items below are the named, exotic, Improvised, and Ember Engine rows whose slot counts or fixed attributes differ from that default. A fixed attribute uses that row's range_max.",
+  "defaults": {
+    "high-end": {
+      "mask": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": false
+      },
+      "chest": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true
+      },
+      "backpack": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true
+      },
+      "gloves": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": false
+      },
+      "holster": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": false
+      },
+      "kneepads": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": false
+      }
+    },
+    "named": {
+      "mask": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": false
+      },
+      "chest": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "backpack": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "gloves": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": false
+      },
+      "holster": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": false
+      },
+      "kneepads": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": false
+      }
+    },
+    "gear-set": {
+      "mask": {
+        "cores": 1,
+        "minors": 1,
+        "mods": 1,
+        "talent": false
+      },
+      "chest": {
+        "cores": 1,
+        "minors": 1,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "backpack": {
+        "cores": 1,
+        "minors": 1,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "gloves": {
+        "cores": 1,
+        "minors": 1,
+        "mods": 0,
+        "talent": false
+      },
+      "holster": {
+        "cores": 1,
+        "minors": 1,
+        "mods": 0,
+        "talent": false
+      },
+      "kneepads": {
+        "cores": 1,
+        "minors": 1,
+        "mods": 0,
+        "talent": false
+      }
+    },
+    "exotic": {
+      "mask": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "chest": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "backpack": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 1,
+        "talent": true,
+        "talentLocked": true
+      },
+      "gloves": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": true,
+        "talentLocked": true
+      },
+      "holster": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": true,
+        "talentLocked": true
+      },
+      "kneepads": {
+        "cores": 1,
+        "minors": 2,
+        "mods": 0,
+        "talent": true,
+        "talentLocked": true
+      }
+    }
+  },
+  "minorCategories": {
+    "Weapon Handling": "offensive",
+    "Critical Hit Chance": "offensive",
+    "Critical Hit Damage": "offensive",
+    "Headshot Damage": "offensive",
+    "Armor Regeneration": "defensive",
+    "Hazard Protection": "defensive",
+    "Health": "defensive",
+    "Explosive Resistance": "defensive",
+    "Skill Haste": "skill",
+    "Skill Damage": "skill",
+    "Repair Skills": "skill",
+    "Status Effects": "skill",
+    "Incoming Repairs": "defensive"
+  },
+  "items": [
+    {
+      "name": "Punch Drunk",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Headshot Damage",
+          "max": 20,
+          "unit": "%",
+          "protoMax": 30
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Nightwatcher",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Scanner Pulse Haste",
+          "max": 100,
+          "unit": "%",
+          "protoMax": 150
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Chill Out",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        }
+      ],
+      "mods": 2,
+      "talent": false,
+      "talentLocked": false,
+      "note": "1 minor, 2 mods. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "Visionario",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Optimal Range",
+          "max": 50,
+          "unit": "%",
+          "protoMax": 75
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "The Hollow Man",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Health Damage",
+          "max": 14,
+          "unit": "%",
+          "protoMax": 21
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Vile",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Status Effects",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Hazard Protection",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "Catharsis",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Incoming Repairs",
+          "max": 20,
+          "unit": "%",
+          "protoMax": 30
+        },
+        {
+          "locked": true,
+          "name": "Armor Regeneration",
+          "max": 4925,
+          "unit": "",
+          "protoMax": 7388
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Armor"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "Coyote's Mask",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "The Catalyst",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Hazard Protection",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Status Effects",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "Tinkerer",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "Investor",
+      "slot": "mask",
+      "file": "gear/masks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false,
+          "exclude": [
+            "Headshot Damage",
+            "Health",
+            "Repair Skills"
+          ]
+        },
+        {
+          "locked": false,
+          "exclude": [
+            "Headshot Damage",
+            "Health",
+            "Repair Skills"
+          ]
+        },
+        {
+          "locked": false,
+          "exclude": [
+            "Headshot Damage",
+            "Health",
+            "Repair Skills"
+          ]
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "note": "3 minors, no mod, talent. Source: Division 2 Community Data Hub gear/masks.csv."
+    },
+    {
+      "name": "Collector",
+      "slot": "chest",
+      "file": "gear/chests.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Provocator",
+      "slot": "chest",
+      "file": "gear/chests.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Armor Regeneration",
+          "max": 4925,
+          "unit": "",
+          "protoMax": 7388
+        },
+        {
+          "locked": true,
+          "name": "Hazard Protection",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Armor"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Beacon",
+      "slot": "chest",
+      "file": "gear/chests.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Tardigrade Armor System",
+      "slot": "chest",
+      "file": "gear/chests.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Armor Regeneration",
+          "max": 4925,
+          "unit": "",
+          "protoMax": 7388
+        },
+        {
+          "locked": true,
+          "name": "Explosive Resistance",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Armor"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Ridgeway's Pride",
+      "slot": "chest",
+      "file": "gear/chests.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Iron Will",
+      "slot": "chest",
+      "file": "gear/chests.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Headshot Damage",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Weapon Handling",
+          "max": 8,
+          "unit": "%",
+          "protoMax": 12
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Acosta's Go-Bag",
+      "slot": "backpack",
+      "file": "gear/backpacks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Skill Damage",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Skill Haste",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Skill Tier"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Birdie's Quick Fix Pack",
+      "slot": "backpack",
+      "file": "gear/backpacks.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Skill Haste",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Repair Skills",
+          "max": 20,
+          "unit": "%",
+          "protoMax": 30
+        }
+      ],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Skill Tier"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Memento",
+      "slot": "backpack",
+      "file": "gear/backpacks.csv",
+      "cores": 3,
+      "minors": [],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage",
+        "Armor",
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "3 cores, 0 minors. Source: Division 2 Community Data Hub gear/backpacks.csv."
+    },
+    {
+      "name": "NinjaBike Messenger Backpack",
+      "slot": "backpack",
+      "file": "gear/backpacks.csv",
+      "cores": 3,
+      "minors": [],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage",
+        "Armor",
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "3 cores, 0 minors. Source: Division 2 Community Data Hub gear/backpacks.csv."
+    },
+    {
+      "name": "Harrier Pride",
+      "slot": "backpack",
+      "file": "gear/backpacks.csv",
+      "cores": 3,
+      "minors": [],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage",
+        "Armor",
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "3 cores, 0 minors. Source: Division 2 Community Data Hub gear/backpacks.csv."
+    },
+    {
+      "name": "Sarru",
+      "slot": "backpack",
+      "file": "gear/backpacks.csv",
+      "cores": 3,
+      "minors": [],
+      "mods": 1,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage",
+        "Armor",
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "3 cores, 0 minors. Source: Division 2 Community Data Hub gear/backpacks.csv."
+    },
+    {
+      "name": "Improvised",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false,
+      "note": "1 mod. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "Ember Engine",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": true,
+      "note": "1 mod. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "Deathgrips",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Armor on Kill",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15,
+          "statId": "armorOnKillPercent"
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Contractor\u2019s Gloves",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Damage to Armor",
+          "max": 8,
+          "unit": "%",
+          "protoMax": 12
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Motherly Love",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Skill Health",
+          "max": 25,
+          "unit": "%",
+          "protoMax": 37.5
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Eagles Grasp",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Weapon Handling",
+          "max": 15,
+          "unit": "%",
+          "protoMax": 22.5
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Firm Handshake",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Status Effects",
+          "max": 16,
+          "unit": "%",
+          "protoMax": 24
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Bloody Knuckles",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "BTSU Datagloves",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Skill Haste",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Repair Skills",
+          "max": 20,
+          "unit": "%",
+          "protoMax": 30
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "Exodus Gloves",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "Overdogs",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "Rugged Gauntlets",
+      "slot": "gloves",
+      "file": "gear/gloves.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/gloves.csv."
+    },
+    {
+      "name": "Improvised",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false,
+      "note": "1 mod. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Ember Engine",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": true,
+      "note": "1 mod. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Forge",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Shield Health",
+          "max": 50,
+          "unit": "%",
+          "protoMax": 75
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Ammo Dump",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Ammo Capacity",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": false
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false,
+      "note": "3 minors. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Picaros Holster",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Weapon Damage",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Spot-On",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Accuracy",
+          "max": 38,
+          "unit": "%",
+          "protoMax": 57
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Salvo",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Rate of Fire",
+          "max": 5,
+          "unit": "%",
+          "protoMax": 7.5
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Claws Out",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Melee Damage",
+          "max": 500,
+          "unit": "%",
+          "protoMax": 750
+        },
+        {
+          "locked": false
+        },
+        {
+          "locked": true,
+          "name": "Pistol Damage",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false,
+      "note": "3 minors. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Bulldog",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Centurion's Scabbard",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Weapon Handling",
+          "max": 8,
+          "unit": "%",
+          "protoMax": 12
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Dodge City Gunslinger's Holster",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Weapon Handling",
+          "max": 8,
+          "unit": "%",
+          "protoMax": 12
+        },
+        {
+          "locked": true,
+          "name": "Headshot Damage",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Imperial Dynasty",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Status Effects",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Hazard Protection",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Shocker Punch",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Explosive Resistance",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Hazard Protection",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Armor"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Waveform",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Skill Damage",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Skill Haste",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 15
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Skill Tier"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Nimble Holster",
+      "slot": "holster",
+      "file": "gear/holsters.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/holsters.csv."
+    },
+    {
+      "name": "Improvised",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": false,
+      "note": "1 mod. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Ember Engine",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        }
+      ],
+      "mods": 1,
+      "talent": false,
+      "talentLocked": true,
+      "note": "1 mod. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Fox\u2019s Prayer",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "DTOC",
+          "max": 8,
+          "unit": "%",
+          "protoMax": 12
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Snow Machine",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Turmoil",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Emperor\u2019s Guard",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Armor Regen",
+          "max": 1,
+          "unit": "%",
+          "protoMax": 1.5,
+          "statId": "armorRegenPercent"
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Grease",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Status Effects",
+          "max": 16,
+          "unit": "%",
+          "protoMax": 24
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false
+    },
+    {
+      "name": "Cloak",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Reduced Threat",
+          "max": 50,
+          "unit": "%",
+          "protoMax": 75
+        },
+        {
+          "locked": false
+        }
+      ],
+      "mods": 0,
+      "talent": false,
+      "talentLocked": false,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true
+    },
+    {
+      "name": "Sawyer's Kneepads",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Explosive Resistance",
+          "max": 10,
+          "unit": "%",
+          "protoMax": 15
+        },
+        {
+          "locked": true,
+          "name": "Health",
+          "max": 18935,
+          "unit": "",
+          "protoMax": 28403
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Armor"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Acosta's Kneepads",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": false,
+          "pool": "offensive"
+        },
+        {
+          "locked": false,
+          "pool": "defensive"
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Blacklisters",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "NinjaBike Messenger Kneepads",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    },
+    {
+      "name": "Nurse's Kneepads",
+      "slot": "kneepads",
+      "file": "gear/knees.csv",
+      "cores": 1,
+      "minors": [
+        {
+          "locked": true,
+          "name": "Critical Hit Chance",
+          "max": 6,
+          "unit": "%",
+          "protoMax": 9
+        },
+        {
+          "locked": true,
+          "name": "Critical Hit Damage",
+          "max": 12,
+          "unit": "%",
+          "protoMax": 18
+        }
+      ],
+      "mods": 0,
+      "talent": true,
+      "talentLocked": true,
+      "coreNames": [
+        "Weapon Damage"
+      ],
+      "coreLocked": true,
+      "note": "talent. Source: Division 2 Community Data Hub gear/knees.csv."
+    }
+  ]
+}
