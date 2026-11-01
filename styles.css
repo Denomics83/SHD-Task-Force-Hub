@@ -2655,7 +2655,24 @@ body.page-admin [hidden] { display: none !important; }
   width: 100%; background: #0c0d10; border: 1px solid rgba(255,255,255,.35); color: #fff; padding: 8px 10px;
   font-family: inherit; text-transform: none; letter-spacing: 0; font-weight: 500; color-scheme: dark;
 }
-.bb-editor label.bb-check, .bb-meta label.bb-check { text-transform: none; letter-spacing: 0; font-size: .9rem; color: #fff; display: flex; flex-direction: row; gap: 8px; align-items: center; font-weight: 600; }
+.bb-editor label.bb-check, .bb-meta label.bb-check, .bc-wrap label.bb-check { text-transform: none; letter-spacing: 0; font-size: .9rem; color: #fff; display: flex; flex-direction: row; gap: 8px; align-items: center; font-weight: 600; }
+.bb-tabs { display: flex; gap: 8px; }
+.bc-wrap { display: grid; gap: 14px; }
+.bc-block h3 { margin: 0 0 8px; font-family: var(--display); letter-spacing: .08em; text-transform: uppercase; color: var(--orange); font-size: .95rem; }
+.bc-talents { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 10px; }
+.bc-talent { border: 1px solid rgba(255,255,255,.16); padding: 10px; background: #0c0d10; }
+.bc-talent p { margin: 6px 0 0; color: #9aa0a6; }
+.bc-slide { display: grid; gap: 4px; margin-top: 8px; color: #d5d8de; text-transform: none; letter-spacing: 0; font-weight: 600; }
+.bc-slide span { display: flex; justify-content: space-between; }
+.bc-slide input { accent-color: var(--orange); width: 100%; }
+.bc-weapon, .bc-stats { display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 8px; margin: 0; }
+.bc-stats { grid-template-columns: repeat(5, minmax(0, 1fr)); }
+.bc-weapon div, .bc-stats div { display: grid; gap: 2px; }
+.bc-weapon dt, .bc-stats dt { color: #9aa0a6; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
+.bc-weapon dd, .bc-stats dd { margin: 0; font-family: var(--display); font-size: 1.05rem; }
+.bc-table { display: grid; grid-template-columns: 120px repeat(4, minmax(0, 1fr)); gap: 6px 10px; align-items: center; }
+.bc-table div { font-family: var(--display); }
+.bc-hits { grid-template-columns: 140px 1fr 1fr; }
 .bb-slide { margin: 0 0 12px; }
 .bb-slide span { display: flex; justify-content: space-between; gap: 8px; color: #d5d8de; text-transform: none; letter-spacing: 0; font-weight: 600; }
 .bb-slide-row { display: flex; align-items: center; gap: 8px; }

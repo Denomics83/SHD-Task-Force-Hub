@@ -108,10 +108,14 @@
       return { min: min == null ? 0 : min, max: max, unit: span.unit || "", known: max != null, proto: proto };
     }
 
+    var panel = "build";
+
     function paint() {
       paintSlots();
       paintEditor();
       paintStats();
+      var calcHost = host.querySelector("#bb-calc");
+      if (panel === "calculator" && calcHost && window.ShadeCalcUI) ShadeCalcUI.render(calcHost, state, catalog);
     }
 
     function paintSlots() {
@@ -479,7 +483,11 @@
         name: meta.name,
         short_description: meta.short,
         notes_html: notes,
-        loadout: ShadeCatalog.toPublic(state),
+        loadout: (function () {
+        var load = ShadeCatalog.toPublic(state);
+        if (window.ShadeCalc && catalog) load.computed = ShadeCalc.summary(state, catalog);
+        return load;
+      })(),
         published: meta.published
       };
     }
@@ -930,8 +938,14 @@
         '<p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" data-sample>Load Eclipse sample</button>' +
         '<button class="admin-btn" type="submit">Save build</button></p>' +
         '<p id="bb-status" class="admin-status" role="status"></p></form>' +
+        '<div class="bb-tabs">' +
+        '<button type="button" class="bb-chip' + (panel === "build" ? " is-on" : "") + '" data-bb-tab="build">Build</button>' +
+        '<button type="button" class="bb-chip' + (panel === "calculator" ? " is-on" : "") + '" data-bb-tab="calculator">Calculator</button>' +
+        "</div>" +
+        '<div id="bb-build-panel"' + (panel === "build" ? "" : " hidden") + '>' +
         '<div class="bb-columns"><section class="bb-panel" id="bb-slots"></section><section class="bb-panel bb-editor" id="bb-editor"></section><section class="bb-panel bb-stats" id="bb-stats"></section></div>' +
-        '<label class="bb-notes-label">Notes <textarea id="bb-notes" rows="4">' + esc(meta.notes) + "</textarea></label>";
+        '<label class="bb-notes-label">Notes <textarea id="bb-notes" rows="4">' + esc(meta.notes) + "</textarea></label></div>" +
+        '<div id="bb-calc" class="bb-panel"' + (panel === "calculator" ? "" : " hidden") + "></div>";
     }
 
     function chosenMod(slotName, choice) {
@@ -956,6 +970,19 @@
     }
 
     host.addEventListener("click", function (e) {
+      var tabBtn = e.target.closest("[data-bb-tab]");
+      if (tabBtn && host.contains(tabBtn)) {
+        panel = tabBtn.getAttribute("data-bb-tab") === "calculator" ? "calculator" : "build";
+        var buildPanel = host.querySelector("#bb-build-panel");
+        var calcHost = host.querySelector("#bb-calc");
+        if (buildPanel) buildPanel.hidden = panel !== "build";
+        if (calcHost) calcHost.hidden = panel !== "calculator";
+        host.querySelectorAll("[data-bb-tab]").forEach(function (btn) {
+          btn.classList.toggle("is-on", btn.getAttribute("data-bb-tab") === panel);
+        });
+        if (panel === "calculator" && calcHost && window.ShadeCalcUI) ShadeCalcUI.render(calcHost, state, catalog);
+        return;
+      }
       var maxBtn = e.target.closest("[data-max]");
       if (maxBtn && host.contains(maxBtn) && !maxBtn.disabled) {
         var item = state[selected];

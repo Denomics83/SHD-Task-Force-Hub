@@ -1,0 +1,48 @@
+{
+  "source": "Coefficients are the calcEffects on the Build Station catalog embedded in the saved share buildstation.app/td2/builder/game/INlIgxZJ (1 Nov 2026). A valuePerStack of 0.01 there is 1% here. maxStacks 0 in that file means a toggle, not a slider. Striker's Gamble is stored there as amp 0.0065 per stack (65% at 100 stacks), which matches the 'amplify' wording in data/td2/gearsets.json. Chest and backpack lines change that talent's cap or per-stack value using the same gearset text. Optimist steps are that page's rampingDamage handler (3% per 10% magazine, 4% on Perfect Optimist) and are applied as total weapon damage. Talents with no calcEffects stay unmodelled.",
+  "talents": [
+    { "name": "Killer", "slot": "weapon", "effects": [{ "stat": "chd", "value": 70 }] },
+    { "name": "Perfect Killer", "slot": "weapon", "effects": [{ "stat": "chd", "value": 90 }] },
+    { "name": "Close & Personal", "slot": "weapon", "effects": [{ "stat": "twd", "value": 30 }] },
+    { "name": "Boomerang", "slot": "weapon", "effects": [{ "stat": "twd", "value": 40 }] },
+    { "name": "Optimist", "slot": "weapon", "maxStacks": 10, "stackLabel": "magazine steps", "effects": [{ "stat": "twd", "perStack": 3 }] },
+    { "name": "Perfect Optimist", "slot": "weapon", "maxStacks": 10, "stackLabel": "magazine steps", "effects": [{ "stat": "twd", "perStack": 4 }] },
+    { "name": "Obliterate", "slot": "chest", "maxStacks": 20, "effects": [{ "stat": "twd", "perStack": 1 }] },
+    { "name": "Perfect Obliterate", "slot": "chest", "maxStacks": 24, "effects": [{ "stat": "twd", "perStack": 1 }] },
+    { "name": "Glass Cannon", "slot": "chest", "effects": [{ "stat": "amp", "value": 25 }] },
+    { "name": "Perfect Glass Cannon", "slot": "chest", "effects": [{ "stat": "amp", "value": 30 }] },
+    { "name": "Intimidate", "slot": "chest", "maxStacks": 7, "effects": [{ "stat": "amp", "perStack": 5 }] },
+    { "name": "Perfect Intimidate", "slot": "chest", "maxStacks": 8, "effects": [{ "stat": "amp", "perStack": 5 }] },
+    { "name": "Vigilance", "slot": "backpack", "effects": [{ "stat": "twd", "value": 25 }] },
+    { "name": "Perfect Vigilance", "slot": "backpack", "effects": [{ "stat": "twd", "value": 25 }] },
+    { "name": "Wicked", "slot": "backpack", "effects": [{ "stat": "twd", "value": 18 }] },
+    { "name": "Perfectly Wicked", "slot": "backpack", "effects": [{ "stat": "twd", "value": 18 }] },
+    { "name": "Throttle Control", "slot": "gear", "maxStacks": 50, "effects": [{ "stat": "chd", "perStack": 5 }] },
+    { "name": "Camaraderie", "slot": "gear", "maxStacks": 35, "effects": [{ "stat": "twd", "perStack": 3 }, { "stat": "chd", "perStack": 3 }] },
+    { "name": "Weakest Link", "slot": "exotic", "effects": [{ "stat": "amp", "value": 30 }] },
+    {
+      "name": "Striker's Gamble",
+      "set": "Striker's Battlegear",
+      "pieces": 4,
+      "maxStacks": 100,
+      "chest": { "talent": "Press the Advantage", "maxStacks": 200 },
+      "backpack": { "talent": "Risk Management", "perStack": 1 },
+      "effects": [{ "stat": "amp", "perStack": 0.65 }]
+    },
+    {
+      "name": "Rules of Engagement",
+      "set": "Ongoing Directive",
+      "pieces": 4,
+      "effects": [{ "stat": "amp", "value": 40 }],
+      "chest": { "talent": "Parabellum Rounds", "value": 60 }
+    },
+    {
+      "name": "Apex Predator",
+      "set": "Hunter's Fury",
+      "pieces": 4,
+      "maxStacks": 5,
+      "stackLabel": "kill stacks",
+      "effects": [{ "stat": "amp", "value": 20, "perStack": 5 }]
+    }
+  ]
+}

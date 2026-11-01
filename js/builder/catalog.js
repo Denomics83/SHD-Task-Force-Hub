@@ -10,7 +10,7 @@
     "weapons", "brands", "gearsets", "named", "exotics", "attributes", "talents",
     "skills", "specializations", "grenades", "playstyles"
   ];
-  var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules", "layouts"];
+var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules", "layouts", "talent-calc", "damage"];
   var GEAR_CORES = ["Weapon Damage", "Armor", "Skill Tier"];
 
   function list(doc, key) {
@@ -89,7 +89,9 @@
       rules: files.rules || {},
       weaponMods: (files.mods && files.mods.slots) || {},
       coreRules: files.coreRules || { open: GEAR_CORES, items: [] },
-      layouts: files.layouts || {},
+layouts: files.layouts || {},
+      talentCalc: files.talentCalc || { talents: [] },
+      damageNotes: files.damageNotes || {},
       namedWeaponByName: byName(namedWeapons),
       namedGearByName: byName(namedGear),
       exoticByName: byName(exotics),
@@ -108,7 +110,7 @@
       }
     }));
     await Promise.all(BUILDER_FILES.map(async function (name) {
-      var key = name === "attributes" ? "builderAttributes" : name === "weapon-cores" ? "weaponCores" : name === "specializations" ? "builderSpecs" : name === "core-rules" ? "coreRules" : name;
+      var key = name === "attributes" ? "builderAttributes" : name === "weapon-cores" ? "weaponCores" : name === "specializations" ? "builderSpecs" : name === "core-rules" ? "coreRules" : name === "talent-calc" ? "talentCalc" : name === "damage" ? "damageNotes" : name;
       try { files[key] = await fetchJSON("data/td2/builder/" + name + ".json"); }
       catch (err) { errors.push(name + ": " + (err && err.message ? err.message : String(err))); }
     }));
@@ -132,7 +134,9 @@
       rules: files.rules,
       mods: files.mods,
       coreRules: files.coreRules,
-      layouts: files.layouts
+layouts: files.layouts,
+      talentCalc: files.talentCalc,
+      damageNotes: files.damageNotes
     });
     catalog.errors = errors;
     return catalog;
@@ -249,6 +253,7 @@
     ["skill1", "skill2"].forEach(function (key) {
       if (load[key]) next[key] = Object.assign(emptySkill(), copy(load[key]));
     });
+    if (load.calculator) next.calculator = copy(load.calculator);
     return next;
   }
 
@@ -344,6 +349,8 @@
       var item = loadout[key] || emptySkill();
       out[key] = { name: item.name || "", catalogId: item.catalogId || "", variant: item.variant || "", expertise: Number(item.expertise) || 0 };
     });
+    if (loadout.calculator) out.calculator = copy(loadout.calculator);
+    if (loadout.computed) out.computed = copy(loadout.computed);
     return out;
   }
 
