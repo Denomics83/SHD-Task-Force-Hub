@@ -64,23 +64,25 @@
     bag: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M6 8h12v11H6zM9 8V6a3 3 0 0 1 6 0v2" fill="currentColor"/></svg>',
     gloves: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 12V5h2v7h1V4h2v8h1V6h2v7h1v7H8z" fill="currentColor"/></svg>',
     knees: '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M7 4h10v8c0 4.5-2.2 8-5 8s-5-3.5-5-8z" fill="currentColor"/></svg>',
-    skill: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/></svg>'
+    skill: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6" fill="none" stroke="currentColor" stroke-width="2"/></svg>',
+    watch: '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="13" r="6.5" fill="none" stroke="currentColor" stroke-width="1.8"/><path d="M12 13V9.5M9 4h6M9 22h6" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>'
   };
 
   var GRID = [
-    { key: "signature", label: "Signature", art: "spec", row: "2", force: "spec" },
-    { key: "grenade", label: "Grenade", art: "grenade", row: "2" },
+    { key: "signature", label: "Specialization", art: "spec", row: "2", force: "spec" },
+    { key: "watch", label: "SHD Watch", art: "watch", row: "2" },
     { key: "primary", label: "Primary", art: "rifle", row: "3" },
     { key: "secondary", label: "Secondary", art: "rifle", row: "3" },
     { key: "sidearm", label: "Sidearm", art: "pistol", row: "3" },
     { key: "mask", label: "Mask", art: "mask", row: "2" },
-    { key: "chest", label: "Chest", art: "chest", row: "2" },
-    { key: "holster", label: "Holster", art: "holster", row: "2" },
     { key: "backpack", label: "Backpack", art: "bag", row: "2" },
+    { key: "chest", label: "Chest", art: "chest", row: "2" },
     { key: "gloves", label: "Gloves", art: "gloves", row: "2" },
+    { key: "holster", label: "Holster", art: "holster", row: "2" },
     { key: "kneepads", label: "Kneepads", art: "knees", row: "2" },
-    { key: "skill1", label: "Skill", art: "skill", row: "2" },
-    { key: "skill2", label: "Skill", art: "skill", row: "2" }
+    { key: "skill1", label: "Skill 1", art: "skill", row: "3" },
+    { key: "skill2", label: "Skill 2", art: "skill", row: "3" },
+    { key: "grenade", label: "Grenade", art: "grenade", row: "3" }
   ];
 
   var BUILDS = [];
@@ -159,37 +161,36 @@
 
   function tdSlot(row, spec) {
     var item = slotOf(row, spec.key);
-    var rarity = faceClass(item, spec.force);
     var filled = filledName(item);
+    var rarity = faceClass(item, spec.force);
+    if (filled && (spec.key === "grenade" || spec.key === "watch") && rarity === "empty") rarity = "gold";
     var hit = spec.key === "grenade" ? null : libraryIcon(item);
     var grenadeSrc = spec.key === "grenade" && filled ? grenadeFile(item.name) : "";
     var own = localArt(item.image) || localArt(item.icon) || grenadeSrc;
-    var art = filled && own
-      ? '<img src="' + STF.esc(own) + '" alt="">'
+    var art = own
+      ? '<img class="' + (grenadeSrc && own === grenadeSrc ? "is-grenade" : "") + '" src="' + STF.esc(own) + '" alt="">'
       : (hit
         ? '<img class="is-mark" src="' + STF.esc(hit.file) + '" alt="">'
         : (SLOT_ART[spec.art] || SLOT_ART.skill));
     var dots = "";
     var count = dotCount(item);
     for (var i = 0; i < count; i++) dots += "<i></i>";
-    var mark = "";
-    if (filled && item.image && hit) {
-      mark = '<span class="td-mark"><img src="' + STF.esc(hit.file) + '" alt=""></span>';
-    } else if (filled && item.brand && !hit) {
-      mark = '<span class="td-mark">' + STF.esc(String(item.brand).trim().charAt(0).toUpperCase()) + "</span>";
-    }
-    var lvl = filled ? '<span class="td-lvl">40</span>' : "";
+    var talentHit = filled && item.talent && STF.iconFor ? STF.iconFor(item.talent) : null;
+    var talent = talentHit && talentHit.file
+      ? '<img class="td-talent is-mark" src="' + STF.esc(talentHit.file) + '" alt="">'
+      : "";
     var title = filled ? item.name : spec.label;
+    var showLabel = filled && String(title).toLowerCase() !== String(spec.label).toLowerCase();
     return (
       '<button type="button" class="td-slot" data-slot="' + spec.key + '">' +
       '<div class="td-face rarity-' + rarity + '">' +
-      lvl +
+      '<span class="td-copy">' +
+      (showLabel ? '<span class="td-slot-label">' + STF.esc(spec.label) + "</span>" : "") +
+      '<strong class="td-name">' + STF.esc(title) + "</strong>" +
+      (filled ? '<span class="td-meta"><span class="td-lvl">40</span>' + (dots ? '<span class="td-dots">' + dots + "</span>" : "") + talent + "</span>" : "") +
+      "</span>" +
       '<span class="td-art">' + art + "</span>" +
-      mark +
-      (dots ? '<span class="td-dots">' + dots + "</span>" : "") +
-      "</div>" +
-      '<span class="td-title">' + STF.esc(title) + "</span>" +
-      "</button>"
+      "</div></button>"
     );
   }
 
@@ -267,10 +268,6 @@
       var extra = [item.brand, item.talent, item.core, item.attributes].filter(function (part) { return part && String(part).trim(); });
       lines.push("<li><span>" + STF.esc(spec.label) + "</span> " + STF.esc(item.name + (extra.length ? " · " + extra.join(" · ") : "")) + "</li>");
     });
-    var specItem = slotOf(row, "specialization");
-    if (specItem.name) {
-      lines.push("<li><span>Specialization</span> " + STF.esc(specItem.name) + "</li>");
-    }
     if (!lines.length) return "";
     return (
       '<section class="build-secondary" aria-label="Specs">' +
@@ -509,6 +506,20 @@
     };
   }
 
+  function watchSlot(watch) {
+    var data = watch || {};
+    var maxed = !!data.max;
+    var points = data.points || {};
+    var spent = 0;
+    Object.keys(points).forEach(function (key) { spent += Number(points[key]) || 0; });
+    if (!maxed && spent <= 0) return slotFromLoadout({});
+    return slotFromLoadout({
+      name: maxed ? "Max" : "Custom",
+      rarity: "high-end",
+      attributes: maxed ? "Maxed" : (spent + " points")
+    });
+  }
+
   function fromRemoteBuild(row) {
     var load = row.loadout || {};
     var spec = load.specialization && load.specialization.name ? load.specialization : { name: load.specialization || "" };
@@ -531,6 +542,7 @@
       notesHtml: row.notes_html || "",
       slots: {
         signature: slotFromLoadout(spec),
+        watch: watchSlot(load.watch),
         grenade: slotFromLoadout(grenade),
         primary: slotFromLoadout(load.primary),
         secondary: slotFromLoadout(load.secondary),
