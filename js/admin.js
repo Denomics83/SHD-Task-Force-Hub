@@ -26,6 +26,7 @@
       loadTemplates();
     }
     if (name === "builder") openBuilder(editingBuilder);
+    if (name === "members") loadMembers();
     window.scrollTo(0, 0);
   }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
@@ -253,6 +254,81 @@
     }).join("") || '<p class="lede">No builds yet.</p>';
     var err = (updates.error && updates.error.message) || (events.error && events.error.message) || (builds.error && builds.error.message);
     status("dash-status", err || "", err ? "err" : "");
+    refreshMemberBadge();
+  }
+
+  var memberRows = [];
+  var memberSelf = "";
+  var memberFilter = "all";
+
+  function memberWhen(iso, withTime) {
+    if (!iso) return "Never";
+    var date = new Date(iso);
+    if (isNaN(date.getTime())) return "";
+    var opts = { day: "numeric", month: "short", year: "numeric" };
+    if (withTime) {
+      opts.hour = "numeric";
+      opts.minute = "2-digit";
+    }
+    return date.toLocaleString("en-AU", opts);
+  }
+
+  function paintMemberBadge(rows) {
+    var node = $("members-pending");
+    if (!node) return;
+    var count = (rows || []).filter(function (row) { return !row.is_member; }).length;
+    node.hidden = count < 1;
+    node.textContent = "Pending " + count;
+  }
+
+  async function refreshMemberBadge() {
+    if (!sb) return;
+    var res = await sb.rpc("admin_list_members");
+    if (res.error) return;
+    paintMemberBadge(res.data || []);
+  }
+
+  function paintMembers() {
+    var host = $("member-list");
+    if (!host) return;
+    var query = ($("member-search").value || "").trim().toLowerCase();
+    var rows = memberRows.filter(function (row) {
+      if (memberFilter === "pending" && row.is_member) return false;
+      if (memberFilter === "approved" && !row.is_member) return false;
+      if (!query) return true;
+      var hay = (String(row.gamer_tag || "") + " " + String(row.email || "")).toLowerCase();
+      return hay.indexOf(query) >= 0;
+    });
+    host.innerHTML = rows.map(function (row) {
+      var self = row.id === memberSelf;
+      var badges = "";
+      if (!row.is_member) badges += '<span class="member-badge is-pending">Pending</span>';
+      if (row.is_admin) badges += '<span class="member-badge is-admin">Admin</span>';
+      return '<article class="member-row">' +
+        '<div class="member-id"><strong>' + STF.esc(row.gamer_tag || "Agent") + "</strong>" + badges +
+        "<small>" + STF.esc(row.email || "") + "</small></div>" +
+        "<div><small>Joined " + STF.esc(memberWhen(row.created_at, false)) + "</small>" +
+        "<small>Last sign-in " + STF.esc(memberWhen(row.last_sign_in_at, true)) + "</small></div>" +
+        '<label class="member-approve"' + (self ? ' title="You can\'t change your own approval"' : "") + ">" +
+        '<input type="checkbox" data-member="' + STF.esc(row.id) + '"' + (row.is_member ? " checked" : "") + (self ? " disabled" : "") + "> Approved</label>" +
+        "</article>";
+    }).join("") || '<p class="lede">No members match.</p>';
+  }
+
+  async function loadMembers() {
+    status("member-status", "Loading…");
+    var pack = await STF.profile();
+    memberSelf = pack && pack.session ? pack.session.user.id : "";
+    var res = await sb.rpc("admin_list_members");
+    if (res.error) {
+      $("member-list").innerHTML = "";
+      status("member-status", res.error.message || "Could not load members", "err");
+      return;
+    }
+    memberRows = res.data || [];
+    paintMembers();
+    paintMemberBadge(memberRows);
+    status("member-status", "");
   }
 
   function resetUpdate() {
@@ -672,6 +748,39 @@
     }
   });
   $("template-new").addEventListener("click", resetTemplate);
+  $("member-search").addEventListener("input", paintMembers);
+  $("member-list").addEventListener("change", async function (e) {
+    var input = e.target.closest("[data-member]");
+    if (!input) return;
+    var id = input.getAttribute("data-member");
+    if (id === memberSelf) {
+      var mine = memberRows.filter(function (row) { return row.id === id; })[0];
+      input.checked = !!(mine && mine.is_member);
+      return;
+    }
+    var next = input.checked;
+    var res = await sb.from("profiles").update({ is_member: next }).eq("id", id);
+    if (res.error) {
+      input.checked = !next;
+      status("member-status", res.error.message || "Could not update approval", "err");
+      return;
+    }
+    memberRows.forEach(function (row) {
+      if (row.id === id) row.is_member = next;
+    });
+    paintMembers();
+    paintMemberBadge(memberRows);
+    status("member-status", next ? "Approved." : "Approval removed.", "ok");
+  });
+  document.querySelector(".member-filters").addEventListener("click", function (e) {
+    var btn = e.target.closest("[data-member-filter]");
+    if (!btn) return;
+    memberFilter = btn.getAttribute("data-member-filter");
+    document.querySelectorAll("[data-member-filter]").forEach(function (el) {
+      el.setAttribute("aria-pressed", el === btn ? "true" : "false");
+    });
+    paintMembers();
+  });
   mountArtPickers();
   previewFile($("event-image"), $("event-image-preview"), $("event-image-url"));
   bindMapFields("event");

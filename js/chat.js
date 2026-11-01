@@ -27,10 +27,31 @@
     log.scrollTop = log.scrollHeight;
   }
 
-  function lock(message) {
-    if (note) note.textContent = message;
+  function disconnect() {
+    if (channel && STF.sb) STF.sb.removeChannel(channel);
+    channel = null;
+  }
+
+  function lock(kind) {
+    disconnect();
     form.hidden = true;
-    log.innerHTML = '<p class="lede">' + STF.esc(message) + "</p>";
+    if (note) note.hidden = true;
+    if (kind === "pending") {
+      log.innerHTML =
+        '<div class="clan-lock" role="status">' +
+        '<p class="clan-lock-kicker">Awaiting approval</p>' +
+        "<p>Your account is pending clan approval</p></div>";
+      return;
+    }
+    if (kind === "signedout") {
+      log.innerHTML =
+        '<div class="clan-lock" role="status">' +
+        '<p class="clan-lock-kicker">Clan chat</p>' +
+        "<p>Sign in to use clan chat.</p>" +
+        '<button type="button" class="admin-btn" id="chat-signin">Sign in</button></div>';
+      return;
+    }
+    log.innerHTML = '<p class="lede">' + STF.esc(kind) + "</p>";
   }
 
   function tagFrom(row) {
@@ -42,10 +63,13 @@
   async function start() {
     if (!STF.sb) return lock("Chat is unavailable.");
     var pack = await STF.profile();
-    if (!pack || !pack.session) return lock("Sign in to use clan chat.");
-    if (!pack.profile || !pack.profile.is_member) return lock("Awaiting clan approval.");
+    if (!pack || !pack.session) return lock("signedout");
+    if (!pack.profile || !pack.profile.is_member) return lock("pending");
     me = pack.session.user.id;
-    if (note) note.textContent = "Clan chat";
+    if (note) {
+      note.hidden = false;
+      note.textContent = "Clan chat";
+    }
     form.hidden = false;
     var res = await STF.sb.from("messages").select("id, sender_id, body, created_at, profiles(gamer_tag)").order("created_at", { ascending: true });
     if (res.error) return lock(res.error.message);
@@ -66,6 +90,10 @@
       .subscribe();
   }
 
+  log.addEventListener("click", function (e) {
+    if (e.target.closest("#chat-signin") && STF.openSignIn) STF.openSignIn();
+  });
+
   form.addEventListener("submit", async function (e) {
     e.preventDefault();
     var input = form.elements.body;
@@ -85,10 +113,6 @@
     }
   });
 
-  function disconnect() {
-    if (channel && STF.sb) STF.sb.removeChannel(channel);
-    channel = null;
-  }
   window.addEventListener("pagehide", disconnect);
   STF.onAuth = function () { location.reload(); };
   start();

@@ -331,11 +331,24 @@
     var actions = box.querySelector(".attendance-actions");
     var list = box.querySelector(".attendance-going");
     if (!pack || !pack.session) {
-      actions.innerHTML = '<p class="lede">Sign in to confirm attendance.</p>';
+      actions.innerHTML =
+        '<div class="clan-lock is-inline" role="status">' +
+        '<p class="clan-lock-kicker">Attendance</p>' +
+        "<p>Sign in to confirm attendance.</p>" +
+        '<button type="button" class="admin-btn" id="attend-signin">Sign in</button></div>';
+      list.innerHTML = "";
+      actions.onclick = function (e) {
+        if (e.target.closest("#attend-signin") && STF.openSignIn) STF.openSignIn();
+      };
       return;
     }
     if (!pack.profile || !pack.profile.is_member) {
-      actions.innerHTML = '<p class="lede">Awaiting clan approval.</p>';
+      actions.innerHTML =
+        '<div class="clan-lock is-inline" role="status">' +
+        '<p class="clan-lock-kicker">Awaiting approval</p>' +
+        "<p>Your account is pending clan approval</p></div>";
+      list.innerHTML = "";
+      actions.onclick = null;
       return;
     }
     var mine = await STF.sb.from("attendance").select("status").eq("event_id", item.id).eq("user_id", pack.session.user.id).maybeSingle();
@@ -441,6 +454,7 @@
       });
     }
     window.scrollTo(0, 0);
+    if (item.kind === "clan") paintAttendance(item);
   }
 
   function routeEvent() {

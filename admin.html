@@ -39,6 +39,7 @@
         <button type="button" class="desk-action" data-go="update">Add update</button>
         <button type="button" class="desk-action" data-go="event">Add event</button>
         <button type="button" class="desk-action" data-go="builder">Builder</button>
+        <button type="button" class="desk-action" data-go="members">Members <span class="desk-pending" id="members-pending" hidden>Pending</span></button>
       </div>
       <div class="desk-lists">
         <section>
@@ -183,6 +184,23 @@
     <section data-view="builder" hidden>
       <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
       <div id="builder-root"></div>
+    </section>
+
+    <section data-view="members" hidden>
+      <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
+      <h1>Members</h1>
+      <div class="member-tools">
+        <label>Search
+          <input id="member-search" type="search" placeholder="Gamer tag or email" autocomplete="off">
+        </label>
+        <div class="member-filters" role="group" aria-label="Member filter">
+          <button type="button" data-member-filter="all" aria-pressed="true">All</button>
+          <button type="button" data-member-filter="pending" aria-pressed="false">Pending</button>
+          <button type="button" data-member-filter="approved" aria-pressed="false">Approved</button>
+        </div>
+      </div>
+      <div id="member-list"></div>
+      <p id="member-status" class="admin-status" role="status"></p>
     </section>
   </main>
 
