@@ -19,9 +19,54 @@
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 4.2a6.2 6.2 0 0 1 6.2 6.2v3.1l1.3 2.2H4.5l1.3-2.2V10.4A6.2 6.2 0 0 1 12 4.2z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M10 18.2a2 2 0 0 0 4 0"/></svg>'
   };
 
+  function isTimestamp(iso) {
+    return /T/.test(String(iso || ""));
+  }
+
+  function localDate(iso) {
+    if (!iso || !isTimestamp(iso)) return null;
+    var date = new Date(iso);
+    return isNaN(date.getTime()) ? null : date;
+  }
+
+  function formatLocal(iso, options) {
+    var date = localDate(iso);
+    if (!date) return "";
+    return new Intl.DateTimeFormat("en-AU", options).format(date);
+  }
+
   function shortDate(iso) {
+    if (!iso) return "";
+    if (isTimestamp(iso)) return formatLocal(iso, { day: "numeric", month: "short" });
     var full = STF.formatDate(iso);
     return full.replace(/ \d{4}$/, "");
+  }
+
+  function postedDate(iso) {
+    if (!iso) return "";
+    if (isTimestamp(iso)) return formatLocal(iso, { day: "numeric", month: "short", year: "numeric" });
+    return STF.formatDate(iso);
+  }
+
+  function scheduleText(iso) {
+    return formatLocal(iso, {
+      weekday: "short",
+      day: "numeric",
+      month: "short",
+      hour: "numeric",
+      minute: "2-digit"
+    });
+  }
+
+  function sortTime(item) {
+    var raw = item.sortAt || item.date || "";
+    if (isTimestamp(raw)) {
+      var instant = new Date(raw).getTime();
+      return isNaN(instant) ? 0 : instant;
+    }
+    var match = String(raw).match(/^(\d{4})-(\d{2})-(\d{2})/);
+    if (!match) return 0;
+    return new Date(Number(match[1]), Number(match[2]) - 1, Number(match[3]), 12).getTime();
   }
 
   function blockHTML(block) {
@@ -65,7 +110,7 @@
 
   function renderDetail(item) {
     var summary = item.summary || "";
-    var posted = item.date ? "Posted " + STF.formatDate(item.date) : "";
+    var posted = item.date ? "Posted " + postedDate(item.date) : "";
     var pill = item.schedule
       ? '<p class="upd-pill">' + STF.esc(item.schedule) + "</p>"
       : "";
@@ -154,8 +199,9 @@
             type: row.type,
             title: row.title,
             summary: STF.plainText(row.body_html),
-            date: (row.published_at || "").slice(0, 10),
-            schedule: row.scheduled_at ? new Date(row.scheduled_at).toLocaleString() : "",
+            date: row.published_at || "",
+            sortAt: row.published_at || row.scheduled_at || "",
+            schedule: scheduleText(row.scheduled_at),
             bodyHtml: row.body_html || "",
             patchHtml: row.patch_notes_html || "",
             priority: 0
@@ -164,7 +210,7 @@
       }
     }
     items.sort(function (a, b) {
-      return String(b.date || "").localeCompare(String(a.date || "")) || ((a.priority || 99) - (b.priority || 99));
+      return sortTime(b) - sortTime(a) || ((a.priority || 99) - (b.priority || 99));
     });
     items.forEach(function (item) { byId[item.id] = item; });
 
