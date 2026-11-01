@@ -125,6 +125,7 @@
       if (file) img.src = file;
     }
     markArt(hidden);
+    if (hidden.id === "event-image-url") suggestClanActivity();
   }
   function mountArtPickers() {
     if (!STF.EVENT_CARDS) return;
@@ -148,6 +149,13 @@
       });
     });
   }
+  function suggestClanActivity() {
+    var select = $("event-activity");
+    if (!select || !$("event-kind") || $("event-kind").value !== "clan" || !STF.clanActivity) return;
+    if (select.dataset.manual === "1") return;
+    var found = STF.clanActivity($("event-title").value, $("event-image-url").value);
+    select.value = found.type || "";
+  }
   function suggestClanArt() {
     if (!$("event-kind") || $("event-kind").value !== "clan" || !STF.eventCardPath) return;
     var hidden = $("event-image-url");
@@ -159,6 +167,7 @@
       return;
     }
     setCardImage(hidden, img, path, true);
+    suggestClanActivity();
   }
   function previewFile(input, img, hidden) {
     input.addEventListener("change", async function () {
@@ -257,6 +266,7 @@
   function toggleEventKind() {
     var kind = $("event-kind").value;
     $("event-rotation").hidden = kind !== "rotation";
+    $("event-activity-label").hidden = kind !== "clan";
     $("event-end").required = kind !== "clan";
     $("event-end-label").hidden = false;
   }
@@ -265,6 +275,7 @@
     $("event-id").value = "";
     $("event-heading").textContent = "Add event";
     setCardImage($("event-image-url"), $("event-image-preview"), "", false);
+    $("event-activity").dataset.manual = "";
     setQuill("event-body", "");
     toggleEventKind();
   }
@@ -276,6 +287,7 @@
       title: $("event-title").value.trim(),
       description_html: quillHTML("event-body"),
       image_url: $("event-image-url").value || null,
+      activity_type: kind === "clan" ? ($("event-activity").value || null) : null,
       starts_at: fromLocal($("event-start").value),
       ends_at: fromLocal($("event-end").value)
     };
@@ -396,6 +408,8 @@
       await loadTemplateSelect();
       if (eventRow.template_id) $("event-template").value = eventRow.template_id;
       $("event-title").value = eventRow.title || "";
+      $("event-activity").value = eventRow.activity_type || "";
+      $("event-activity").dataset.manual = eventRow.activity_type ? "1" : "";
       setQuill("event-body", eventRow.description_html || "");
       $("event-start").value = toLocal(eventRow.starts_at);
       $("event-end").value = toLocal(eventRow.ends_at);
@@ -533,7 +547,13 @@
     toggleEventKind();
     suggestClanArt();
   });
-  $("event-title").addEventListener("input", suggestClanArt);
+  $("event-title").addEventListener("input", function () {
+    suggestClanArt();
+    suggestClanActivity();
+  });
+  $("event-activity").addEventListener("change", function () {
+    $("event-activity").dataset.manual = "1";
+  });
   $("event-template").addEventListener("change", applyTemplate);
   $("event-start").addEventListener("change", function () {
     if ($("event-kind").value === "rotation") applyTemplate();

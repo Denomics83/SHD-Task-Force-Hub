@@ -1704,6 +1704,10 @@ body.page-events .hero-slide {
 .tl-foot strong {
   font-size: .98rem; font-weight: 700; line-height: 1.05; letter-spacing: .01em;
 }
+.tl-foot.is-clan strong {
+  font-size: 1.05rem;
+  line-height: 1.15;
+}
 .tl-foot small, .tl-foot em {
   font-style: normal; font-size: .68rem; color: #c5cad3; line-height: 1.2;
 }

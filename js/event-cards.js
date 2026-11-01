@@ -104,6 +104,40 @@
     return { slug: slug, file: fileFor(slug), label: labelFor(slug) };
   });
 
+  var CLAN_MATCHES = [
+    { test: /dark hours|dark-hours/, type: "raid", name: "Dark Hours" },
+    { test: /iron horse|iron-horse/, type: "raid", name: "Iron Horse" },
+    { test: /broken rain|broken-rain/, type: "incursion", name: "Broken Rain" },
+    { test: /paradise lost|paradise-lost/, type: "incursion", name: "Paradise Lost" },
+    { test: /\bconflict\b|conflict\.jpg/, type: "pvp", name: "Conflict" },
+    { test: /dark zone|\bdz\b|dark-zone(?!-surge)/, type: "dark-zone", name: "" }
+  ];
+
+  STF.clanActivity = function (title, art) {
+    var text = (String(title || "") + " " + String(art || "")).toLowerCase();
+    for (var i = 0; i < CLAN_MATCHES.length; i++) {
+      if (CLAN_MATCHES[i].test.test(text)) {
+        return { type: CLAN_MATCHES[i].type, name: CLAN_MATCHES[i].name || String(title || "").trim() };
+      }
+    }
+    return { type: "", name: String(title || "").trim() };
+  };
+
+  STF.clanFooter = function (title, art, activityType) {
+    var found = STF.clanActivity(title, art);
+    var type = activityType || found.type || "other";
+    var name = found.name || String(title || "").trim() || "Event";
+    if (type === "dark-zone" || type === "other") name = String(title || "").trim() || name;
+    var label = {
+      raid: "Clan Raid",
+      incursion: "Clan Incursion",
+      pvp: "Clan PvP",
+      "dark-zone": "Clan Dark Zone",
+      other: "Clan"
+    }[type] || "Clan";
+    return label + ": " + name;
+  };
+
   STF.eventCardPath = function (name) {
     if (name == null || name === "") return "";
     var slug = slugify(name);

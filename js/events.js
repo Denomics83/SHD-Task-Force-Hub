@@ -621,6 +621,7 @@
             image_url: row.image_url || "",
             image: "",
             cardLabel: cardLabel,
+            activityType: row.activity_type || "",
             accent: "#FF6D10"
           },
           start: row.starts_at,
@@ -656,6 +657,9 @@
         state: item.state,
         accent: item.type.accent || "#FF6D10",
         cardLabel: categoryFor(item),
+        clanLine: item.kind === "clan" && STF.clanFooter
+          ? STF.clanFooter(item.type.name, item.type.image_url, item.type.activityType)
+          : "",
         icon: emblemKind(item.type.id),
         emblem: emblemSrc(item),
         typeId: item.type.id
@@ -705,6 +709,9 @@
         state: "ended",
         accent: item.type.accent || "#6e7480",
         cardLabel: categoryFor(item),
+        clanLine: item.kind === "clan" && STF.clanFooter
+          ? STF.clanFooter(item.type.name, item.type.image_url, item.type.activityType)
+          : "",
         icon: emblemKind(item.type.id),
         emblem: emblemSrc(item),
         remainStart: item.start,
@@ -737,10 +744,12 @@
           '<span class="tl-ticker" data-ticker' + tickerStatic + ' data-state="' + STF.esc(slide.state || "") + '" data-remain-start="' + STF.esc(slide.remainStart || "") + '" data-remain-end="' + STF.esc(slide.remainEnd || "") + '">' + STF.esc(ticker) + "</span>" +
           (fullBleed ? "" : '<img class="tl-emblem-img" src="' + STF.esc(emblem) + '" alt="">') +
           "</div>" +
-          '<div class="tl-foot">' +
-          '<span class="tl-kind">' + STF.esc(slide.cardLabel || "Season Event") + "</span>" +
-          "<strong>" + STF.esc(slide.title) + "</strong>" +
-          "</div>";
+          (slide.clanLine
+            ? '<div class="tl-foot is-clan"><strong>' + STF.esc(slide.clanLine) + "</strong></div>"
+            : '<div class="tl-foot">' +
+              '<span class="tl-kind">' + STF.esc(slide.cardLabel || "Season Event") + "</span>" +
+              "<strong>" + STF.esc(slide.title) + "</strong>" +
+              "</div>");
         var card = slide.href
           ? '<a class="hero-card tl-card is-' + slide.kind + '" href="' + slide.href + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</a>"
           : '<article class="hero-card tl-card is-' + slide.kind + '" aria-label="' + STF.esc(slide.label) + '">' + inner + "</article>";
