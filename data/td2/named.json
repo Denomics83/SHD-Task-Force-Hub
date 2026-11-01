@@ -1,0 +1,698 @@
+{
+  "source": "Named gear is every chest or backpack the talent table marks with Found on, plus the named pieces listed on the Red Horizon page. Named weapons are the named rows already in weapons.json, plus Found-on weapons and The Drill, Cricket, Teapot, and Steamer. Fixed attributes are stored only where the page states one. Weapon type is null when the page does not name the weapon class.",
+  "gear": [
+    {
+      "name": "Everyday Carrier",
+      "slot": "chest",
+      "brand": "Belstone Armory",
+      "base": "Belstone Armory",
+      "kind": "gear",
+      "perfectTalent": "Perfect Efficient",
+      "perfectText": "Using an armor kit has a 75% chance to not consume the armor kit.\n\nSpecialization armor kit bonuses are increased by 100%.",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/belstone.png"
+    },
+    {
+      "name": "Bober",
+      "slot": "chest",
+      "brand": "Zwiadowka SP. z o.o.",
+      "base": "Zwiadowka SP. z o.o.",
+      "kind": "gear",
+      "perfectTalent": "Perfect Entrench",
+      "perfectText": "If you are below 30% armor, headshots from cover repair 30% of your armor.\n\nCooldown 1 seconds.",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/zwiadowka.png"
+    },
+    {
+      "name": "The Sacrifice",
+      "slot": "chest",
+      "brand": null,
+      "base": null,
+      "kind": "gear",
+      "perfectTalent": "Perfect Glass Cannon",
+      "perfectText": "All damage you deal is amplified by 30%. All damage you take is amplified by 60%,",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Robin",
+      "slot": "chest",
+      "brand": null,
+      "base": null,
+      "kind": "gear",
+      "perfectTalent": "Perfect Gunslinger",
+      "perfectText": "Weapon swapping increases total weapon damage by 28% for 5 seconds. Thus buff is lost for 5 seconds if you weapon swap while it is active.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Chainkiller",
+      "slot": "chest",
+      "brand": "Walker, Harris & Co.",
+      "base": "Walker, Harris & Co.",
+      "kind": "gear",
+      "perfectTalent": "Perfect Headhunter",
+      "perfectText": "After killing an enemy with a headshot, your next weapon hit within 30 seconds deals an additional 150% of that killing blow's damage.\nDamage is capped to 800% of your weapon damage. This is raised to 1250% if your headshot damage is greater than 150%.",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/walker-harris.png"
+    },
+    {
+      "name": "Impetus",
+      "slot": "chest",
+      "brand": "Wyvern Wear",
+      "base": "Wyvern Wear",
+      "kind": "gear",
+      "perfectTalent": "Perfect Kinetic Momentum",
+      "perfectText": "When in combat, each skill generates a stack while active or not on cooldown. Stacks increase your total skill damage by 1.5% and total skill repair by 2%. Up to 18 stacks per skill. Lost when on cooldown.",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/wyvern.png"
+    },
+    {
+      "name": "Equalizer",
+      "slot": "chest",
+      "brand": null,
+      "base": null,
+      "kind": "gear",
+      "perfectTalent": "Perfect Obliterate",
+      "perfectText": "Critical hits increase total weapon damage by 1% for 5 seconds. Stacks up to 24 times.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Sleight",
+      "slot": "chest",
+      "brand": null,
+      "base": null,
+      "kind": "gear",
+      "perfectTalent": "Perfect Protected Reload",
+      "perfectText": "Grants +40% bonus armor while reloading.\nGrants 0-30% of your armor as bonus armor to all other allies when they are reloading, based on your Armor core attributes.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Zero F's",
+      "slot": "chest",
+      "brand": "Badger Tuff",
+      "base": "Badger Tuff",
+      "kind": "gear",
+      "perfectTalent": "Perfect Unbreakable",
+      "perfectText": "When your armor is depleted, repair 100% of your armor.\n\nCooldown: 55 seconds",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/badger-tuff.png"
+    },
+    {
+      "name": "Momma Badger",
+      "slot": "backpack",
+      "brand": null,
+      "base": null,
+      "kind": "gear",
+      "perfectTalent": "Perfect Safeguard",
+      "perfectText": "While at full armor, increases total skill repair by 160%.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Strategic Alignment",
+      "slot": "backpack",
+      "brand": null,
+      "base": null,
+      "kind": "gear",
+      "perfectTalent": "Perfect Shock and Awe",
+      "perfectText": "Applying a status effect to an enemy increases total skill damage and repair by 20% for 27 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Trick Shot",
+      "slot": "chest",
+      "brand": "Imminence Armaments",
+      "perfectTalent": "Perfect Reassigned",
+      "perfectText": "Killing an enemy adds 1 round of a random special ammo into your sidearm. Cooldown: 8s.",
+      "base": "Imminence Armaments",
+      "kind": "gear",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Rushdown",
+      "slot": "chest",
+      "brand": "Richter & Kaiser GmbH",
+      "perfectTalent": "Tag Team",
+      "perfectText": "The last enemy you have damaged with a skill is marked. Dealing weapon damage to that enemy consumes the mark to reduce active cooldowns by 12s. Cooldown: 4s.",
+      "base": "Richter & Kaiser GmbH",
+      "kind": "gear",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/richter-kaiser.png"
+    },
+    {
+      "name": "Melon Baller",
+      "slot": "backpack",
+      "brand": "Airaldi Holdings",
+      "perfectTalent": "Perfect Concussion",
+      "perfectText": "Headshots increase total weapon damage by 20% for 1.5s. 5s with marksman rifles. Headshot kills increase total weapon damage by 15% for 10s.",
+      "base": "Airaldi Holdings",
+      "kind": "gear",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/airaldi.png"
+    },
+    {
+      "name": "Keeper",
+      "slot": "backpack",
+      "brand": "5.11 Tactical",
+      "perfectTalent": "Perfect Protector",
+      "perfectText": "When your shield is damaged, you gain +25% bonus armor and all other allies gain +35% of your armor as bonus armor for 3s. Cooldown: 3s.",
+      "base": "5.11 Tactical",
+      "kind": "gear",
+      "fixedAttributes": null,
+      "icon": "assets/icons/brands/511-tactical.png"
+    },
+    {
+      "name": "Visionario",
+      "slot": "mask",
+      "brand": "Virtuoso",
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": [
+        {
+          "name": "Optimal Range",
+          "value": "50%"
+        }
+      ],
+      "base": "Virtuoso",
+      "kind": "gear",
+      "icon": null
+    }
+  ],
+  "weapons": [
+    {
+      "name": "Invisible Hand",
+      "kind": "weapon",
+      "type": "AR",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/assault-rifle.png"
+    },
+    {
+      "name": "Burn Out",
+      "kind": "weapon",
+      "type": "AR",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/assault-rifle.png"
+    },
+    {
+      "name": "Dark Winter",
+      "kind": "weapon",
+      "type": "SMG",
+      "base": null,
+      "perfectTalent": "Perfect Killer",
+      "perfectText": "Killing an enemy with a critical hit grants +90% critical hit damage for 10 seconds.",
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/smg.png"
+    },
+    {
+      "name": "The Apartment",
+      "kind": "weapon",
+      "type": "SMG",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/smg.png"
+    },
+    {
+      "name": "Safety Distance",
+      "kind": "weapon",
+      "type": "SMG",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/smg.png"
+    },
+    {
+      "name": "Sleipnir",
+      "kind": "weapon",
+      "type": "LMG",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/lmg.png"
+    },
+    {
+      "name": "Black Friday",
+      "kind": "weapon",
+      "type": "LMG",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/lmg.png"
+    },
+    {
+      "name": "Baker's Dozen",
+      "kind": "weapon",
+      "type": "Rifle",
+      "base": null,
+      "perfectTalent": "Perfect Lucky Shot",
+      "perfectText": "Magazine capacity is increased by 30%. Missed shots from cover have a 100% chance to return to the magazine.",
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/rifle.png"
+    },
+    {
+      "name": "Virginian",
+      "kind": "weapon",
+      "type": "Rifle",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/rifle.png"
+    },
+    {
+      "name": "Harmony",
+      "kind": "weapon",
+      "type": "Rifle",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/rifle.png"
+    },
+    {
+      "name": "The White Death",
+      "kind": "weapon",
+      "type": "MMR",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/mmr.png"
+    },
+    {
+      "name": "Designated Hitter",
+      "kind": "weapon",
+      "type": "MMR",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/mmr.png"
+    },
+    {
+      "name": "The Mop",
+      "kind": "weapon",
+      "type": "Shotgun",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/shotgun.png"
+    },
+    {
+      "name": "Rock n' Roll",
+      "kind": "weapon",
+      "type": "Shotgun",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/shotgun.png"
+    },
+    {
+      "name": "Emeline's Guard",
+      "kind": "weapon",
+      "type": "Shotgun",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/shotgun.png"
+    },
+    {
+      "name": "TDI Kard Custom",
+      "kind": "weapon",
+      "type": "Pistol",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/pistol.png"
+    },
+    {
+      "name": "Prophet",
+      "kind": "weapon",
+      "type": "Pistol",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/pistol.png"
+    },
+    {
+      "name": "Mozambique Special",
+      "kind": "weapon",
+      "type": "Pistol",
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/pistol.png"
+    },
+    {
+      "name": "Robin",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Bulldog",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": null,
+      "perfectText": null,
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Interchange",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Back and Forth",
+      "perfectText": "Swapping to this weapon grants +13% Rate of Fire and +12% Weapon Damage for 10s.\nSwapping from this weapon grants +5% Rate of Fire and +4.5% Weapon Damage for 10s. Receiving one of the bonuses will remove the previous one if it's still active. Two instances of this Talent will not function at the same time.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Trader",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Back and Forth",
+      "perfectText": "Swapping to this weapon grants +13% Rate of Fire and +12% Weapon Damage for 10s.\nSwapping from this weapon grants +5% Rate of Fire and +4.5% Weapon Damage for 10s. Receiving one of the bonuses will remove the previous one if it's still active. Two instances of this Talent will not function at the same time.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "The Drill",
+      "type": "AR",
+      "base": "Carbine 7",
+      "perfectTalent": "Perfect Precision Strike",
+      "perfectText": "Killing enemies farther than 20m builds up stacks. Max stack is 2. Hitting an enemy within 20m uses all stacks to provide +35% Amplified Damage to enemies within 20m for 5s.",
+      "kind": "weapon",
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/assault-rifle.png"
+    },
+    {
+      "name": "Cricket",
+      "type": "LMG",
+      "base": "GR9",
+      "perfectTalent": "Perfect Precision Strike",
+      "perfectText": "Killing enemies farther than 20m builds up stacks. Max stack is 2. Hitting an enemy within 20m uses all stacks to provide +35% Amplified Damage to enemies within 20m for 5s.",
+      "kind": "weapon",
+      "fixedAttributes": null,
+      "icon": "assets/icons/weapons/lmg.png"
+    },
+    {
+      "name": "Teapot",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Boiling Point",
+      "perfectText": "The first 48% of your magazine will have -100% Critical Hit Chance. The rest will have 100%.",
+      "kind": "weapon",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Steamer",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Boiling Point",
+      "perfectText": "The first 48% of your magazine will have -100% Critical Hit Chance. The rest will have 100%.",
+      "kind": "weapon",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Brutus",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Behind You",
+      "perfectText": "Amplifies weapon damage by +25% to enemies that are not targeting you.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Whisper",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Behind You",
+      "perfectText": "Amplifies weapon damage by +25% to enemies that are not targeting you.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "The Virginian",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Boomerang",
+      "perfectText": "Critical hits have a 75% chance to return the bullet to the magazine. If a bullet is returned to the magazine the next shot has +50% increased damage.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Mechanical Animal",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Future Perfect",
+      "perfectText": "Weapon kills grant +1 skill tier for 19 seconds. Stacks up to 4 times\nWeapon kills at tier 6 grant overcharge for 15 seconds.\n\nOvercharge cooldown: 90 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Scalpel",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Future Perfect",
+      "perfectText": "Weapon kills grant +1 skill tier for 19 seconds. Stacks up to 4 times\nWeapon kills at tier 6 grant overcharge for 15 seconds.\n\nOvercharge cooldown: 90 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Brain Break",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Head Scratcher",
+      "perfectText": "Deal 35% Amplified Damage to confused enemies. After 4 kills, applies Confuse to the enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Insult to Injury",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Head Scratcher",
+      "perfectText": "Deal 35% Amplified Damage to confused enemies. After 4 kills, applies Confuse to the enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Pyromaniac",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Ignited",
+      "perfectText": "Deal +30% weapon damage to burning enemies.\nAfter 3 kills, applies burning to the next enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Lockdown",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Immobilize",
+      "perfectText": "Amplifies weapon damage by 25% to ensnared enemies. After 3 kills applies Ensnare to the next enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Froth",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Immobilize",
+      "perfectText": "Amplifies weapon damage by 25% to ensnared enemies. After 3 kills applies Ensnare to the next enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Gear Shift",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Measured",
+      "perfectText": "The top half of the magazine has 25% rate of fire and -30% weapon damage. The bottom half of the magazine has -18% rate of fire and +38% total weapon damage.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Glory Daze",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Near Sighted",
+      "perfectText": "Receive +100% stability at the cost of -35% optimal range.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Manic",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Overflowing",
+      "perfectText": "Every 2 reloads from empty increases your base magazine capacity by 100%.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Enforcer",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Pummel",
+      "perfectText": "2 consecutive kills refills the magazine and grants +40% weapon damage for 10 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Tsunami",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Pummel",
+      "perfectText": "2 consecutive kills refills the magazine and grants +40% weapon damage for 10 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Boomstick",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Pumped Up",
+      "perfectText": "Reloading grants +6% weapon damage for 10s. Stacks up to 5 times.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Carnage",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Sadist",
+      "perfectText": "Deal +35% weapon damage to bleeding enemies.\n\nAfter 3 kills, applies bleed to the next enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Lightning Rod",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Salvage",
+      "perfectText": "Killing a target has a 85% chance to refill the magazine.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Stage Left",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Sledgehammer",
+      "perfectText": "Dealing damage with a grenade applies a mark on target. Targets with mark will take 40% more damage to armor have a -30% movement speed. Mark will disappear after 10 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Surge",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Spike",
+      "perfectText": "Headshots grant +25% skill damage for 15 seconds.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Purist",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Streamline",
+      "perfectText": "Increase Weapon Damage by 47% when no Skills are Deployed or on cooldown.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Lud",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Streamline",
+      "perfectText": "Increase Weapon Damage by 47% when no Skills are Deployed or on cooldown.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Big Show",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Thunder Strike",
+      "perfectText": "Amplifies 35% extra damage to shocked targets. After 3 kills, applies shock to the next enemy you hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Like Glue",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Brazen",
+      "perfectText": "Receive +3.5% Amplified Damage on the next shot with the weapon for each pellet that hits the target, if at least 4 pellets hit.",
+      "fixedAttributes": null,
+      "icon": null
+    },
+    {
+      "name": "Thorn",
+      "kind": "weapon",
+      "type": null,
+      "base": null,
+      "perfectTalent": "Perfect Brazen",
+      "perfectText": "Receive +3.5% Amplified Damage on the next shot with the weapon for each pellet that hits the target, if at least 4 pellets hit.",
+      "fixedAttributes": null,
+      "icon": null
+    }
+  ]
+}

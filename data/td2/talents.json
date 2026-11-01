@@ -1,53 +1,1056 @@
 {
-  "source": "Talent names only. Gear-set chest and backpack talents are copied from the wiki gear-set table in gearsets.json. Brand chest/backpack and weapon talent descriptions were not re-fetched.",
+  "source": "Talent names and Perfect text from the Division Fandom page Talents/Tom Clancy's The Division 2, plus Boiling Point and Precision Strike from the Red Horizon and TU22 pages. A blank text means that row had no normal description in the table.",
   "weapon": [
+    "Allegro",
+    "Back and Forth",
+    "Behind You",
     "Boomerang",
+    "Boiling Point",
+    "Breadbasket",
     "Close & Personal",
+    "Determined",
     "Eyeless",
+    "Extra",
     "Fast Hands",
+    "Finisher",
+    "First Blood",
     "Flatline",
     "Frenzy",
     "Future Perfect",
+    "Head Scratcher",
     "Ignited",
+    "Immobilize",
     "In Sync",
+    "Jazz Hands",
     "Killer",
+    "Lucky Shot",
     "Measured",
+    "Naked",
+    "Near Sighted",
+    "On Empty",
     "Optimist",
+    "Outsider",
     "Overflowing",
+    "Overwhelm",
+    "Perpetuation",
+    "Precision Strike",
     "Preservation",
+    "Pressure Point",
+    "Pummel",
+    "Pumped Up",
     "Ranger",
+    "Reformation",
+    "Rifleman",
     "Sadist",
+    "Salvage",
+    "Sledgehammer",
+    "Soft Spot",
+    "Spike",
+    "Steady Handed",
     "Strained",
     "Streamline",
-    "Unhinged"
+    "Thunder Strike",
+    "Unhinged",
+    "Unwavering",
+    "Vindictive",
+    "Brazen",
+    "Perfect Allegro",
+    "Perfect Back and Forth",
+    "Perfect Behind You",
+    "Perfect Boomerang",
+    "Perfect Boiling Point",
+    "Perfect Breadbasket",
+    "Perfect Close & Personal",
+    "Perfect Determined",
+    "Perfect Eyeless",
+    "Perfect Extra",
+    "Perfect Fast Hands",
+    "Perfect Finisher",
+    "Perfect First Blood",
+    "Perfect Flatline",
+    "Perfect Frenzy",
+    "Perfect Future Perfect",
+    "Perfect Head Scratcher",
+    "Perfect Ignited",
+    "Perfect Immobilize",
+    "Perfect In Sync",
+    "Perfect Jazz Hands",
+    "Perfect Killer",
+    "Perfect Lucky Shot",
+    "Perfect Measured",
+    "Perfect Naked",
+    "Perfect Near Sighted",
+    "Perfect On Empty",
+    "Perfect Optimist",
+    "Perfect Outsider",
+    "Perfect Overflowing",
+    "Perfect Overwhelm",
+    "Perfect Perpetuation",
+    "Perfect Precision Strike",
+    "Perfect Preservation",
+    "Perfect Pressure Point",
+    "Perfect Pummel",
+    "Perfect Pumped Up",
+    "Perfect Ranger",
+    "Perfect Reformation",
+    "Perfect Rifleman",
+    "Perfect Sadist",
+    "Perfect Salvage",
+    "Perfect Sledgehammer",
+    "Perfect Soft Spot",
+    "Perfect Spike",
+    "Perfect Steady Handed",
+    "Perfect Strained",
+    "Perfect Streamline",
+    "Perfect Thunder Strike",
+    "Perfect Unhinged",
+    "Perfect Unwavering",
+    "Perfect Vindictive",
+    "Perfect Brazen"
   ],
   "chest": [
+    "Braced",
     "Efficient",
+    "Empathic Resolve",
     "Entrench",
+    "Explosive Delivery",
     "Focus",
     "Glass Cannon",
+    "Gunslinger",
     "Headhunter",
     "Intimidate",
     "Kinetic Momentum",
+    "Mad Bomber",
     "Obliterate",
     "Overwatch",
+    "Protected Reload",
+    "Reassigned",
+    "Skilled",
     "Spark",
     "Spotter",
+    "Tag Team",
     "Tamper Proof",
+    "Trauma",
     "Unbreakable",
-    "Vanguard"
+    "Vanguard",
+    "Perfect Braced",
+    "Perfect Efficient",
+    "Perfect Entrench",
+    "Perfect Focus",
+    "Perfect Glass Cannon",
+    "Perfect Gunslinger",
+    "Perfect Headhunter",
+    "Perfect Intimidate",
+    "Perfect Kinetic Momentum",
+    "Perfect Obliterate",
+    "Perfect Protected Reload",
+    "Perfect Skilled",
+    "Perfect Spotter",
+    "Perfect Trauma",
+    "Perfect Unbreakable",
+    "Perfect Vanguard"
   ],
   "backpack": [
+    "Adrenaline Rush",
+    "Bloodsucker",
+    "Calculated",
+    "Clutch",
     "Combined Arms",
     "Companion",
     "Composure",
     "Concussion",
+    "Creeping Death",
+    "Energize",
+    "Galvanize",
     "Opportunistic",
     "Overclock",
+    "Protector",
     "Safeguard",
     "Shock and Awe",
     "Tech Support",
+    "Unstoppable Force",
+    "Versatile",
     "Vigilance",
-    "Wicked"
+    "Wicked",
+    "Perfect Adrenaline Rush",
+    "Perfect Bloodsucker",
+    "Perfect Calculated",
+    "Perfect Clutch",
+    "Perfect Combined Arms",
+    "Perfect Companion",
+    "Perfect Creeping Death",
+    "Perfect Energize",
+    "Perfect Galvanize",
+    "Perfect Opportunistic",
+    "Perfect Overclock",
+    "Perfect Safeguard",
+    "Perfect Shock and Awe",
+    "Perfect Tech Support",
+    "Perfect Unstoppable Force",
+    "Perfect Versatile",
+    "Perfect Vigilance",
+    "Perfect Wicked"
+  ],
+  "details": [
+    {
+      "name": "Allegro",
+      "slot": "weapon",
+      "text": "+12% Fire Rate",
+      "perfectText": "Invisible Hand",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Back and Forth",
+      "slot": "weapon",
+      "text": "Swapping to this weapon grants +10% Rate of Fire and +9% Weapon Damage for 10s.\nSwapping from this weapon grants +5% Rate of Fire and +4.5% Weapon Damage for 10s. Receiving one of the bonuses will remove the previous one if it's still active. Two instances of this Talent will not function at the same time.",
+      "perfectText": "Swapping to this weapon grants +13% Rate of Fire and +12% Weapon Damage for 10s.\nSwapping from this weapon grants +5% Rate of Fire and +4.5% Weapon Damage for 10s. Receiving one of the bonuses will remove the previous one if it's still active. Two instances of this Talent will not function at the same time.",
+      "requirement": "Rifles/Assault Rifles/Marksman Rifles/Submachine Guns/Light Machine Guns/Shotguns",
+      "foundOn": [
+        "Trader",
+        "Interchange"
+      ]
+    },
+    {
+      "name": "Behind You",
+      "slot": "weapon",
+      "text": "Amplifies weapon damage by +20% to enemies that are not targeting you.",
+      "perfectText": "Amplifies weapon damage by +25% to enemies that are not targeting you.",
+      "requirement": "Rifle",
+      "foundOn": [
+        "Brutus",
+        "Whisper"
+      ]
+    },
+    {
+      "name": "Boomerang",
+      "slot": "weapon",
+      "text": "Critical hits have a 50% chance to return the bullet to the magazine. If a bullet is returned to the magazine the next shot has +40% increased damage.",
+      "perfectText": "Critical hits have a 75% chance to return the bullet to the magazine. If a bullet is returned to the magazine the next shot has +50% increased damage.",
+      "requirement": "Rifle",
+      "foundOn": [
+        "The Virginian"
+      ]
+    },
+    {
+      "name": "Boiling Point",
+      "slot": "weapon",
+      "text": "The first 53% of your magazine will have -100% Critical Hit Chance. The rest will have 100%.",
+      "perfectText": "The first 48% of your magazine will have -100% Critical Hit Chance. The rest will have 100%.",
+      "requirement": "ARs/SMGs/LMGs",
+      "foundOn": [
+        "Teapot",
+        "Steamer"
+      ]
+    },
+    {
+      "name": "Breadbasket",
+      "slot": "weapon",
+      "text": "Landing body shots adds a stack of bonus +55% headshot damage to the next headshot for 10 seconds. Max stack is 3.",
+      "perfectText": "Landing body shots adds a stack of bonus +70% headshot damage to the next headshot for 10s. Max stack is 2.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Close & Personal",
+      "slot": "weapon",
+      "text": "Killing a target within 7 meters grants +30% weapon damage for 10 seconds.",
+      "perfectText": "Killing a target within 7 meters grants +38% weapon damage for 10 seconds.",
+      "requirement": "All weapons",
+      "foundOn": []
+    },
+    {
+      "name": "Determined",
+      "slot": "weapon",
+      "text": "After killing an enemy with a headshot the next shot landed on any enemy will be a guaranteed headshot.",
+      "perfectText": "After killing an enemy with a headshot the next shot landed on any enemy will be a guaranteed critical headshot. While the talent is active killing an enemy will not retrigger the talent.",
+      "requirement": "Rifles, Marksman Rifles, Pistols",
+      "foundOn": []
+    },
+    {
+      "name": "Eyeless",
+      "slot": "weapon",
+      "text": "Deal +30% weapon damage to blinded enemies.\nAfter 4 kills, applies blind to the next enemy you hit.",
+      "perfectText": "Deal +350% weapon damage to blinded enemies.\nAfter 3 kills, applies blind to the next enemy you hit.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Extra",
+      "slot": "weapon",
+      "text": "50% magazine capacity.",
+      "perfectText": "Rock'n'Roll",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Fast Hands",
+      "slot": "weapon",
+      "text": "Critical hits add a stack of 3% reload speed bonus. Max stack is 40.",
+      "perfectText": "Critical hits add a stack of 5% reload speed bonus. Max stack is 40.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Finisher",
+      "slot": "weapon",
+      "text": "Swapping from this weapon within 10 seconds of killing an enemy grants 30% critical hit chance and 30% critical hit damage for 15 seconds.",
+      "perfectText": "Swapping from this weapon within 10 seconds of killing an enemy grants 35% critical hit chance and 40% critical hit damage for 15 seconds.",
+      "requirement": "Pistol",
+      "foundOn": []
+    },
+    {
+      "name": "First Blood",
+      "slot": "weapon",
+      "text": "If scoped, your first shot fired from out of combat or after fully reloading from empty deals headshot damage to any part of the body hit.",
+      "perfectText": "If Scoped, your first two shots from out of combat or after fully reloading from empty deals headshot damage to any part of the body hit.",
+      "requirement": "Requires a Scope with 8X magnification or higher.\nMarksman Rifles",
+      "foundOn": []
+    },
+    {
+      "name": "Flatline",
+      "slot": "weapon",
+      "text": "Amplifies weapon damage by 15% to pulsed enemies. After 4 kills, applies pulse to the next enemy you hit.",
+      "perfectText": "Amplifies weapon damage by 20% to pulsed enemies. After 3 kills, applies pulse to the next enemy you hit.",
+      "requirement": "Any Weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Frenzy",
+      "slot": "weapon",
+      "text": "For every 10 bullets in the magazine capacity, gain +3% rate of fire and +3% weapon damage for 5 seconds when reloading from empty",
+      "perfectText": "For every 8 bullets in the magazine capacity, gain +3% rate of fire and +3% weapon damage for 5 seconds when reloading from empty.",
+      "requirement": "LMGs",
+      "foundOn": []
+    },
+    {
+      "name": "Future Perfect",
+      "slot": "weapon",
+      "text": "Weapon kills grant +1 skill tier for 15 seconds. Stacks up to 3 times.\nWeapon kills at tier 6 grant overcharge for 15 seconds.\n\nOvercharge cooldown: 90 seconds.",
+      "perfectText": "Weapon kills grant +1 skill tier for 19 seconds. Stacks up to 4 times\nWeapon kills at tier 6 grant overcharge for 15 seconds.\n\nOvercharge cooldown: 90 seconds.",
+      "requirement": "Any Weapon",
+      "foundOn": [
+        "Mechanical Animal",
+        "Scalpel"
+      ]
+    },
+    {
+      "name": "Head Scratcher",
+      "slot": "weapon",
+      "text": "Deal 30% Amplified Damage to confused enemies. After 4 kills, applies Confuse to the enemy you hit.",
+      "perfectText": "Deal 35% Amplified Damage to confused enemies. After 4 kills, applies Confuse to the enemy you hit.",
+      "requirement": null,
+      "foundOn": [
+        "Brain Break",
+        "Insult to Injury"
+      ]
+    },
+    {
+      "name": "Ignited",
+      "slot": "weapon",
+      "text": "Deal +25% weapon damage to burning enemies.\nAfter 4 kills, applies burning to the next enemy you hit.",
+      "perfectText": "Deal +30% weapon damage to burning enemies.\nAfter 3 kills, applies burning to the next enemy you hit.",
+      "requirement": "Any weapon",
+      "foundOn": [
+        "Pyromaniac"
+      ]
+    },
+    {
+      "name": "Immobilize",
+      "slot": "weapon",
+      "text": "Amplifies weapon damage by 20% to ensared enemies. After 4 kills applies Ensnare to the next enemy you hit.",
+      "perfectText": "Amplifies weapon damage by 25% to ensnared enemies. After 3 kills applies Ensnare to the next enemy you hit.",
+      "requirement": null,
+      "foundOn": [
+        "Lockdown",
+        "Froth"
+      ]
+    },
+    {
+      "name": "In Sync",
+      "slot": "weapon",
+      "text": "Hitting an enemy grants +15% skill damage for 5 seconds.\nUsing a skill or damaging an enemy with a skill grants +15% weapon damage for 5 seconds.\nDamage increases are doubled while both buffs are active at the same time.",
+      "perfectText": "Hitting an enemy grants +20% skill damage for 5 seconds.\nUsing a skill or damaging an enemy with a skill grants +20% weapon damage for 5 seconds.\nDamage increases are doubled while both buffs are active at the same time.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Jazz Hands",
+      "slot": "weapon",
+      "text": "50% Reload speed",
+      "perfectText": "Cu\u00e9lebre",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Killer",
+      "slot": "weapon",
+      "text": "Killing an enemy with a critical hit grants +70% critical hit damage for 10 seconds.",
+      "perfectText": "Killing an enemy with a critical hit grants +90% critical hit damage for 10 seconds.",
+      "requirement": "Any weapon",
+      "foundOn": [
+        "Dark Winter"
+      ]
+    },
+    {
+      "name": "Lucky Shot",
+      "slot": "weapon",
+      "text": "Magazine capacity is increased by 20%. Missed shots from cover have a 100% chance to return to the magazine.",
+      "perfectText": "Magazine capacity is increased by 30%. Missed shots from cover have a 100% chance to return to the magazine.",
+      "requirement": "Marksman Rifles/Pistols/Rifles",
+      "foundOn": [
+        "Baker's Dozen"
+      ]
+    },
+    {
+      "name": "Measured",
+      "slot": "weapon",
+      "text": "The top half of the magazine has 25% rate of fire and -25% weapon damage. The bottom half of the magazine has -18% rate of fire and +30% total weapon damage.",
+      "perfectText": "The top half of the magazine has 25% rate of fire and -30% weapon damage. The bottom half of the magazine has -18% rate of fire and +38% total weapon damage.",
+      "requirement": "Assault Rifles\nLMGs\nSMGs",
+      "foundOn": [
+        "Gear Shift"
+      ]
+    },
+    {
+      "name": "Naked",
+      "slot": "weapon",
+      "text": "Whenever your armor is depleted, gain 50% Headshot damage for 5 seconds.",
+      "perfectText": "Whenever your armor is depleted, gain 50% Headshot damage for 8 seconds.",
+      "requirement": "Marksman Rifle",
+      "foundOn": []
+    },
+    {
+      "name": "Near Sighted",
+      "slot": "weapon",
+      "text": "Receive +80% stability at the cost of -35% optimal range.",
+      "perfectText": "Receive +100% stability at the cost of -35% optimal range.",
+      "requirement": "Assault Rifles",
+      "foundOn": [
+        "Glory Daze"
+      ]
+    },
+    {
+      "name": "On Empty",
+      "slot": "weapon",
+      "text": "Reloading from empty grants +60% weapon handling for 10 seconds.",
+      "perfectText": "Reloading from empty grants +80% weapon handling for 10 seconds.",
+      "requirement": "Assault Rifles",
+      "foundOn": []
+    },
+    {
+      "name": "Optimist",
+      "slot": "weapon",
+      "text": "Weapon Damage is increased by +3.5% for every 10% of ammo missing from the magazine.",
+      "perfectText": "Weapon Damage is increased by +4.5% for every 10% of ammo missing from the magazine.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Outsider",
+      "slot": "weapon",
+      "text": "After killing an enemy, gain 100% optimal range and +100% accuracy for 10 seconds.",
+      "perfectText": "After killing an enemy, gain 150% optimal range and 125% accuracy for 10 seconds.",
+      "requirement": "SMGs",
+      "foundOn": []
+    },
+    {
+      "name": "Overflowing",
+      "slot": "weapon",
+      "text": "Every 3 reloads from empty increases your base magazine size by 100%.",
+      "perfectText": "Every 2 reloads from empty increases your base magazine capacity by 100%.",
+      "requirement": "Assault Rifles",
+      "foundOn": [
+        "Manic"
+      ]
+    },
+    {
+      "name": "Overwhelm",
+      "slot": "weapon",
+      "text": "Suppressing an enemy, that is not currently suppressed, grants +10% weapon damage for 12 seconds, Max stack is 4.",
+      "perfectText": "Suppressing an enemy, that is not currently suppressed, grants +12% weapon damage for 12 seconds, Max stack is 4.",
+      "requirement": "LMGs",
+      "foundOn": []
+    },
+    {
+      "name": "Perpetuation",
+      "slot": "weapon",
+      "text": "Headshots grant +75% status effect damage and duration to the next status effect you apply.\nCooldown: 20 seconds.",
+      "perfectText": "Headshots grant +75% status effect damage and duration to the next status effect you apply.\nCooldown: 16 seconds.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Precision Strike",
+      "slot": "weapon",
+      "text": "Killing enemies farther than 20m builds up stacks. Max stack is 3. Hitting an enemy within 20m will use all stacks to provide 20% amplified damage to enemies within 20m for 5s.",
+      "perfectText": "Killing enemies farther than 20m builds up stacks. Max stack is 2. Hittting an enemy within 20m will use all stacks to provide 35% amplified damage to enemies within 20m for 5s.",
+      "requirement": "Rifles/Assault Rifles/Marksman Rifles/Light Machine Guns",
+      "foundOn": []
+    },
+    {
+      "name": "Preservation",
+      "slot": "weapon",
+      "text": "Killing an enemy repairs 10% armor over 5 seconds. Headshot kills improve the repair by an additional 10%.",
+      "perfectText": "Killing an enemy repairs 15% armor over 5 seconds. Headshot kills improve the repair by an additional 15%.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Pressure Point",
+      "slot": "weapon",
+      "text": "Amplifies weapon damage by 15% to enemies under status effects.",
+      "perfectText": "Amplifies weapon damage by 20% to enemies under status effects.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Pummel",
+      "slot": "weapon",
+      "text": "3 consecutive kills refills the magazine and grants +40% weapon damage for 10 seconds.",
+      "perfectText": "2 consecutive kills refills the magazine and grants +40% weapon damage for 10 seconds.",
+      "requirement": "Shotgun",
+      "foundOn": [
+        "Enforcer",
+        "Tsunami"
+      ]
+    },
+    {
+      "name": "Pumped Up",
+      "slot": "weapon",
+      "text": "Reloading grants +1% weapon damage for 10 seconds. Stacks up to 25 times.",
+      "perfectText": "Reloading grants +6% weapon damage for 10s. Stacks up to 5 times.",
+      "requirement": "Shotgun",
+      "foundOn": [
+        "Boomstick"
+      ]
+    },
+    {
+      "name": "Ranger",
+      "slot": "weapon",
+      "text": "Amplifies weapon damage by 2% for every 4 meters you are away from your target.",
+      "perfectText": "Amplifies weapon damage by 2% for every 3 meters you are away from your target.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Reformation",
+      "slot": "weapon",
+      "text": "Headshots grant +60% skill repair for 15 seconds.",
+      "perfectText": "Headshots grant +80% skill repair for 15 seconds.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Rifleman",
+      "slot": "weapon",
+      "text": "Landing headshots adds a stack of bonus +10% weapon damage for 5 seconds. Max stack is 5. Additional headshots refresh the duration.",
+      "perfectText": "Landing headshots adds a stack of bonus +11% weapon damage for 5 seconds. Max stack is 6. Additional headshots refresh the duration.",
+      "requirement": "Rifles",
+      "foundOn": []
+    },
+    {
+      "name": "Sadist",
+      "slot": "weapon",
+      "text": "Deal +30% weapon damage to bleeding enemies.\n\nAfter 4 kills, applies bleed to the next enemy you hit.",
+      "perfectText": "Deal +35% weapon damage to bleeding enemies.\n\nAfter 3 kills, applies bleed to the next enemy you hit.",
+      "requirement": "Any weapon",
+      "foundOn": [
+        "Carnage"
+      ]
+    },
+    {
+      "name": "Salvage",
+      "slot": "weapon",
+      "text": "Killing a target has a 70% chance to refill the magazine.",
+      "perfectText": "Killing a target has a 85% chance to refill the magazine.",
+      "requirement": "Pistols",
+      "foundOn": [
+        "Lightning Rod"
+      ]
+    },
+    {
+      "name": "Sledgehammer",
+      "slot": "weapon",
+      "text": "Dealing damage with a grenade applies a mark on target. Targets with mark will take 30% more damage to armor have a -20% movement speed. Mark will disappear after 10 seconds.",
+      "perfectText": "Dealing damage with a grenade applies a mark on target. Targets with mark will take 40% more damage to armor have a -30% movement speed. Mark will disappear after 10 seconds.",
+      "requirement": "Any weapon",
+      "foundOn": [
+        "Stage Left"
+      ]
+    },
+    {
+      "name": "Soft Spot",
+      "slot": "weapon",
+      "text": "Destroying a Weakpoint grants 19% Weapon Damage for 15s",
+      "perfectText": "Destroying a Weakpoint grants 24% Weapon Damage for 15s",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Spike",
+      "slot": "weapon",
+      "text": "Headshots grant +20% skill damage for 15 seconds.",
+      "perfectText": "Headshots grant +25% skill damage for 15 seconds.",
+      "requirement": "Any weapon",
+      "foundOn": [
+        "Surge"
+      ]
+    },
+    {
+      "name": "Steady Handed",
+      "slot": "weapon",
+      "text": "Hits grant a stack of +1% Accuracy and Stability.\n\nAt 100 stacks, consumes them to refill the magazine.",
+      "perfectText": "Hits grant a stack of +1% Accuracy and Stability.\nAt 75 stacks, consumes them to refill the magazine.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Strained",
+      "slot": "weapon",
+      "text": "Gain +10% critical hit damage for every 0.5 seconds you are firing.\n\nStacks up to 5 times.",
+      "perfectText": "Gain 10% critical hit damage for every 0.5 seconds you are firing. Stacks up to 8 times.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Streamline",
+      "slot": "weapon",
+      "text": "Increase Weapon Damage by 42% when no Skills are Deployed or on cooldown.",
+      "perfectText": "Increase Weapon Damage by 47% when no Skills are Deployed or on cooldown.",
+      "requirement": "Any Weapon",
+      "foundOn": [
+        "Purist",
+        "Lud"
+      ]
+    },
+    {
+      "name": "Thunder Strike",
+      "slot": "weapon",
+      "text": "Amplifies 30% extra damage to shocked targets. After 4 kills, applies shock to the next enemy you hit.",
+      "perfectText": "Amplifies 35% extra damage to shocked targets. After 3 kills, applies shock to the next enemy you hit.",
+      "requirement": null,
+      "foundOn": [
+        "Big Show"
+      ]
+    },
+    {
+      "name": "Unhinged",
+      "slot": "weapon",
+      "text": "Grants +18% weapon damage at the cost of -25% Stability and -25% Accuracy.",
+      "perfectText": "Grants +22% weapon damage at the cost of -25% Stability and -25% Accuracy.",
+      "requirement": "LMGs",
+      "foundOn": []
+    },
+    {
+      "name": "Unwavering",
+      "slot": "weapon",
+      "text": "Swapping to this weapon grants +300% weapon handling for 5 seconds. Kills refresh this buff. Swapping away disables this buff from all weapons for 5 seconds.",
+      "perfectText": "Swapping to this weapon grants +400% weapon handling for 5 seconds. Kills refresh this buff. Swapping away disables this buff from all weapons for 5 seconds.",
+      "requirement": "SMGs",
+      "foundOn": []
+    },
+    {
+      "name": "Vindictive",
+      "slot": "weapon",
+      "text": "Killing an enemy with a status effect applied applied grants you and all allies within 15 meters 16% critical hit chance and 16% critical hit damage for 20 seconds.",
+      "perfectText": "Killing an enemy with a status effect applied applied grants you and all allies within 20 meters 21% critical hit chance and 21% critical hit damage for 20 seconds.",
+      "requirement": "Any weapon",
+      "foundOn": []
+    },
+    {
+      "name": "Brazen",
+      "slot": "weapon",
+      "text": "Receive +3.5% Amplified Damage on the next shot with the weapon for each pellet that hits the target, if at least 6 pellets hit.",
+      "perfectText": "Receive +3.5% Amplified Damage on the next shot with the weapon for each pellet that hits the target, if at least 4 pellets hit.",
+      "requirement": "Shotguns",
+      "foundOn": [
+        "Like Glue",
+        "Thorn"
+      ]
+    },
+    {
+      "name": "Braced",
+      "slot": "chest",
+      "text": "While in cover, weapon handling is increased by +45%.",
+      "perfectText": "While in cover, weapon handling is increased by +50%.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Efficient",
+      "slot": "chest",
+      "text": "Using an armor kit has a 50% chance to not consume the armor kit.\n\nSpecialization armor kit bonuses are increased by 100%.",
+      "perfectText": "Using an armor kit has a 75% chance to not consume the armor kit.\n\nSpecialization armor kit bonuses are increased by 100%.",
+      "requirement": null,
+      "foundOn": [
+        "Belstone Armory Everyday Carrier"
+      ]
+    },
+    {
+      "name": "Empathic Resolve",
+      "slot": "chest",
+      "text": "Repairing an ally increases their total weapon and skill damage by 3-15% for 20 seconds. 1-7% if self. Effectiveness increased by your skill tier.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Entrench",
+      "slot": "chest",
+      "text": "If you are below 30% armor, headshots from cover repair 20% of your armor.\n\nCooldown: 2 seconds.",
+      "perfectText": "If you are below 30% armor, headshots from cover repair 30% of your armor.\n\nCooldown 1 seconds.",
+      "requirement": null,
+      "foundOn": [
+        "Zwiadowka Sp. z.o.o. Bober"
+      ]
+    },
+    {
+      "name": "Explosive Delivery",
+      "slot": "chest",
+      "text": "Whenever you throw a skill, 1.5 seconds after landing, it creates an explosion damaging enemies within 5 meters.\nDamage scales with skill tier dealing 25-100% damage of a concussion grenade.\n\nAt most once per skill.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Focus",
+      "slot": "chest",
+      "text": "Increases total weapon damage by 5% every second you are aiming while scoped 8x or higher, up to 50%.",
+      "perfectText": "Increases total weapon damage by 6% every second you are aiming while scoped 8x or higher, up to 50%.",
+      "requirement": "Requires a Scope with 8x magnification or higher.",
+      "foundOn": []
+    },
+    {
+      "name": "Glass Cannon",
+      "slot": "chest",
+      "text": "All damage you deal is amplified by 25%. All damage you take is amplified by 50%,",
+      "perfectText": "All damage you deal is amplified by 30%. All damage you take is amplified by 60%,",
+      "requirement": null,
+      "foundOn": [
+        "The Sacrifice"
+      ]
+    },
+    {
+      "name": "Gunslinger",
+      "slot": "chest",
+      "text": "Weapon swapping increases total weapon damage by 20% for 5 seconds. Thus buff is lost for 5 seconds if you weapon swap while it is active.",
+      "perfectText": "Weapon swapping increases total weapon damage by 28% for 5 seconds. Thus buff is lost for 5 seconds if you weapon swap while it is active.",
+      "requirement": null,
+      "foundOn": [
+        "Robin"
+      ]
+    },
+    {
+      "name": "Headhunter",
+      "slot": "chest",
+      "text": "After killing an enemy with a headshot, your next weapon hit within 30 seconds deals an additional 125% of that killing blow's damage.\nDamage is capped to 800% of your weapon damage. This is raised to 1250% if your headshot damage is greater than 150%.",
+      "perfectText": "After killing an enemy with a headshot, your next weapon hit within 30 seconds deals an additional 150% of that killing blow's damage.\nDamage is capped to 800% of your weapon damage. This is raised to 1250% if your headshot damage is greater than 150%.",
+      "requirement": null,
+      "foundOn": [
+        "Walker",
+        "Harris & Co. Chainkiller"
+      ]
+    },
+    {
+      "name": "Intimidate",
+      "slot": "chest",
+      "text": "While you have bonus armor, amplifies total weapon damage by 35% to enemies within 9 meters.",
+      "perfectText": "While you have bonus armor, amplifies total weapon damage by 35% to enemies within 10 meters.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Kinetic Momentum",
+      "slot": "chest",
+      "text": "When in combat, each skill generates a stack while active or not on cooldown. Stacks increase your total skill damage by 1% and total skill repair by 2%. Up to 15 stacks per skill. Lost when on cooldown.",
+      "perfectText": "When in combat, each skill generates a stack while active or not on cooldown. Stacks increase your total skill damage by 1.5% and total skill repair by 2%. Up to 18 stacks per skill. Lost when on cooldown.",
+      "requirement": null,
+      "foundOn": [
+        "Wyvern Wear Impetus"
+      ]
+    },
+    {
+      "name": "Mad Bomber",
+      "slot": "chest",
+      "text": "Grenade Radius is increased by +50%. Grenades that kill an enemy are refunded.\n\nGrenades can now be \"cooked\" by holding down the fire button, making them explode earlier.\n\nGain +15% bonus armor while aiming grenades.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Obliterate",
+      "slot": "chest",
+      "text": "Critical hits increase total weapon damage by 1% for 10 seconds. Stacks up to 20 times.",
+      "perfectText": "Critical hits increase total weapon damage by 1% for 5 seconds. Stacks up to 24 times.",
+      "requirement": null,
+      "foundOn": [
+        "Equalizer"
+      ]
+    },
+    {
+      "name": "Overwatch",
+      "slot": "chest",
+      "text": "After staying in cover for 10 seconds, increases you and your allies' total weapon and skill damage by 12% as long as you remain in cover or in a cover-to-cover move.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Protected Reload",
+      "slot": "chest",
+      "text": "Grants +20% bonus armor while reloading.\nGrants 0-18% of your armor as bonus armor to all other allies when they are reloading, based on your Armor core attributes.",
+      "perfectText": "Grants +40% bonus armor while reloading.\nGrants 0-30% of your armor as bonus armor to all other allies when they are reloading, based on your Armor core attributes.",
+      "requirement": null,
+      "foundOn": [
+        "Sleight"
+      ]
+    },
+    {
+      "name": "Reassigned",
+      "slot": "chest",
+      "text": "Killing an enemy adds 1 round of a random special ammo into your sidearm.\n\nCooldown: 15 seconds.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Skilled",
+      "slot": "chest",
+      "text": "Skill kills have a 25% chance to reset skill cooldowns.",
+      "perfectText": "Skill kills have a 30% chance to reset skill cooldowns.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Spark",
+      "slot": "chest",
+      "text": "Damaging enemies with a skill increases total weapon damage by 15% for 15 seconds.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Spotter",
+      "slot": "chest",
+      "text": "Amplifies total weapon and skill damage by 15% to pulsed enemies.",
+      "perfectText": "Amplifies total weapon and skill damage by 20% to pulsed enemies.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Tag Team",
+      "slot": "chest",
+      "text": "The last enemy you have damaged with a skill is marked. Dealing weapon damage to that enemy consumes the mark to reduce active cooldowns by 6 seconds.\n\nCooldown: 4 seconds.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Tamper Proof",
+      "slot": "chest",
+      "text": "Enemies that walk within 3 meters of your hive, turret, or remote pulse are shocked.\nArm time: 2 seconds.\n\nCooldown per skill: 10 seconds.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Trauma",
+      "slot": "chest",
+      "text": "Applies blind to an enemy hit in the head.\n\nCooldown: 30 seconds.",
+      "perfectText": "Applies bleed to an enemy hit in the chest.\n\nCooldown: 30 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Unbreakable",
+      "slot": "chest",
+      "text": "When your armor is depleted, repair 95% of your armor.\n\nCooldown: 60 seconds",
+      "perfectText": "When your armor is depleted, repair 100% of your armor.\n\nCooldown: 55 seconds",
+      "requirement": null,
+      "foundOn": [
+        "Badger Tuff Zero F's"
+      ]
+    },
+    {
+      "name": "Vanguard",
+      "slot": "chest",
+      "text": "Deploying a shield makes it invulnerable for 5 seconds and grants 45% of your armor as bonus armor to all other allies for 20 seconds.\n\nCooldown: 25 seconds",
+      "perfectText": "}\n\nShow/Hide Backpack Talents",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Adrenaline Rush",
+      "slot": "backpack",
+      "text": "Whenever you are within 10 meters of an enemy, gain 20% bonus armor for 5 seconds. Stacks up to 3 times.\nCooldown: 5 seconds.",
+      "perfectText": "Whenever you are within 10 meters of an enemy, gain 23% bonus armor for 5 seconds. Stacks up to 3 times.\nCooldown: 5 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Bloodsucker",
+      "slot": "backpack",
+      "text": "Killing an enemy adds and refreshes a stack of +10% bonus armor for 10 seconds, Max stack is 10.",
+      "perfectText": "Killing an enemy adds and refreshes a stack of +12% bonus armor for 10 seconds, Max stack is 10.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Calculated",
+      "slot": "backpack",
+      "text": "Kills from cover reduce skill cooldowns by 10%.",
+      "perfectText": "Kills from cover reduce skill cooldowns by 15%.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Clutch",
+      "slot": "backpack",
+      "text": "If you are below 15% armor, critical hits repair 2.5% missing armor.\n\nKills allow you to repair up to 100% armor for 4-10 seconds, based on your number of Weapon core attributes.",
+      "perfectText": "If you are below 20% armor, critical hits repair 2.5% missing armor.\n\nKills allow you to repair up to 100% armor for 4-10 seconds, based on your number of Weapon core attributes.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Combined Arms",
+      "slot": "backpack",
+      "text": "Shooting an enemy increases total skill damage by 25% for 3 seconds.",
+      "perfectText": "Shooting an enemy increases total skill damage by 30% for 3 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Companion",
+      "slot": "backpack",
+      "text": "While you are within 5 meters of an ally or skill, total weapon damage is increased by 15%.",
+      "perfectText": "While you are within 10 meters of an ally or skill, total weapon damage is increased by 20%.",
+      "requirement": "Perfect Companion is only a named Chest item.",
+      "foundOn": []
+    },
+    {
+      "name": "Composure",
+      "slot": "backpack",
+      "text": "While in cover, increases total weapon damage by 15%.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Concussion",
+      "slot": "backpack",
+      "text": "Headshots increase total weapon damage by 10% for 1.5 seconds. 5 seconds with marksman rifles.\n\nHeadshot kills increase total weapon damage by 15% for 10 seconds.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Creeping Death",
+      "slot": "backpack",
+      "text": "When you apply a status effect, it is also applied to all enemies within 8 meters of your target.\n\nCooldown: 15 seconds.",
+      "perfectText": "When you apply a status effect, it is also applied to all enemies within 10 meters of your target.\nCooldown: 10 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Energize",
+      "slot": "backpack",
+      "text": "Using an armor kit grants +1 skill tier for 15 seconds, if already at skill tier 6, grants overcharge.\nCooldown: 60 seconds.",
+      "perfectText": "Using an armor kit grants +1 skill tier for 15 seconds, if already at skill tier 6, grants overcharge.\nCooldown: 30 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Galvanize",
+      "slot": "backpack",
+      "text": "Applying a Blind, Ensnare, Confusion, or Shock to an enemy grants 40% of your armor as bonus armor to you and all allies within 20 meters of that enemy for 10s",
+      "perfectText": "Applying a Blind, Ensnare, Confusion, or Shock to an enemy grants 50% of your armor as bonus armor to you and all allies within 30 meters of that enemy for 10s",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Opportunistic",
+      "slot": "backpack",
+      "text": "Enemies you hit with shotguns and marksman rifles amplifies the damage they take by 10% from all sources for 5 seconds.",
+      "perfectText": "Enemies you hit with shotguns and marksman rifles amplifies the damage they take by 15% from all sources for 5 seconds.",
+      "requirement": "Requires a Shotgun or Marksman Rifle drawn.",
+      "foundOn": []
+    },
+    {
+      "name": "Overclock",
+      "slot": "backpack",
+      "text": "Allies within 7 meters of your deployed skills, gain +25% reload speed and reduces their active cooldowns by 0.2 seconds each seconds.",
+      "perfectText": "Allies within 15 meters of your deployed skills, gain +30% reload speed and reduces their active cooldowns by 0.6 seconds each seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Protector",
+      "slot": "backpack",
+      "text": "When your shield is damaged, you gain +5% bonus armor and all other allies gain 15% of your armor as bonus armor for 3 seconds.\nCooldown: 3 seconds.",
+      "perfectText": null,
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Safeguard",
+      "slot": "backpack",
+      "text": "While at full armor, increases total skill repair by 100%.",
+      "perfectText": "While at full armor, increases total skill repair by 160%.",
+      "requirement": null,
+      "foundOn": [
+        "Momma Badger"
+      ]
+    },
+    {
+      "name": "Shock and Awe",
+      "slot": "backpack",
+      "text": "Applying a status effect to an enemy increases total skill damage and repair by 20% for 20 seconds.",
+      "perfectText": "Applying a status effect to an enemy increases total skill damage and repair by 20% for 27 seconds.",
+      "requirement": null,
+      "foundOn": [
+        "Strategic Alignment"
+      ]
+    },
+    {
+      "name": "Tech Support",
+      "slot": "backpack",
+      "text": "Skill kills increase total skill damage by 25% for 20 seconds.",
+      "perfectText": "Skill kills increase total skill damage by 25% for 27 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Unstoppable Force",
+      "slot": "backpack",
+      "text": "Killing an enemy increases total weapon damage by 5% for 15 seconds. Stacks up to 5 times.Grenade kills add 2 stacks.",
+      "perfectText": "Killing an enemy increases total weapon damage by 7% for 15 seconds. Stacks up to 5 times.Grenade kills add 2 stacks.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Versatile",
+      "slot": "backpack",
+      "text": "Amplifies total weapon damage for 10 seconds when swapping between your primary and secondary weapons if they are different.\n35% to enemies within 15 meters for Shotguns and SMGs.\n\n35% to enemies further than 25 meters for Rifles and Marksman Rifles.\n\n10% to enemies between 15-25 meters for LMGs and Assault Rifles.\n\nAt most once per 5 seconds per weapon type.",
+      "perfectText": "Amplifies total weapon damage for 10 seconds when swapping between your primary and secondary weapons if they are different.\n45% to enemies within 15 meters for Shotguns and SMGs.\n\n45% to enemies further than 25 meters for Rifles and Marksman Rifles.\n\n20% to enemies between 15-25 meters for LMGs and Assault Rifles.\n\nAt most once per 5 seconds per weapon type.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Vigilance",
+      "slot": "backpack",
+      "text": "Increases total weapon damage by 25%. Taking damage disables this buff for 4 seconds.",
+      "perfectText": "Increases total weapon damage by 25%. Taking damage disables this buff for 3 seconds.",
+      "requirement": null,
+      "foundOn": []
+    },
+    {
+      "name": "Wicked",
+      "slot": "backpack",
+      "text": "Applying a status effect increases total weapon damage by 18% for 20 seconds.",
+      "perfectText": "Applying a status effect increases total weapon damage by 18% for 23 seconds.",
+      "requirement": "}",
+      "foundOn": []
+    }
   ]
 }

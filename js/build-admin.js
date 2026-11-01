@@ -59,7 +59,7 @@ window.BuildAdmin = (function () {
   }
 
   async function loadCatalogs() {
-    var names = ["playstyles", "specializations", "grenades", "attributes", "gearsets", "brands", "exotics", "weapons", "talents", "skills"];
+    var names = ["playstyles", "specializations", "grenades", "attributes", "gearsets", "brands", "exotics", "weapons", "talents", "skills", "named"];
     var out = {};
     await Promise.all(names.map(async function (name) {
       out[name] = await STF.fetchJSON("data/td2/" + name + ".json");
@@ -91,6 +91,7 @@ window.BuildAdmin = (function () {
   }
 
   function markHTML(item) {
+    if (item && item.icon) return '<img class="ba-mark" src="' + STF.esc(item.icon) + '" alt="">';
     if (!STF.iconFor || !item) return "";
     var hit = STF.iconFor(item.brand) || STF.iconFor(item.name) || STF.iconFor(item.type);
     if (!hit || !hit.file) return "";
@@ -122,13 +123,14 @@ window.BuildAdmin = (function () {
     return html;
   }
 
-  function attrRow(attr, index, maxHint) {
+  function attrRow(attr, index, maxHint, locked) {
+    var lock = locked ? " disabled" : "";
     return (
       '<div class="ba-attr" data-index="' + index + '">' +
-      '<select data-attr="name">' + optionList(minorNames(), attr.name || "") + "</select>" +
-      '<input data-attr="value" inputmode="decimal" value="' + STF.esc(attr.value || "") + '" placeholder="Value">' +
+      '<select data-attr="name"' + lock + ">" + optionList(minorNames(), attr.name || "") + "</select>" +
+      '<input data-attr="value" inputmode="decimal" value="' + STF.esc(attr.value || "") + '" placeholder="Value"' + lock + ">" +
       "<small>" + STF.esc(maxHint(attr.name)) + "</small>" +
-      '<button type="button" data-remove-attr="' + index + '" aria-label="Remove attribute">×</button>' +
+      (locked ? "" : '<button type="button" data-remove-attr="' + index + '" aria-label="Remove attribute">×</button>') +
       "</div>"
     );
   }
@@ -155,6 +157,10 @@ window.BuildAdmin = (function () {
   }
 
   function weaponEditor(key, item) {
+    var named = namedWeapon(item.name);
+    var locked = !!(named && named.perfectTalent);
+    var pool = (cat.talents.weapon || []).slice();
+    if (named && named.perfectTalent && pool.indexOf(named.perfectTalent) < 0) pool.push(named.perfectTalent);
     var attrs = (item.attributes || []).map(function (attr, index) {
       return attrRow(attr, index, maxHint);
     }).join("");
@@ -162,26 +168,43 @@ window.BuildAdmin = (function () {
       "<p class=\"slot-rarity\">" + STF.esc(item.rarity || "Weapon") + "</p>" +
       "<h3>" + STF.esc(item.name || label(key)) + "</h3>" +
       '<p><button type="button" class="admin-btn" data-change="' + key + '">Choose weapon</button></p>' +
-      "<label>Talent <select data-field=\"talent\">" + optionList(cat.talents.weapon || [], item.talent || "") + "</select></label>" +
+      "<label>Talent <select data-field=\"talent\"" + (locked ? " disabled" : "") + ">" + optionList(pool, item.talent || "") + "</select></label>" +
+      (locked && named.perfectText ? '<p class="lede">' + STF.esc(named.perfectText) + "</p>" : "") +
       "<h4>Attributes</h4>" +
       '<div class="ba-attrs">' + (attrs || '<p class="lede">No attributes yet.</p>') + "</div>" +
       '<button type="button" class="admin-btn admin-btn-ghost" data-add-attr="' + key + '">Add attribute</button>'
     );
   }
 
+  function namedDoc() {
+    return cat.named || { gear: [], weapons: [] };
+  }
+  function namedGear(name, slot) {
+    return (namedDoc().gear || []).filter(function (row) {
+      return row.name === name && (!slot || row.slot === slot);
+    })[0] || null;
+  }
+  function namedWeapon(name) {
+    return (namedDoc().weapons || []).filter(function (row) { return row.name === name; })[0] || null;
+  }
   function gearEditor(key, item) {
     var cores = (cat.attributes.cores || []).map(function (row) { return row.name; });
+    var named = namedGear(item.name, key);
+    var locked = !!(named && named.perfectTalent);
     var attrs = (item.attributes || []).map(function (attr, index) {
-      return attrRow(attr, index, maxHint);
+      var fixed = named && named.fixedAttributes && named.fixedAttributes.some(function (row) { return row.name === attr.name; });
+      return attrRow(attr, index, maxHint, fixed);
     }).join("");
     var talent = "";
-    if (TALENT_SLOTS[key]) {
+    if (TALENT_SLOTS[key] || locked) {
       var pool = (cat.talents[key] || []).slice();
       items("gearsets").forEach(function (set) {
         var extra = key === "chest" ? set.chestTalent : set.backpackTalent;
         if (extra && pool.indexOf(extra) < 0) pool.push(extra);
       });
-      talent = "<label>Talent <select data-field=\"talent\">" + optionList(pool, item.talent || "") + "</select></label>";
+      if (named && named.perfectTalent && pool.indexOf(named.perfectTalent) < 0) pool.push(named.perfectTalent);
+      talent = "<label>Talent <select data-field=\"talent\"" + (locked ? " disabled" : "") + ">" + optionList(pool, item.talent || "") + "</select></label>";
+      if (locked && named.perfectText) talent += '<p class="lede">' + STF.esc(named.perfectText) + "</p>";
     }
     var mod = "";
     if (MOD_SLOTS[key]) {
@@ -249,12 +272,20 @@ window.BuildAdmin = (function () {
   }
 
   function openWeaponPicker(key) {
-    var types = (cat.weapons.types || []).concat(["Unclassified"]);
+    var types = ["Named"].concat(cat.weapons.types || []).concat(["Unclassified"]);
     function grid(type) {
       var rows = items("weapons").filter(function (row) {
-        if (type === "Unclassified") return !row.type;
-        return row.type === type;
+        if (type === "Named") return row.rarity === "named" || !!namedWeapon(row.name);
+        if (type === "Unclassified") return !row.type && row.rarity !== "named";
+        return row.type === type && row.rarity !== "named";
       });
+      if (type === "Named") {
+        (namedDoc().weapons || []).forEach(function (row) {
+          if (!rows.some(function (item) { return item.name === row.name; })) {
+            rows.push({ name: row.name, type: row.type || "", rarity: "named", talent: row.perfectTalent || "" });
+          }
+        });
+      }
       if (!rows.length) return '<p class="lede">No weapons in this type.</p>';
       return '<div class="ba-grid">' + rows.map(function (row) {
         return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-weapon="' + STF.esc(row.name) + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
@@ -277,11 +308,12 @@ window.BuildAdmin = (function () {
         if (!pick) return;
         var found = items("weapons").filter(function (row) { return row.name === pick.getAttribute("data-weapon"); })[0];
         if (!found) return;
+        var named = namedWeapon(found.name);
         state[key] = {
           name: found.name,
-          type: found.type || "",
-          rarity: found.rarity || "",
-          talent: found.talent || "",
+          type: found.type || (named && named.type) || "",
+          rarity: found.rarity || (named ? "named" : ""),
+          talent: (named && named.perfectTalent) || found.talent || "",
           attributes: state[key].attributes || []
         };
         selected = key;
@@ -296,15 +328,20 @@ window.BuildAdmin = (function () {
       var rows = [];
       if (tab === "sets") {
         rows = items("gearsets").map(function (row) {
-          return { name: row.name, rarity: "gear-set", brand: row.name, talent: key === "chest" ? row.chestTalent : key === "backpack" ? row.backpackTalent : "" };
+          return { name: row.name, rarity: "gear-set", brand: row.name, talent: key === "chest" ? row.chestTalent : key === "backpack" ? row.backpackTalent : "", icon: row.icon || "" };
         });
       } else if (tab === "brands") {
-        rows = items("brands").map(function (name) {
-          return { name: name, rarity: "high-end", brand: name, talent: "" };
+        rows = items("brands").map(function (row) {
+          var name = row.name || row;
+          return { name: name, rarity: "high-end", brand: name, talent: "", icon: row.icon || "" };
+        });
+      } else if (tab === "named") {
+        rows = (namedDoc().gear || []).filter(function (row) { return row.slot === key; }).map(function (row) {
+          return { name: row.name, rarity: "named", brand: row.brand || "", talent: row.perfectTalent || "", icon: row.icon || "" };
         });
       } else {
-        rows = items("exotics").filter(function (row) { return row.slot === key; }).map(function (row) {
-          return { name: row.name, rarity: "exotic", brand: "", talent: row.talent || "" };
+        rows = items("exotics").filter(function (row) { return row.kind !== "weapon" && row.slot === key; }).map(function (row) {
+          return { name: row.name, rarity: "exotic", brand: "", talent: row.talent || "", icon: row.icon || "" };
         });
       }
       if (!rows.length) return '<p class="lede">Nothing in this list for this slot.</p>';
@@ -314,7 +351,7 @@ window.BuildAdmin = (function () {
     }
     openModal(
       "<h3>Choose " + STF.esc(label(key)) + "</h3>" +
-      '<div class="ba-chips"><button type="button" class="ba-chip is-on" data-tab="sets">Gear sets</button><button type="button" class="ba-chip" data-tab="brands">Brands</button><button type="button" class="ba-chip" data-tab="exotics">Exotics</button></div>' +
+      '<div class="ba-chips"><button type="button" class="ba-chip is-on" data-tab="sets">Gear sets</button><button type="button" class="ba-chip" data-tab="brands">Brands</button><button type="button" class="ba-chip" data-tab="named">Named</button><button type="button" class="ba-chip" data-tab="exotics">Exotics</button></div>' +
       '<div id="ba-gear-grid">' + grid("sets") + "</div>",
       function (e) {
         var tab = e.target.closest("[data-tab]");
@@ -327,15 +364,20 @@ window.BuildAdmin = (function () {
         var pick = e.target.closest("[data-gear]");
         if (!pick) return;
         var prev = state[key];
+        var pickedName = pick.getAttribute("data-gear");
+        var named = namedGear(pickedName, key);
+        var fixed = named && named.fixedAttributes ? named.fixedAttributes.map(function (row) {
+          return { name: row.name, value: row.value };
+        }) : null;
         state[key] = {
-          name: pick.getAttribute("data-gear"),
+          name: pickedName,
           brand: pick.getAttribute("data-brand") || "",
           rarity: pick.getAttribute("data-rarity") || "",
           core: prev.core || "",
           coreValue: prev.coreValue || "",
-          attributes: prev.attributes || [],
+          attributes: fixed || prev.attributes || [],
           mod: prev.mod || "",
-          talent: pick.getAttribute("data-talent") || prev.talent || ""
+          talent: (named && named.perfectTalent) || pick.getAttribute("data-talent") || ""
         };
         selected = key;
         closeModal();

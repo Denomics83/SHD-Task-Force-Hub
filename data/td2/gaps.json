@@ -1,13 +1,15 @@
 {
   "gaps": [
-    "Fandom returned 403 and Buildstation has no public JSON API, so this catalog is not a full item dump.",
-    "Attribute max values are stored only for Weapon Damage (15%), Critical Hit Chance (6%), and Critical Hit Damage (12%), from the Coyote's Mask and Ridgeway's Pride wiki pages. Other attributes have no max.",
-    "Per-brand hex colours were not in a source I could fetch. Builder tiles use rarity gradients (green gear set, gold high-end, orange exotic) like the Buildstation board.",
-    "Weapon talent descriptions and brand chest/backpack talent descriptions are not stored.",
-    "Agitator, Whiplash, Robin, Bulldog, Interchange, and Trader have no weapon type in the Buildstation changelog, so they show under Unclassified.",
-    "Core Strength bonuses were not on the fetched wiki gear-set table.",
-    "Specialization grenade proper names were not re-fetched; each row is tied to its specialization.",
-    "High-end weapon models are a working set, not every blueprint in the game.",
-    "Skill variants may miss a variant added after the list was written."
+    "Brand core attributes (Weapon Damage, Armor, or Skill Tier) are not in the Fandom brand-bonus table, so every brand core is null.",
+    "Red Horizon changed some brand and gear-set numbers in Ubisoft PDFs that are not transcribed on the wiki. The 1/2/3-piece lines are the wiki brand table as fetched, except Legatus is the table line, while Title Update 22 described different Legatus numbers when the brand was added.",
+    "These brands have bonuses but no icon in the shared library: Golan Gear, Imminence Armaments, Legatus S.p.A., Shiny Monkey Gear, Urban Lookout, and Edelweiss GPz.",
+    "Virtuoso and Ember Engine have no icon file in assets/icons/gearsets.",
+    "Named gear is only the pieces the talent table or the Red Horizon page names. The wiki does not publish a full named-gear index, so other named pieces are not invented.",
+    "Named weapon types are null when neither weapons.json nor the wiki page states the weapon class. Teapot and Steamer are in that group. Perfect talent text is filled only where the talent table or Red Horizon states it.",
+    "Exotic weapon talent descriptions were not on the fetched exotic page, so weapons.json exotic talentText stays empty except Fafnir, whose talent is Dragon's Breath from the Red Horizon page.",
+    "Birdie's Quick Fix Pack is listed with a null talent because the wiki page marks that section WIP.",
+    "Chill Out, Nightwatcher, Punch Drunk, The Hollow Man, Investor, and Zero F's were in the old exotic list but are not on the exotic page. Zero F's is a named Badger Tuff chest in the talent table. The others were not given a verified named entry.",
+    "Attribute max values stay at Weapon Damage 15%, Critical Hit Chance 6%, and Critical Hit Damage 12%. The gear page confirms non-prototype Critical Hit Chance caps at 6%. Other attribute caps were not stated.",
+    "High-end weapon models remain the working set already in weapons.json, not every blueprint."
   ]
 }

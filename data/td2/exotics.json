@@ -1,110 +1,206 @@
 {
-  "source": "Exotic armour pieces. Pack Instincts and Bleeding Edge are the talents stated on the Division wiki pages for Coyote's Mask and Ridgeway's Pride. Other talent names are left blank.",
+  "source": "Armor exotics and talent text from the Division Fandom page Exotic Items in The Division 2, plus Iron Will, Provocator, and Fafnir from the Red Horizon page and Centurion's Scabbard from Title Update 22. Exotic weapon talent text was not on that page, so those talentText fields stay null. Birdie's Quick Fix Pack is listed with no talent because the page marks it WIP.",
   "items": [
+    {
+      "name": "Vile",
+      "slot": "mask",
+      "kind": "gear",
+      "talent": "Toxic Delivery",
+      "talentText": "Status effects also apply a damage over time debuff for 10s. Total damage dealt is equal to 50% of your concussion grenade damage and increased by your status effect attributes.",
+      "icon": null
+    },
     {
       "name": "Coyote's Mask",
       "slot": "mask",
-      "talent": "Pack Instincts"
+      "kind": "gear",
+      "talent": "Pack Instincts",
+      "talentText": "You and allies gain a bonus based on the distance of the last enemy you hit. 0-15m +25% critical hit damage, 15-25m +10% critical hit damage and +10% critical hit chance, beyond 25m +25% critical hit chance.",
+      "icon": null
     },
     {
       "name": "Catharsis",
       "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "Chill Out",
-      "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "Nightwatcher",
-      "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "Punch Drunk",
-      "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "Vile",
-      "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "The Hollow Man",
-      "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "Investor",
-      "slot": "mask",
-      "talent": ""
-    },
-    {
-      "name": "Memento",
-      "slot": "backpack",
-      "talent": ""
-    },
-    {
-      "name": "Acosta's Go-Bag",
-      "slot": "backpack",
-      "talent": ""
-    },
-    {
-      "name": "NinjaBike Messenger Bag",
-      "slot": "backpack",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Vicious Cycle",
+      "talentText": "Taking damage builds stacks to a cap of 30. Each stack grants 1% Weapon Damage. Taking damage at max stacks purges stacks and status effects and drops a healing cloud that restores 5% of Max Armor for 10 seconds.",
+      "icon": null
     },
     {
       "name": "Ridgeway's Pride",
       "slot": "chest",
-      "talent": "Bleeding Edge"
+      "kind": "gear",
+      "talent": "Bleeding Edge",
+      "talentText": "Shooting enemies within 15m applies bleed. Repair 3-48% of your armor per second for every bleeding enemy within 15m.",
+      "icon": null
     },
     {
       "name": "Tardigrade Armor System",
       "slot": "chest",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Ablative Nano-Plating",
+      "talentText": "Whenever you or any ally's armor breaks, they gain 80% of your armor as bonus armor for 10s. Cooldown per ally: 45s. Killing an enemy with your specialization weapon removes this cooldown for all allies.",
+      "icon": null
     },
     {
-      "name": "Zero F's",
+      "name": "Collector",
       "slot": "chest",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Hoarder",
+      "talentText": "+3 Grenade Capacity, +50% Grenade Radius, +35% Grenade Damage, and +25% Grenade Damage for each extra enemy caught in the blast. Regenerates grenades every 30s if you have fewer than 2.",
+      "icon": null
     },
     {
-      "name": "The Sacrifice",
+      "name": "Iron Will",
       "slot": "chest",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Resolved",
+      "talentText": "Your next body shot is considered a headshot. Cooldown 2s in PvE and 3s in PvP. Requires an MMR, rifle, or pistol.",
+      "icon": null
     },
     {
-      "name": "BTSU Datagloves",
-      "slot": "gloves",
-      "talent": ""
-    },
-    {
-      "name": "Imperial Dynasty",
-      "slot": "holster",
-      "talent": ""
-    },
-    {
-      "name": "Waveform",
-      "slot": "holster",
-      "talent": ""
+      "name": "Provocator",
+      "slot": "chest",
+      "kind": "gear",
+      "talent": "Challenger",
+      "talentText": "Receive +35% Damage Resistance from enemies within 15m.",
+      "icon": null
     },
     {
       "name": "Dodge City Gunslinger's Holster",
       "slot": "holster",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Quick Draw",
+      "talentText": "While your pistol is holstered, gain a stacking buff every 0.5s up to 100. Swapping to it consumes the buff and the first shot deals +10% damage per stack as headshot damage.",
+      "icon": null
+    },
+    {
+      "name": "Waveform",
+      "slot": "holster",
+      "kind": "gear",
+      "talent": "Alternating Current",
+      "talentText": "Generate a stack of 3% skill damage on one skill every second, capping at 10 stacks. After 10 seconds at the cap the stacks transfer to your other skill.",
+      "icon": null
+    },
+    {
+      "name": "Imperial Dynasty",
+      "slot": "holster",
+      "kind": "gear",
+      "talent": "Dragon's Glare",
+      "talentText": "While in combat, applies burn to the closest enemy within 20m. Cooldown: 40s.",
+      "icon": null
+    },
+    {
+      "name": "Shocker Punch",
+      "slot": "holster",
+      "kind": "gear",
+      "talent": "Defibrillator",
+      "talentText": "Shock stun is reduced by 50%. A shield gives 100% melee damage. With St. Elmo's Engine the next melee applies Shock. All three together make that Shock a 5m radius. Cooldown 15 seconds.",
+      "icon": null
+    },
+    {
+      "name": "Centurion's Scabbard",
+      "slot": "holster",
+      "kind": "gear",
+      "talent": "Counter",
+      "talentText": "Swapping weapons cycles rate of fire and weapon damage, then magazine size and reload speed. PvE bonuses last 12s. PvP bonuses last 10s. Swapping to the sidearm does not advance the cycle.",
+      "icon": null
+    },
+    {
+      "name": "Nimble Holster",
+      "slot": "holster",
+      "kind": "gear",
+      "talent": "Bob and Weave",
+      "talentText": "Cover-to-cover restores 5% repairs per meter in PvE or 3% in PvP. Damage taken during the move is healed over 10s.",
+      "icon": null
+    },
+    {
+      "name": "Memento",
+      "slot": "backpack",
+      "kind": "gear",
+      "talent": "Kill Confirmed",
+      "talentText": "Kills drop a trophy. Collecting it grants a 10s buff that scales with core attributes, and a long buff up to 30 stacks: +1% weapon damage, +1% skill efficiency, and +0.1% armor regeneration for 300s.",
+      "icon": null
+    },
+    {
+      "name": "Acosta's Go-Bag",
+      "slot": "backpack",
+      "kind": "gear",
+      "talent": "One in Hand",
+      "talentText": "Throwing a grenade refunds it and grants +1 skill tier for 15s, or overcharge at skill tier 6. Cooldown 60s. Also raises armor kit, grenade, and ammo capacity plus repair skills and status effects.",
+      "icon": null
+    },
+    {
+      "name": "NinjaBike Messenger Bag",
+      "slot": "backpack",
+      "kind": "gear",
+      "talent": "Resourceful",
+      "talentText": "Counts as one piece toward any equipped gear set or brand set bonus, including more than one set at the same time.",
+      "icon": null
+    },
+    {
+      "name": "Birdie's Quick Fix Pack",
+      "slot": "backpack",
+      "kind": "gear",
+      "talent": null,
+      "talentText": null,
+      "icon": null
+    },
+    {
+      "name": "BTSU Datagloves",
+      "slot": "gloves",
+      "kind": "gear",
+      "talent": "Transference Overclock",
+      "talentText": "Grants +15% Hive skill haste per skill tier. Detonating a Hive refreshes allies' skill cooldowns and grants overcharge for 15s. Those allies cannot gain it again for 120s.",
+      "icon": null
+    },
+    {
+      "name": "Bloody Knuckles",
+      "slot": "gloves",
+      "kind": "gear",
+      "talent": "Over the Top",
+      "talentText": "A grenade or melee activates Seeing Red: +25% weapon damage and +100% melee damage for 20s, then a 60s cooldown. Another grenade or melee during the cooldown ends it immediately.",
+      "icon": null
+    },
+    {
+      "name": "Rugged Gauntlets",
+      "slot": "gloves",
+      "kind": "gear",
+      "talent": "Iron Grip",
+      "talentText": "-50% recoil penalty while hip-firing and -50% recoil penalty while blind-firing from cover.",
+      "icon": null
     },
     {
       "name": "Sawyer's Kneepads",
       "slot": "kneepads",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Stand Your Ground",
+      "talentText": "Cannot be staggered by explosions. Total weapon damage increases by 3% each second you are not moving, up to 10 stacks, lost 10s after you move.",
+      "icon": null
     },
     {
       "name": "NinjaBike Kneepads",
       "slot": "kneepads",
-      "talent": ""
+      "kind": "gear",
+      "talent": "Parkour!",
+      "talentText": "A cover-to-cover or vault reloads your drawn weapon and grants +25% bonus armor for 5s.",
+      "icon": null
+    },
+    {
+      "name": "Acosta's Kneepads",
+      "slot": "kneepads",
+      "kind": "gear",
+      "talent": "Escape Plan",
+      "talentText": "Vaulting, climbing, or dropping grants +10% movement speed for 3s. Standing still for 5s then grants +20% movement speed for 5s. Status effects grant +10% movement speed for 5s, and movement impairment from status effects is reduced by 50%.",
+      "icon": null
+    },
+    {
+      "name": "Fafnir",
+      "slot": "Shotgun",
+      "kind": "weapon",
+      "type": "Shotgun",
+      "talent": "Dragon's Breath",
+      "talentText": "This weapon fires Dragon's Breath shells. Each shot has a 40% chance of applying Burn. Weapon Damage is amplified by 50% of your Status Effect bonus.",
+      "icon": "assets/icons/weapons/shotgun.png"
     }
   ]
 }

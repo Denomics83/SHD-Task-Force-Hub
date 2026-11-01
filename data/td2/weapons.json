@@ -579,6 +579,12 @@
       "type": "",
       "rarity": "named",
       "talent": ""
+    },
+    {
+      "name": "Fafnir",
+      "type": "Shotgun",
+      "rarity": "exotic",
+      "talent": "Dragon's Breath"
     }
   ]
 }

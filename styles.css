@@ -1253,6 +1253,7 @@ body.page-builds.is-list {
 }
 .td-face.rarity-gold { background: linear-gradient(180deg, #f2c14b 0%, #c49220 100%); }
 .td-face.rarity-named { background: linear-gradient(180deg, #f0c56a 0%, #b8860b 100%); }
+.td-face.rarity-named + .td-title { color: var(--named); }
 .td-face.rarity-exotic { background: linear-gradient(180deg, #ff8a4a 0%, #c2410c 100%); }
 .td-face.rarity-gearset { background: linear-gradient(180deg, #3ddc84 0%, #0d7a45 100%); }
 .td-face.rarity-spec { background: linear-gradient(180deg, #ff9a3c 0%, #e06712 100%); }
