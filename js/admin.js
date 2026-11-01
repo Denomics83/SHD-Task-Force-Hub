@@ -581,13 +581,10 @@
   }
 
   async function saveBuilder(body) {
-    var short = String(body.short_description || "").trim();
-    if (short.length > 140) throw new Error("Short description is over 140 characters.");
     var payload = {
       category: body.category,
       playstyle: body.playstyle || null,
       name: String(body.name || "").trim(),
-      short_description: short,
       notes_html: window.STF && STF.safeHTML ? STF.safeHTML(body.notes_html || "") : (body.notes_html || ""),
       loadout: body.loadout || {},
       published: !!body.published

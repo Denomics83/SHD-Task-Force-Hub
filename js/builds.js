@@ -247,18 +247,10 @@
   }
 
   function notesPage(row) {
-    var bits = [];
-    var styleParas = String(row.playstyle || "").split(/\n\s*\n/).map(function (para) { return para.trim(); }).filter(Boolean);
-    if (styleParas.length) {
-      bits.push("<h2>Playstyle</h2>");
-      styleParas.forEach(function (para) {
-        bits.push('<p class="detail-blurb">' + STF.esc(para) + "</p>");
-      });
-    }
-    if (row.description) bits.push("<h2>Description</h2>" + '<p class="detail-blurb">' + STF.esc(row.description) + "</p>");
-    if (row.notesHtml) bits.push("<h2>Notes</h2>" + '<div class="detail-blurb rich-html">' + STF.safeHTML(row.notesHtml) + "</div>");
-    if (!bits.length) bits.push('<p class="lede">No notes on this build.</p>');
-    return '<section class="build-notes" aria-label="Notes">' + bits.join("") + "</section>";
+    var body = row.notesHtml
+      ? '<div class="rich-html">' + STF.safeHTML(row.notesHtml) + "</div>"
+      : '<p class="lede">No play style notes on this build.</p>';
+    return '<section class="build-notes" aria-label="Play style">' + body + "</section>";
   }
 
   function statNum(value, unit) {
@@ -452,17 +444,21 @@
   }
 
   function detailHTML(row) {
-    var tabs = ["stats", "loadout", "notes"].map(function (id) {
-      var on = id === "loadout" ? ' aria-current="true"' : "";
-      return '<button type="button" role="tab" data-build-tab="' + id + '"' + on + ">" + id + "</button>";
-    }).join("");
+    var tabs = [
+      { id: "stats", label: "Stats" },
+      { id: "loadout", label: "Loadout" },
+      { id: "playstyle", label: "Play style" }
+    ];
     return (
       '<p class="build-kicker">' + STF.esc(row.name) + " · " + STF.esc(roleText(row)) + "</p>" +
-      '<div class="build-tabs" role="tablist">' + tabs + "</div>" +
+      '<div class="build-tabs" role="tablist">' + tabs.map(function (tab) {
+        var on = tab.id === "loadout" ? ' aria-current="true"' : "";
+        return '<button type="button" role="tab" data-build-tab="' + tab.id + '"' + on + ">" + tab.label + "</button>";
+      }).join("") + "</div>" +
       '<div class="build-rail" tabindex="0">' +
       '<section class="build-page" data-build-page="stats" aria-label="Stats"><p class="lede">Computing stats…</p></section>' +
       '<section class="build-page" data-build-page="loadout" aria-label="Loadout">' + loadoutHTML(row) + "</section>" +
-      '<section class="build-page" data-build-page="notes" aria-label="Notes">' + notesPage(row) + "</section>" +
+      '<section class="build-page" data-build-page="playstyle" aria-label="Play style">' + notesPage(row) + "</section>" +
       "</div>"
     );
   }
@@ -470,8 +466,7 @@
   function centerBuildPage(rail, id, smooth) {
     var page = rail.querySelector('[data-build-page="' + id + '"]');
     if (!page || !rail.clientWidth) return;
-    var left = page.offsetLeft - Math.max(0, (rail.clientWidth - page.offsetWidth) / 2);
-    rail.scrollTo({ left: Math.max(0, left), behavior: smooth ? "smooth" : "auto" });
+    rail.scrollTo({ left: page.offsetLeft, behavior: smooth ? "smooth" : "auto" });
   }
 
   function activeBuildPage(rail) {
@@ -564,7 +559,7 @@
         return (
           '<button type="button" class="build-row" data-build="' + STF.esc(row.id) + '">' +
           '<span class="build-copy"><strong>' + STF.esc(row.name) + "</strong>" +
-          "<em>" + STF.esc(roleText(row)) + "</em></span>" +
+          "<em>" + STF.esc(roleText(row) + " · " + (cat ? cat.label : row.category)) + "</em></span>" +
           '<span class="role-ico ' + kind + '" aria-hidden="true">' + ROLE_ICONS[kind] + "</span>" +
           "</button>"
         );
@@ -595,7 +590,7 @@
       rail.addEventListener("keydown", function (e) {
         if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
         e.preventDefault();
-        var order = ["stats", "loadout", "notes"];
+        var order = ["stats", "loadout", "playstyle"];
         var next = order.indexOf(activeBuildPage(rail)) + (e.key === "ArrowRight" ? 1 : -1);
         if (next < 0 || next >= order.length) return;
         centerBuildPage(rail, order[next], true);
@@ -771,7 +766,6 @@
       category: row.category,
       role: role,
       roleLabel: style || "Damage",
-      description: row.short_description || "",
       playstyle: style,
       notesHtml: row.notes_html || "",
       loadout: row.loadout || {},
@@ -799,7 +793,7 @@
     try { await STF.loadIcons(); } catch (err) { console.error(err); }
     var remote = [];
     if (STF.sb) {
-      var res = await STF.sb.from("builds").select("id, category, playstyle, name, short_description, notes_html, loadout, published").eq("published", true);
+      var res = await STF.sb.from("builds").select("id, category, playstyle, name, notes_html, loadout, published").eq("published", true);
       if (!res.error && res.data) remote = res.data.map(fromRemoteBuild);
     }
     BUILDS = remote;

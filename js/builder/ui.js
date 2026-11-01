@@ -66,7 +66,6 @@
         name: record && record.name || "",
         category: record && record.category || "solo",
         playstyle: record && record.playstyle || "",
-        short: record && record.short_description || "",
         published: record ? !!record.published : true,
         notesHtml: record && record.notes_html || ""
       };
@@ -604,10 +603,8 @@
       meta.name = host.querySelector("#bb-name").value.trim();
       meta.category = host.querySelector("#bb-category").value;
       meta.playstyle = host.querySelector("#bb-playstyle").value;
-      meta.short = host.querySelector("#bb-short").value.trim();
       meta.published = host.querySelector("#bb-published").checked;
       meta.notesHtml = notesMarkup();
-      host.querySelector("#bb-short-count").textContent = meta.short.length + " / 140";
     }
 
     function payload() {
@@ -617,7 +614,6 @@
         category: meta.category,
         playstyle: meta.playstyle,
         name: meta.name,
-        short_description: meta.short,
         notes_html: meta.notesHtml,
         loadout: (function () {
         var load = ShadeCatalog.toPublic(state);
@@ -1106,7 +1102,6 @@
           return '<option value="' + esc(name) + '"' + (name === meta.playstyle ? " selected" : "") + ">" + esc(name) + "</option>";
         }).join("") + "</select></label>" +
         '<label>Name <input id="bb-name" required value="' + esc(meta.name) + '"></label>' +
-        '<label>Short description <input id="bb-short" maxlength="140" required value="' + esc(meta.short) + '"><small id="bb-short-count">' + meta.short.length + " / 140</small></label>" +
         '<label class="bb-check"><input id="bb-published" type="checkbox"' + (meta.published ? " checked" : "") + "> Published</label>" +
         '<label class="bb-notes-label">Notes</label>' +
         '<div id="bb-notes" class="rich-editor"></div>' +
@@ -1259,7 +1254,6 @@
         return;
       }
       if (e.target.type === "range" && e.target.getAttribute("data-bind")) applyRange(e.target);
-      if (e.target.id === "bb-short") host.querySelector("#bb-short-count").textContent = e.target.value.length + " / 140";
     });
 
     host.addEventListener("submit", async function (e) {
@@ -1267,7 +1261,6 @@
       e.preventDefault();
       var body = payload();
       if (!body.name) return status("Name is required.", "err");
-      if (body.short_description.length > 140) return status("Short description is over 140 characters.", "err");
       if (!save) return status("Preview only. Save from Admin after you log in.", "err");
       status("Saving…");
       try {
@@ -1284,14 +1277,11 @@
       var doc = await (options.fetchJSON || STF.fetchJSON)("data/td2/builder/sample-eclipse.json");
       state = ShadeCatalog.fromSaved({ loadout: doc }, catalog);
       if (!meta.name) meta.name = "Eclipse Protocol";
-      if (!meta.short) meta.short = "Lexington, Big Alejandro, four-piece Eclipse.";
       if (catalog.playstyles.indexOf("Skill") >= 0) meta.playstyle = "Skill";
       else if (!meta.playstyle) meta.playstyle = catalog.playstyles[0] || "";
       var name = host.querySelector("#bb-name");
-      var short = host.querySelector("#bb-short");
       var play = host.querySelector("#bb-playstyle");
       if (name && !name.value) name.value = meta.name;
-      if (short && !short.value) short.value = meta.short;
       if (play && meta.playstyle) play.value = meta.playstyle;
       selected = "mask";
       paint();
