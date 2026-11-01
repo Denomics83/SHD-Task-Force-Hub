@@ -6732,169 +6732,6 @@
       "source": "local catalog"
     },
     {
-      "slug": "skill-smart-cover",
-      "name": "Smart Cover",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Precision Smart Cover",
-        "Fortified Smart Cover"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-sticky-bomb",
-      "name": "Sticky Bomb",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Burn Sticky Bomb",
-        "EMP Sticky Bomb",
-        "Explosive Sticky Bomb"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-trap",
-      "name": "Trap",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Repair Trap",
-        "Shock Trap",
-        "Shrapnel Trap"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-decoy",
-      "name": "Decoy",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Decoy"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-pulse",
-      "name": "Pulse",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Scanner Pulse",
-        "Remote Pulse",
-        "Jammer Pulse",
-        "Banshee Pulse",
-        "Achilles Pulse"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-turret",
-      "name": "Turret",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Assault Turret",
-        "Incinerator Turret",
-        "Sniper Turret",
-        "Artillery Turret"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-hive",
-      "name": "Hive",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Restorer Hive",
-        "Stinger Hive",
-        "Reviver Hive",
-        "Booster Hive",
-        "Artificer Hive"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-chem-launcher",
-      "name": "Chem Launcher",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Reinforcer Chem Launcher",
-        "Firestarter Chem Launcher",
-        "Riot Foam Chem Launcher",
-        "Oxidizer Chem Launcher"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-firefly",
-      "name": "Firefly",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Blinder Firefly",
-        "Burster Firefly",
-        "Demolisher Firefly"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-seeker-mine",
-      "name": "Seeker Mine",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Explosive Seeker Mine",
-        "Airburst Seeker Mine",
-        "Cluster Seeker Mine",
-        "Mender Seeker Mine"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-drone",
-      "name": "Drone",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Striker Drone",
-        "Defender Drone",
-        "Bombardier Drone",
-        "Fixer Drone",
-        "Tactician Drone"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-shield",
-      "name": "Shield",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Bulwark Shield",
-        "Crusader Shield",
-        "Deflector Shield",
-        "Striker Shield"
-      ],
-      "source": "local catalog"
-    },
-    {
       "slug": "spec-sharpshooter",
       "name": "Sharpshooter",
       "kind": "specialization",
@@ -9982,596 +9819,6 @@
       "source": "local catalog"
     },
     {
-      "slug": "skill-precision-smart-cover",
-      "name": "Precision Smart Cover",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Precision Smart Cover",
-        "Fortified Smart Cover"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-fortified-smart-cover",
-      "name": "Fortified Smart Cover",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Precision Smart Cover",
-        "Fortified Smart Cover"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-burn-sticky-bomb",
-      "name": "Burn Sticky Bomb",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Burn Sticky Bomb",
-        "EMP Sticky Bomb",
-        "Explosive Sticky Bomb"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-emp-sticky-bomb",
-      "name": "EMP Sticky Bomb",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Burn Sticky Bomb",
-        "EMP Sticky Bomb",
-        "Explosive Sticky Bomb"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-explosive-sticky-bomb",
-      "name": "Explosive Sticky Bomb",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Burn Sticky Bomb",
-        "EMP Sticky Bomb",
-        "Explosive Sticky Bomb"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-repair-trap",
-      "name": "Repair Trap",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Repair Trap",
-        "Shock Trap",
-        "Shrapnel Trap"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-shock-trap",
-      "name": "Shock Trap",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Repair Trap",
-        "Shock Trap",
-        "Shrapnel Trap"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-shrapnel-trap",
-      "name": "Shrapnel Trap",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Repair Trap",
-        "Shock Trap",
-        "Shrapnel Trap"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-scanner-pulse",
-      "name": "Scanner Pulse",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Scanner Pulse",
-        "Remote Pulse",
-        "Jammer Pulse",
-        "Banshee Pulse",
-        "Achilles Pulse"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-remote-pulse",
-      "name": "Remote Pulse",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Scanner Pulse",
-        "Remote Pulse",
-        "Jammer Pulse",
-        "Banshee Pulse",
-        "Achilles Pulse"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-jammer-pulse",
-      "name": "Jammer Pulse",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Scanner Pulse",
-        "Remote Pulse",
-        "Jammer Pulse",
-        "Banshee Pulse",
-        "Achilles Pulse"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-banshee-pulse",
-      "name": "Banshee Pulse",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Scanner Pulse",
-        "Remote Pulse",
-        "Jammer Pulse",
-        "Banshee Pulse",
-        "Achilles Pulse"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-achilles-pulse",
-      "name": "Achilles Pulse",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Scanner Pulse",
-        "Remote Pulse",
-        "Jammer Pulse",
-        "Banshee Pulse",
-        "Achilles Pulse"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-assault-turret",
-      "name": "Assault Turret",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Assault Turret",
-        "Incinerator Turret",
-        "Sniper Turret",
-        "Artillery Turret"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-incinerator-turret",
-      "name": "Incinerator Turret",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Assault Turret",
-        "Incinerator Turret",
-        "Sniper Turret",
-        "Artillery Turret"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-sniper-turret",
-      "name": "Sniper Turret",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Assault Turret",
-        "Incinerator Turret",
-        "Sniper Turret",
-        "Artillery Turret"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-artillery-turret",
-      "name": "Artillery Turret",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Assault Turret",
-        "Incinerator Turret",
-        "Sniper Turret",
-        "Artillery Turret"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-restorer-hive",
-      "name": "Restorer Hive",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Restorer Hive",
-        "Stinger Hive",
-        "Reviver Hive",
-        "Booster Hive",
-        "Artificer Hive"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-stinger-hive",
-      "name": "Stinger Hive",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Restorer Hive",
-        "Stinger Hive",
-        "Reviver Hive",
-        "Booster Hive",
-        "Artificer Hive"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-reviver-hive",
-      "name": "Reviver Hive",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Restorer Hive",
-        "Stinger Hive",
-        "Reviver Hive",
-        "Booster Hive",
-        "Artificer Hive"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-booster-hive",
-      "name": "Booster Hive",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Restorer Hive",
-        "Stinger Hive",
-        "Reviver Hive",
-        "Booster Hive",
-        "Artificer Hive"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-artificer-hive",
-      "name": "Artificer Hive",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Restorer Hive",
-        "Stinger Hive",
-        "Reviver Hive",
-        "Booster Hive",
-        "Artificer Hive"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-reinforcer-chem-launcher",
-      "name": "Reinforcer Chem Launcher",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Reinforcer Chem Launcher",
-        "Firestarter Chem Launcher",
-        "Riot Foam Chem Launcher",
-        "Oxidizer Chem Launcher"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-firestarter-chem-launcher",
-      "name": "Firestarter Chem Launcher",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Reinforcer Chem Launcher",
-        "Firestarter Chem Launcher",
-        "Riot Foam Chem Launcher",
-        "Oxidizer Chem Launcher"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-riot-foam-chem-launcher",
-      "name": "Riot Foam Chem Launcher",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Reinforcer Chem Launcher",
-        "Firestarter Chem Launcher",
-        "Riot Foam Chem Launcher",
-        "Oxidizer Chem Launcher"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-oxidizer-chem-launcher",
-      "name": "Oxidizer Chem Launcher",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Reinforcer Chem Launcher",
-        "Firestarter Chem Launcher",
-        "Riot Foam Chem Launcher",
-        "Oxidizer Chem Launcher"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-blinder-firefly",
-      "name": "Blinder Firefly",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Blinder Firefly",
-        "Burster Firefly",
-        "Demolisher Firefly"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-burster-firefly",
-      "name": "Burster Firefly",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Blinder Firefly",
-        "Burster Firefly",
-        "Demolisher Firefly"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-demolisher-firefly",
-      "name": "Demolisher Firefly",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Blinder Firefly",
-        "Burster Firefly",
-        "Demolisher Firefly"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-explosive-seeker-mine",
-      "name": "Explosive Seeker Mine",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Explosive Seeker Mine",
-        "Airburst Seeker Mine",
-        "Cluster Seeker Mine",
-        "Mender Seeker Mine"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-airburst-seeker-mine",
-      "name": "Airburst Seeker Mine",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Explosive Seeker Mine",
-        "Airburst Seeker Mine",
-        "Cluster Seeker Mine",
-        "Mender Seeker Mine"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-cluster-seeker-mine",
-      "name": "Cluster Seeker Mine",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Explosive Seeker Mine",
-        "Airburst Seeker Mine",
-        "Cluster Seeker Mine",
-        "Mender Seeker Mine"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-mender-seeker-mine",
-      "name": "Mender Seeker Mine",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Explosive Seeker Mine",
-        "Airburst Seeker Mine",
-        "Cluster Seeker Mine",
-        "Mender Seeker Mine"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-striker-drone",
-      "name": "Striker Drone",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Striker Drone",
-        "Defender Drone",
-        "Bombardier Drone",
-        "Fixer Drone",
-        "Tactician Drone"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-defender-drone",
-      "name": "Defender Drone",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Striker Drone",
-        "Defender Drone",
-        "Bombardier Drone",
-        "Fixer Drone",
-        "Tactician Drone"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-bombardier-drone",
-      "name": "Bombardier Drone",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Striker Drone",
-        "Defender Drone",
-        "Bombardier Drone",
-        "Fixer Drone",
-        "Tactician Drone"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-fixer-drone",
-      "name": "Fixer Drone",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Striker Drone",
-        "Defender Drone",
-        "Bombardier Drone",
-        "Fixer Drone",
-        "Tactician Drone"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-tactician-drone",
-      "name": "Tactician Drone",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Striker Drone",
-        "Defender Drone",
-        "Bombardier Drone",
-        "Fixer Drone",
-        "Tactician Drone"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-bulwark-shield",
-      "name": "Bulwark Shield",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Bulwark Shield",
-        "Crusader Shield",
-        "Deflector Shield",
-        "Striker Shield"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-crusader-shield",
-      "name": "Crusader Shield",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Bulwark Shield",
-        "Crusader Shield",
-        "Deflector Shield",
-        "Striker Shield"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-deflector-shield",
-      "name": "Deflector Shield",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Bulwark Shield",
-        "Crusader Shield",
-        "Deflector Shield",
-        "Striker Shield"
-      ],
-      "source": "local catalog"
-    },
-    {
-      "slug": "skill-striker-shield",
-      "name": "Striker Shield",
-      "kind": "skill",
-      "file": "assets/icons/loot/generic.svg",
-      "proto": "",
-      "aliases": [
-        "Bulwark Shield",
-        "Crusader Shield",
-        "Deflector Shield",
-        "Striker Shield"
-      ],
-      "source": "local catalog"
-    },
-    {
       "slug": "named-weapon-culebre",
       "name": "Culebre",
       "kind": "named-weapon",
@@ -10679,6 +9926,479 @@
         "cluster grenades"
       ],
       "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+    },
+    {
+      "slug": "skill-precision-smart-cover",
+      "name": "Precision Smart Cover",
+      "kind": "skill",
+      "file": "assets/icons/skills/precision-smart-cover.svg",
+      "proto": "",
+      "aliases": [
+        "Precision Smart Cover"
+      ],
+      "source": "Traced from the in-game skill menu"
+    },
+    {
+      "slug": "skill-fortified-smart-cover",
+      "name": "Fortified Smart Cover",
+      "kind": "skill",
+      "file": "assets/icons/skills/fortified-smart-cover.svg",
+      "proto": "",
+      "aliases": [
+        "Fortified Smart Cover"
+      ],
+      "source": "Traced from the in-game skill menu"
+    },
+    {
+      "slug": "skill-burn-sticky-bomb",
+      "name": "Burn Sticky Bomb",
+      "kind": "skill",
+      "file": "assets/icons/skills/burn-sticky-bomb.png",
+      "proto": "",
+      "aliases": [
+        "Burn Sticky Bomb"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-emp-sticky-bomb",
+      "name": "EMP Sticky Bomb",
+      "kind": "skill",
+      "file": "assets/icons/skills/emp-sticky-bomb.png",
+      "proto": "",
+      "aliases": [
+        "EMP Sticky Bomb"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-explosive-sticky-bomb",
+      "name": "Explosive Sticky Bomb",
+      "kind": "skill",
+      "file": "assets/icons/skills/explosive-sticky-bomb.png",
+      "proto": "",
+      "aliases": [
+        "Explosive Sticky Bomb"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-repair-trap",
+      "name": "Repair Trap",
+      "kind": "skill",
+      "file": "assets/icons/skills/repair-trap.png",
+      "proto": "",
+      "aliases": [
+        "Repair Trap"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-shock-trap",
+      "name": "Shock Trap",
+      "kind": "skill",
+      "file": "assets/icons/skills/shock-trap.png",
+      "proto": "",
+      "aliases": [
+        "Shock Trap"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-shrapnel-trap",
+      "name": "Shrapnel Trap",
+      "kind": "skill",
+      "file": "assets/icons/skills/shrapnel-trap.png",
+      "proto": "",
+      "aliases": [
+        "Shrapnel Trap"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-decoy",
+      "name": "Decoy",
+      "kind": "skill",
+      "file": "assets/icons/skills/decoy.png",
+      "proto": "",
+      "aliases": [
+        "Decoy"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-scanner-pulse",
+      "name": "Scanner Pulse",
+      "kind": "skill",
+      "file": "assets/icons/skills/scanner-pulse.png",
+      "proto": "",
+      "aliases": [
+        "Scanner Pulse"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-remote-pulse",
+      "name": "Remote Pulse",
+      "kind": "skill",
+      "file": "assets/icons/skills/remote-pulse.png",
+      "proto": "",
+      "aliases": [
+        "Remote Pulse"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-jammer-pulse",
+      "name": "Jammer Pulse",
+      "kind": "skill",
+      "file": "assets/icons/skills/jammer-pulse.png",
+      "proto": "",
+      "aliases": [
+        "Jammer Pulse"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-banshee-pulse",
+      "name": "Banshee Pulse",
+      "kind": "skill",
+      "file": "assets/icons/skills/banshee-pulse.png",
+      "proto": "",
+      "aliases": [
+        "Banshee Pulse"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-achilles-pulse",
+      "name": "Achilles Pulse",
+      "kind": "skill",
+      "file": "assets/icons/skills/achilles-pulse.png",
+      "proto": "",
+      "aliases": [
+        "Achilles Pulse"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-assault-turret",
+      "name": "Assault Turret",
+      "kind": "skill",
+      "file": "assets/icons/skills/assault-turret.png",
+      "proto": "",
+      "aliases": [
+        "Assault Turret"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-incinerator-turret",
+      "name": "Incinerator Turret",
+      "kind": "skill",
+      "file": "assets/icons/skills/incinerator-turret.png",
+      "proto": "",
+      "aliases": [
+        "Incinerator Turret"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-sniper-turret",
+      "name": "Sniper Turret",
+      "kind": "skill",
+      "file": "assets/icons/skills/sniper-turret.png",
+      "proto": "",
+      "aliases": [
+        "Sniper Turret"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-artillery-turret",
+      "name": "Artillery Turret",
+      "kind": "skill",
+      "file": "assets/icons/skills/artillery-turret.png",
+      "proto": "",
+      "aliases": [
+        "Artillery Turret"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-restorer-hive",
+      "name": "Restorer Hive",
+      "kind": "skill",
+      "file": "assets/icons/skills/restorer-hive.png",
+      "proto": "",
+      "aliases": [
+        "Restorer Hive"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-stinger-hive",
+      "name": "Stinger Hive",
+      "kind": "skill",
+      "file": "assets/icons/skills/stinger-hive.png",
+      "proto": "",
+      "aliases": [
+        "Stinger Hive"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-reviver-hive",
+      "name": "Reviver Hive",
+      "kind": "skill",
+      "file": "assets/icons/skills/reviver-hive.png",
+      "proto": "",
+      "aliases": [
+        "Reviver Hive"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-booster-hive",
+      "name": "Booster Hive",
+      "kind": "skill",
+      "file": "assets/icons/skills/booster-hive.png",
+      "proto": "",
+      "aliases": [
+        "Booster Hive"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-artificer-hive",
+      "name": "Artificer Hive",
+      "kind": "skill",
+      "file": "assets/icons/skills/artificer-hive.png",
+      "proto": "",
+      "aliases": [
+        "Artificer Hive"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-reinforcer-chem-launcher",
+      "name": "Reinforcer Chem Launcher",
+      "kind": "skill",
+      "file": "assets/icons/skills/reinforcer-chem-launcher.png",
+      "proto": "",
+      "aliases": [
+        "Reinforcer Chem Launcher"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-firestarter-chem-launcher",
+      "name": "Firestarter Chem Launcher",
+      "kind": "skill",
+      "file": "assets/icons/skills/firestarter-chem-launcher.png",
+      "proto": "",
+      "aliases": [
+        "Firestarter Chem Launcher"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-riot-foam-chem-launcher",
+      "name": "Riot Foam Chem Launcher",
+      "kind": "skill",
+      "file": "assets/icons/skills/riot-foam-chem-launcher.png",
+      "proto": "",
+      "aliases": [
+        "Riot Foam Chem Launcher"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-oxidizer-chem-launcher",
+      "name": "Oxidizer Chem Launcher",
+      "kind": "skill",
+      "file": "assets/icons/skills/oxidizer-chem-launcher.png",
+      "proto": "",
+      "aliases": [
+        "Oxidizer Chem Launcher"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-blinder-firefly",
+      "name": "Blinder Firefly",
+      "kind": "skill",
+      "file": "assets/icons/skills/blinder-firefly.png",
+      "proto": "",
+      "aliases": [
+        "Blinder Firefly"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-burster-firefly",
+      "name": "Burster Firefly",
+      "kind": "skill",
+      "file": "assets/icons/skills/burster-firefly.png",
+      "proto": "",
+      "aliases": [
+        "Burster Firefly"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-demolisher-firefly",
+      "name": "Demolisher Firefly",
+      "kind": "skill",
+      "file": "assets/icons/skills/demolisher-firefly.png",
+      "proto": "",
+      "aliases": [
+        "Demolisher Firefly"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-explosive-seeker-mine",
+      "name": "Explosive Seeker Mine",
+      "kind": "skill",
+      "file": "assets/icons/skills/explosive-seeker-mine.png",
+      "proto": "",
+      "aliases": [
+        "Explosive Seeker Mine"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-airburst-seeker-mine",
+      "name": "Airburst Seeker Mine",
+      "kind": "skill",
+      "file": "assets/icons/skills/airburst-seeker-mine.png",
+      "proto": "",
+      "aliases": [
+        "Airburst Seeker Mine"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-cluster-seeker-mine",
+      "name": "Cluster Seeker Mine",
+      "kind": "skill",
+      "file": "assets/icons/skills/cluster-seeker-mine.png",
+      "proto": "",
+      "aliases": [
+        "Cluster Seeker Mine"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-mender-seeker-mine",
+      "name": "Mender Seeker Mine",
+      "kind": "skill",
+      "file": "assets/icons/skills/mender-seeker-mine.png",
+      "proto": "",
+      "aliases": [
+        "Mender Seeker Mine"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-striker-drone",
+      "name": "Striker Drone",
+      "kind": "skill",
+      "file": "assets/icons/skills/striker-drone.png",
+      "proto": "",
+      "aliases": [
+        "Striker Drone"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-defender-drone",
+      "name": "Defender Drone",
+      "kind": "skill",
+      "file": "assets/icons/skills/defender-drone.png",
+      "proto": "",
+      "aliases": [
+        "Defender Drone"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-bombardier-drone",
+      "name": "Bombardier Drone",
+      "kind": "skill",
+      "file": "assets/icons/skills/bombardier-drone.png",
+      "proto": "",
+      "aliases": [
+        "Bombardier Drone"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-fixer-drone",
+      "name": "Fixer Drone",
+      "kind": "skill",
+      "file": "assets/icons/skills/fixer-drone.png",
+      "proto": "",
+      "aliases": [
+        "Fixer Drone"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-tactician-drone",
+      "name": "Tactician Drone",
+      "kind": "skill",
+      "file": "assets/icons/skills/tactician-drone.png",
+      "proto": "",
+      "aliases": [
+        "Tactician Drone"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-bulwark-shield",
+      "name": "Bulwark Shield",
+      "kind": "skill",
+      "file": "assets/icons/skills/bulwark-shield.png",
+      "proto": "",
+      "aliases": [
+        "Bulwark Shield"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-crusader-shield",
+      "name": "Crusader Shield",
+      "kind": "skill",
+      "file": "assets/icons/skills/crusader-shield.png",
+      "proto": "",
+      "aliases": [
+        "Crusader Shield"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-deflector-shield",
+      "name": "Deflector Shield",
+      "kind": "skill",
+      "file": "assets/icons/skills/deflector-shield.png",
+      "proto": "",
+      "aliases": [
+        "Deflector Shield"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "skill-striker-shield",
+      "name": "Striker Shield",
+      "kind": "skill",
+      "file": "assets/icons/skills/striker-shield.png",
+      "proto": "",
+      "aliases": [
+        "Striker Shield"
+      ],
+      "source": "The Division Wiki skill icon, saved locally"
     }
   ],
   "note": "White-on-transparent marks from ProtoTrack. Slot icons live under caches/ because they are the targeted loot on prototype caches."

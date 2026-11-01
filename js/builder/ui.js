@@ -131,6 +131,16 @@
           '<span class="bb-tile-copy"><span>' + esc(LABELS[key]) + "</span><strong>" + esc(name) + "</strong>" + proto + "</span>" +
           art + "</button>";
       }
+      function skillTile(key) {
+        var item = state[key] || {};
+        var name = item.name || LABELS[key];
+        var on = key === selected ? " is-on" : "";
+        var icon = item.name ? skillArt(item.name) : "";
+        return '<button type="button" class="bb-tile bb-skill rarity-' + rarityClass(item) + on + '" data-slot="' + key + '">' +
+          '<span class="bb-tile-copy"><span>' + esc(LABELS[key]) + "</span><strong>" + esc(name) + "</strong></span>" +
+          (icon ? '<img class="bb-logo" src="' + esc(icon) + '" alt="">' : "") +
+          "</button>";
+      }
       var specName = (state.specialization && state.specialization.name) || "";
       var watchOn = state.watch && state.watch.max;
       var grenadeName = (state.grenade && state.grenade.name) || "";
@@ -145,7 +155,7 @@
         '<div class="bb-slot-row bb-slot-2">' + tile("mask", true) + tile("backpack", true) + "</div>" +
         '<div class="bb-slot-row bb-slot-2">' + tile("chest", true) + tile("gloves", true) + "</div>" +
         '<div class="bb-slot-row bb-slot-2">' + tile("holster", true) + tile("kneepads", true) + "</div>" +
-        '<div class="bb-slot-row bb-slot-3">' + tile("skill1") + tile("skill2") +
+        '<div class="bb-slot-row bb-slot-3">' + skillTile("skill1") + skillTile("skill2") +
         '<button type="button" class="bb-tile bb-gear rarity-' + (grenadeName ? "gold" : "empty") + (selected === "grenade" ? " is-on" : "") + '" data-slot="grenade"><span class="bb-tile-copy"><span>Grenade</span><strong>' + esc(grenadeName || "Grenade") + "</strong></span>" +
         (grenadeIcon ? '<img class="bb-tile-grenade" src="' + esc(grenadeIcon) + '" alt="">' : "") + "</button>" +
         "</div>";
@@ -400,6 +410,11 @@
 
     function grenadeArt(name) {
       var row = (catalog.grenades || []).filter(function (item) { return item.name === name; })[0];
+      return row && row.icon ? row.icon : "";
+    }
+
+    function skillArt(name) {
+      var row = (catalog.skills || []).filter(function (item) { return item.name === name; })[0];
       return row && row.icon ? row.icon : "";
     }
 

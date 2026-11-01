@@ -9,7 +9,7 @@
         "Precision Smart Cover",
         "Fortified Smart Cover"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/precision-smart-cover.svg"
     },
     {
       "id": "skill-fortified-smart-cover",
@@ -19,7 +19,7 @@
         "Precision Smart Cover",
         "Fortified Smart Cover"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/fortified-smart-cover.svg"
     },
     {
       "id": "skill-burn-sticky-bomb",
@@ -30,7 +30,7 @@
         "EMP Sticky Bomb",
         "Explosive Sticky Bomb"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/burn-sticky-bomb.png"
     },
     {
       "id": "skill-emp-sticky-bomb",
@@ -41,7 +41,7 @@
         "EMP Sticky Bomb",
         "Explosive Sticky Bomb"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/emp-sticky-bomb.png"
     },
     {
       "id": "skill-explosive-sticky-bomb",
@@ -52,7 +52,7 @@
         "EMP Sticky Bomb",
         "Explosive Sticky Bomb"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/explosive-sticky-bomb.png"
     },
     {
       "id": "skill-repair-trap",
@@ -63,7 +63,7 @@
         "Shock Trap",
         "Shrapnel Trap"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/repair-trap.png"
     },
     {
       "id": "skill-shock-trap",
@@ -74,7 +74,7 @@
         "Shock Trap",
         "Shrapnel Trap"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/shock-trap.png"
     },
     {
       "id": "skill-shrapnel-trap",
@@ -85,7 +85,7 @@
         "Shock Trap",
         "Shrapnel Trap"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/shrapnel-trap.png"
     },
     {
       "id": "skill-decoy",
@@ -94,7 +94,7 @@
       "variants": [
         "Decoy"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/decoy.png"
     },
     {
       "id": "skill-scanner-pulse",
@@ -107,7 +107,7 @@
         "Banshee Pulse",
         "Achilles Pulse"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/scanner-pulse.png"
     },
     {
       "id": "skill-remote-pulse",
@@ -120,7 +120,7 @@
         "Banshee Pulse",
         "Achilles Pulse"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/remote-pulse.png"
     },
     {
       "id": "skill-jammer-pulse",
@@ -133,7 +133,7 @@
         "Banshee Pulse",
         "Achilles Pulse"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/jammer-pulse.png"
     },
     {
       "id": "skill-banshee-pulse",
@@ -146,7 +146,7 @@
         "Banshee Pulse",
         "Achilles Pulse"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/banshee-pulse.png"
     },
     {
       "id": "skill-achilles-pulse",
@@ -159,7 +159,7 @@
         "Banshee Pulse",
         "Achilles Pulse"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/achilles-pulse.png"
     },
     {
       "id": "skill-assault-turret",
@@ -171,7 +171,7 @@
         "Sniper Turret",
         "Artillery Turret"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/assault-turret.png"
     },
     {
       "id": "skill-incinerator-turret",
@@ -183,7 +183,7 @@
         "Sniper Turret",
         "Artillery Turret"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/incinerator-turret.png"
     },
     {
       "id": "skill-sniper-turret",
@@ -195,7 +195,7 @@
         "Sniper Turret",
         "Artillery Turret"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/sniper-turret.png"
     },
     {
       "id": "skill-artillery-turret",
@@ -207,7 +207,7 @@
         "Sniper Turret",
         "Artillery Turret"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/artillery-turret.png"
     },
     {
       "id": "skill-restorer-hive",
@@ -220,7 +220,7 @@
         "Booster Hive",
         "Artificer Hive"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/restorer-hive.png"
     },
     {
       "id": "skill-stinger-hive",
@@ -233,7 +233,7 @@
         "Booster Hive",
         "Artificer Hive"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/stinger-hive.png"
     },
     {
       "id": "skill-reviver-hive",
@@ -246,7 +246,7 @@
         "Booster Hive",
         "Artificer Hive"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/reviver-hive.png"
     },
     {
       "id": "skill-booster-hive",
@@ -259,7 +259,7 @@
         "Booster Hive",
         "Artificer Hive"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/booster-hive.png"
     },
     {
       "id": "skill-artificer-hive",
@@ -272,7 +272,7 @@
         "Booster Hive",
         "Artificer Hive"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/artificer-hive.png"
     },
     {
       "id": "skill-reinforcer-chem-launcher",
@@ -284,7 +284,7 @@
         "Riot Foam Chem Launcher",
         "Oxidizer Chem Launcher"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/reinforcer-chem-launcher.png"
     },
     {
       "id": "skill-firestarter-chem-launcher",
@@ -296,7 +296,7 @@
         "Riot Foam Chem Launcher",
         "Oxidizer Chem Launcher"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/firestarter-chem-launcher.png"
     },
     {
       "id": "skill-riot-foam-chem-launcher",
@@ -308,7 +308,7 @@
         "Riot Foam Chem Launcher",
         "Oxidizer Chem Launcher"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/riot-foam-chem-launcher.png"
     },
     {
       "id": "skill-oxidizer-chem-launcher",
@@ -320,7 +320,7 @@
         "Riot Foam Chem Launcher",
         "Oxidizer Chem Launcher"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/oxidizer-chem-launcher.png"
     },
     {
       "id": "skill-blinder-firefly",
@@ -331,7 +331,7 @@
         "Burster Firefly",
         "Demolisher Firefly"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/blinder-firefly.png"
     },
     {
       "id": "skill-burster-firefly",
@@ -342,7 +342,7 @@
         "Burster Firefly",
         "Demolisher Firefly"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/burster-firefly.png"
     },
     {
       "id": "skill-demolisher-firefly",
@@ -353,7 +353,7 @@
         "Burster Firefly",
         "Demolisher Firefly"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/demolisher-firefly.png"
     },
     {
       "id": "skill-explosive-seeker-mine",
@@ -365,7 +365,7 @@
         "Cluster Seeker Mine",
         "Mender Seeker Mine"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/explosive-seeker-mine.png"
     },
     {
       "id": "skill-airburst-seeker-mine",
@@ -377,7 +377,7 @@
         "Cluster Seeker Mine",
         "Mender Seeker Mine"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/airburst-seeker-mine.png"
     },
     {
       "id": "skill-cluster-seeker-mine",
@@ -389,7 +389,7 @@
         "Cluster Seeker Mine",
         "Mender Seeker Mine"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/cluster-seeker-mine.png"
     },
     {
       "id": "skill-mender-seeker-mine",
@@ -401,7 +401,7 @@
         "Cluster Seeker Mine",
         "Mender Seeker Mine"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/mender-seeker-mine.png"
     },
     {
       "id": "skill-striker-drone",
@@ -414,7 +414,7 @@
         "Fixer Drone",
         "Tactician Drone"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/striker-drone.png"
     },
     {
       "id": "skill-defender-drone",
@@ -427,7 +427,7 @@
         "Fixer Drone",
         "Tactician Drone"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/defender-drone.png"
     },
     {
       "id": "skill-bombardier-drone",
@@ -440,7 +440,7 @@
         "Fixer Drone",
         "Tactician Drone"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/bombardier-drone.png"
     },
     {
       "id": "skill-fixer-drone",
@@ -453,7 +453,7 @@
         "Fixer Drone",
         "Tactician Drone"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/fixer-drone.png"
     },
     {
       "id": "skill-tactician-drone",
@@ -466,7 +466,7 @@
         "Fixer Drone",
         "Tactician Drone"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/tactician-drone.png"
     },
     {
       "id": "skill-bulwark-shield",
@@ -478,7 +478,7 @@
         "Deflector Shield",
         "Striker Shield"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/bulwark-shield.png"
     },
     {
       "id": "skill-crusader-shield",
@@ -490,7 +490,7 @@
         "Deflector Shield",
         "Striker Shield"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/crusader-shield.png"
     },
     {
       "id": "skill-deflector-shield",
@@ -502,7 +502,7 @@
         "Deflector Shield",
         "Striker Shield"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/deflector-shield.png"
     },
     {
       "id": "skill-striker-shield",
@@ -514,7 +514,7 @@
         "Deflector Shield",
         "Striker Shield"
       ],
-      "icon": "assets/icons/loot/generic.svg"
+      "icon": "assets/icons/skills/striker-shield.png"
     }
   ]
 }
