@@ -296,6 +296,17 @@ test("public loadout keeps the fields the build page reads", function () {
   assert.equal(pub.secondary.rarity, "exotic");
 });
 
+test("a saved loadout without a grenade still loads", function () {
+  const loadout = catalogApi.fromSaved({ loadout: { primary: { name: "Police M4", type: "AR" } } }, catalog);
+  assert.equal(loadout.grenade.name, "");
+  assert.equal(catalogApi.toPublic(loadout).grenade.name, "");
+  assert.equal(catalogApi.toPublic(loadout).grenade.catalogId, "");
+  const named = catalogApi.fromSaved({ loadout: { grenade: { name: "Incendiary Grenade" } } }, catalog);
+  assert.equal(named.grenade.catalogId, "grenade-incendiary-grenade");
+  assert.equal(named.grenade.specialization, "Survivalist");
+  assert.equal(catalogApi.toPublic(named).grenade.specialization, "Survivalist");
+});
+
 test("legacy admin loadouts still sum", function () {
   const record = {
     loadout: {

@@ -8,7 +8,7 @@
     primary: "Primary", secondary: "Secondary", sidearm: "Sidearm",
     mask: "Mask", backpack: "Backpack", chest: "Chest", gloves: "Gloves",
     holster: "Holster", kneepads: "Kneepads", skill1: "Skill 1", skill2: "Skill 2",
-    specialization: "Specialization", watch: "SHD Watch"
+    grenade: "Grenade", specialization: "Specialization", watch: "SHD Watch"
   };
 
   function esc(value) {
@@ -105,24 +105,31 @@
     function paintSlots() {
       var node = host.querySelector("#bb-slots");
       if (!node) return;
-      function tile(key) {
+      function tile(key, gear) {
         var item = state[key] || {};
         var name = item.name || LABELS[key];
         var on = key === selected ? " is-on" : "";
         var proto = item.prototype ? '<i class="bb-proto">Prototype</i>' : "";
-        return '<button type="button" class="bb-tile rarity-' + rarityClass(item) + on + '" data-slot="' + key + '">' +
-          '<span>' + esc(LABELS[key]) + "</span><strong>" + esc(name) + "</strong>" + proto + "</button>";
+        var art = gear ? '<span class="bb-tile-art"></span>' : "";
+        return '<button type="button" class="bb-tile' + (gear ? " bb-gear" : "") + ' rarity-' + rarityClass(item) + on + '" data-slot="' + key + '">' +
+          '<span class="bb-tile-copy"><span>' + esc(LABELS[key]) + "</span><strong>" + esc(name) + "</strong>" + proto + "</span>" +
+          art + "</button>";
       }
-      var specName = (state.specialization && state.specialization.name) || "Specialization";
+      var specName = (state.specialization && state.specialization.name) || "";
       var watchOn = state.watch && state.watch.max;
+      var grenadeName = (state.grenade && state.grenade.name) || "";
       node.innerHTML =
-        '<p class="bb-kicker">Loadout</p>' +
-        '<div class="bb-slot-row bb-slot-3">' + WEAPONS.map(tile).join("") + "</div>" +
-        '<div class="bb-slot-row bb-slot-3">' + GEAR.map(tile).join("") + "</div>" +
-        '<div class="bb-slot-row bb-slot-2">' + ["skill1", "skill2"].map(tile).join("") + "</div>" +
         '<div class="bb-slot-row bb-slot-2">' +
-        '<button type="button" class="bb-tile rarity-' + (specName === "Specialization" ? "empty" : "gold") + (selected === "specialization" ? " is-on" : "") + '" data-slot="specialization"><span>Specialization</span><strong>' + esc(specName) + "</strong></button>" +
+        '<button type="button" class="bb-tile rarity-' + (specName ? "gold" : "empty") + (selected === "specialization" ? " is-on" : "") + '" data-slot="specialization"><span>Specialization</span><strong>' + esc(specName || "Specialization") + "</strong></button>" +
         '<button type="button" class="bb-tile rarity-gold' + (selected === "watch" ? " is-on" : "") + '" data-slot="watch"><span>SHD Watch</span><strong>' + (watchOn ? "Max" : "Custom") + "</strong></button>" +
+        "</div>" +
+        '<p class="bb-kicker">Loadout</p>' +
+        '<div class="bb-slot-row bb-slot-3">' + WEAPONS.map(function (key) { return tile(key); }).join("") + "</div>" +
+        '<div class="bb-slot-row bb-slot-2">' + tile("mask", true) + tile("backpack", true) + "</div>" +
+        '<div class="bb-slot-row bb-slot-2">' + tile("chest", true) + tile("gloves", true) + "</div>" +
+        '<div class="bb-slot-row bb-slot-2">' + tile("holster", true) + tile("kneepads", true) + "</div>" +
+        '<div class="bb-slot-row bb-slot-3">' + tile("skill1") + tile("skill2") +
+        '<button type="button" class="bb-tile rarity-' + (grenadeName ? "gold" : "empty") + (selected === "grenade" ? " is-on" : "") + '" data-slot="grenade"><span>Grenade</span><strong>' + esc(grenadeName || "Grenade") + "</strong></button>" +
         "</div>";
     }
 
@@ -198,6 +205,7 @@
       if (!node) return;
       if (selected === "watch") return node.innerHTML = watchEditor();
       if (selected === "specialization") return node.innerHTML = specEditor();
+      if (selected === "grenade") return node.innerHTML = grenadeEditor();
       if (selected === "skill1" || selected === "skill2") return node.innerHTML = skillEditor();
       if (WEAPONS.indexOf(selected) >= 0) return node.innerHTML = weaponEditor();
       node.innerHTML = gearEditor();
@@ -277,6 +285,16 @@
         '<label>Variant <select data-field="variant">' + optionHTML(variants, item.variant) + "</select></label>" +
         expertiseField(item) +
         '<p class="lede">Skill damage, repair and duration by tier are phase 3. Expertise is saved with the skill.</p>';
+    }
+
+    function grenadeEditor() {
+      var name = (state.grenade && state.grenade.name) || "";
+      var spec = (state.grenade && state.grenade.specialization) || "";
+      return '<p class="bb-kicker">Grenade</p>' +
+        "<h3>" + esc(name || "Empty slot") + "</h3>" +
+        (spec ? '<p class="lede">' + esc(spec) + "</p>" : "") +
+        '<p class="admin-row"><button type="button" class="admin-btn" data-grenade-pick>Choose grenade</button>' +
+        '<button type="button" class="admin-btn admin-btn-ghost" data-grenade-clear>Clear</button></p>';
     }
 
     function specEditor() {
@@ -541,9 +559,28 @@
     }
 
     function openPicker() {
+      if (selected === "grenade") return openGrenadePicker();
       if (WEAPONS.indexOf(selected) >= 0) return openWeaponPicker();
       if (GEAR.indexOf(selected) >= 0) return openGearPicker();
       if (selected === "skill1" || selected === "skill2") return openSkillPicker();
+    }
+
+    function openGrenadePicker() {
+      var rows = (catalog.grenades || []).map(function (row) {
+        return { name: row.name, rarity: "high-end", specialization: row.specialization || "", id: row.id || "" };
+      });
+      modal("<h3>Choose grenade</h3>" + grid(rows, "data-grenade", function (row) { return row.specialization || "Grenade"; }), function (e) {
+        var pick = e.target.closest && e.target.closest("[data-grenade]");
+        if (!pick) return;
+        var found = (catalog.grenades || []).filter(function (row) { return row.name === pick.getAttribute("data-grenade"); })[0] || {};
+        state.grenade = {
+          name: found.name || pick.getAttribute("data-grenade"),
+          catalogId: found.id || "",
+          specialization: found.specialization || ""
+        };
+        closeModal();
+        paint();
+      });
     }
 
     function modal(html, onClick) {
@@ -804,6 +841,18 @@
       return row ? row.name : "";
     }
 
+    function grenadeRecord(specName) {
+      var label = grenadeFor(specName);
+      var row = (catalog.grenades || []).filter(function (item) {
+        return item.name === label || item.specialization === specName;
+      })[0];
+      return {
+        name: (row && row.name) || label || "",
+        catalogId: (row && row.id) || "",
+        specialization: (row && row.specialization) || ""
+      };
+    }
+
     function shell() {
       var plays = (catalog.playstyles || ["DPS"]).map(function (name) {
         return '<option value="' + esc(name) + '"' + (name === meta.playstyle ? " selected" : "") + ">" + esc(name) + "</option>";
@@ -888,10 +937,20 @@
       }
       if (!e.target.closest(".bb-mod")) closeModMenus();
       var slotBtn = e.target.closest("[data-slot]");
+      if (e.target.closest("[data-grenade-pick]")) return openGrenadePicker();
+      if (e.target.closest("[data-grenade-clear]")) {
+        state.grenade = { name: "", catalogId: "" };
+        paint();
+        return;
+      }
       if (slotBtn && host.contains(slotBtn)) {
         selected = slotBtn.getAttribute("data-slot");
         paintSlots();
         paintEditor();
+        if (selected === "grenade") {
+          if (!state.grenade || !state.grenade.name) openGrenadePicker();
+          return;
+        }
         if (!state[selected] || !state[selected].name) {
           if (selected !== "watch" && selected !== "specialization") openPicker();
         }
@@ -908,7 +967,7 @@
       var specBtn = e.target.closest("[data-spec]");
       if (specBtn) {
         state.specialization = { name: specBtn.getAttribute("data-spec") };
-        state.grenade = { name: grenadeFor(state.specialization.name) };
+        state.grenade = grenadeRecord(state.specialization.name);
         paint();
         return;
       }

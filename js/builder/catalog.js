@@ -200,8 +200,21 @@
     if (typeof load.specialization === "string") specName = load.specialization;
     else if (load.specialization && load.specialization.name) specName = load.specialization.name;
     next.specialization = { name: specName };
-    if (typeof load.grenade === "string") next.grenade = { name: load.grenade };
-    else if (load.grenade && load.grenade.name && load.grenade.name !== "SHD Watch") next.grenade = { name: load.grenade.name };
+    if (typeof load.grenade === "string") next.grenade = { name: load.grenade, catalogId: "" };
+    else if (load.grenade && load.grenade.name && load.grenade.name !== "SHD Watch") {
+      next.grenade = {
+        name: load.grenade.name,
+        catalogId: load.grenade.catalogId || "",
+        specialization: load.grenade.specialization || ""
+      };
+    } else next.grenade = { name: "", catalogId: "" };
+    var knownGrenade = ((catalog && catalog.grenades) || []).filter(function (row) {
+      return sameName(row.name, next.grenade.name);
+    })[0];
+    if (knownGrenade) {
+      if (!next.grenade.catalogId) next.grenade.catalogId = knownGrenade.id || "";
+      if (!next.grenade.specialization) next.grenade.specialization = knownGrenade.specialization || "";
+    }
     WEAPONS.forEach(function (key) {
       if (load[key]) next[key] = Object.assign(emptyWeapon(), copy(load[key]));
       if (!Array.isArray(next[key].attributes)) next[key].attributes = [];
@@ -228,7 +241,11 @@
       version: 1,
       mode: loadout.mode === "restricted" ? "restricted" : "normal",
       specialization: { name: (loadout.specialization && loadout.specialization.name) || "" },
-      grenade: { name: (loadout.grenade && loadout.grenade.name) || "" },
+      grenade: {
+        name: (loadout.grenade && loadout.grenade.name) || "",
+        catalogId: (loadout.grenade && loadout.grenade.catalogId) || "",
+        specialization: (loadout.grenade && loadout.grenade.specialization) || ""
+      },
       watch: copy(loadout.watch || { max: false, points: {} })
     };
     WEAPONS.forEach(function (key) {
