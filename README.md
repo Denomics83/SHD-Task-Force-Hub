@@ -29,7 +29,7 @@ Open `http://localhost:8080/` (fetch of `data/*.json` needs a server, not `file:
 
 | File | Purpose |
 |------|---------|
-| `data/news.json` | Event / announcement feed |
+| `data/news.json` | Retired static feed. Live updates come from Supabase `public.updates`. |
 | `data/loot.json` | Escalations, Proto caches, and Dark Zone rows |
 | `data/escalations.json` | Weekly escalations strip |
 | `data/season.json` | Season detail, including the `theme` paragraph |

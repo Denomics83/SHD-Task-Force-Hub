@@ -8,16 +8,25 @@
   var ALLOWED = { announcement: 1, maintenance: 1, patch: 1, reminder: 1 };
   var byId = {};
 
+  var MEGAPHONE =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 10h3.2L13 16.2V7.8L7.2 10H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M16 9.2a3.2 3.2 0 0 1 0 5.6"/></svg>';
   var GLYPH = {
-    announcement:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 10h3.2L13 16.2V7.8L7.2 10H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M16 9.2a3.2 3.2 0 0 1 0 5.6"/></svg>',
+    announcement: MEGAPHONE,
+    reminder: MEGAPHONE,
     maintenance:
       '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M14.2 6.2 17.8 9.8l2.2-2.2a4.6 4.6 0 0 1-6.2 6.1L7.2 20.3a1.6 1.6 0 0 1-2.3-2.3l6.6-6.6a4.6 4.6 0 0 1 6.1-6.2z"/></svg>',
     patch:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>',
-    reminder:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" d="M12 4.2a6.2 6.2 0 0 1 6.2 6.2v3.1l1.3 2.2H4.5l1.3-2.2V10.4A6.2 6.2 0 0 1 12 4.2z"/><path fill="none" stroke="currentColor" stroke-width="1.6" d="M10 18.2a2 2 0 0 0 4 0"/></svg>'
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>'
   };
+
+  function iconType(type) {
+    return type === "reminder" ? "announcement" : type;
+  }
+
+  function safeImage(src) {
+    var value = String(src || "").trim();
+    return /^https?:\/\/\S+$/i.test(value) ? value : "";
+  }
 
   function isTimestamp(iso) {
     return /T/.test(String(iso || ""));
@@ -94,14 +103,19 @@
       .map(function (item) {
         var desc = item.summary || item.body || "";
         var when = item.date ? shortDate(item.date) : "";
+        var face = iconType(item.type);
+        var thumb = item.image
+          ? '<img class="upd-thumb" src="' + STF.esc(item.image) + '" alt="">'
+          : "";
         return (
           '<a class="upd-entry" href="#' + STF.esc(item.id) + '">' +
+          thumb +
           "<div>" +
           "<h2>" + STF.esc(item.title) + "</h2>" +
           (desc ? '<p class="upd-desc">' + STF.esc(desc) + "</p>" : "") +
           (when ? '<time class="upd-stamp" datetime="' + STF.esc(item.date) + '">' + STF.esc(when) + "</time>" : "") +
           "</div>" +
-          '<div class="upd-ico ' + item.type + '" aria-hidden="true">' + GLYPH[item.type] + "</div>" +
+          '<div class="upd-ico ' + face + '" aria-hidden="true">' + (GLYPH[face] || "") + "</div>" +
           "</a>"
         );
       })
@@ -114,28 +128,20 @@
     var pill = item.schedule
       ? '<p class="upd-pill">' + STF.esc(item.schedule) + "</p>"
       : "";
-    var image = item.image && item.image.src
-      ? '<figure class="upd-banner"><img src="' + STF.esc(item.image.src) + '" alt="' + STF.esc(item.image.alt || "") + '"></figure>'
+    var image = item.image
+      ? '<figure class="upd-banner"><img src="' + STF.esc(item.image) + '" alt="' + STF.esc(item.title || "") + '"></figure>'
       : "";
     var sections = item.bodyHtml
       ? '<div class="rich-html">' + STF.safeHTML(item.bodyHtml) + "</div>" +
         (item.patchHtml ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(item.patchHtml) + "</div>" : "")
       : (item.sections || []).map(sectionHTML).join("");
-    var seasonLink = item.id === "ann-season-window"
-      ? '<p class="upd-more"><a href="season.html">Season detail — manhunts, maps, modifiers</a></p>'
-      : "";
-    var demo = item.demo
-      ? '<p class="upd-demo">Demo copy for layout. Not an official title update.</p>'
-      : "";
     detail.innerHTML =
       "<h1>" + STF.esc(item.title) + "</h1>" +
       (summary ? '<p class="upd-summary">' + STF.esc(summary) + "</p>" : "") +
       (posted ? '<p class="upd-posted">' + STF.esc(posted) + "</p>" : "") +
       pill +
       image +
-      sections +
-      seasonLink +
-      demo;
+      sections;
   }
 
   function setHeaderBack(on) {
@@ -186,29 +192,26 @@
   }
 
   try {
-    var news = await STF.fetchJSON("data/news.json");
-    var items = (news.items || [])
-      .filter(function (item) { return ALLOWED[item.type]; })
-      .slice();
-    if (STF.sb) {
-      var remote = await STF.sb.from("updates").select("*").order("published_at", { ascending: false });
-      if (!remote.error) {
-        (remote.data || []).forEach(function (row) {
-          items.push({
-            id: row.id,
-            type: row.type,
-            title: row.title,
-            summary: STF.plainText(row.body_html),
-            date: row.published_at || "",
-            sortAt: row.published_at || row.scheduled_at || "",
-            schedule: scheduleText(row.scheduled_at),
-            bodyHtml: row.body_html || "",
-            patchHtml: row.patch_notes_html || "",
-            priority: 0
-          });
-        });
-      }
-    }
+    var items = [];
+    if (!STF.sb) throw new Error("Supabase did not load.");
+    var remote = await STF.sb.from("updates").select("*").order("published_at", { ascending: false });
+    if (remote.error) throw remote.error;
+    (remote.data || []).forEach(function (row) {
+      if (!ALLOWED[row.type]) return;
+      items.push({
+        id: row.id,
+        type: row.type,
+        title: row.title,
+        summary: STF.plainText(row.body_html),
+        date: row.published_at || "",
+        sortAt: row.published_at || row.scheduled_at || "",
+        schedule: scheduleText(row.scheduled_at),
+        image: safeImage(row.image_url),
+        bodyHtml: row.body_html || "",
+        patchHtml: row.patch_notes_html || "",
+        priority: 0
+      });
+    });
     items.sort(function (a, b) {
       return sortTime(b) - sortTime(a) || ((a.priority || 99) - (b.priority || 99));
     });

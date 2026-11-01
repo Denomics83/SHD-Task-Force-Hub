@@ -16,7 +16,7 @@
       el.hidden = el.getAttribute("data-view") !== name;
     });
     if (name === "dash") loadDash();
-    if (name === "update") ensureQuill("update-body");
+    if (name === "update") ensureQuill("update-body", true);
     if (name === "event") {
       ensureQuill("event-body", true);
       loadTemplateSelect();
@@ -83,7 +83,7 @@
         pickImage(function (url) {
           var range = quill.getSelection(true);
           quill.insertEmbed(range ? range.index : 0, "image", url);
-        });
+        }, id.indexOf("update") === 0 ? "update-status" : "event-status");
       });
     }
     quills[id] = quill;
@@ -97,7 +97,8 @@
     return quill.root.innerHTML;
   }
   function setQuill(id, html) {
-    var quill = ensureQuill(id, id === "event-body");
+    var withImages = id === "event-body" || id === "update-body" || id === "update-patch";
+    var quill = ensureQuill(id, withImages);
     quill.setContents([]);
     if (html) quill.clipboard.dangerouslyPasteHTML(html);
   }
@@ -111,7 +112,7 @@
     if (res.error) throw res.error;
     return sb.storage.from("media").getPublicUrl(path).data.publicUrl;
   }
-  function pickImage(done) {
+  function pickImage(done, statusId) {
     var input = document.createElement("input");
     input.type = "file";
     input.accept = "image/jpeg,image/png,image/webp,image/gif,image/avif";
@@ -120,7 +121,7 @@
       try {
         done(await uploadImage(input.files[0], "inline"));
       } catch (err) {
-        status("event-status", err.message || String(err), "err");
+        status(statusId || "event-status", err.message || String(err), "err");
       }
     });
     input.click();
@@ -244,7 +245,7 @@
     var events = await sb.from("events").select("id, kind, title, starts_at").order("starts_at", { ascending: false });
     var builds = await sb.from("builds").select("id, name, category, published").order("created_at", { ascending: false });
     $("list-updates").innerHTML = (updates.data || []).map(function (row) {
-      return '<article class="desk-row"><strong>' + STF.esc(row.title) + '</strong><small>' + STF.esc(row.type) + " · " + STF.esc(stamp(row.published_at)) + "</small>" + rowButtons("update", row.id) + "</article>";
+      return '<article class="desk-row"><strong>' + STF.esc(row.title) + '</strong><small>' + STF.esc(updateTypeLabel(row.type)) + " · " + STF.esc(stamp(row.published_at)) + "</small>" + rowButtons("update", row.id) + "</article>";
     }).join("") || '<p class="lede">No updates yet.</p>';
     $("list-events").innerHTML = (events.data || []).map(function (row) {
       return '<article class="desk-row"><strong>' + STF.esc(row.title) + '</strong><small>' + STF.esc(row.kind) + " · " + STF.esc(stamp(row.starts_at)) + "</small>" + rowButtons("event", row.id) + "</article>";
@@ -360,12 +361,20 @@
   function togglePatch() {
     var patch = $("update-type").value === "patch";
     $("update-patch-wrap").hidden = !patch;
-    if (patch) ensureQuill("update-patch");
+    if (patch) ensureQuill("update-patch", true);
+  }
+  function updateTypeLabel(type) {
+    if (type === "reminder") return "Announcement";
+    if (type === "maintenance") return "Scheduled Maintenance";
+    if (type === "patch") return "Downloadable Update";
+    return type || "";
   }
   function updatePayload() {
+    var image = ($("update-image").value || "").trim();
     return {
       type: $("update-type").value,
       title: $("update-title").value.trim(),
+      image_url: image || null,
       body_html: quillHTML("update-body"),
       patch_notes_html: $("update-type").value === "patch" ? quillHTML("update-patch") : "",
       scheduled_at: fromLocal($("update-when").value)
@@ -539,6 +548,7 @@
       $("update-heading").textContent = "Edit update";
       $("update-type").value = row.type;
       $("update-title").value = row.title || "";
+      $("update-image").value = row.image_url || "";
       $("update-when").value = toLocal(row.scheduled_at);
       $("update-published").value = stamp(row.published_at);
       togglePatch();
@@ -629,10 +639,14 @@
 
   function openPreview() {
     var payload = updatePayload();
+    var previewImage = payload.image_url && /^https?:\/\/\S+$/i.test(payload.image_url)
+      ? '<figure class="upd-banner"><img src="' + STF.esc(payload.image_url) + '" alt=""></figure>'
+      : "";
     $("preview-body").innerHTML =
       '<article class="upd-entry"><div><h2>' + STF.esc(payload.title || "Untitled") + "</h2>" +
       '<p class="upd-desc">' + STF.esc(STF.plainText(payload.body_html)) + "</p>" +
       '<time class="upd-stamp">' + STF.esc(stamp(payload.scheduled_at)) + "</time></div></article>" +
+      previewImage +
       '<div class="rich-html">' + STF.safeHTML(payload.body_html) + "</div>" +
       (payload.patch_notes_html ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(payload.patch_notes_html) + "</div>" : "");
     $("preview-modal").hidden = false;

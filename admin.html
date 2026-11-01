@@ -67,11 +67,12 @@
         <label>Type
           <select name="type" id="update-type" required>
             <option value="maintenance">Scheduled Maintenance</option>
-            <option value="reminder">Reminder</option>
+            <option value="reminder">Announcement</option>
             <option value="patch">Downloadable Update</option>
           </select>
         </label>
         <label>Title <input name="title" id="update-title" required></label>
+        <label>Image URL <input name="image_url" id="update-image" type="url" placeholder="https://…"></label>
         <label>Description</label>
         <div id="update-body" class="rich-editor"></div>
         <div id="update-patch-wrap" hidden>
