@@ -1,0 +1,8 @@
+{
+  "source": "Critical hit chance caps at 60 in the live stat sheet. Skill tier displayed on the sheet caps at 6, with anything above noted as overcharge rather than a seventh tier. Prototype: Year 8 spec, old max becomes the new minimum and the new max is up to 1.5x; skill tier cores stay unchanged; exotics cannot be prototype. Raid, Incursion, Dark Zone and Conflict clamp prototype rolls to that low end. NinjaBike Messenger Backpack talent text in data/td2/exotics.json counts the backpack toward other brand and gear-set bonuses.",
+  "criticalHitChanceCap": 60,
+  "skillTierCap": 6,
+  "prototypeFactor": 1.5,
+  "skillTierCanPrototype": false,
+  "exoticCanPrototype": false
+}

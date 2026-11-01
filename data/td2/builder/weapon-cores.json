@@ -1,0 +1,33 @@
+{
+  "source": "Class cores from the Build Station catalog embedded in the saved share buildstation.app/td2/builder/game/INlIgxZJ (fetched 1 Nov 2026) and the NamuWiki level-40 weapon table. Core 1 is weapon-type damage at 15. Core 2 is the class native: Assault Rifle Health Damage 21, SMG Critical Hit Chance 21, LMG Damage to TOC 12, Rifle Critical Hit Damage 34, Marksman Rifle Headshot Damage 111, Shotgun Damage to Armor 12. Prototype max is 1.5x (15 to 22.5, 21 to 31.5, 12 to 18, 34 to 51, 111 to 166.5), matching the NamuWiki prototype column and the Year 8 'up to 1.5x' rule. Pistols have no second core in that table.",
+  "types": {
+    "AR": {
+      "core1": { "name": "Assault Rifle Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": { "name": "Health Damage", "max": 21, "protoMax": 31.5, "unit": "%" }
+    },
+    "SMG": {
+      "core1": { "name": "SMG Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": { "name": "Critical Hit Chance", "max": 21, "protoMax": 31.5, "unit": "%" }
+    },
+    "LMG": {
+      "core1": { "name": "LMG Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": { "name": "Damage to TOC", "max": 12, "protoMax": 18, "unit": "%" }
+    },
+    "Rifle": {
+      "core1": { "name": "Rifle Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": { "name": "Critical Hit Damage", "max": 34, "protoMax": 51, "unit": "%" }
+    },
+    "MMR": {
+      "core1": { "name": "Marksman Rifle Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": { "name": "Headshot Damage", "max": 111, "protoMax": 166.5, "unit": "%" }
+    },
+    "Shotgun": {
+      "core1": { "name": "Shotgun Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": { "name": "Damage to Armor", "max": 12, "protoMax": 18, "unit": "%" }
+    },
+    "Pistol": {
+      "core1": { "name": "Pistol Damage", "max": 15, "protoMax": 22.5, "unit": "%" },
+      "core2": null
+    }
+  }
+}

@@ -1,0 +1,29 @@
+{
+  "source": "Generic (non-exotic, non-specialization) attachment bonuses taken from the Build Station weaponMods collection in the saved share INlIgxZJ (1 Nov 2026). Values are the caps on those generic rows: 5% critical hit chance optics, muzzles and laser pointers, as on the FAMAS in that build; extended 5.56 magazines at +20 rounds and -10% reload. This is a working picker list, not all 260 attachments.",
+  "slots": {
+    "optic": [
+      { "name": "Rugged Mini Reflex Sight", "stat": "Critical Hit Chance", "value": 5 },
+      { "name": "Russian Red Dot Sight", "stat": "Critical Hit Damage", "value": 10 },
+      { "name": "Reflex Sight", "stat": "Weapon Handling", "value": 12 },
+      { "name": "Small RDS Scope", "stat": "Stability", "value": 50, "statNeg": "Accuracy", "valueNeg": -20 },
+      { "name": "ACOG Scope (4x)", "stat": "Optimal Range", "value": 50 }
+    ],
+    "muzzle": [
+      { "name": "Muzzle Brake 5.56", "stat": "Critical Hit Chance", "value": 5 },
+      { "name": "Flash Hider 9mm", "stat": "Critical Hit Damage", "value": 10 },
+      { "name": "Compensator", "stat": "Stability", "value": 30 },
+      { "name": "Small Suppressor .45", "stat": "Accuracy", "value": 30 }
+    ],
+    "magazine": [
+      { "name": "Sturdy Extended 5.56 Mag", "stat": "Extra Rounds", "value": 20, "statNeg": "Reload Speed", "valueNeg": -10 },
+      { "name": "Tactical Mag", "stat": "Critical Hit Damage", "value": 10 },
+      { "name": "Lightweight Marksman Mag", "stat": "Reload Speed", "value": 20 }
+    ],
+    "underbarrel": [
+      { "name": "Laser Pointer", "stat": "Critical Hit Chance", "value": 5 },
+      { "name": "Angled Grip", "stat": "Stability", "value": 30 },
+      { "name": "Vertical Grip", "stat": "Accuracy", "value": 30 },
+      { "name": "Handstop", "stat": "Reload Speed", "value": 10 }
+    ]
+  }
+}

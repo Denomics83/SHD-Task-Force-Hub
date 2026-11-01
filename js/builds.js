@@ -458,14 +458,30 @@
     item = item || {};
     var attrs = item.attributes;
     var attrText = Array.isArray(attrs)
-      ? attrs.map(function (attr) { return [attr.name, attr.value].filter(Boolean).join(" "); }).join("\n")
+      ? attrs.map(function (attr) { return [attr.name, attr.value].filter(function (part) { return part != null && part !== ""; }).join(" "); }).join("\n")
       : (attrs || "");
+    var core = item.core || "";
+    if (item.coreValue != null && item.coreValue !== "" && String(core).indexOf(String(item.coreValue)) < 0) {
+      core = (core + " " + item.coreValue).trim();
+    }
+    var extra = [];
+    if (item.core2) extra.push([item.core2, item.core2Value].filter(function (part) { return part != null && part !== ""; }).join(" "));
+    if (typeof item.mod === "string" && item.mod) extra.push([item.mod, item.modValue].filter(function (part) { return part != null && part !== ""; }).join(" "));
+    if (Array.isArray(item.mods)) {
+      item.mods.forEach(function (mod) {
+        if (!mod) return;
+        extra.push([mod.name || mod.stat, mod.value].filter(function (part) { return part != null && part !== ""; }).join(" "));
+      });
+    }
+    if (item.prototype) extra.push("Prototype");
+    if (item.expertise) extra.push("Expertise " + item.expertise);
+    if (extra.length) attrText = [attrText].concat(extra).filter(Boolean).join("\n");
     return {
       name: item.name || "",
       brand: item.brand || "",
       rarity: item.rarity || "",
       talent: item.talent || "",
-      core: item.core || "",
+      core: core,
       attributes: attrText,
       image: /^https?:/i.test(String(item.image || "")) ? "" : (item.image || ""),
       icon: /^https?:/i.test(String(item.icon || "")) ? "" : (item.icon || ""),

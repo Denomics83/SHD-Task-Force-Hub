@@ -1,0 +1,22 @@
+{
+  "source": "SHD watch nodes as stored on the Build Station share INlIgxZJ (1 Nov 2026) when max is on: offense weapon damage 0.1, crit chance 0.1, crit damage 0.2, headshot 0.2, and the same four groups the spec lists. Per-point scaling is 50 points to each cap (SHD 1-1000 fills every node): 0.2% per point to a 10% cap, 0.4% per point to a 20% cap. That table is the one published by Raison Detre and the Korean SHD point guide, and it matches the max watch posted on r/thedivision (Nov 2021) which the saved build still uses. Fandom's skill list says Skill Health; the saved build and those two point tables say Skill Duration, so this file follows the build.",
+  "pointsPerNode": 50,
+  "nodes": [
+    { "id": "weaponDamage", "group": "offense", "name": "Weapon Damage", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "headshotDamage", "group": "offense", "name": "Headshot Damage", "perPoint": 0.4, "max": 20, "unit": "%" },
+    { "id": "criticalHitChance", "group": "offense", "name": "Critical Hit Chance", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "criticalHitDamage", "group": "offense", "name": "Critical Hit Damage", "perPoint": 0.4, "max": 20, "unit": "%" },
+    { "id": "totalArmor", "group": "defense", "name": "Total Armor", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "healthPercent", "group": "defense", "name": "Total Health", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "explosiveResistance", "group": "defense", "name": "Explosive Resistance", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "hazardProtection", "group": "defense", "name": "Hazard Protection", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "skillDamage", "group": "utility", "name": "Skill Damage", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "skillRepair", "group": "utility", "name": "Repair Skills", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "skillDuration", "group": "utility", "name": "Skill Duration", "perPoint": 0.4, "max": 20, "unit": "%" },
+    { "id": "skillHaste", "group": "utility", "name": "Skill Haste", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "accuracy", "group": "handling", "name": "Accuracy", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "stability", "group": "handling", "name": "Stability", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "reloadSpeed", "group": "handling", "name": "Reload Speed", "perPoint": 0.2, "max": 10, "unit": "%" },
+    { "id": "ammoCapacity", "group": "handling", "name": "Ammo Capacity", "perPoint": 0.4, "max": 20, "unit": "%" }
+  ]
+}

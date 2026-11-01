@@ -1,0 +1,8 @@
+{
+  "source": "Gear critical and headshot caps missing from data/td2/attributes.json. Max rolls are the level-40 gear minors stated on Coyote's Mask and Ridgeway's Pride (Weapon Damage 15, Critical Hit Chance 6, Critical Hit Damage 12) and the Division community attribute sheet (Headshot Damage 10). Prototype max is 1.5x that cap, the Year 8 rule in the Shade Hub builder spec and the Into The Dark / Rise Up notes: Critical Hit Chance 6 to 9, Critical Hit Damage 12 to 18, Headshot Damage 10 to 15 (Vortex prototype table, 2026). Used only when the catalog has no row for the same stat and group.",
+  "gearMinors": [
+    { "id": "critical-hit-chance-gear-minor", "name": "Critical Hit Chance", "max": 6, "protoMax": 9, "unit": "%", "group": "gear" },
+    { "id": "critical-hit-damage-gear-minor", "name": "Critical Hit Damage", "max": 12, "protoMax": 18, "unit": "%", "group": "gear" },
+    { "id": "headshot-damage-gear-minor", "name": "Headshot Damage", "max": 10, "protoMax": 15, "unit": "%", "group": "gear" }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "source": "Armor core 170,000 is data/td2/attributes.json (ProtoTrack / community table, 2026-11-01). Piece base armor is the level-40 datamine posted by D3LTAFR0ST on r/thedivision, 17 Oct 2020 (Mask 80,297, Chest 157,961, Holster 111,889, Kneepads 98,726, Gloves 80,297, Backpack 130,844). Expertise is Ubisoft's Intelligence Annex: weapons +1% weapon damage per rank to the weapon's own damage bonus, gear +1% of that piece's base armor per rank, not of the blue core (https://www.ubisoft.com/en-us/game/the-division/the-division-2/news-updates/3Eqa62fOd4sDI1hqjSVdI2/intelligence-annex-expertise). Rank cap 30 is the Year 8 prototype requirement in the builder spec. Base health is not in those sources, so it is null and the sheet shows health percent and flat health separately.",
+  "coreArmor": 170000,
+  "baseHealth": null,
+  "expertiseMax": 30,
+  "pieces": {
+    "mask": 80297,
+    "chest": 157961,
+    "holster": 111889,
+    "kneepads": 98726,
+    "gloves": 80297,
+    "backpack": 130844
+  }
+}

@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="robots" content="noindex, nofollow">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Builder preview — Shade Hub</title>
+  <link rel="stylesheet" href="../styles.css">
+</head>
+<body class="page-admin">
+  <header class="desk-top">
+    <a class="brand" href="../index.html"><strong>Shade Hub</strong></a>
+    <span class="desk-kicker">Builder preview</span>
+  </header>
+  <main class="desk">
+    <div id="builder-root"></div>
+  </main>
+  <script src="../js/common.js"></script>
+  <script src="../js/builder/engine.js"></script>
+  <script src="../js/builder/catalog.js"></script>
+  <script src="../js/builder/ui.js"></script>
+  <script>
+    ShadeBuilder.mount(document.getElementById("builder-root"), {
+      sample: true,
+      fetchJSON: function (path) { return STF.fetchJSON("../" + path); }
+    });
+  </script>
+</body>
+</html>

@@ -3,6 +3,7 @@
   var sb = STF.sb;
   var quills = {};
   var editingBuild = null;
+  var editingBuilder = null;
   var buildReady = false;
 
   function $(id) { return document.getElementById(id); }
@@ -27,6 +28,7 @@
       loadTemplates();
     }
     if (name === "build") openBuild(editingBuild);
+    if (name === "builder") openBuilder(editingBuilder);
     window.scrollTo(0, 0);
   }
   function pad(n) { return (n < 10 ? "0" : "") + n; }
@@ -209,7 +211,8 @@
   }
 
   function rowButtons(kind, id) {
-    return '<span class="desk-row-actions"><button type="button" data-edit="' + kind + '" data-id="' + id + '">Edit</button><button type="button" data-del="' + kind + '" data-id="' + id + '">Delete</button></span>';
+    var builder = kind === "build" ? '<button type="button" data-edit="builder" data-id="' + id + '">Builder</button>' : "";
+    return '<span class="desk-row-actions"><button type="button" data-edit="' + kind + '" data-id="' + id + '">Edit</button>' + builder + '<button type="button" data-del="' + kind + '" data-id="' + id + '">Delete</button></span>';
   }
 
   async function loadDash() {
@@ -506,12 +509,41 @@
       setQuill("template-body", found.description_html || "");
       return;
     }
-    if (kind === "build") {
+    if (kind === "build" || kind === "builder") {
       var buildRes = await sb.from("builds").select("*").eq("id", id).single();
       if (buildRes.error) return status("dash-status", buildRes.error.message, "err");
+      if (kind === "builder") {
+        editingBuilder = buildRes.data;
+        show("builder");
+        return;
+      }
       editingBuild = buildRes.data;
       show("build");
     }
+  }
+
+  function openBuilder(record) {
+    editingBuilder = record;
+    if (!window.ShadeBuilder || !$("builder-root")) return;
+    ShadeBuilder.mount($("builder-root"), { record: record, onSave: saveBuilder });
+  }
+
+  async function saveBuilder(body) {
+    var payload = {
+      category: body.category,
+      playstyle: body.playstyle,
+      name: body.name,
+      short_description: body.short_description,
+      notes_html: body.notes_html,
+      loadout: body.loadout,
+      published: body.published
+    };
+    if (!payload.name) throw new Error("Name is required.");
+    var res = body.id
+      ? await sb.from("builds").update(payload).eq("id", body.id).select("id").single()
+      : await sb.from("builds").insert(payload).select("id").single();
+    if (res.error) throw res.error;
+    return res.data && res.data.id;
   }
 
   async function remove(kind, id) {
@@ -564,6 +596,7 @@
       if (go.getAttribute("data-go") === "update") resetUpdate();
       if (go.getAttribute("data-go") === "event") resetEvent();
       if (go.getAttribute("data-go") === "build") editingBuild = null;
+      if (go.getAttribute("data-go") === "builder") editingBuilder = null;
       show(go.getAttribute("data-go"));
       return;
     }
