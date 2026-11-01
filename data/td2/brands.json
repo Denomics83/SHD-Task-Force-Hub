@@ -1,21 +1,24 @@
 {
-  "source": "1/2/3-piece bonuses from the Division Fandom Brand Sets page for The Division 2. Chest and backpack are the only talent slots, from that page's introduction. Core attributes are not in that table, so core is null. Red Horizon later changed some brand bonuses in an external PDF that is not copied on the wiki page.",
+  "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
   "items": [
     {
+      "id": "brand-5-11-tactical",
       "name": "5.11 Tactical",
-      "core": null,
+      "core": "Armor",
       "bonus1": "+12% Protection from Elites",
-      "bonus2": "+100% increased threat",
+      "bonus2": "+100% Increased Threat",
       "bonus3": "+30% Hazard Protection",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/511-tactical.png"
+      "icon": "assets/icons/brands/511-tactical.png",
+      "aliases": []
     },
     {
+      "id": "brand-airaldi-holdings",
       "name": "Airaldi Holdings",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+12% Marksman Rifle Damage",
       "bonus2": "+26% Headshot Damage",
       "bonus3": "+5% Damage to Armor",
@@ -23,11 +26,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/airaldi.png"
+      "icon": "assets/icons/brands/airaldi.png",
+      "aliases": []
     },
     {
-      "name": "Alps Summit Armament",
-      "core": null,
+      "id": "brand-alps-summit-armaments",
+      "name": "Alps Summit Armaments",
+      "core": "Skill Tier",
       "bonus1": "+18% Repair Skills",
       "bonus2": "+30% Skill Duration",
       "bonus3": "+30% Skill Haste",
@@ -35,11 +40,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/alps.png"
+      "icon": "assets/icons/brands/alps.png",
+      "aliases": []
     },
     {
+      "id": "brand-badger-tuff",
       "name": "Badger Tuff",
-      "core": null,
+      "core": "Armor",
       "bonus1": "+12% Shotgun Damage",
       "bonus2": "+10% Armor on Kill",
       "bonus3": "+15% Total Armor",
@@ -47,23 +54,27 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/badger-tuff.png"
+      "icon": "assets/icons/brands/badger-tuff.png",
+      "aliases": []
     },
     {
+      "id": "brand-belstone-armory",
       "name": "Belstone Armory",
-      "core": null,
+      "core": "Armor",
       "bonus1": "+1% Armor Regen",
-      "bonus2": "+100% increased threat",
+      "bonus2": "+100% Increased Threat",
       "bonus3": "+36% Protection from Elites",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/belstone.png"
+      "icon": "assets/icons/brands/belstone.png",
+      "aliases": []
     },
     {
+      "id": "brand-brazos-de-arcabuz",
       "name": "Brazos de Arcabuz",
-      "core": null,
+      "core": "Armor",
       "bonus1": "+10% Skill Haste",
       "bonus2": "+1 Skill Tier",
       "bonus3": "+50% Magazine Size",
@@ -71,23 +82,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/brazos.png"
+      "icon": "assets/icons/brands/brazos.png",
+      "aliases": []
     },
     {
-      "name": "\u010cesk\u00e1 V\u00fdroba S.R.O.",
-      "core": null,
-      "bonus1": "+8% Critical Hit Chance",
-      "bonus2": "+24% Shotgun Damage",
-      "bonus3": "+30% Hazard Protection",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/ceska.png"
-    },
-    {
+      "id": "brand-china-light-industries-corporation",
       "name": "China Light Industries Corporation",
-      "core": null,
+      "core": "Skill Tier",
       "bonus1": "+15% Explosive Damage",
       "bonus2": "+20% Status Effects",
       "bonus3": "+30% Skill Haste",
@@ -95,11 +96,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/china-light.png"
+      "icon": "assets/icons/brands/china-light.png",
+      "aliases": []
     },
     {
+      "id": "brand-douglas-and-harding",
       "name": "Douglas & Harding",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+24% Pistol Damage",
       "bonus2": "+20% Skill Health",
       "bonus3": "+50% Accuracy",
@@ -107,11 +110,27 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/douglas-harding.png"
+      "icon": "assets/icons/brands/douglasharding.png",
+      "aliases": []
     },
     {
+      "id": "brand-edelweiss-gpz",
+      "name": "Edelweiss GPz",
+      "core": "Skill Tier",
+      "bonus1": "+18% Repair Skill",
+      "bonus2": "+20% Skill Haste",
+      "bonus3": "+8% Skill Efficiency",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/edelweissgpz.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-electrique",
       "name": "Electrique",
-      "core": null,
+      "core": "Skill Tier",
       "bonus1": "+10% Status Effects",
       "bonus2": "+20% Hazard Protection",
       "bonus3": "+8% Skill Efficiency",
@@ -119,11 +138,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/electrique.png"
+      "icon": "assets/icons/brands/electrique.png",
+      "aliases": []
     },
     {
+      "id": "brand-empress-international",
       "name": "Empress International",
-      "core": null,
+      "core": "Skill Tier",
       "bonus1": "+10% Skill Health",
       "bonus2": "+13% Skill Damage",
       "bonus3": "+8% Skill Efficiency",
@@ -131,59 +152,69 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/empress.png"
+      "icon": "assets/icons/brands/empress.png",
+      "aliases": []
     },
     {
+      "id": "brand-fenris-group-ab",
       "name": "Fenris Group AB",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+12% Assault Rifle Damage",
-      "bonus2": "+30% Mag Size",
+      "bonus2": "+32% Magazine Size",
       "bonus3": "+50% Stability",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/fenris.png"
+      "icon": "assets/icons/brands/fenris.png",
+      "aliases": []
     },
     {
+      "id": "brand-gila-guard",
       "name": "Gila Guard",
-      "core": null,
+      "core": "Armor",
       "bonus1": "+5% Total Armor",
       "bonus2": "+20% Hazard Protection",
-      "bonus3": "+2% Armor Regeneration",
+      "bonus3": "+2% Armor Regen",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/gila.png"
+      "icon": "assets/icons/brands/gila.png",
+      "aliases": []
     },
     {
+      "id": "brand-golan-gear-ltd",
+      "name": "Golan Gear Ltd",
+      "core": "Armor",
+      "bonus1": "+20% Explosive Resistance",
+      "bonus2": "+1.5% Armor Regen",
+      "bonus3": "+150% Increased Threat",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/golangearltd.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-grupo-sombra-s-a",
       "name": "Grupo Sombra S.A.",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+13% Critical Hit Damage",
-      "bonus2": "+20% Explosives Damage",
+      "bonus2": "+20% Explosive Damage",
       "bonus3": "+39% Headshot Damage",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/grupo.png"
+      "icon": "assets/icons/brands/gruposombrasa.png",
+      "aliases": []
     },
     {
-      "name": "Golan Gear",
-      "core": null,
-      "bonus1": "+20% Explosive resistance",
-      "bonus2": "+1.5% Armor Regeneration",
-      "bonus3": "+100% Increased Threat",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": null
-    },
-    {
+      "id": "brand-habsburg-guard",
       "name": "Habsburg Guard",
-      "core": null,
+      "core": "Armor",
       "bonus1": "+13% Headshot Damage",
       "bonus2": "+24% Marksman Rifle Damage",
       "bonus3": "+25% Status Effects",
@@ -191,11 +222,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/habsburg.png"
+      "icon": "assets/icons/brands/habsburg.png",
+      "aliases": []
     },
     {
+      "id": "brand-hana-u-corporation",
       "name": "Hana-U Corporation",
-      "core": null,
+      "core": "Skill Tier",
       "bonus1": "+10% Skill Haste",
       "bonus2": "+13% Skill Damage",
       "bonus3": "+18% Weapon Damage",
@@ -203,47 +236,55 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/hana-u.png"
+      "icon": "assets/icons/brands/hana-u.png",
+      "aliases": []
     },
     {
+      "id": "brand-imminence-armaments",
       "name": "Imminence Armaments",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+6% Weapon Damage",
       "bonus2": "+48% Pistol Damage",
-      "bonus3": "+30% skill Health",
+      "bonus3": "+30% Skill Health",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": null
+      "icon": "assets/icons/brands/imminencearmaments.png",
+      "aliases": []
     },
     {
+      "id": "brand-legatus-s-p-a",
       "name": "Legatus S.p.A.",
-      "core": null,
-      "bonus1": "+15% Mag Size",
+      "core": "Weapon Damage",
+      "bonus1": "+15% Magazine Size",
       "bonus2": "+24% SMG Damage",
       "bonus3": "+105% Optimal Range",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": null
+      "icon": "assets/icons/brands/legatusspa.png",
+      "aliases": []
     },
     {
+      "id": "brand-lengmo",
       "name": "Lengmo",
-      "core": null,
-      "bonus1": "+20% Explosive Resistance",
-      "bonus2": "+20% Skill Health",
-      "bonus3": "+30% LMG Damage",
+      "core": "Armor",
+      "bonus1": "+15% Reload Speed",
+      "bonus2": "+24% LMG Damage",
+      "bonus3": "+30% Weapon Handling",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/lengmo.png"
+      "icon": "assets/icons/brands/lengmo.png",
+      "aliases": []
     },
     {
+      "id": "brand-murakami-industries",
       "name": "Murakami Industries",
-      "core": null,
+      "core": "Skill Tier",
       "bonus1": "+15% Skill Duration",
       "bonus2": "+35% Repair Skills",
       "bonus3": "+18% Skill Damage",
@@ -251,11 +292,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/murakami.png"
+      "icon": "assets/icons/brands/murakami.png",
+      "aliases": []
     },
     {
+      "id": "brand-overlord-armaments",
       "name": "Overlord Armaments",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+12% Rifle Damage",
       "bonus2": "+30% Accuracy",
       "bonus3": "+30% Weapon Handling",
@@ -263,23 +306,27 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/overlord.png"
+      "icon": "assets/icons/brands/overlord.png",
+      "aliases": []
     },
     {
+      "id": "brand-palisade-steelworks",
       "name": "Palisade Steelworks",
-      "core": null,
-      "bonus1": "+10% Armor on kill",
-      "bonus2": "+24% Protection From Elites",
+      "core": "Armor",
+      "bonus1": "+10% Armor on Kill",
+      "bonus2": "+24% Protection from Elites",
       "bonus3": "+1 Skill Tier",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/palisade.png"
+      "icon": "assets/icons/brands/palisade.png",
+      "aliases": []
     },
     {
+      "id": "brand-petrov-defense-group",
       "name": "Petrov Defense Group",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+12% LMG Damage",
       "bonus2": "+15% Weapon Handling",
       "bonus3": "+50% Ammo Capacity",
@@ -287,11 +334,13 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/petrov.png"
+      "icon": "assets/icons/brands/petrov.png",
+      "aliases": []
     },
     {
+      "id": "brand-providence-defense",
       "name": "Providence Defense",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+13% Headshot Damage",
       "bonus2": "+8% Critical Hit Chance",
       "bonus3": "+13% Critical Hit Damage",
@@ -299,131 +348,27 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/providence.png"
+      "icon": "assets/icons/brands/providence.png",
+      "aliases": []
     },
     {
+      "id": "brand-richter-and-kaiser-gmbh",
       "name": "Richter & Kaiser GmbH",
-      "core": null,
-      "bonus1": "+10% Skill haste",
+      "core": "Skill Tier",
+      "bonus1": "+10% Skill Haste",
       "bonus2": "+40% Explosive Resistance",
-      "bonus3": "+52% Skill Repair",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/richter-kaiser.png"
-    },
-    {
-      "name": "Shiny Monkey Gear",
-      "core": null,
-      "bonus1": "+15% Skill Duration",
-      "bonus2": "+5% Skill Efficiency",
       "bonus3": "+52% Repair Skills",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": null
+      "icon": "assets/icons/brands/richterkaisergmbh.png",
+      "aliases": []
     },
     {
-      "name": "Sokolov Concern",
-      "core": null,
-      "bonus1": "+10% SMG Damage",
-      "bonus2": "+13% Critical Hit Damage",
-      "bonus3": "+8% Critical Hit Chance",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/sokolov.png"
-    },
-    {
-      "name": "Uzina Getica",
-      "core": null,
-      "bonus1": "+5% Armor",
-      "bonus2": "+10% Armor on kill",
-      "bonus3": "+30% Hazard protection",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/uzina-getica.png"
-    },
-    {
-      "name": "Walker, Harris & Co.",
-      "core": null,
-      "bonus1": "+6% Weapon Damage",
-      "bonus2": "+5% Damage to Armor",
-      "bonus3": "+10% Damage to Health",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/walker-harris.png"
-    },
-    {
-      "name": "Yaahl Gear",
-      "core": null,
-      "bonus1": "+10% Hazard Protection",
-      "bonus2": "+12% Weapon Damage",
-      "bonus3": "+40% Pulse Resistance",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/yaahl.png"
-    },
-    {
-      "name": "Wyvern Wear",
-      "core": null,
-      "bonus1": "+8% Skill Damage",
-      "bonus2": "+20% Status Effects",
-      "bonus3": "+45% Skill Duration",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/wyvern.png"
-    },
-    {
-      "name": "Zwiadowka SP. z o.o.",
-      "core": null,
-      "bonus1": "+15% Magazine Size",
-      "bonus2": "+24% Rifle Damage",
-      "bonus3": "+30% Weapon Handling",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/zwiadowka.png"
-    },
-    {
-      "name": "Urban Lookout",
-      "core": null,
-      "bonus1": "+5% Weapon Handling",
-      "bonus2": "+24% MMR Damage",
-      "bonus3": "+24% Skill Duration",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": null
-    },
-    {
-      "name": "Unit Alloys",
-      "core": null,
-      "bonus1": "+5% Rate of Fire",
-      "bonus2": "+24% AR Damage",
-      "bonus3": "+50% Mag Size",
-      "talentSlots": [
-        "chest",
-        "backpack"
-      ],
-      "icon": "assets/icons/brands/unit-alloys.png"
-    },
-    {
+      "id": "brand-royal-works",
       "name": "Royal Works",
-      "core": null,
+      "core": "Weapon Damage",
       "bonus1": "+5% Weapon Handling",
       "bonus2": "+24% LMG Damage",
       "bonus3": "+50% Accuracy",
@@ -431,19 +376,167 @@
         "chest",
         "backpack"
       ],
-      "icon": "assets/icons/brands/royal-works.png"
+      "icon": "assets/icons/brands/royal-works.png",
+      "aliases": []
     },
     {
-      "name": "Edelweiss GPz",
-      "core": null,
-      "bonus1": "+8% Repair Skills",
-      "bonus2": "+20% Skill Haste",
-      "bonus3": "+8% Skill Efficiency",
+      "id": "brand-shiny-monkey-gear",
+      "name": "Shiny Monkey Gear",
+      "core": "Skill Tier",
+      "bonus1": "+15% Skill Duration",
+      "bonus2": "+5% Skill Efficiency",
+      "bonus3": "+52% Repair Skills",
       "talentSlots": [
         "chest",
         "backpack"
       ],
-      "icon": null
+      "icon": "assets/icons/brands/shinymonkeygear.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-sokolov-concern",
+      "name": "Sokolov Concern",
+      "core": "Weapon Damage",
+      "bonus1": "+12% SMG Damage",
+      "bonus2": "+13% Critical Hit Damage",
+      "bonus3": "+8% Critical Hit Chance",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/sokolov.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-unit-alloys",
+      "name": "Unit Alloys",
+      "core": "Weapon Damage",
+      "bonus1": "+5% Rate of Fire",
+      "bonus2": "+24% Assault Rifle Damage",
+      "bonus3": "+50% Magazine Size",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/unit-alloys.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-urban-lookout",
+      "name": "Urban Lookout",
+      "core": "Weapon Damage",
+      "bonus1": "+5% Weapon Handling",
+      "bonus2": "+24% Marksman Rifle Damage",
+      "bonus3": "+45% Skill Duration",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/urbanlookout.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-uzina-getica",
+      "name": "Uzina Getica",
+      "core": "Armor",
+      "bonus1": "+5% Total Armor",
+      "bonus2": "+10% Armor on Kill",
+      "bonus3": "+30% Hazard Protection",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/uzina-getica.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-walker-harris-and-co",
+      "name": "Walker, Harris & Co.",
+      "core": "Weapon Damage",
+      "bonus1": "+6% Weapon Damage",
+      "bonus2": "+5% Damage to Armor",
+      "bonus3": "+10% Damage to Health",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/walkerharrisco.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-wyvern-wear",
+      "name": "Wyvern Wear",
+      "core": "Skill Tier",
+      "bonus1": "+8% Skill Damage",
+      "bonus2": "+20% Status Effects",
+      "bonus3": "+45% Skill Duration",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/wyvern.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-yaahl-gear",
+      "name": "Yaahl Gear",
+      "core": "Armor",
+      "bonus1": "+10% Hazard Protection",
+      "bonus2": "+10% Weapon Damage",
+      "bonus3": "+40% Pulse Resistance",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/yaahl.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-zwiadowka-sp-z-o-o",
+      "name": "Zwiadowka Sp.z o.o.",
+      "core": "Weapon Damage",
+      "bonus1": "+15% Magazine Size",
+      "bonus2": "+24% Rifle Damage",
+      "bonus3": "+30% Weapon Handling",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/zwiadowkaspzoo.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-ceska-vyroba-s-r-o",
+      "name": "Česká Výroba s.r.o.",
+      "core": "Weapon Damage",
+      "bonus1": "+8% Critical Hit Chance",
+      "bonus2": "+24% Shotgun Damage",
+      "bonus3": "+30% Hazard Protection",
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": "assets/icons/brands/ceskavyrobasro.png",
+      "aliases": []
+    },
+    {
+      "id": "brand-improvised",
+      "name": "Improvised",
+      "core": "Armor",
+      "bonus1": null,
+      "bonus2": null,
+      "bonus3": null,
+      "talentSlots": [
+        "chest",
+        "backpack"
+      ],
+      "icon": null,
+      "aliases": [
+        "Improvised Gear"
+      ],
+      "unverified": [
+        "Not on the ProtoTrack set index. The community brand table lists no 1/2/3-piece bonuses."
+      ]
     }
   ]
 }

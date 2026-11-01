@@ -1,5 +1,5 @@
 {
-  "source": "The six Division 2 specializations (Sharpshooter, Demolitionist, Survivalist, then Gunner, Technician, and Firewall from Warlords of New York).",
+  "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
   "items": [
     "Sharpshooter",
     "Demolitionist",
@@ -7,5 +7,49 @@
     "Gunner",
     "Technician",
     "Firewall"
+  ],
+  "details": [
+    {
+      "id": "spec-sharpshooter",
+      "name": "Sharpshooter",
+      "grenade": "Flashbang Grenade",
+      "sidearm": null,
+      "icon": "assets/icons/specializations/sharpshooter.png"
+    },
+    {
+      "id": "spec-demolitionist",
+      "name": "Demolitionist",
+      "grenade": "Fragmentation Grenade",
+      "sidearm": null,
+      "icon": null
+    },
+    {
+      "id": "spec-survivalist",
+      "name": "Survivalist",
+      "grenade": "Incendiary Grenade",
+      "sidearm": null,
+      "icon": "assets/icons/specializations/survivalist.png"
+    },
+    {
+      "id": "spec-gunner",
+      "name": "Gunner",
+      "grenade": "Riot Foam Grenade",
+      "sidearm": null,
+      "icon": "assets/icons/specializations/gunner.png"
+    },
+    {
+      "id": "spec-technician",
+      "name": "Technician",
+      "grenade": "EMP Grenade",
+      "sidearm": null,
+      "icon": "assets/icons/specializations/technician.png"
+    },
+    {
+      "id": "spec-firewall",
+      "name": "Firewall",
+      "grenade": "Cluster Grenade",
+      "sidearm": null,
+      "icon": "assets/icons/specializations/firewall.png"
+    }
   ]
 }

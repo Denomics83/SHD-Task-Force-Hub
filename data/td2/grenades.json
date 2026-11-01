@@ -1,28 +1,34 @@
 {
-  "source": "Specialization grenades. Proper names were not re-fetched (wiki returned 403); labels include the specialization so the slot is still the real grenade for that spec.",
+  "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
   "items": [
     {
+      "id": "grenade-flashbang-grenade",
       "name": "Flashbang Grenade",
       "specialization": "Sharpshooter"
     },
     {
-      "name": "Demolitionist Grenade",
+      "id": "grenade-fragmentation-grenade",
+      "name": "Fragmentation Grenade",
       "specialization": "Demolitionist"
     },
     {
+      "id": "grenade-incendiary-grenade",
       "name": "Incendiary Grenade",
       "specialization": "Survivalist"
     },
     {
-      "name": "Gunner Grenade",
+      "id": "grenade-riot-foam-grenade",
+      "name": "Riot Foam Grenade",
       "specialization": "Gunner"
     },
     {
-      "name": "Technician Grenade",
+      "id": "grenade-emp-grenade",
+      "name": "EMP Grenade",
       "specialization": "Technician"
     },
     {
-      "name": "Firewall Grenade",
+      "id": "grenade-cluster-grenade",
+      "name": "Cluster Grenade",
       "specialization": "Firewall"
     }
   ]

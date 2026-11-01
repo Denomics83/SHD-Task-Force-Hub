@@ -1,201 +1,520 @@
 {
-  "source": "Division 2 skill variants. The wiki skills page returned 403, so variant lists were not re-checked against that page and may miss a seasonal variant.",
+  "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
   "items": [
     {
-      "name": "Assault Turret",
+      "id": "skill-precision-smart-cover",
+      "name": "Precision Smart Cover",
+      "family": "Smart Cover",
       "variants": [
-        "Base"
-      ]
+        "Precision Smart Cover",
+        "Fortified Smart Cover"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
-      "name": "Incinerator Turret",
+      "id": "skill-fortified-smart-cover",
+      "name": "Fortified Smart Cover",
+      "family": "Smart Cover",
       "variants": [
-        "Base"
-      ]
+        "Precision Smart Cover",
+        "Fortified Smart Cover"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
-      "name": "Sniper Turret",
+      "id": "skill-burn-sticky-bomb",
+      "name": "Burn Sticky Bomb",
+      "family": "Sticky Bomb",
       "variants": [
-        "Base"
-      ]
+        "Burn Sticky Bomb",
+        "EMP Sticky Bomb",
+        "Explosive Sticky Bomb"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
-      "name": "Artillery Turret",
+      "id": "skill-emp-sticky-bomb",
+      "name": "EMP Sticky Bomb",
+      "family": "Sticky Bomb",
       "variants": [
-        "Base"
-      ]
+        "Burn Sticky Bomb",
+        "EMP Sticky Bomb",
+        "Explosive Sticky Bomb"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
-      "name": "Striker Drone",
+      "id": "skill-explosive-sticky-bomb",
+      "name": "Explosive Sticky Bomb",
+      "family": "Sticky Bomb",
       "variants": [
-        "Base"
-      ]
+        "Burn Sticky Bomb",
+        "EMP Sticky Bomb",
+        "Explosive Sticky Bomb"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
-      "name": "Bombardier Drone",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Fixer Drone",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Defender Drone",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Cluster Seeker Mine",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Explosive Seeker Mine",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Airburst Seeker Mine",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Mender Seeker Mine",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Reinforcer Chem Launcher",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Firestarter Chem Launcher",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Oxidizer Chem Launcher",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Reviver Hive",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Stinger Hive",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Restorer Hive",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Booster Hive",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Bulwark Ballistic Shield",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Crusader Ballistic Shield",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Striker Ballistic Shield",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Deflector Ballistic Shield",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Riot Foam Chem Launcher",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Blinder Firefly",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Burster Firefly",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Demolisher Firefly",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Pulse",
-      "variants": [
-        "Scanner",
-        "Remote",
-        "Jammer",
-        "Banshee"
-      ]
-    },
-    {
-      "name": "Decoy",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
-      "name": "Shock Trap",
-      "variants": [
-        "Base"
-      ]
-    },
-    {
+      "id": "skill-repair-trap",
       "name": "Repair Trap",
+      "family": "Trap",
       "variants": [
-        "Base"
-      ]
+        "Repair Trap",
+        "Shock Trap",
+        "Shrapnel Trap"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
-      "name": "Sticky Bomb",
+      "id": "skill-shock-trap",
+      "name": "Shock Trap",
+      "family": "Trap",
       "variants": [
-        "Explosive",
-        "Burn"
-      ]
+        "Repair Trap",
+        "Shock Trap",
+        "Shrapnel Trap"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-shrapnel-trap",
+      "name": "Shrapnel Trap",
+      "family": "Trap",
+      "variants": [
+        "Repair Trap",
+        "Shock Trap",
+        "Shrapnel Trap"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-decoy",
+      "name": "Decoy",
+      "family": "Decoy",
+      "variants": [
+        "Decoy"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-scanner-pulse",
+      "name": "Scanner Pulse",
+      "family": "Pulse",
+      "variants": [
+        "Scanner Pulse",
+        "Remote Pulse",
+        "Jammer Pulse",
+        "Banshee Pulse",
+        "Achilles Pulse"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-remote-pulse",
+      "name": "Remote Pulse",
+      "family": "Pulse",
+      "variants": [
+        "Scanner Pulse",
+        "Remote Pulse",
+        "Jammer Pulse",
+        "Banshee Pulse",
+        "Achilles Pulse"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-jammer-pulse",
+      "name": "Jammer Pulse",
+      "family": "Pulse",
+      "variants": [
+        "Scanner Pulse",
+        "Remote Pulse",
+        "Jammer Pulse",
+        "Banshee Pulse",
+        "Achilles Pulse"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-banshee-pulse",
+      "name": "Banshee Pulse",
+      "family": "Pulse",
+      "variants": [
+        "Scanner Pulse",
+        "Remote Pulse",
+        "Jammer Pulse",
+        "Banshee Pulse",
+        "Achilles Pulse"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-achilles-pulse",
+      "name": "Achilles Pulse",
+      "family": "Pulse",
+      "variants": [
+        "Scanner Pulse",
+        "Remote Pulse",
+        "Jammer Pulse",
+        "Banshee Pulse",
+        "Achilles Pulse"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-assault-turret",
+      "name": "Assault Turret",
+      "family": "Turret",
+      "variants": [
+        "Assault Turret",
+        "Incinerator Turret",
+        "Sniper Turret",
+        "Artillery Turret"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-incinerator-turret",
+      "name": "Incinerator Turret",
+      "family": "Turret",
+      "variants": [
+        "Assault Turret",
+        "Incinerator Turret",
+        "Sniper Turret",
+        "Artillery Turret"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-sniper-turret",
+      "name": "Sniper Turret",
+      "family": "Turret",
+      "variants": [
+        "Assault Turret",
+        "Incinerator Turret",
+        "Sniper Turret",
+        "Artillery Turret"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-artillery-turret",
+      "name": "Artillery Turret",
+      "family": "Turret",
+      "variants": [
+        "Assault Turret",
+        "Incinerator Turret",
+        "Sniper Turret",
+        "Artillery Turret"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-restorer-hive",
+      "name": "Restorer Hive",
+      "family": "Hive",
+      "variants": [
+        "Restorer Hive",
+        "Stinger Hive",
+        "Reviver Hive",
+        "Booster Hive",
+        "Artificer Hive"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-stinger-hive",
+      "name": "Stinger Hive",
+      "family": "Hive",
+      "variants": [
+        "Restorer Hive",
+        "Stinger Hive",
+        "Reviver Hive",
+        "Booster Hive",
+        "Artificer Hive"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-reviver-hive",
+      "name": "Reviver Hive",
+      "family": "Hive",
+      "variants": [
+        "Restorer Hive",
+        "Stinger Hive",
+        "Reviver Hive",
+        "Booster Hive",
+        "Artificer Hive"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-booster-hive",
+      "name": "Booster Hive",
+      "family": "Hive",
+      "variants": [
+        "Restorer Hive",
+        "Stinger Hive",
+        "Reviver Hive",
+        "Booster Hive",
+        "Artificer Hive"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-artificer-hive",
+      "name": "Artificer Hive",
+      "family": "Hive",
+      "variants": [
+        "Restorer Hive",
+        "Stinger Hive",
+        "Reviver Hive",
+        "Booster Hive",
+        "Artificer Hive"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-reinforcer-chem-launcher",
+      "name": "Reinforcer Chem Launcher",
+      "family": "Chem Launcher",
+      "variants": [
+        "Reinforcer Chem Launcher",
+        "Firestarter Chem Launcher",
+        "Riot Foam Chem Launcher",
+        "Oxidizer Chem Launcher"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-firestarter-chem-launcher",
+      "name": "Firestarter Chem Launcher",
+      "family": "Chem Launcher",
+      "variants": [
+        "Reinforcer Chem Launcher",
+        "Firestarter Chem Launcher",
+        "Riot Foam Chem Launcher",
+        "Oxidizer Chem Launcher"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-riot-foam-chem-launcher",
+      "name": "Riot Foam Chem Launcher",
+      "family": "Chem Launcher",
+      "variants": [
+        "Reinforcer Chem Launcher",
+        "Firestarter Chem Launcher",
+        "Riot Foam Chem Launcher",
+        "Oxidizer Chem Launcher"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-oxidizer-chem-launcher",
+      "name": "Oxidizer Chem Launcher",
+      "family": "Chem Launcher",
+      "variants": [
+        "Reinforcer Chem Launcher",
+        "Firestarter Chem Launcher",
+        "Riot Foam Chem Launcher",
+        "Oxidizer Chem Launcher"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-blinder-firefly",
+      "name": "Blinder Firefly",
+      "family": "Firefly",
+      "variants": [
+        "Blinder Firefly",
+        "Burster Firefly",
+        "Demolisher Firefly"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-burster-firefly",
+      "name": "Burster Firefly",
+      "family": "Firefly",
+      "variants": [
+        "Blinder Firefly",
+        "Burster Firefly",
+        "Demolisher Firefly"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-demolisher-firefly",
+      "name": "Demolisher Firefly",
+      "family": "Firefly",
+      "variants": [
+        "Blinder Firefly",
+        "Burster Firefly",
+        "Demolisher Firefly"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-explosive-seeker-mine",
+      "name": "Explosive Seeker Mine",
+      "family": "Seeker Mine",
+      "variants": [
+        "Explosive Seeker Mine",
+        "Airburst Seeker Mine",
+        "Cluster Seeker Mine",
+        "Mender Seeker Mine"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-airburst-seeker-mine",
+      "name": "Airburst Seeker Mine",
+      "family": "Seeker Mine",
+      "variants": [
+        "Explosive Seeker Mine",
+        "Airburst Seeker Mine",
+        "Cluster Seeker Mine",
+        "Mender Seeker Mine"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-cluster-seeker-mine",
+      "name": "Cluster Seeker Mine",
+      "family": "Seeker Mine",
+      "variants": [
+        "Explosive Seeker Mine",
+        "Airburst Seeker Mine",
+        "Cluster Seeker Mine",
+        "Mender Seeker Mine"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-mender-seeker-mine",
+      "name": "Mender Seeker Mine",
+      "family": "Seeker Mine",
+      "variants": [
+        "Explosive Seeker Mine",
+        "Airburst Seeker Mine",
+        "Cluster Seeker Mine",
+        "Mender Seeker Mine"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-striker-drone",
+      "name": "Striker Drone",
+      "family": "Drone",
+      "variants": [
+        "Striker Drone",
+        "Defender Drone",
+        "Bombardier Drone",
+        "Fixer Drone",
+        "Tactician Drone"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-defender-drone",
+      "name": "Defender Drone",
+      "family": "Drone",
+      "variants": [
+        "Striker Drone",
+        "Defender Drone",
+        "Bombardier Drone",
+        "Fixer Drone",
+        "Tactician Drone"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-bombardier-drone",
+      "name": "Bombardier Drone",
+      "family": "Drone",
+      "variants": [
+        "Striker Drone",
+        "Defender Drone",
+        "Bombardier Drone",
+        "Fixer Drone",
+        "Tactician Drone"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-fixer-drone",
+      "name": "Fixer Drone",
+      "family": "Drone",
+      "variants": [
+        "Striker Drone",
+        "Defender Drone",
+        "Bombardier Drone",
+        "Fixer Drone",
+        "Tactician Drone"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-tactician-drone",
+      "name": "Tactician Drone",
+      "family": "Drone",
+      "variants": [
+        "Striker Drone",
+        "Defender Drone",
+        "Bombardier Drone",
+        "Fixer Drone",
+        "Tactician Drone"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-bulwark-shield",
+      "name": "Bulwark Shield",
+      "family": "Shield",
+      "variants": [
+        "Bulwark Shield",
+        "Crusader Shield",
+        "Deflector Shield",
+        "Striker Shield"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-crusader-shield",
+      "name": "Crusader Shield",
+      "family": "Shield",
+      "variants": [
+        "Bulwark Shield",
+        "Crusader Shield",
+        "Deflector Shield",
+        "Striker Shield"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-deflector-shield",
+      "name": "Deflector Shield",
+      "family": "Shield",
+      "variants": [
+        "Bulwark Shield",
+        "Crusader Shield",
+        "Deflector Shield",
+        "Striker Shield"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
+    },
+    {
+      "id": "skill-striker-shield",
+      "name": "Striker Shield",
+      "family": "Shield",
+      "variants": [
+        "Bulwark Shield",
+        "Crusader Shield",
+        "Deflector Shield",
+        "Striker Shield"
+      ],
+      "icon": "assets/icons/loot/generic.svg"
     }
   ]
 }

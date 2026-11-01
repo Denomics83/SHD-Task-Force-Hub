@@ -1,98 +1,327 @@
 {
-  "source": "Max values are only included where a Division wiki page states them. Coyote's Mask and Ridgeway's Pride both list Weapon Damage max 15%, Critical Hit Chance max 6%, Critical Hit Damage max 12%. Other attributes are real gear stats with no max stored.",
+  "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
   "cores": [
     {
-      "name": "Weapon Damage",
-      "max": 15,
-      "unit": "%"
-    },
-    {
+      "id": "armor-gear-core",
       "name": "Armor",
-      "max": null,
+      "max": 170000,
+      "protoMax": 255000,
       "unit": ""
     },
     {
+      "id": "weapon-damage-gear-core",
+      "name": "Weapon Damage",
+      "max": 15,
+      "protoMax": 22.5,
+      "unit": "%"
+    },
+    {
+      "id": "skill-tier-gear-core",
       "name": "Skill Tier",
       "max": 1,
+      "protoMax": 1.5,
       "unit": ""
     }
   ],
   "minors": [
     {
-      "name": "Critical Hit Chance",
+      "id": "damage-to-armor-weapon-minor",
+      "name": "Damage to Armor",
       "max": 6,
-      "unit": "%"
+      "protoMax": 9,
+      "unit": "%",
+      "group": "weapon"
     },
     {
-      "name": "Critical Hit Damage",
-      "max": 12,
-      "unit": "%"
+      "id": "critical-hit-chance-weapon-minor",
+      "name": "Critical Hit Chance",
+      "max": 9.5,
+      "protoMax": 14.5,
+      "unit": "%",
+      "group": "weapon"
     },
     {
+      "id": "health-damage-weapon-minor",
+      "name": "Health Damage",
+      "max": 10,
+      "protoMax": 14.5,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "dtoc-weapon-minor",
+      "name": "DTOC",
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "headshot-damage-weapon-minor",
       "name": "Headshot Damage",
-      "max": null,
-      "unit": "%"
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "weapon"
     },
     {
+      "id": "critical-hit-damage-weapon-minor",
+      "name": "Critical Hit Damage",
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "reload-speed-weapon-minor",
+      "name": "Reload Speed",
+      "max": 12,
+      "protoMax": 18,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "stability-weapon-minor",
+      "name": "Stability",
+      "max": 12,
+      "protoMax": 18,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "accuracy-weapon-minor",
+      "name": "Accuracy",
+      "max": 12,
+      "protoMax": 18,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "optimal-range-weapon-minor",
+      "name": "Optimal Range",
+      "max": 24,
+      "protoMax": 36,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "magazine-size-weapon-minor",
+      "name": "Magazine Size",
+      "max": 12.5,
+      "protoMax": 18.75,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "rate-of-fire-weapon-minor",
+      "name": "Rate of Fire",
+      "max": 5,
+      "protoMax": 7.5,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "swap-speed-weapon-minor",
+      "name": "Swap Speed",
+      "max": 15,
+      "protoMax": 22.5,
+      "unit": "%",
+      "group": "weapon"
+    },
+    {
+      "id": "weapon-handling-gear-minor",
       "name": "Weapon Handling",
-      "max": null,
-      "unit": "%"
+      "max": 8,
+      "protoMax": 12,
+      "unit": "%",
+      "group": "gear"
     },
     {
+      "id": "armor-regeneration-gear-minor",
       "name": "Armor Regeneration",
-      "max": null,
-      "unit": ""
+      "max": 4925,
+      "protoMax": 7388,
+      "unit": "",
+      "group": "gear"
     },
     {
-      "name": "Armor on Kill",
-      "max": null,
-      "unit": ""
-    },
-    {
-      "name": "Health",
-      "max": null,
-      "unit": ""
-    },
-    {
+      "id": "hazard-protection-gear-minor",
       "name": "Hazard Protection",
-      "max": null,
-      "unit": "%"
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "gear"
     },
     {
-      "name": "Skill Damage",
-      "max": null,
-      "unit": "%"
+      "id": "health-gear-minor",
+      "name": "Health",
+      "max": 18935,
+      "protoMax": 28403,
+      "unit": "",
+      "group": "gear"
     },
     {
+      "id": "explosive-resistance-gear-minor",
+      "name": "Explosive Resistance",
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "gear"
+    },
+    {
+      "id": "skill-haste-gear-minor",
       "name": "Skill Haste",
-      "max": null,
-      "unit": "%"
+      "max": 12,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "gear"
     },
     {
-      "name": "Skill Repair",
-      "max": null,
-      "unit": "%"
+      "id": "skill-damage-gear-minor",
+      "name": "Skill Damage",
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "gear"
     },
     {
-      "name": "Status Effects",
-      "max": null,
-      "unit": "%"
-    },
-    {
+      "id": "repair-skills-gear-minor",
       "name": "Repair Skills",
-      "max": null,
-      "unit": "%"
+      "max": 20,
+      "protoMax": 30,
+      "unit": "%",
+      "group": "gear"
+    },
+    {
+      "id": "status-effects-gear-minor",
+      "name": "Status Effects",
+      "max": 10,
+      "protoMax": 15,
+      "unit": "%",
+      "group": "gear"
     }
   ],
   "mods": [
     "Critical Hit Chance",
     "Critical Hit Damage",
     "Headshot Damage",
+    "Protection from Elites",
+    "Armor on Kill",
+    "Burn Resistance",
+    "Bleed Resistance",
+    "Shock Resistance",
+    "Disrupt Resistance",
+    "Blind/Deaf Resistance",
+    "Disorient Resistance",
+    "Ensnare Resistance",
+    "Pulse Resistance",
+    "Incoming Repairs",
     "Skill Haste",
     "Skill Duration",
-    "Repair Skills",
-    "Protection from Elites",
-    "Incoming Repairs",
-    "Armor on Kill"
+    "Repair Skills"
+  ],
+  "modCaps": [
+    {
+      "id": "critical-hit-chance-gear-mod",
+      "name": "Critical Hit Chance",
+      "max": 6,
+      "unit": "%"
+    },
+    {
+      "id": "critical-hit-damage-gear-mod",
+      "name": "Critical Hit Damage",
+      "max": 12,
+      "unit": "%"
+    },
+    {
+      "id": "headshot-damage-gear-mod",
+      "name": "Headshot Damage",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "protection-from-elites-gear-mod",
+      "name": "Protection from Elites",
+      "max": 13,
+      "unit": "%"
+    },
+    {
+      "id": "armor-on-kill-gear-mod",
+      "name": "Armor on Kill",
+      "max": 18935,
+      "unit": ""
+    },
+    {
+      "id": "burn-resistance-gear-mod",
+      "name": "Burn Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "bleed-resistance-gear-mod",
+      "name": "Bleed Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "shock-resistance-gear-mod",
+      "name": "Shock Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "disrupt-resistance-gear-mod",
+      "name": "Disrupt Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "blind-deaf-resistance-gear-mod",
+      "name": "Blind/Deaf Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "disorient-resistance-gear-mod",
+      "name": "Disorient Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "ensnare-resistance-gear-mod",
+      "name": "Ensnare Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "pulse-resistance-gear-mod",
+      "name": "Pulse Resistance",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "incoming-repairs-gear-mod",
+      "name": "Incoming Repairs",
+      "max": 20,
+      "unit": "%"
+    },
+    {
+      "id": "skill-haste-gear-mod",
+      "name": "Skill Haste",
+      "max": 12,
+      "unit": "%"
+    },
+    {
+      "id": "skill-duration-gear-mod",
+      "name": "Skill Duration",
+      "max": 10,
+      "unit": "%"
+    },
+    {
+      "id": "repair-skills-gear-mod",
+      "name": "Repair Skills",
+      "max": 20,
+      "unit": "%"
+    }
   ]
 }
