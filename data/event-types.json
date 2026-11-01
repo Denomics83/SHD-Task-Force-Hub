@@ -3,40 +3,40 @@
     {
       "id": "red-moon-unleashed",
       "name": "Red Moon Unleashed",
-      "description": "Limited-time event — earn event keys",
+      "description": "Moon Cultists, Revenant Bounties, event keys and reward caches. Runs 15 Oct to 3 Nov.",
       "rewards": "details coming soon",
       "modifiers": "details coming soon",
-      "tasks": "details coming soon",
+      "tasks": "First 150 daily Moon Cultist kills need half the usual keys. Daily Boost and the 20 Red Moon Altars reset at 08:00 UTC.",
       "cardLabel": "Announcement",
       "accent": "#c43b3b",
       "image": "assets/events/season-hero.jpg",
-      "source": "",
+      "source": "ProtoTrack Seasonal Calendar · checked 1 Nov 2026",
       "suggested": ""
     },
     {
       "id": "expertise-surge",
       "name": "Expertise Surge",
-      "description": "Limited-time expertise progress window.",
+      "description": "Double Expertise upgrade materials from all sources, including Exotic Components.",
       "rewards": "add details",
       "modifiers": "add details",
       "tasks": "add details",
       "cardLabel": "Season Event",
       "accent": "#d97706",
       "image": "",
-      "source": "Source · checked 29 Oct 2026",
+      "source": "ProtoTrack Seasonal Calendar · checked 1 Nov 2026",
       "suggested": ""
     },
     {
       "id": "vanguard-overdrive",
       "name": "Vanguard Overdrive",
-      "description": "Limited-time vanguard activity window.",
+      "description": "Stat bonus week. Disabled in Conflict.",
       "rewards": "add details",
-      "modifiers": "add details",
+      "modifiers": "+50% Reload Speed · +50% Swap Speed · +40% Hazard Protection · +20% Movement Speed · +15% Armor on Kill",
       "tasks": "add details",
       "cardLabel": "Season Event",
       "accent": "#3b82f6",
       "image": "assets/events/raid-hero.jpg",
-      "source": "Source · checked 29 Oct 2026",
+      "source": "ProtoTrack Seasonal Calendar · checked 1 Nov 2026",
       "suggested": ""
     }
   ]
