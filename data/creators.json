@@ -1,3 +1,18 @@
 {
-  "creators": []
+  "creators": [
+    { "name": "Kamikazevondoom", "platform": "youtube", "url": "https://www.youtube.com/@Kamikazevondoom" },
+    { "name": "RogueGold", "platform": "youtube", "url": "https://www.youtube.com/@RogueGold" },
+    { "name": "NothingButSkillz", "platform": "youtube", "url": "https://www.youtube.com/@NothingButSkillz" },
+    { "name": "widdz", "platform": "youtube", "url": "https://www.youtube.com/@widdz" },
+    { "name": "Running Butcher", "platform": "youtube", "url": "https://www.youtube.com/@RunningButcher" },
+    { "name": "Ubisoft", "platform": "youtube", "url": "https://www.youtube.com/@Ubisoft" },
+    { "name": "Died Again Gaming", "platform": "youtube", "url": "https://www.youtube.com/@DiedAgainGaming" },
+    { "name": "TuxedoBandido", "platform": "youtube", "url": "https://www.youtube.com/@TuxedoBandido" },
+    { "name": "GCROCK6", "platform": "twitch", "url": "https://www.twitch.tv/gcrock6" },
+    { "name": "NothingButSkillz", "platform": "twitch", "url": "https://www.twitch.tv/nothingbutskillz" },
+    { "name": "vFOXYGIRLvYT", "platform": "twitch", "url": "https://www.twitch.tv/vfoxygirlvyt" },
+    { "name": "CharlesCimeaurant", "platform": "twitch", "url": "https://www.twitch.tv/charlescimeaurant" },
+    { "name": "Lanza", "platform": "twitch", "url": "https://www.twitch.tv/lanza" },
+    { "name": "TuxedoBandido", "platform": "twitch", "url": "https://www.twitch.tv/tuxedobandido" }
+  ]
 }

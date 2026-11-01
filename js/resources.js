@@ -231,17 +231,24 @@
       creatorsBody.innerHTML = '<p class="lede">No creators yet.</p>';
       return;
     }
-    creatorsBody.innerHTML = rows.map(function (row) {
+    var html = "";
+    var last = "";
+    rows.forEach(function (row) {
       var platform = String(row.platform || "").toLowerCase();
+      if (platform && platform !== last) {
+        var label = platform === "youtube" ? "YouTube" : platform === "twitch" ? "Twitch" : platform;
+        html += '<p class="creator-label">' + STF.esc(label) + "</p>";
+        last = platform;
+      }
       var mark = platformMark(platform);
       var logo = mark ? '<span class="creator-logo" aria-hidden="true">' + mark + "</span>" : "";
-      return (
+      html +=
         '<a class="creator-row" href="' + STF.esc(row.url || "#") + '" target="_blank" rel="noopener">' +
         "<strong>" + STF.esc(row.name || "Creator") + "</strong>" +
         logo +
-        "</a>"
-      );
-    }).join("");
+        "</a>";
+    });
+    creatorsBody.innerHTML = html;
   }
 
   function renderMutators(doc) {

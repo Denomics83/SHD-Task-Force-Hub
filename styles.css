@@ -1183,6 +1183,16 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   text-decoration: none;
 }
 .creator-row { margin: 0 0 8px; }
+.creator-label {
+  margin: 4px 2px 8px;
+  font-family: var(--font);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #8b919a;
+}
+.creator-label:not(:first-child) { margin-top: 16px; }
 a.hunter-yt:hover, a.creator-row:hover { text-decoration: none; border-color: var(--orange); }
 .hunter-yt span, .creator-row strong {
   font-family: var(--display);
