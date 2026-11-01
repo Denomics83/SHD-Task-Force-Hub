@@ -1,41 +1,8 @@
-/* Events — full-bleed season + raid cards. RSVP stays on Resources. */
+/* Events — season banner and admin-created events. */
 (async function () {
   STF.mountChrome("events");
   var rail = document.getElementById("hero-rail");
   if (!rail) return;
-
-  function zonedDate(dateStr, timeStr, timeZone) {
-    var dp = String(dateStr || "").split("-");
-    var tp = String(timeStr || "00:00").split(":");
-    if (dp.length < 3) return null;
-    var y = +dp[0];
-    var mo = +dp[1];
-    var d = +dp[2];
-    var h = +tp[0] || 0;
-    var mi = +tp[1] || 0;
-    var zone = timeZone || "UTC";
-    var fmt = new Intl.DateTimeFormat("en-US", {
-      timeZone: zone,
-      hourCycle: "h23",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit"
-    });
-    function asUTC(ms) {
-      var map = {};
-      fmt.formatToParts(new Date(ms)).forEach(function (p) {
-        map[p.type] = p.value;
-      });
-      return Date.UTC(+map.year, +map.month - 1, +map.day, +map.hour, +map.minute, +map.second);
-    }
-    var target = Date.UTC(y, mo - 1, d, h, mi, 0);
-    var guess = target;
-    for (var i = 0; i < 3; i++) guess -= asUTC(guess) - target;
-    return new Date(guess);
-  }
 
   function endedAgo(iso) {
     var days = Math.max(0, Math.floor((Date.now() - new Date(iso).getTime()) / 86400000));
@@ -251,55 +218,6 @@
     if (days > 0) return n(days, "day") + " " + n(hours, "hour") + " remaining";
     if (hours > 0) return n(hours, "hour") + " " + n(rem, "min") + " remaining";
     return n(Math.max(rem, 1), "min") + " remaining";
-  }
-
-  function zoneLabel(when, timeZone) {
-    var zone = timeZone || "UTC";
-    var name = "";
-    try {
-      new Intl.DateTimeFormat("en-AU", {
-        timeZone: zone,
-        timeZoneName: "short"
-      }).formatToParts(when).forEach(function (p) {
-        if (p.type === "timeZoneName") name = p.value;
-      });
-    } catch (e) {}
-    if (name && !/^GMT|^UTC/i.test(name)) return name;
-    var fmt = new Intl.DateTimeFormat("en-US", {
-      timeZone: zone,
-      hourCycle: "h23",
-      year: "numeric",
-      month: "2-digit",
-      day: "2-digit",
-      hour: "2-digit",
-      minute: "2-digit",
-      second: "2-digit"
-    });
-    var map = {};
-    fmt.formatToParts(when).forEach(function (p) { map[p.type] = p.value; });
-    var asUTC = Date.UTC(+map.year, +map.month - 1, +map.day, +map.hour, +map.minute, +map.second);
-    var off = Math.round((asUTC - when.getTime()) / 3600000);
-    if (zone === "Australia/Melbourne" || zone === "Australia/Sydney" || zone === "Australia/Hobart") {
-      return off >= 11 ? "AEDT" : "AEST";
-    }
-    var sign = off >= 0 ? "+" : "";
-    return "UTC" + sign + off;
-  }
-
-  function clockLabel(when, timeZone) {
-    var zone = timeZone || "UTC";
-    var time = new Intl.DateTimeFormat("en-US", {
-      hour: "numeric",
-      minute: "2-digit",
-      timeZone: zone
-    }).format(when);
-    time = time.replace(":00", "").replace(/\s+/g, "").toLowerCase();
-    var day = new Intl.DateTimeFormat("en-US", {
-      weekday: "long",
-      timeZone: zone
-    }).format(when);
-    var tzPart = zoneLabel(when, zone);
-    return day + " " + time + (tzPart ? " " + tzPart : "");
   }
 
   function dots(index, count) {
@@ -528,20 +446,14 @@
   try {
     var results = await Promise.all([
       STF.fetchJSON("data/season.json"),
-      STF.fetchJSON("data/raids.json"),
       STF.fetchJSON("data/event-types.json").catch(function () { return { types: [] }; }),
       STF.fetchJSON("data/events.json").catch(function () { return { events: [] }; })
     ]);
     var season = results[0] || {};
-    var raids = ((results[1] && results[1].raids) || []).slice().sort(function (a, b) {
-      var ka = (a.date || "") + " " + (a.time || "");
-      var kb = (b.date || "") + " " + (b.time || "");
-      return ka < kb ? -1 : ka > kb ? 1 : 0;
-    });
     var typeById = {};
-    ((results[2] && results[2].types) || []).forEach(function (type) { typeById[type.id] = type; });
+    ((results[1] && results[1].types) || []).forEach(function (type) { typeById[type.id] = type; });
     var now = Date.now();
-    var joined = ((results[3] && results[3].events) || []).map(function (ev) {
+    var joined = ((results[2] && results[2].events) || []).map(function (ev) {
       var startMs = new Date(ev.start).getTime();
       var endMs = new Date(ev.end).getTime();
       var state = now >= endMs ? "ended" : now < startMs ? "upcoming" : "active";
@@ -634,29 +546,6 @@
       banner.style.backgroundImage = "url('" + art + "')";
     }
 
-    raids.forEach(function (raid) {
-      var when = zonedDate(raid.date, raid.time, raid.timezone);
-      var chip = when ? countdownLabel(when) : "Scheduled";
-      var kicker = STF.esc(raid.activity || "Raid");
-      if (when) kicker += " · " + STF.esc(clockLabel(when, raid.timezone));
-      slides.push({
-        kind: "raid",
-        href: "",
-        chip: chip,
-        chipClass: " countdown",
-        title: "Raid Scheduled",
-        kickerHtml: kicker,
-        sub: "",
-        label: "Scheduled raid",
-        accent: "#FF6D10",
-        cardLabel: "Raid",
-        icon: "raid",
-        emblem: (STF.eventCardPath && STF.eventCardPath(raid.activity)) || EMBLEMS.raid,
-        activity: raid.activity || "",
-        state: "upcoming"
-      });
-    });
-
     ended.forEach(function (item) {
       slides.push({
         kind: "event",
@@ -686,11 +575,6 @@
           end: slide.remainEnd,
           state: slide.state
         });
-        var tickerStatic = "";
-        if (slide.kind === "raid" && !slide.remainEnd) {
-          ticker = slide.chip || "Scheduled";
-          tickerStatic = ' data-static="1"';
-        }
         var emblem = slide.emblem || EMBLEMS.raid;
         var fullBleed = /^assets\/event-cards\//.test(emblem) || /^https:\/\//.test(emblem);
         var artOpen = fullBleed
@@ -699,7 +583,7 @@
         var inner =
           artOpen +
           '<span class="tl-tag ' + statusClass + '">' + statusLabel(slide.state || "active") + "</span>" +
-          '<span class="tl-ticker" data-ticker' + tickerStatic + ' data-state="' + STF.esc(slide.state || "") + '" data-remain-start="' + STF.esc(slide.remainStart || "") + '" data-remain-end="' + STF.esc(slide.remainEnd || "") + '">' + STF.esc(ticker) + "</span>" +
+          '<span class="tl-ticker" data-ticker data-state="' + STF.esc(slide.state || "") + '" data-remain-start="' + STF.esc(slide.remainStart || "") + '" data-remain-end="' + STF.esc(slide.remainEnd || "") + '">' + STF.esc(ticker) + "</span>" +
           (fullBleed ? "" : '<img class="tl-emblem-img" src="' + STF.esc(emblem) + '" alt="">') +
           "</div>" +
           (slide.clanLine
