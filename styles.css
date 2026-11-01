@@ -2035,22 +2035,29 @@ body.page-events .tl-art {
   display: block;
   align-self: center;
 }
-.tl-art.has-card {
-  background-size: cover;
-  background-position: center center;
-  background-repeat: no-repeat;
+.tl-art.has-card { overflow: hidden; }
+.tl-card-art {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 40%;
+  z-index: 0;
 }
 .tl-art.has-card::before {
   content: "";
   position: absolute;
   inset: 0;
   background: linear-gradient(180deg, rgba(0,0,0,.42) 0%, rgba(0,0,0,.08) 38%, rgba(0,0,0,.28) 100%);
-  z-index: 0;
+  z-index: 1;
+  pointer-events: none;
 }
 .tl-art.has-card .tl-tag,
 .tl-art.has-card .tl-ticker {
   position: relative;
-  z-index: 1;
+  z-index: 2;
   text-shadow: 0 1px 2px rgba(0,0,0,.65);
 }
 .art-label {
@@ -2075,7 +2082,14 @@ body.page-events .tl-art {
   overflow: hidden;
 }
 .art-thumb.is-on { outline: 2px solid var(--orange); outline-offset: 1px; }
-.art-thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.art-thumb img {
+  width: 100%;
+  height: 100%;
+  max-width: none;
+  object-fit: cover;
+  object-position: center 40%;
+  display: block;
+}
 .tl-tag.is-live { background: var(--orange); color: #1a0d00; }
 .tl-tag.is-soon { background: transparent; color: #fff; border: 1px solid rgba(255,255,255,.7); }
 .tl-tag.is-ended { background: #3a3f48; color: #d5d8de; }

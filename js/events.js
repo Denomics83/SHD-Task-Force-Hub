@@ -729,7 +729,7 @@
         var emblem = slide.emblem || EMBLEMS.raid;
         var fullBleed = /^assets\/event-cards\//.test(emblem) || /^https:\/\//.test(emblem);
         var artOpen = fullBleed
-          ? '<div class="tl-art has-card" style="background-image:url(\'' + STF.esc(emblem) + '\')">'
+          ? '<div class="tl-art has-card"><img class="tl-card-art" src="' + STF.esc(emblem) + '" alt="">'
           : '<div class="tl-art">';
         var inner =
           artOpen +
