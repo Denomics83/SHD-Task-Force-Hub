@@ -2153,9 +2153,70 @@ button.td-slot { background: transparent; border: 0; padding: 0; color: inherit;
 button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px; }
 .build-sheet { display: grid; gap: 12px; }
 .slot-detail {
-  border: 1px solid rgba(255,255,255,.4);
-  padding: 12px;
-  background: #101114;
+  border: 0;
+  padding: 8px 8px 12px;
+  background: transparent;
+  max-width: 100%;
+  overflow: hidden;
+}
+.sheet-wrap { max-width: 100%; margin: 0 0 12px; }
+.sheet-title {
+  margin: 0 0 6px;
+  font-family: var(--display);
+  font-size: 1.05rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
+}
+.sheet-title.is-named { color: #f2c14b; }
+.sheet-title.is-exotic { color: #ff5a2a; }
+.sheet-panel {
+  background: #0c0e12;
+  border: 1px solid rgba(255,255,255,.28);
+  padding: 10px;
+  max-width: 100%;
+  overflow: hidden;
+}
+.sheet-hero, .sheet-spec {
+  display: grid;
+  grid-template-columns: 76px 32px minmax(0, 1fr);
+  gap: 8px;
+  align-items: center;
+}
+.sheet-spec { grid-template-columns: 48px 48px auto minmax(0, 1fr); }
+.sheet-brand {
+  position: relative;
+  height: 72px;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+}
+.sheet-logo { width: 52px; height: 52px; object-fit: contain; position: relative; }
+.sheet-slotcol { display: flex; flex-direction: column; gap: 4px; align-items: center; }
+.sheet-slot, .sheet-talent-icon { width: 28px; height: 28px; object-fit: contain; }
+.sheet-talent { color: #fff; font-size: .95rem; line-height: 1.15; }
+.sheet-attrs { list-style: none; margin: 10px 0 0; padding: 0; display: grid; gap: 6px; }
+.sheet-attrs li { display: flex; gap: 8px; align-items: flex-start; color: #f4f6f8; font-size: .86rem; min-width: 0; }
+.sheet-attrs span { min-width: 0; overflow-wrap: anywhere; }
+.sheet-pip { width: 16px; height: 16px; flex: 0 0 auto; }
+.sheet-pip.is-off { color: #e23b3b; }
+.sheet-pip.is-def { color: #3d7edb; }
+.sheet-pip.is-skill { color: #e2c56a; }
+.sheet-mods { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 8px 10px; margin-top: 10px; }
+.sheet-mod { min-width: 0; }
+.sheet-mod small { display: block; color: #9aa0a6; font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
+.sheet-mod strong, .sheet-mod em { display: block; overflow-wrap: anywhere; }
+.sheet-mod strong { color: #fff; font-size: .78rem; }
+.sheet-mod em { font-style: normal; color: #d5d8de; font-size: .74rem; }
+.sheet-mod-icon { width: 18px; height: 18px; }
+.sheet-ammo {
+  justify-self: start;
+  border: 1px solid rgba(255,255,255,.45);
+  padding: 2px 6px;
+  font-size: .68rem;
+  letter-spacing: .06em;
+  text-transform: uppercase;
+  color: #fff;
 }
 .slot-detail h2 { margin: 0 0 6px; font-size: 1.35rem; }
 .slot-rarity { margin: 0; color: var(--orange); letter-spacing: .12em; text-transform: uppercase; font-size: .68rem; font-weight: 700; }

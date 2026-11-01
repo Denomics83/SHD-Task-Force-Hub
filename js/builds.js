@@ -232,30 +232,13 @@
   }
 
   function slotPanel(row, key) {
-    var spec = null;
-    for (var i = 0; i < GRID.length; i++) if (GRID[i].key === key) spec = GRID[i];
-    if (!spec && key === "specialization") spec = { key: "specialization", label: "Specialization" };
-    var item = slotOf(row, key);
-    var title = item.name || (spec ? spec.label : "Slot");
-    var rarity = item.name ? (item.rarity || "high-end") : "empty";
-    var lines = [];
-    if (item.core) lines.push({ k: "Core", v: item.core });
-    if (item.talent) lines.push({ k: "Talent", v: item.talent });
-    String(item.attributes || "").split(/[\n,]/).forEach(function (part) {
-      if (part.trim()) lines.push({ k: "Attribute", v: part.trim() });
-    });
-    var bars = lines.map(function (line) {
-      return (
-        '<div class="attr-line"><span>' + STF.esc(line.k) + "</span><strong>" + STF.esc(line.v) + "</strong>" +
-        '<i style="width:' + barWidth(line.v) + '%"></i></div>'
-      );
-    }).join("");
-    return (
-      '<p class="slot-rarity">' + STF.esc(rarity === "empty" ? "Empty" : rarity) + "</p>" +
-      "<h2>" + STF.esc(title) + "</h2>" +
-      (item.brand ? "<p>" + STF.esc(item.brand) + "</p>" : "") +
-      (bars || '<p class="lede">No core, talent, or attributes stored for this slot.</p>')
-    );
+    var raw = rawPiece(row, key);
+    if (key === "watch") {
+      var watch = ((row && row.loadout) || {}).watch || {};
+      return '<section class="sheet-wrap"><h3 class="sheet-title">SHD Watch</h3><div class="sheet-panel"><p>' +
+        (watch.max ? "Maxed" : "Custom") + "</p></div></section>";
+    }
+    return STF.sheetCard(raw, key);
   }
 
   function loadoutHTML(row) {

@@ -508,7 +508,8 @@
       var name = (state.grenade && state.grenade.name) || "";
       var spec = (state.grenade && state.grenade.specialization) || "";
       var icon = grenadeArt(name);
-      return '<p class="bb-kicker">Grenade</p>' +
+      return (window.STF && STF.sheetCard && name ? STF.sheetCard({ name: name }, "grenade") : "") +
+        '<p class="bb-kicker">Grenade</p>' +
         (icon ? '<img class="bb-tile-grenade is-native" src="' + esc(icon) + '" alt="">' : "") +
         "<h3>" + esc(name || "Empty slot") + "</h3>" +
         (spec ? '<p class="lede">' + esc(spec) + "</p>" : "") +
@@ -529,7 +530,8 @@
         var note = stat.counts === false ? " (conditional, not added to the sheet total)" : "";
         return "<li>" + esc(stat.name) + " " + esc(stat.value) + note + "</li>";
       }).join("") : "";
-      return '<p class="bb-kicker">Specialization</p><div class="bb-chips">' + buttons + "</div>" +
+      return (window.STF && STF.sheetCard ? STF.sheetCard({ name: current }, "specialization") : "") +
+        '<p class="bb-kicker">Specialization</p><div class="bb-chips">' + buttons + "</div>" +
         (lines ? "<ul>" + lines + "</ul>" : '<p class="lede">Pick a specialization. Its passive stats land on the sheet.</p>') +
         '<p class="lede">Grenade: ' + esc(state.grenade.name || "—") + "</p>";
     }
@@ -550,12 +552,8 @@
     }
 
     function head(item, pickLabel) {
-      var rarity = item.rarity;
-      if (!rarity && (selected === "skill1" || selected === "skill2")) rarity = item.name ? (item.family || skillFamily(item) || "Skill") : "Empty";
-      if (!rarity) rarity = "Empty";
-      return '<p class="bb-kicker">' + esc(LABELS[selected]) + "</p>" +
-        '<p class="slot-rarity">' + esc(rarity) + "</p>" +
-        "<h3>" + esc(item.name || "Empty slot") + "</h3>" +
+      var summary = window.STF && STF.sheetCard ? STF.sheetCard(item, selected) : "";
+      return summary +
         '<p class="admin-row"><button type="button" class="admin-btn" data-pick>' + esc(pickLabel) + '</button>' +
         '<button type="button" class="admin-btn admin-btn-ghost" data-clear>Clear</button></p>';
     }
