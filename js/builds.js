@@ -123,18 +123,32 @@
     return Math.min(3, parts.length);
   }
 
+  function libraryIcon(item) {
+    if (!filledName(item) || !STF.iconFor) return null;
+    return STF.iconFor(item.brand) || STF.iconFor(item.name) || STF.iconFor(item.type) || null;
+  }
+
+  function filledName(item) {
+    return !!(item && item.name);
+  }
+
   function tdSlot(row, spec) {
     var item = slotOf(row, spec.key);
     var rarity = faceClass(item, spec.force);
-    var filled = !!item.name;
+    var filled = filledName(item);
+    var hit = libraryIcon(item);
     var art = filled && item.image
       ? '<img src="' + STF.esc(item.image) + '" alt="">'
-      : (SLOT_ART[spec.art] || SLOT_ART.skill);
+      : (hit
+        ? '<img class="is-mark" src="' + STF.esc(hit.file) + '" alt="">'
+        : (SLOT_ART[spec.art] || SLOT_ART.skill));
     var dots = "";
     var count = dotCount(item);
     for (var i = 0; i < count; i++) dots += "<i></i>";
     var mark = "";
-    if (filled && item.brand) {
+    if (filled && item.image && hit) {
+      mark = '<span class="td-mark"><img src="' + STF.esc(hit.file) + '" alt=""></span>';
+    } else if (filled && item.brand && !hit) {
       mark = '<span class="td-mark">' + STF.esc(String(item.brand).trim().charAt(0).toUpperCase()) + "</span>";
     }
     var lvl = filled ? '<span class="td-lvl">40</span>' : "";
@@ -489,6 +503,7 @@
 
   paintGrid();
   (async function loadBuilds() {
+    try { await STF.loadIcons(); } catch (err) { console.error(err); }
     var local = [];
     try {
       var doc = await STF.fetchJSON("data/builds.json");

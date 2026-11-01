@@ -90,12 +90,20 @@ window.BuildAdmin = (function () {
     }[key] || key;
   }
 
+  function markHTML(item) {
+    if (!STF.iconFor || !item) return "";
+    var hit = STF.iconFor(item.brand) || STF.iconFor(item.name) || STF.iconFor(item.type);
+    if (!hit || !hit.file) return "";
+    return '<img class="ba-mark" src="' + STF.esc(hit.file) + '" alt="">';
+  }
+
   function tile(key) {
     var item = state[key] || {};
     var name = item.name || label(key);
     var picked = key === selected ? " is-picked" : "";
     return (
       '<button type="button" class="ba-tile rarity-' + rarityClass(item) + picked + '" data-slot="' + key + '">' +
+      markHTML(item) +
       '<span class="ba-slot">' + STF.esc(label(key)) + "</span>" +
       "<strong>" + STF.esc(name) + "</strong>" +
       "</button>"
@@ -249,7 +257,7 @@ window.BuildAdmin = (function () {
       });
       if (!rows.length) return '<p class="lede">No weapons in this type.</p>';
       return '<div class="ba-grid">' + rows.map(function (row) {
-        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-weapon="' + STF.esc(row.name) + '"><strong>' + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
+        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-weapon="' + STF.esc(row.name) + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
       }).join("") + "</div>";
     }
     var chips = types.map(function (type, index) {
@@ -301,7 +309,7 @@ window.BuildAdmin = (function () {
       }
       if (!rows.length) return '<p class="lede">Nothing in this list for this slot.</p>';
       return '<div class="ba-grid">' + rows.map(function (row) {
-        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-gear="' + STF.esc(row.name) + '" data-rarity="' + STF.esc(row.rarity) + '" data-brand="' + STF.esc(row.brand || "") + '" data-talent="' + STF.esc(row.talent || "") + '"><strong>' + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
+        return '<button type="button" class="ba-pick rarity-' + rarityClass(row) + '" data-gear="' + STF.esc(row.name) + '" data-rarity="' + STF.esc(row.rarity) + '" data-brand="' + STF.esc(row.brand || "") + '" data-talent="' + STF.esc(row.talent || "") + '">' + markHTML(row) + "<strong>" + STF.esc(row.name) + "</strong><small>" + STF.esc(row.rarity) + "</small></button>";
       }).join("") + "</div>";
     }
     openModal(
@@ -419,6 +427,7 @@ window.BuildAdmin = (function () {
     host = el;
     host.classList.add("ba-root");
     cat = await loadCatalogs();
+    try { await STF.loadIcons(); } catch (err) { console.error(err); }
     state = fromRecord(record);
     selected = "primary";
     host.innerHTML = "";

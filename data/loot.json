@@ -1,55 +1,74 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-10-31",
+  "lootDate": "2026-11-01",
   "weekOf": "2026-10-27",
   "weekEnd": "2026-11-02",
-  "updated": "2026-10-31T08:50",
-  "note": "Escalation targeted loot for 2026-10-31 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-01T01:57",
+  "note": "Escalation targeted loot for 2026-11-01 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "Coney Island Ballpark",
+      "faction": "Black Tusk",
+      "missionIcon": "assets/icons/factions/black-tusk.png",
       "loot": "Eclipse Protocol",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "kind": "gearset",
+      "slug": "eclipse-protocol",
+      "icon": "assets/icons/gearsets/eclipse-protocol.png"
     },
     {
       "mission": "Coney Island Amusement Park",
+      "faction": "Black Tusk",
+      "missionIcon": "assets/icons/factions/black-tusk.png",
       "loot": "Umbra Initiative",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "kind": "gearset",
+      "slug": "umbra-initiative",
+      "icon": "assets/icons/gearsets/umbra-initiative.png"
     },
     {
       "mission": "ViewPoint Museum",
+      "faction": "True Sons",
+      "missionIcon": "assets/icons/factions/true-sons.png",
       "loot": "Aegis",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "kind": "gearset",
+      "slug": "aegis",
+      "icon": "assets/icons/gearsets/aegis.png"
     },
     {
       "mission": "Capitol Building",
+      "faction": "True Sons",
+      "missionIcon": "assets/icons/factions/true-sons.png",
       "loot": "Cavalier",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "kind": "gearset",
+      "slug": "cavalier",
+      "icon": "assets/icons/gearsets/cavalier.png"
     },
     {
       "mission": "Potomac Event Center",
-      "loot": "Douglas &amp; Harding",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "faction": "Outcasts",
+      "missionIcon": "assets/icons/factions/outcasts.png",
+      "loot": "Douglas & Harding",
+      "kind": "brand",
+      "slug": "douglas-harding",
+      "icon": "assets/icons/brands/douglas-harding.png"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
+      "cacheIcon": "assets/icons/loot/generic.svg",
       "loot": "Gloves",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "kind": "slot",
+      "slug": "gloves",
+      "icon": "assets/icons/caches/gloves.png"
     },
     {
       "cache": "Prototype Weapon Cache",
+      "cacheIcon": "assets/icons/loot/generic.svg",
       "loot": "Rifles",
-      "kind": "unknown",
-      "icon": "assets/icons/loot/generic.svg"
+      "kind": "weapon",
+      "slug": "rifle",
+      "icon": "assets/icons/weapons/rifle.png"
     }
   ],
   "darkZone": [

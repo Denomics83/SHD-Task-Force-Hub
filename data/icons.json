@@ -1,0 +1,855 @@
+{
+  "source": "https://prototrack.gg/assets/division2/",
+  "fallback": "assets/icons/loot/generic.svg",
+  "missing": [
+    "Rogue Agents faction mark \u2014 ProtoTrack has no rogue/rogueagents asset",
+    "Separate mission-type icons (stronghold, invaded, bounty). ProtoTrack uses the faction mark on each mission.",
+    "Dedicated prototype cache crate icon \u2014 ProtoTrack cache cards have no crate image"
+  ],
+  "icons": [
+    {
+      "slug": "black-tusk",
+      "name": "Black Tusk",
+      "kind": "faction",
+      "file": "assets/icons/factions/black-tusk.png",
+      "proto": "blacktusks",
+      "aliases": [
+        "black tusks",
+        "bt"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/blacktusks.png"
+    },
+    {
+      "slug": "cleaners",
+      "name": "Cleaners",
+      "kind": "faction",
+      "file": "assets/icons/factions/cleaners.png",
+      "proto": "cleaners",
+      "aliases": [
+        "cleaner"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/cleaners.png"
+    },
+    {
+      "slug": "hunters",
+      "name": "Hunters",
+      "kind": "faction",
+      "file": "assets/icons/factions/hunters.png",
+      "proto": "hunters",
+      "aliases": [
+        "hunter",
+        "rogue",
+        "rogue agents"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/hunters.png"
+    },
+    {
+      "slug": "hyenas",
+      "name": "Hyenas",
+      "kind": "faction",
+      "file": "assets/icons/factions/hyenas.png",
+      "proto": "hyenas",
+      "aliases": [
+        "hyena"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/hyenas.png"
+    },
+    {
+      "slug": "outcasts",
+      "name": "Outcasts",
+      "kind": "faction",
+      "file": "assets/icons/factions/outcasts.png",
+      "proto": "outcasts",
+      "aliases": [
+        "outcast"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/outcasts.png"
+    },
+    {
+      "slug": "rikers",
+      "name": "Rikers",
+      "kind": "faction",
+      "file": "assets/icons/factions/rikers.png",
+      "proto": "rikers",
+      "aliases": [
+        "riker"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/rikers.png"
+    },
+    {
+      "slug": "true-sons",
+      "name": "True Sons",
+      "kind": "faction",
+      "file": "assets/icons/factions/true-sons.png",
+      "proto": "truesons",
+      "aliases": [
+        "true son"
+      ],
+      "source": "https://prototrack.gg/assets/division2/factions/truesons.png"
+    },
+    {
+      "slug": "511-tactical",
+      "name": "5.11 Tactical",
+      "kind": "brand",
+      "file": "assets/icons/brands/511-tactical.png",
+      "proto": "511tactical",
+      "aliases": [
+        "511 tactical",
+        "5 11 tactical",
+        "511"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/511tactical.png"
+    },
+    {
+      "slug": "airaldi",
+      "name": "Airaldi Holdings",
+      "kind": "brand",
+      "file": "assets/icons/brands/airaldi.png",
+      "proto": "airaldiholdings",
+      "aliases": [
+        "airaldi"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/airaldiholdings.png"
+    },
+    {
+      "slug": "alps",
+      "name": "Alps Summit Armaments",
+      "kind": "brand",
+      "file": "assets/icons/brands/alps.png",
+      "proto": "alpssummitarmaments",
+      "aliases": [
+        "alps summit",
+        "alps"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/alpssummitarmaments.png"
+    },
+    {
+      "slug": "badger-tuff",
+      "name": "Badger Tuff",
+      "kind": "brand",
+      "file": "assets/icons/brands/badger-tuff.png",
+      "proto": "badgertuff",
+      "aliases": [
+        "badger"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/badgertuff.png"
+    },
+    {
+      "slug": "belstone",
+      "name": "Belstone Armory",
+      "kind": "brand",
+      "file": "assets/icons/brands/belstone.png",
+      "proto": "belstonearmory",
+      "aliases": [
+        "belstone"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/belstonearmory.png"
+    },
+    {
+      "slug": "brazos",
+      "name": "Brazos de Arcabuz",
+      "kind": "brand",
+      "file": "assets/icons/brands/brazos.png",
+      "proto": "brazosdearcabuz",
+      "aliases": [
+        "brazos"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/brazosdearcabuz.png"
+    },
+    {
+      "slug": "ceska",
+      "name": "Ceska Vyroba s.r.o.",
+      "kind": "brand",
+      "file": "assets/icons/brands/ceska.png",
+      "proto": "ceskavyrobasro",
+      "aliases": [
+        "ceska vyroba",
+        "ceska vyroba sro",
+        "ceska"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/ceskavyrobasro.png"
+    },
+    {
+      "slug": "china-light",
+      "name": "China Light Industries Corporation",
+      "kind": "brand",
+      "file": "assets/icons/brands/china-light.png",
+      "proto": "chinalightindustriescorporation",
+      "aliases": [
+        "china light",
+        "clic"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/chinalightindustriescorporation.png"
+    },
+    {
+      "slug": "douglas-harding",
+      "name": "Douglas & Harding",
+      "kind": "brand",
+      "file": "assets/icons/brands/douglas-harding.png",
+      "proto": "douglasharding",
+      "aliases": [
+        "douglas and harding",
+        "douglas harding"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/douglasharding.png"
+    },
+    {
+      "slug": "electrique",
+      "name": "Electrique",
+      "kind": "brand",
+      "file": "assets/icons/brands/electrique.png",
+      "proto": "electrique",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/brandsets/electrique.png"
+    },
+    {
+      "slug": "empress",
+      "name": "Empress International",
+      "kind": "brand",
+      "file": "assets/icons/brands/empress.png",
+      "proto": "empressinternational",
+      "aliases": [
+        "empress"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/empressinternational.png"
+    },
+    {
+      "slug": "fenris",
+      "name": "Fenris Group AB",
+      "kind": "brand",
+      "file": "assets/icons/brands/fenris.png",
+      "proto": "fenrisgroupab",
+      "aliases": [
+        "fenris group",
+        "fenris"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/fenrisgroupab.png"
+    },
+    {
+      "slug": "gila",
+      "name": "Gila Guard",
+      "kind": "brand",
+      "file": "assets/icons/brands/gila.png",
+      "proto": "gilaguard",
+      "aliases": [
+        "gila"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/gilaguard.png"
+    },
+    {
+      "slug": "grupo",
+      "name": "Grupo Sombra S.A.",
+      "kind": "brand",
+      "file": "assets/icons/brands/grupo.png",
+      "proto": "gruposombrasa",
+      "aliases": [
+        "grupo sombra",
+        "grupo sombra sa",
+        "grupo"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/gruposombrasa.png"
+    },
+    {
+      "slug": "habsburg",
+      "name": "Habsburg Guard",
+      "kind": "brand",
+      "file": "assets/icons/brands/habsburg.png",
+      "proto": "habsburgguard",
+      "aliases": [
+        "habsburg"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/habsburgguard.png"
+    },
+    {
+      "slug": "hana-u",
+      "name": "Hana-U Corporation",
+      "kind": "brand",
+      "file": "assets/icons/brands/hana-u.png",
+      "proto": "hanaucorporation",
+      "aliases": [
+        "hana u",
+        "hana u corporation"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/hanaucorporation.png"
+    },
+    {
+      "slug": "lengmo",
+      "name": "Lengmo",
+      "kind": "brand",
+      "file": "assets/icons/brands/lengmo.png",
+      "proto": "lengmo",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/brandsets/lengmo.png"
+    },
+    {
+      "slug": "murakami",
+      "name": "Murakami Industries",
+      "kind": "brand",
+      "file": "assets/icons/brands/murakami.png",
+      "proto": "murakamiindustries",
+      "aliases": [
+        "murakami"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/murakamiindustries.png"
+    },
+    {
+      "slug": "overlord",
+      "name": "Overlord Armaments",
+      "kind": "brand",
+      "file": "assets/icons/brands/overlord.png",
+      "proto": "overlordarmaments",
+      "aliases": [
+        "overlord"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/overlordarmaments.png"
+    },
+    {
+      "slug": "palisade",
+      "name": "Palisade Steelworks",
+      "kind": "brand",
+      "file": "assets/icons/brands/palisade.png",
+      "proto": "palisadesteelworks",
+      "aliases": [
+        "palisade"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/palisadesteelworks.png"
+    },
+    {
+      "slug": "petrov",
+      "name": "Petrov Defense Group",
+      "kind": "brand",
+      "file": "assets/icons/brands/petrov.png",
+      "proto": "petrovdefensegroup",
+      "aliases": [
+        "petrov"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/petrovdefensegroup.png"
+    },
+    {
+      "slug": "providence",
+      "name": "Providence Defense",
+      "kind": "brand",
+      "file": "assets/icons/brands/providence.png",
+      "proto": "providencedefense",
+      "aliases": [
+        "providence"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/providencedefense.png"
+    },
+    {
+      "slug": "richter-kaiser",
+      "name": "Richter & Kaiser GmbH",
+      "kind": "brand",
+      "file": "assets/icons/brands/richter-kaiser.png",
+      "proto": "richterkaisergmbh",
+      "aliases": [
+        "richter and kaiser",
+        "richter kaiser",
+        "richter"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/richterkaisergmbh.png"
+    },
+    {
+      "slug": "royal-works",
+      "name": "Royal Works",
+      "kind": "brand",
+      "file": "assets/icons/brands/royal-works.png",
+      "proto": "royalworks",
+      "aliases": [
+        "royal"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/royalworks.png"
+    },
+    {
+      "slug": "sokolov",
+      "name": "Sokolov Concern",
+      "kind": "brand",
+      "file": "assets/icons/brands/sokolov.png",
+      "proto": "sokolovconcern",
+      "aliases": [
+        "sokolov"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/sokolovconcern.png"
+    },
+    {
+      "slug": "unit-alloys",
+      "name": "Unit Alloys",
+      "kind": "brand",
+      "file": "assets/icons/brands/unit-alloys.png",
+      "proto": "unitalloys",
+      "aliases": [
+        "unit"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/unitalloys.png"
+    },
+    {
+      "slug": "uzina-getica",
+      "name": "Uzina Getica",
+      "kind": "brand",
+      "file": "assets/icons/brands/uzina-getica.png",
+      "proto": "uzinagetica",
+      "aliases": [
+        "uzina",
+        "getica"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/uzinagetica.png"
+    },
+    {
+      "slug": "walker-harris",
+      "name": "Walker, Harris & Co.",
+      "kind": "brand",
+      "file": "assets/icons/brands/walker-harris.png",
+      "proto": "walkerharrisco",
+      "aliases": [
+        "walker harris",
+        "walker harris and co",
+        "walker and harris"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/walkerharrisco.png"
+    },
+    {
+      "slug": "wyvern",
+      "name": "Wyvern Wear",
+      "kind": "brand",
+      "file": "assets/icons/brands/wyvern.png",
+      "proto": "wyvernwear",
+      "aliases": [
+        "wyvern"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/wyvernwear.png"
+    },
+    {
+      "slug": "yaahl",
+      "name": "Yaahl Gear",
+      "kind": "brand",
+      "file": "assets/icons/brands/yaahl.png",
+      "proto": "yaahlgear",
+      "aliases": [
+        "yaahl"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/yaahlgear.png"
+    },
+    {
+      "slug": "zwiadowka",
+      "name": "Zwiadowka Sp. z o.o.",
+      "kind": "brand",
+      "file": "assets/icons/brands/zwiadowka.png",
+      "proto": "zwiadowkaspzoo",
+      "aliases": [
+        "zwiadowka"
+      ],
+      "source": "https://prototrack.gg/assets/division2/brandsets/zwiadowkaspzoo.png"
+    },
+    {
+      "slug": "aces-and-eights",
+      "name": "Aces & Eights",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/aces-and-eights.png",
+      "proto": "aceseights",
+      "aliases": [
+        "aces and eights",
+        "aces"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/aceseights.png"
+    },
+    {
+      "slug": "aegis",
+      "name": "Aegis",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/aegis.png",
+      "proto": "aegis",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/aegis.png"
+    },
+    {
+      "slug": "breaking-point",
+      "name": "Breaking Point",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/breaking-point.png",
+      "proto": "breakingpoint",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/breakingpoint.png"
+    },
+    {
+      "slug": "cavalier",
+      "name": "Cavalier",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/cavalier.png",
+      "proto": "cavalier",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/cavalier.png"
+    },
+    {
+      "slug": "core-strength",
+      "name": "Core Strength",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/core-strength.png",
+      "proto": "corestrength",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/corestrength.png"
+    },
+    {
+      "slug": "eclipse-protocol",
+      "name": "Eclipse Protocol",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/eclipse-protocol.png",
+      "proto": "eclipseprotocol",
+      "aliases": [
+        "eclipse"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/eclipseprotocol.png"
+    },
+    {
+      "slug": "foundry-bulwark",
+      "name": "Foundry Bulwark",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/foundry-bulwark.png",
+      "proto": "foundrybulwark",
+      "aliases": [
+        "foundry"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/foundrybulwark.png"
+    },
+    {
+      "slug": "future-initiative",
+      "name": "Future Initiative",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/future-initiative.png",
+      "proto": "futureinitiative",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/futureinitiative.png"
+    },
+    {
+      "slug": "hard-wired",
+      "name": "Hard Wired",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/hard-wired.png",
+      "proto": "hardwired",
+      "aliases": [
+        "hardwired"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/hardwired.png"
+    },
+    {
+      "slug": "heartbreaker",
+      "name": "Heartbreaker",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/heartbreaker.png",
+      "proto": "heartbreaker",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/heartbreaker.png"
+    },
+    {
+      "slug": "hotshot",
+      "name": "Hotshot",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/hotshot.png",
+      "proto": "hotshot",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/hotshot.png"
+    },
+    {
+      "slug": "hunters-fury",
+      "name": "Hunter's Fury",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/hunters-fury.png",
+      "proto": "huntersfury",
+      "aliases": [
+        "hunters fury"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/huntersfury.png"
+    },
+    {
+      "slug": "negotiators-dilemma",
+      "name": "Negotiator's Dilemma",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/negotiators-dilemma.png",
+      "proto": "negotiatorsdilemma",
+      "aliases": [
+        "negotiators dilemma"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/negotiatorsdilemma.png"
+    },
+    {
+      "slug": "ongoing-directive",
+      "name": "Ongoing Directive",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/ongoing-directive.png",
+      "proto": "ongoingdirective",
+      "aliases": [
+        "ongoing"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/ongoingdirective.png"
+    },
+    {
+      "slug": "ortiz-exuro",
+      "name": "Ortiz: Exuro",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/ortiz-exuro.png",
+      "proto": "ortizexuro",
+      "aliases": [
+        "ortiz exuro"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/ortizexuro.png"
+    },
+    {
+      "slug": "ortiz-reficere",
+      "name": "Ortiz: Reficere",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/ortiz-reficere.png",
+      "proto": "ortizreficere",
+      "aliases": [
+        "ortiz reficere",
+        "ortiz"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/ortizreficere.png"
+    },
+    {
+      "slug": "refactor",
+      "name": "Refactor",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/refactor.png",
+      "proto": "refactor",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/refactor.png"
+    },
+    {
+      "slug": "rigger",
+      "name": "Rigger",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/rigger.png",
+      "proto": "rigger",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/rigger.png"
+    },
+    {
+      "slug": "strikers-battlegear",
+      "name": "Striker's Battlegear",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/strikers-battlegear.png",
+      "proto": "strikersbattlegear",
+      "aliases": [
+        "strikers",
+        "striker",
+        "strikers battlegear"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/strikersbattlegear.png"
+    },
+    {
+      "slug": "system-corruption",
+      "name": "System Corruption",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/system-corruption.png",
+      "proto": "systemcorruption",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/systemcorruption.png"
+    },
+    {
+      "slug": "tip-of-the-spear",
+      "name": "Tip of the Spear",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/tip-of-the-spear.png",
+      "proto": "tipofthespear",
+      "aliases": [
+        "tip of the spear"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/tipofthespear.png"
+    },
+    {
+      "slug": "tipping-scales",
+      "name": "Tipping Scales",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/tipping-scales.png",
+      "proto": "tippingscales",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/tippingscales.png"
+    },
+    {
+      "slug": "true-patriot",
+      "name": "True Patriot",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/true-patriot.png",
+      "proto": "truepatriot",
+      "aliases": [],
+      "source": "https://prototrack.gg/assets/division2/gearsets/truepatriot.png"
+    },
+    {
+      "slug": "umbra-initiative",
+      "name": "Umbra Initiative",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/umbra-initiative.png",
+      "proto": "umbrainitiative",
+      "aliases": [
+        "umbra"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/umbrainitiative.png"
+    },
+    {
+      "slug": "assault-rifle",
+      "name": "Assault Rifles",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/assault-rifle.png",
+      "proto": "ar",
+      "aliases": [
+        "assault rifle",
+        "ar",
+        "ars"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/ar.png"
+    },
+    {
+      "slug": "lmg",
+      "name": "LMGs",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/lmg.png",
+      "proto": "lmg",
+      "aliases": [
+        "lmg",
+        "light machine gun",
+        "light machine guns"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/lmg.png"
+    },
+    {
+      "slug": "mmr",
+      "name": "Marksman Rifles",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/mmr.png",
+      "proto": "mmr",
+      "aliases": [
+        "mmr",
+        "marksman rifle",
+        "marksman rifles",
+        "marksman"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/mmr.png"
+    },
+    {
+      "slug": "pistol",
+      "name": "Pistols",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/pistol.png",
+      "proto": "pistol",
+      "aliases": [
+        "pistol",
+        "pistols",
+        "sidearm",
+        "sidearms"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/pistol.png"
+    },
+    {
+      "slug": "rifle",
+      "name": "Rifles",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/rifle.png",
+      "proto": "rifle",
+      "aliases": [
+        "rifle",
+        "rifles"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/rifle.png"
+    },
+    {
+      "slug": "shotgun",
+      "name": "Shotguns",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/shotgun.png",
+      "proto": "shotgun",
+      "aliases": [
+        "shotgun",
+        "shotguns"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/shotgun.png"
+    },
+    {
+      "slug": "smg",
+      "name": "SMGs",
+      "kind": "weapon",
+      "file": "assets/icons/weapons/smg.png",
+      "proto": "smg",
+      "aliases": [
+        "smg",
+        "submachine gun",
+        "submachine guns"
+      ],
+      "source": "https://prototrack.gg/assets/division2/weapons/smg.png"
+    },
+    {
+      "slug": "backpack",
+      "name": "Backpacks",
+      "kind": "slot",
+      "file": "assets/icons/caches/backpack.png",
+      "proto": "backpack",
+      "aliases": [
+        "backpack",
+        "backpacks"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gear/backpack.png"
+    },
+    {
+      "slug": "chest",
+      "name": "Chests",
+      "kind": "slot",
+      "file": "assets/icons/caches/chest.png",
+      "proto": "chest",
+      "aliases": [
+        "chest",
+        "chests",
+        "body armor",
+        "body armour"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gear/chest.png"
+    },
+    {
+      "slug": "gloves",
+      "name": "Gloves",
+      "kind": "slot",
+      "file": "assets/icons/caches/gloves.png",
+      "proto": "gloves",
+      "aliases": [
+        "glove",
+        "gloves"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gear/gloves.png"
+    },
+    {
+      "slug": "holster",
+      "name": "Holsters",
+      "kind": "slot",
+      "file": "assets/icons/caches/holster.png",
+      "proto": "holster",
+      "aliases": [
+        "holster",
+        "holsters"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gear/holster.png"
+    },
+    {
+      "slug": "kneepads",
+      "name": "Kneepads",
+      "kind": "slot",
+      "file": "assets/icons/caches/kneepads.png",
+      "proto": "kneepads",
+      "aliases": [
+        "kneepad",
+        "kneepads",
+        "knee pads"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gear/kneepads.png"
+    },
+    {
+      "slug": "mask",
+      "name": "Masks",
+      "kind": "slot",
+      "file": "assets/icons/caches/mask.png",
+      "proto": "mask",
+      "aliases": [
+        "mask",
+        "masks"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gear/mask.png"
+    }
+  ],
+  "note": "White-on-transparent marks from ProtoTrack. Slot icons live under caches/ because they are the targeted loot on prototype caches."
+}

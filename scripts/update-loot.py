@@ -1,11 +1,12 @@
 #!/usr/bin/env python3
 """Fetch one ProtoTrack targeted-loot page and update data/loot.json.
 
-Writes the file only when the loot date changed and the page still has
-5 escalation missions and 2 requisition caches. A layout change exits
-without touching the file.
+Writes the file when the loot date changed, or when the date is unchanged
+but saved rows are missing faction / brand icons. A layout that is not
+5 escalation missions and 2 requisition caches exits without writing.
 """
 
+import html
 import json
 import re
 import sys
@@ -15,73 +16,102 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 LOOT_PATH = ROOT / "data" / "loot.json"
+ICONS_PATH = ROOT / "data" / "icons.json"
 URL = "https://prototrack.gg/target-loot/target-loot.php"
 UA = "SHD-Task-Force-Hub clan site (github.com/Denomics83/SHD-Task-Force-Hub)"
 GENERIC = "assets/icons/loot/generic.svg"
 
-# name (normalised) -> (kind, icon, optional chip tone)
-KNOWN = {
-    "belstone armory": ("brand", "assets/icons/brands/belstone-mark.png", "belstone"),
-    "wyvern wear": ("brand", "assets/icons/brands/wyvern-mark.png", "wyvern"),
-    "murakami industries": ("brand", "assets/icons/brands/murakami.png", "murakami"),
-    "airaldi holdings": ("brand", "assets/icons/brands/airaldi.png", "airaldi"),
-    "alps summit armaments": ("brand", "assets/icons/brands/alps-logo.png", None),
-    "alps summit": ("brand", "assets/icons/brands/alps-logo.png", None),
-    "grupo sombra": ("brand", "assets/icons/brands/grupo-logo.png", None),
-    "grupo sombra sa": ("brand", "assets/icons/brands/grupo-logo.png", None),
-    "ceska vyroba": ("brand", "assets/icons/brands/ceska-logo.png", None),
-    "ceska vyroba sro": ("brand", "assets/icons/brands/ceska-logo.png", None),
-    "fenris group": ("brand", "assets/icons/brands/fenris.png", None),
-    "fenris group ab": ("brand", "assets/icons/brands/fenris.png", None),
-    "gila guard": ("brand", "assets/icons/brands/gila-logo.png", None),
-    "providence defense": ("brand", "assets/icons/brands/providence-logo.png", None),
-    "hana u corporation": ("brand", "assets/icons/brands/hana-u-logo.png", None),
-    "hana u": ("brand", "assets/icons/brands/hana-u-logo.png", None),
-    "unit alloys": ("brand", "assets/icons/brands/unit-alloys.png", None),
-    "ongoing directive": ("gearset", "assets/icons/gearsets/ongoing-directive.png", None),
-    "ortiz reficere": ("gearset", "assets/icons/gearsets/ortiz-reficere.png", None),
-    "tipping scales": ("gearset", "assets/icons/gearsets/tipping-scales.png", None),
-    "strikers battlegear": ("gearset", "assets/icons/gearsets/strikers-battlegear.png", None),
-    "striker": ("gearset", "assets/icons/gearsets/strikers-battlegear.png", None),
-    "foundry bulwark": ("gearset", "assets/icons/gearsets/foundry-bulwark.png", None),
-    "future initiative": ("gearset", "assets/icons/gearsets/future-initiative.png", None),
-    "refactor": ("gearset", "assets/icons/gearsets/refactor.png", None),
-    "core strength": ("gearset", "assets/icons/gearsets/core-strength.png", None),
-    "mask": ("slot", "assets/icons/slots/mask.png", None),
-    "masks": ("slot", "assets/icons/slots/mask.png", None),
-    "holster": ("slot", "assets/icons/slots/holster.png", None),
-    "holsters": ("slot", "assets/icons/slots/holster.png", None),
-    "kneepad": ("slot", "assets/icons/slots/kneepads.png", None),
-    "kneepads": ("slot", "assets/icons/slots/kneepads.png", None),
-    "assault rifle": ("weapon", "assets/icons/weapons/assault-rifle.png", None),
-    "assault rifles": ("weapon", "assets/icons/weapons/assault-rifle.png", None),
-    "pistol": ("weapon", "assets/icons/weapons/pistol.png", None),
-    "pistols": ("weapon", "assets/icons/weapons/pistol.png", None),
+FOLDER_KIND = {
+    "factions": "faction",
+    "brandsets": "brand",
+    "brands": "brand",
+    "gearsets": "gearset",
+    "weapons": "weapon",
+    "gear": "slot",
 }
 
 
 def normalise(name):
-    text = name.lower().replace("&", " and ")
+    text = html.unescape(str(name or "")).lower().replace("&", " and ")
+    text = text.replace("'", "").replace("’", "")
     text = re.sub(r"[^a-z0-9]+", " ", text)
     return re.sub(r"\s+", " ", text).strip()
 
 
-def classify(name):
-    key = normalise(name)
-    if key in KNOWN:
-        return KNOWN[key]
+def unescape(value):
+    text = str(value or "")
+    for _ in range(2):
+        nxt = html.unescape(text)
+        if nxt == text:
+            break
+        text = nxt
+    return text.strip()
+
+
+def load_icons():
+    try:
+        doc = json.loads(ICONS_PATH.read_text())
+    except (OSError, json.JSONDecodeError) as err:
+        print("warning: could not read icons.json: %s" % err, file=sys.stderr)
+        return {}, {}
+    by_proto = {}
+    by_key = {}
+
+    def add(key, icon):
+        if key and key not in by_key:
+            by_key[key] = icon
+
+    for icon in doc.get("icons") or []:
+        proto = icon.get("proto") or ""
+        kind = icon.get("kind") or ""
+        if proto and kind:
+            by_proto[(kind, proto)] = icon
+        for alias in [icon.get("name"), icon.get("slug"), proto] + list(icon.get("aliases") or []):
+            phrase = normalise(alias)
+            if not phrase:
+                continue
+            add(phrase, icon)
+            add(phrase.replace(" ", ""), icon)
+    return by_proto, by_key
+
+
+BY_PROTO, BY_KEY = load_icons()
+
+
+def lookup_name(name):
+    phrase = normalise(name)
+    if not phrase:
+        return None
+    return BY_KEY.get(phrase) or BY_KEY.get(phrase.replace(" ", ""))
+
+
+def lookup_src(src):
+    path = unescape(src).split("?", 1)[0]
+    match = re.search(
+        r"/(factions|brandsets|brands|gearsets|weapons|gear)/([^/]+)\.(?:png|svg|webp)$",
+        path,
+    )
+    if not match:
+        return None
+    return BY_PROTO.get((FOLDER_KIND[match.group(1)], match.group(2)))
+
+
+def classify(name, src=""):
+    icon = lookup_src(src) or lookup_name(name)
+    if icon:
+        return icon.get("kind") or "unknown", icon.get("slug") or "", icon.get("file") or GENERIC
     print("warning: no logo for %r; using generic icon" % name, file=sys.stderr)
-    return ("unknown", GENERIC, None)
+    return "unknown", "", GENERIC
 
 
-def entry(name, priority=False):
-    kind, icon, tone = classify(name)
-    row = {"loot": name, "kind": kind, "icon": icon}
-    if priority:
-        row["priority"] = True
-    if tone:
-        row["tone"] = tone
-    return row
+def faction_from(src, alt):
+    icon = lookup_src(src) or lookup_name(re.sub(r"\s+faction$", "", unescape(alt), flags=re.I))
+    if icon:
+        return icon.get("name") or "", icon.get("file") or GENERIC
+    label = re.sub(r"\s+faction$", "", unescape(alt), flags=re.I).strip()
+    if label:
+        print("warning: no faction icon for %r; using generic icon" % label, file=sys.stderr)
+    return label, GENERIC
 
 
 def fetch():
@@ -90,43 +120,70 @@ def fetch():
         return res.read().decode("utf-8", "replace")
 
 
-def parse(html):
+def tag_attr(tag, name):
+    if hasattr(tag, "group"):
+        tag = tag.group(0)
+    match = re.search(r'\b%s="([^"]*)"' % re.escape(name), tag or "")
+    return unescape(match.group(1)) if match else ""
+
+
+def parse(html_text):
     date_match = re.search(
-        r"Loot date</span>\s*<strong><time datetime=\"(\d{4}-\d{2}-\d{2})\"",
-        html,
+        r'Loot date</span>\s*<strong><time datetime="(\d{4}-\d{2}-\d{2})"',
+        html_text,
     )
     week = re.search(
-        r"Rotation week</span>\s*<strong><time datetime=\"(\d{4}-\d{2}-\d{2})\">.*?"
-        r"<time datetime=\"(\d{4}-\d{2}-\d{2})\">",
-        html,
+        r'Rotation week</span>\s*<strong><time datetime="(\d{4}-\d{2}-\d{2})">.*?'
+        r'<time datetime="(\d{4}-\d{2}-\d{2})">',
+        html_text,
         re.S,
     )
     table = re.search(
         r'aria-label="Escalation target loot and history"(.*?)</table>',
-        html,
+        html_text,
         re.S,
     )
     missions = []
     if table:
-        for row in re.findall(r"<tr class=\"([^\"]*)\">(.*?)</tr>", table.group(1), re.S):
-            cls, body = row
+        for cls, body in re.findall(r'<tr class="([^"]*)">(.*?)</tr>', table.group(1), re.S):
             mission = re.search(r'data-label="Mission".*?<span>([^<]+)</span>', body, re.S)
-            loot = re.search(r'data-loot="([^"]+)"', body)
-            if not mission or not loot:
+            faction_tag = re.search(r'<img[^>]*class="tl-faction-icon"[^>]*>', body)
+            loot_tag = re.search(r'<img[^>]*\bdata-loot="[^"]*"[^>]*>', body)
+            loot_span = re.search(
+                r'data-label="Target Loot".*?<span>([^<]+)</span>',
+                body,
+                re.S,
+            )
+            if not mission or not (loot_tag or loot_span):
                 continue
+            loot_name = tag_attr(loot_tag, "data-loot") if loot_tag else ""
+            if not loot_name and loot_span:
+                loot_name = unescape(loot_span.group(1))
             priority = "priority-row" in cls or "priority-mark" in body
-            missions.append((mission.group(1).strip(), loot.group(1).strip(), priority))
+            missions.append({
+                "mission": unescape(mission.group(1)),
+                "faction_src": tag_attr(faction_tag, "src"),
+                "faction_alt": tag_attr(faction_tag, "alt"),
+                "loot": loot_name,
+                "loot_src": tag_attr(loot_tag, "src"),
+                "priority": priority,
+            })
 
     caches = []
-    for card in re.findall(
+    for label, body in re.findall(
         r'aria-label="(Prototype (?:Gear|Weapon) Cache)"(.*?)</article>',
-        html,
+        html_text,
         re.S,
     ):
-        label, body = card
-        loot = re.search(r'class="tl-loot">.*?<span>([^<]+)</span>', body, re.S)
-        if loot:
-            caches.append((label.strip(), loot.group(1).strip()))
+        loot_tag = re.search(r'class="tl-loot"[^>]*>\s*<img[^>]*>', body, re.S)
+        loot_span = re.search(r'class="tl-loot"[^>]*>.*?<span>([^<]+)</span>', body, re.S)
+        if not loot_span:
+            continue
+        caches.append({
+            "cache": unescape(label),
+            "loot": unescape(loot_span.group(1)),
+            "loot_src": tag_attr(loot_tag.group(0) if loot_tag else "", "src"),
+        })
 
     return {
         "date": date_match.group(1) if date_match else "",
@@ -144,6 +201,20 @@ def load_existing():
         return {}
 
 
+def needs_icon_backfill(existing):
+    rows = existing.get("escalations") or []
+    caches = existing.get("protoCaches") or []
+    if len(rows) != 5 or len(caches) != 2:
+        return True
+    for row in rows:
+        if not row.get("missionIcon") or not row.get("slug"):
+            return True
+    for row in caches:
+        if not row.get("slug") or not row.get("cacheIcon"):
+            return True
+    return False
+
+
 def build(parsed, existing):
     dark = existing.get("darkZone") or [
         {"map": "DZ East", "loot": "confirm in-game", "kind": "unknown", "icon": "", "badge": ""},
@@ -158,14 +229,32 @@ def build(parsed, existing):
         "Dark Zone targeted loot is not on the ProtoTrack board."
     ) % (parsed["date"], week_of, week_end)
     escalations = []
-    for mission, loot, priority in parsed["missions"]:
-        row = entry(loot, priority)
-        row = {"mission": mission, **row}
-        escalations.append(row)
+    for row in parsed["missions"]:
+        faction, mission_icon = faction_from(row["faction_src"], row["faction_alt"])
+        kind, slug, icon = classify(row["loot"], row["loot_src"])
+        item = {
+            "mission": row["mission"],
+            "faction": faction,
+            "missionIcon": mission_icon,
+            "loot": row["loot"],
+            "kind": kind,
+            "slug": slug,
+            "icon": icon,
+        }
+        if row["priority"]:
+            item["priority"] = True
+        escalations.append(item)
     caches = []
-    for label, loot in parsed["caches"]:
-        row = entry(loot, False)
-        caches.append({"cache": label, **row})
+    for row in parsed["caches"]:
+        kind, slug, icon = classify(row["loot"], row["loot_src"])
+        caches.append({
+            "cache": row["cache"],
+            "cacheIcon": GENERIC,
+            "loot": row["loot"],
+            "kind": kind,
+            "slug": slug,
+            "icon": icon,
+        })
     return {
         "source": "https://prototrack.gg/",
         "sourceName": "ProtoTrack.gg",
@@ -182,12 +271,12 @@ def build(parsed, existing):
 
 def main():
     try:
-        html = fetch()
+        page = fetch()
     except Exception as err:
         print("fetch failed: %s" % err, file=sys.stderr)
         return 1
 
-    parsed = parse(html)
+    parsed = parse(page)
     if not parsed["date"] or len(parsed["missions"]) != 5 or len(parsed["caches"]) != 2:
         print(
             "not writing: date=%r missions=%d caches=%d"
@@ -197,7 +286,7 @@ def main():
         return 0
 
     existing = load_existing()
-    if existing.get("lootDate") == parsed["date"]:
+    if existing.get("lootDate") == parsed["date"] and not needs_icon_backfill(existing):
         print("Loot date unchanged (%s); not writing." % parsed["date"])
         return 0
 
