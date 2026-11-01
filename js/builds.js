@@ -241,49 +241,191 @@
     });
     if (current) html += '<div class="td-row td-row-' + current + '">' + rows[current].join("") + "</div>";
     return (
-      '<div class="build-sheet">' +
       '<div class="td-loadout" aria-label="Gear loadout">' + html + "</div>" +
-      '<aside class="slot-detail" id="slot-detail" hidden><p class="lede">Tap a slot.</p></aside>' +
-      "</div>" +
-      '<p class="pad-hints"><span><i>Tap</i> Inspect</span><span><i>Esc</i> Back</span></p>'
+      '<aside class="slot-detail" id="slot-detail" hidden></aside>'
     );
   }
 
-  function playstyleHTML(row) {
+  function notesPage(row) {
     var bits = [];
-    if (row.notesHtml) bits.push('<div class="detail-blurb rich-html">' + STF.safeHTML(row.notesHtml) + "</div>");
-    if (row.description) bits.push('<p class="detail-blurb">' + STF.esc(row.description) + "</p>");
-    String(row.playstyle || "").split(/\n\s*\n/).forEach(function (para) {
-      if (para.trim()) bits.push('<p class="detail-blurb">' + STF.esc(para.trim()) + "</p>");
-    });
-    if (!bits.length) return "";
-    return '<section class="build-secondary" aria-label="Playstyle"><h2>Playstyle</h2>' + bits.join("") + "</section>";
+    var styleParas = String(row.playstyle || "").split(/\n\s*\n/).map(function (para) { return para.trim(); }).filter(Boolean);
+    if (styleParas.length) {
+      bits.push("<h2>Playstyle</h2>");
+      styleParas.forEach(function (para) {
+        bits.push('<p class="detail-blurb">' + STF.esc(para) + "</p>");
+      });
+    }
+    if (row.description) bits.push("<h2>Description</h2>" + '<p class="detail-blurb">' + STF.esc(row.description) + "</p>");
+    if (row.notesHtml) bits.push("<h2>Notes</h2>" + '<div class="detail-blurb rich-html">' + STF.safeHTML(row.notesHtml) + "</div>");
+    if (!bits.length) bits.push('<p class="lede">No notes on this build.</p>');
+    return '<section class="build-notes" aria-label="Notes">' + bits.join("") + "</section>";
   }
 
-  function specsHTML(row) {
-    var lines = [];
-    GRID.forEach(function (spec) {
-      var item = slotOf(row, spec.key);
-      if (!item.name) return;
-      var extra = [item.brand, item.talent, item.core, item.attributes].filter(function (part) { return part && String(part).trim(); });
-      lines.push("<li><span>" + STF.esc(spec.label) + "</span> " + STF.esc(item.name + (extra.length ? " · " + extra.join(" · ") : "")) + "</li>");
-    });
+  function statNum(value, unit) {
+    var n = Number(value);
+    if (!isFinite(n)) return "—";
+    var rounded = Math.abs(n) >= 100 ? Math.round(n) : Math.round(n * 10) / 10;
+    var text = String(rounded);
+    if (text === "-0") text = "0";
+    var parts = text.split(".");
+    parts[0] = parts[0].replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+    return parts.join(".") + (unit || "");
+  }
+
+  function statRows(lines) {
     if (!lines.length) return "";
+    return '<ul class="stat-rows">' + lines.map(function (line) {
+      return "<li><span>" + STF.esc(line.name) + "</span><strong>" + STF.esc(line.value) + "</strong></li>";
+    }).join("") + "</ul>";
+  }
+
+  function statBlock(title, lines) {
+    if (!lines.length) return "";
+    return '<section class="stat-block"><h3>' + STF.esc(title) + "</h3>" + statRows(lines) + "</section>";
+  }
+
+  function renderStats(live) {
+    var chcValue = statNum(live.criticalHitChanceCapped, "%");
+    if (live.criticalHitChance > live.criticalHitChanceCap) {
+      chcValue += " (" + statNum(live.criticalHitChance, "%") + ")";
+    }
+    var offense = [
+      { name: "Weapon Damage", value: statNum(live.stats.weaponDamage || 0, "%") },
+      { name: "Critical Hit Chance", value: chcValue },
+      { name: "Critical Hit Damage", value: statNum(live.stats.criticalHitDamage || 0, "%") },
+      { name: "Headshot Damage", value: statNum(live.stats.headshotDamage || 0, "%") }
+    ];
+    ["assaultRifleDamage", "smgDamage", "lmgDamage", "rifleDamage", "marksmanRifleDamage", "shotgunDamage", "pistolDamage"].forEach(function (id) {
+      if (!live.stats[id]) return;
+      offense.push({ name: ShadeEngine.STATS[id].name, value: statNum(live.stats[id], "%") });
+    });
+    (live.groups.offense || []).forEach(function (row) {
+      if (!row.value) return;
+      if (offense.some(function (line) { return line.name === row.name; })) return;
+      offense.push({ name: row.name, value: statNum(row.value, row.unit) });
+    });
+    var defense = [
+      { name: "Armor", value: statNum(live.armor.total, "") }
+    ];
+    if (live.health.total != null) defense.push({ name: "Health", value: statNum(live.health.total, "") });
+    else if (live.health.flat && live.health.percent) {
+      defense.push({ name: "Health", value: statNum(live.health.flat, "") + " + " + statNum(live.health.percent, "%") });
+    } else if (live.health.percent) defense.push({ name: "Health", value: statNum(live.health.percent, "%") });
+    else if (live.health.flat) defense.push({ name: "Health", value: statNum(live.health.flat, "") });
+    (live.groups.defense || []).forEach(function (row) {
+      if (!row.value) return;
+      if (row.id === "armorFlat" || row.id === "totalArmor" || row.id === "healthFlat" || row.id === "healthPercent") return;
+      defense.push({ name: row.name, value: statNum(row.value, row.unit) });
+    });
+    var skill = [
+      { name: "Skill Tier", value: statNum(live.skillTierEffective, "") + (live.overcharge ? " (overcharge " + statNum(live.skillTier, "") + ")" : "") }
+    ];
+    (live.groups.skill || []).forEach(function (row) {
+      if (!row.value || row.id === "skillTier") return;
+      skill.push({ name: row.name, value: statNum(row.value, row.unit) });
+    });
+    var skillMods = (live.skillMods || []).map(function (mod) {
+      var who = mod.specialization ? " (" + mod.specialization + ")" : "";
+      return { name: (mod.skill ? mod.skill + " · " : "") + mod.name + who, value: statNum(mod.value, mod.unit) };
+    });
+    var bonuses = (live.bonuses || []).map(function (row) {
+      var stats = (row.applied || []).map(function (stat) {
+        var meta = stat.id && ShadeEngine.STATS[stat.id];
+        return stat.name + " " + statNum(stat.value, meta ? meta.unit : "");
+      }).join(", ");
+      var talent = row.talent ? row.talent.name : "";
+      return { name: row.name + " " + (row.need || row.pieces) + "pc", value: stats || talent || "Set bonus" };
+    });
+    var watch = (live.watch || []).filter(function (node) { return node.value; }).map(function (node) {
+      return { name: node.name, value: statNum(node.value, node.unit || "%") };
+    });
+    var spec = live.specialization || { applied: [], noted: [] };
+    var specLines = (spec.applied || []).map(function (row) {
+      return { name: row.name, value: row.value };
+    });
+    (spec.noted || []).forEach(function (row) {
+      specLines.push({ name: row.name, value: String(row.value) + " (not in the total)" });
+    });
+    if (!specLines.length && spec.name) specLines.push({ name: spec.name, value: "Equipped" });
     return (
-      '<section class="build-secondary" aria-label="Specs">' +
-      "<h2>Specs</h2>" +
-      '<ul class="piece-list">' + lines.join("") + "</ul>" +
-      "</section>"
+      '<div class="stat-sheet">' +
+      statBlock("Offense", offense) +
+      statBlock("Defense", defense) +
+      statBlock("Skill", skill) +
+      statBlock("Skill mods", skillMods) +
+      statBlock("Bonuses", bonuses) +
+      statBlock("SHD Watch", watch) +
+      statBlock("Specialization", specLines) +
+      "</div>"
     );
+  }
+
+  var catalogPromise = null;
+  function builderCatalog() {
+    if (!window.ShadeCatalog) return Promise.reject(new Error("catalog"));
+    if (!catalogPromise) catalogPromise = ShadeCatalog.load(STF.fetchJSON);
+    return catalogPromise;
+  }
+
+  function fillStats(row, node) {
+    if (!node) return;
+    if (!window.ShadeEngine || !window.ShadeCatalog) {
+      node.innerHTML = '<p class="lede">Stats are unavailable.</p>';
+      return;
+    }
+    builderCatalog().then(function (catalog) {
+      var state = ShadeCatalog.fromSaved(row.loadout || {}, catalog);
+      node.innerHTML = renderStats(ShadeEngine.compute(state, catalog));
+    }).catch(function (err) {
+      console.error(err);
+      node.innerHTML = '<p class="lede">Could not compute this build.</p>';
+    });
   }
 
   function detailHTML(row) {
+    var tabs = ["stats", "loadout", "notes"].map(function (id) {
+      var on = id === "loadout" ? ' aria-current="true"' : "";
+      return '<button type="button" role="tab" data-build-tab="' + id + '"' + on + ">" + id + "</button>";
+    }).join("");
     return (
       '<p class="build-kicker">' + STF.esc(row.name) + " · " + STF.esc(roleText(row)) + "</p>" +
-      loadoutHTML(row) +
-      playstyleHTML(row) +
-      specsHTML(row)
+      '<div class="build-tabs" role="tablist">' + tabs + "</div>" +
+      '<div class="build-rail" tabindex="0">' +
+      '<section class="build-page" data-build-page="stats" aria-label="Stats"><p class="lede">Computing stats…</p></section>' +
+      '<section class="build-page" data-build-page="loadout" aria-label="Loadout">' + loadoutHTML(row) + "</section>" +
+      '<section class="build-page" data-build-page="notes" aria-label="Notes">' + notesPage(row) + "</section>" +
+      "</div>"
     );
+  }
+
+  function centerBuildPage(rail, id, smooth) {
+    var page = rail.querySelector('[data-build-page="' + id + '"]');
+    if (!page || !rail.clientWidth) return;
+    var left = page.offsetLeft - Math.max(0, (rail.clientWidth - page.offsetWidth) / 2);
+    rail.scrollTo({ left: Math.max(0, left), behavior: smooth ? "smooth" : "auto" });
+  }
+
+  function activeBuildPage(rail) {
+    var pages = rail.querySelectorAll(".build-page");
+    var mid = rail.scrollLeft + rail.clientWidth / 2;
+    var best = "loadout";
+    var bestDist = Infinity;
+    pages.forEach(function (page) {
+      var center = page.offsetLeft + page.offsetWidth / 2;
+      var dist = Math.abs(center - mid);
+      if (dist < bestDist) {
+        bestDist = dist;
+        best = page.getAttribute("data-build-page");
+      }
+    });
+    return best;
+  }
+
+  function markBuildTab(root, id) {
+    root.querySelectorAll("[data-build-tab]").forEach(function (btn) {
+      if (btn.getAttribute("data-build-tab") === id) btn.setAttribute("aria-current", "true");
+      else btn.removeAttribute("aria-current");
+    });
   }
 
   function buildsURL(hash) {
@@ -375,6 +517,22 @@
     setHeaderBack("detail", cat);
     openBuild = row;
     detailBody.innerHTML = detailHTML(row);
+    var rail = detailBody.querySelector(".build-rail");
+    fillStats(row, detailBody.querySelector('[data-build-page="stats"]'));
+    if (rail) {
+      var place = function () { centerBuildPage(rail, "loadout", false); };
+      requestAnimationFrame(function () { place(); requestAnimationFrame(place); });
+      rail.addEventListener("scroll", function () { markBuildTab(detailBody, activeBuildPage(rail)); }, { passive: true });
+      rail.addEventListener("keydown", function (e) {
+        if (e.key !== "ArrowRight" && e.key !== "ArrowLeft") return;
+        e.preventDefault();
+        var order = ["stats", "loadout", "notes"];
+        var next = order.indexOf(activeBuildPage(rail)) + (e.key === "ArrowRight" ? 1 : -1);
+        if (next < 0 || next >= order.length) return;
+        centerBuildPage(rail, order[next], true);
+        markBuildTab(detailBody, order[next]);
+      });
+    }
     window.scrollTo(0, 0);
     if (push) history.pushState({ cat: catId, build: buildId }, "", buildsURL("#" + catId + "/" + buildId));
   }
@@ -410,6 +568,13 @@
 
   var openBuild = null;
   detailBody.addEventListener("click", function (e) {
+    var tab = e.target.closest("[data-build-tab]");
+    if (tab && detailBody.contains(tab)) {
+      var rail = detailBody.querySelector(".build-rail");
+      if (rail) centerBuildPage(rail, tab.getAttribute("data-build-tab"), true);
+      markBuildTab(detailBody, tab.getAttribute("data-build-tab"));
+      return;
+    }
     var btn = e.target.closest(".td-slot");
     if (!btn || !openBuild || !detailBody.contains(btn)) return;
     detailBody.querySelectorAll(".td-slot").forEach(function (el) { el.classList.remove("is-picked"); });
@@ -418,7 +583,7 @@
     if (!panel) return;
     panel.hidden = false;
     panel.innerHTML = slotPanel(openBuild, btn.getAttribute("data-slot"));
-    panel.scrollIntoView({ block: "nearest" });
+    panel.scrollIntoView({ block: "nearest", inline: "nearest" });
   });
 
   stage.addEventListener("click", function (e) {
@@ -538,8 +703,9 @@
       role: role,
       roleLabel: style || "Damage",
       description: row.short_description || "",
-      playstyle: "",
+      playstyle: style,
       notesHtml: row.notes_html || "",
+      loadout: row.loadout || {},
       slots: {
         signature: slotFromLoadout(spec),
         watch: watchSlot(load.watch),

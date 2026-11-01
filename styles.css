@@ -377,9 +377,6 @@ h1 { margin: 0 0 6px; font-size: clamp(1.25rem, 4.5vw, 1.7rem); letter-spacing: 
 /* ===== Inventory-style build card =====
    LEFT = key stats | RIGHT stack: TOP weapons | MIDDLE 2×3 gear | BOTTOM skills+spec
 */
-.build-rail {
-  display: flex; flex-direction: column; gap: 16px;
-}
 .inv-card {
   background: var(--panel);
   border: 1px solid var(--border);
@@ -2112,14 +2109,117 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
 .attr-line span { display: block; color: #9aa0a6; font-size: .68rem; letter-spacing: .06em; text-transform: uppercase; }
 .attr-line strong { display: block; font-weight: 600; }
 .attr-line i { display: block; height: 4px; margin-top: 4px; background: var(--orange); }
-.pad-hints {
-  display: flex; gap: 14px; margin: 14px 0 0;
-  color: #9aa0a6; font-size: .72rem;
+.build-tabs {
+  display: flex;
+  margin: 0 0 8px;
+  border-bottom: 1px solid rgba(255,255,255,.22);
 }
-.pad-hints i {
-  font-style: normal; font-weight: 700; color: #fff;
-  border: 1px solid rgba(255,255,255,.4);
-  padding: 1px 5px; margin-right: 4px;
+.build-tabs button {
+  flex: 1;
+  background: transparent;
+  border: 0;
+  border-bottom: 2px solid transparent;
+  color: #9aa0a6;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  font-size: .78rem;
+  padding: 8px 4px 6px;
+}
+.build-tabs button[aria-current="true"] {
+  color: var(--orange);
+  border-bottom-color: var(--orange);
+}
+.build-rail {
+  position: relative;
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  gap: 10px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  scroll-behavior: smooth;
+  -webkit-overflow-scrolling: touch;
+  scrollbar-width: none;
+  overscroll-behavior-x: contain;
+  outline: none;
+}
+.build-rail::-webkit-scrollbar { display: none; }
+.build-page {
+  flex: 0 0 84%;
+  width: 84%;
+  height: 100%;
+  min-width: 0;
+  min-height: 0;
+  scroll-snap-align: center;
+  scroll-snap-stop: always;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  overscroll-behavior-y: contain;
+}
+.stat-sheet, .build-notes { min-width: 0; }
+.stat-sheet {
+  background: #101114;
+  border: 1px solid rgba(255,255,255,.22);
+  padding: 2px 10px 8px;
+}
+.stat-block { margin: 0; }
+.stat-block h3, .build-notes h2 {
+  margin: 12px 0 0;
+  padding-bottom: 4px;
+  color: var(--orange);
+  font-size: .72rem;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  border-bottom: 1px solid rgba(255,109,16,.45);
+}
+.stat-rows { list-style: none; margin: 0; padding: 0; }
+.stat-rows li {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 10px;
+  padding: 6px 0;
+  border-bottom: 1px solid rgba(255,255,255,.08);
+  font-size: .84rem;
+}
+.stat-rows span { min-width: 0; color: #d5d8de; }
+.stat-rows strong {
+  flex: 0 0 auto;
+  max-width: 58%;
+  color: #fff;
+  font-weight: 700;
+  font-variant-numeric: tabular-nums;
+  text-align: right;
+}
+body.page-resources #tab-builds.res-panel:not([hidden]) {
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+}
+#build-list:not([hidden]) { flex: 1 1 auto; min-height: 0; overflow: auto; }
+#build-detail:not([hidden]) {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  padding-bottom: 8px;
+}
+#detail-body {
+  flex: 1 1 auto;
+  min-height: 0;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
 }
 @media (min-width: 860px) {
   .build-sheet { grid-template-columns: minmax(0, 420px) minmax(220px, 1fr); align-items: start; }
