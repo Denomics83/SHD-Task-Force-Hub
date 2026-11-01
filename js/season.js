@@ -33,7 +33,7 @@
       .join("");
   }
 
-  var SCOUT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.6" cy="14" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.4" cy="14" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.7 14h2.6M7.6 10.9V8.2M16.4 10.9V8.2M5.4 8.2h4.4M14.2 8.2h4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  var SCOUT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M1 20.4 6.15 3.2 11.3 20.4H1zm11.7 0 5.15-17.2 5.15 17.2H12.7z"/></svg>';
   var HVT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>';
   var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
 
