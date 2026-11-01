@@ -1,117 +1,105 @@
 {
   "seasons": {
     "y8s3-red-horizon": {
+      "source": "https://dving.net/guides/the-division-2-guides/journey",
+      "sourceUpdated": "2026-01-02",
       "missions": [
         {
-          "name": "Mission 1 — add name",
+          "name": "The Beginning",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Complete the American History Museum mission",
+            "Finish Propaganda Broadcasts",
+            "Deconstruct unwanted items",
+            "Liberate Control Points",
+            "Craft basic gear pieces",
+            "Finish Main Missions",
+            "Stop Public Executions",
+            "Loot Specialized (or higher) items"
           ]
         },
         {
-          "name": "Mission 2 — add name",
+          "name": "Expanding Influence",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Donate 500 resources to Control Points",
+            "Complete Bounties",
+            "Wear 4 items of the same brand",
+            "Finish Territory Control activities",
+            "Craft weapons",
+            "Complete Jefferson Plaza mission",
+            "Claim a Season Pass reward",
+            "Conquer Tidal Basin Stronghold"
           ]
         },
         {
-          "name": "Mission 3 — add name",
+          "name": "Combat Training",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Reach Momentum Tier 2",
+            "Maintain Momentum Tier 2 for 60 seconds",
+            "Eliminate 500 enemies",
+            "Defeat 100 elite enemies",
+            "Score 150 headshot kills",
+            "Achieve 40 double kills",
+            "Kill 40 enemies with explosives",
+            "Kill 40 enemies using skills"
           ]
         },
         {
-          "name": "Mission 4 — add name",
+          "name": "Tactical Superiority",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Restore 100,000 armor via Critical Recovery",
+            "Eliminate 200 enemies using Seeker Mines",
+            "Kill 80 Frenzied enemies",
+            "Achieve 40 skill-based kills",
+            "Prevent 600 Momentum losses",
+            "Defeat 10 Blacklist enemies",
+            "Maintain Momentum Tier 2 for 120 seconds",
+            "Land 300 headshot kills"
           ]
         },
         {
-          "name": "Mission 5 — add name",
+          "name": "High Aggression",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Eliminate 80 enemies while Overdrive is active",
+            "Eliminate 250 enemies during Overdrive cooldown",
+            "Defeat 150 enemies using skills",
+            "Eliminate 250 enemies while Momentum Surge is equipped",
+            "Kill 200 Blacklist enemies",
+            "Achieve Momentum Tier 5",
+            "Prevent 900 Momentum losses",
+            "Maintain Momentum Tier 4 for 180 seconds"
           ]
         },
         {
-          "name": "Mission 6 — add name",
+          "name": "Advanced Tactics",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Activate Vendetta and eliminate 100 marked enemies",
+            "Kill 70 enemies with a sidearm during Vendetta",
+            "Eliminate 200 enemies using the Assault Drone",
+            "Defeat 350 Blacklist enemies",
+            "Maintain Momentum Tier 4 for 240 seconds",
+            "Prevent 1200 Momentum losses",
+            "Reach Momentum Tier 5 and kill 5 enemies",
+            "Activate Overdrive, Vendetta, and Tactical Supremacy within 15 minutes"
           ]
         },
         {
-          "name": "Mission 7 — add name",
+          "name": "The Final Challenge",
           "unlocks": "",
           "tasks": [
-            "Task 1 — add task",
-            "Task 2 — add task",
-            "Task 3 — add task",
-            "Task 4 — add task",
-            "Task 5 — add task",
-            "Task 6 — add task",
-            "Task 7 — add task",
-            "Task 8 — add task",
-            "Task 9 — add task",
-            "Task 10 — add task"
+            "Activate Tactical Supremacy and eliminate 600 enemies",
+            "Extend Tactical Supremacy via headshot kills",
+            "Defeat 50 enemies using the Reinforced Shield",
+            "Recover 100,000 armor with Reactive Reinforcement",
+            "Maintain Momentum Tier 5 for 60 seconds",
+            "Eliminate 20 Blacklist enemies",
+            "Reach Momentum Tier 5 and kill 8 enemies",
+            "Activate Overdrive, Vendetta, and Tactical Supremacy in 15 minutes"
           ]
         }
       ]
