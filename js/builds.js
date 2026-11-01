@@ -284,78 +284,146 @@
     return '<section class="stat-block"><h3>' + STF.esc(title) + "</h3>" + statRows(lines) + "</section>";
   }
 
-  function renderStats(live) {
-    var chcValue = statNum(live.criticalHitChanceCapped, "%");
-    if (live.criticalHitChance > live.criticalHitChanceCap) {
-      chcValue += " (" + statNum(live.criticalHitChance, "%") + ")";
+  function statPresent(value) {
+    if (value == null || value === "") return false;
+    var n = Number(value);
+    return isFinite(n) && n !== 0;
+  }
+
+  function pushStat(lines, name, value, unit) {
+    if (!statPresent(value)) return;
+    lines.push({ name: name, value: statNum(value, unit) });
+  }
+
+  function joinedStat(lines, name, parts) {
+    var shown = parts.filter(function (part) { return part; });
+    if (!shown.length) return;
+    lines.push({ name: name, value: shown.join(" + ") });
+  }
+
+  function damageRows(computed) {
+    if (!computed || typeof computed !== "object") return [];
+    var slots = [["primary", "Primary"], ["secondary", "Secondary"], ["sidearm", "Sidearm"]];
+    var bag = computed.weapons && typeof computed.weapons === "object" ? computed.weapons : null;
+    if (!bag && (computed.primary || computed.secondary || computed.sidearm)) bag = computed;
+    var rows = [];
+    if (bag) {
+      slots.forEach(function (pair) {
+        var row = bag[pair[0]];
+        if (!row || typeof row !== "object") return;
+        if (!statPresent(row.effDmgPerMag) && !statPresent(row.effAvgShot)) return;
+        rows.push({
+          slot: pair[1],
+          name: row.name || "",
+          mag: statPresent(row.effDmgPerMag) ? row.effDmgPerMag : null,
+          shot: statPresent(row.effAvgShot) ? row.effAvgShot : null
+        });
+      });
+      return rows;
     }
-    var offense = [
-      { name: "Weapon Damage", value: statNum(live.stats.weaponDamage || 0, "%") },
-      { name: "Critical Hit Chance", value: chcValue },
-      { name: "Critical Hit Damage", value: statNum(live.stats.criticalHitDamage || 0, "%") },
-      { name: "Headshot Damage", value: statNum(live.stats.headshotDamage || 0, "%") }
-    ];
+    if (statPresent(computed.effDmgPerMag) || statPresent(computed.effAvgShot)) {
+      var slot = computed.weapon === "secondary" ? "Secondary" : computed.weapon === "sidearm" ? "Sidearm" : "Primary";
+      rows.push({
+        slot: slot,
+        name: computed.name || "",
+        mag: statPresent(computed.effDmgPerMag) ? computed.effDmgPerMag : null,
+        shot: statPresent(computed.effAvgShot) ? computed.effAvgShot : null
+      });
+    }
+    return rows;
+  }
+
+  function damageHTML(computed) {
+    var rows = damageRows(computed);
+    if (!rows.length) return "";
+    return '<div class="dps-board">' + rows.map(function (row) {
+      var title = row.name ? row.slot + " · " + row.name : row.slot;
+      var cells = "";
+      if (row.mag != null) cells += '<div><span>Eff. Dmg / Mag</span><strong>' + STF.esc(statNum(row.mag, "")) + "</strong></div>";
+      if (row.shot != null) cells += '<div><span>Eff. Avg Shot</span><strong>' + STF.esc(statNum(row.shot, "")) + "</strong></div>";
+      return '<section class="dps-weapon"><h3>' + STF.esc(title) + '</h3><div class="dps-pair">' + cells + "</div></section>";
+    }).join("") + "</div>";
+  }
+
+  function renderStats(live, computed) {
+    var offense = [];
+    var offenseSeen = {
+      weaponDamage: true,
+      criticalHitChance: true,
+      criticalHitDamage: true,
+      headshotDamage: true
+    };
+    pushStat(offense, "Weapon Damage", live.stats.weaponDamage, "%");
     ["assaultRifleDamage", "smgDamage", "lmgDamage", "rifleDamage", "marksmanRifleDamage", "shotgunDamage", "pistolDamage"].forEach(function (id) {
-      if (!live.stats[id]) return;
+      offenseSeen[id] = true;
+      if (!statPresent(live.stats[id])) return;
       offense.push({ name: ShadeEngine.STATS[id].name, value: statNum(live.stats[id], "%") });
     });
+    if (statPresent(live.criticalHitChanceCapped)) {
+      var chcValue = statNum(live.criticalHitChanceCapped, "%");
+      if (live.criticalHitChance > live.criticalHitChanceCap) {
+        chcValue += " (" + statNum(live.criticalHitChance, "%") + ")";
+      }
+      offense.push({ name: "Critical Hit Chance", value: chcValue });
+    }
+    pushStat(offense, "Critical Hit Damage", live.stats.criticalHitDamage, "%");
+    pushStat(offense, "Headshot Damage", live.stats.headshotDamage, "%");
     (live.groups.offense || []).forEach(function (row) {
-      if (!row.value) return;
-      if (offense.some(function (line) { return line.name === row.name; })) return;
+      if (offenseSeen[row.id] || !statPresent(row.value)) return;
       offense.push({ name: row.name, value: statNum(row.value, row.unit) });
     });
-    var defense = [
-      { name: "Armor", value: statNum(live.armor.total, "") }
-    ];
-    if (live.health.total != null) defense.push({ name: "Health", value: statNum(live.health.total, "") });
-    else if (live.health.flat && live.health.percent) {
-      defense.push({ name: "Health", value: statNum(live.health.flat, "") + " + " + statNum(live.health.percent, "%") });
-    } else if (live.health.percent) defense.push({ name: "Health", value: statNum(live.health.percent, "%") });
-    else if (live.health.flat) defense.push({ name: "Health", value: statNum(live.health.flat, "") });
+    var defense = [];
+    pushStat(defense, "Armor", live.armor && live.armor.total, "");
+    if (live.health && live.health.total != null) pushStat(defense, "Health", live.health.total, "");
+    else if (live.health) {
+      joinedStat(defense, "Health", [
+        statPresent(live.health.flat) ? statNum(live.health.flat, "") : "",
+        statPresent(live.health.percent) ? statNum(live.health.percent, "%") : ""
+      ]);
+    }
+    joinedStat(defense, "Armor Regen", [
+      statPresent(live.stats.armorRegen) ? statNum(live.stats.armorRegen, "") : "",
+      statPresent(live.stats.armorRegenPercent) ? statNum(live.stats.armorRegenPercent, "%") : ""
+    ]);
+    joinedStat(defense, "Armor on Kill", [
+      statPresent(live.stats.armorOnKill) ? statNum(live.stats.armorOnKill, "") : "",
+      statPresent(live.stats.armorOnKillPercent) ? statNum(live.stats.armorOnKillPercent, "%") : ""
+    ]);
+    var defenseSeen = {
+      armorFlat: true,
+      totalArmor: true,
+      healthFlat: true,
+      healthPercent: true,
+      armorRegen: true,
+      armorRegenPercent: true,
+      armorOnKill: true,
+      armorOnKillPercent: true
+    };
     (live.groups.defense || []).forEach(function (row) {
-      if (!row.value) return;
-      if (row.id === "armorFlat" || row.id === "totalArmor" || row.id === "healthFlat" || row.id === "healthPercent") return;
+      if (defenseSeen[row.id] || !statPresent(row.value)) return;
       defense.push({ name: row.name, value: statNum(row.value, row.unit) });
     });
-    var skill = [
-      { name: "Skill Tier", value: statNum(live.skillTierEffective, "") + (live.overcharge ? " (overcharge " + statNum(live.skillTier, "") + ")" : "") }
-    ];
+    var skill = [];
+    if (statPresent(live.skillTierEffective) || live.overcharge) {
+      var tier = statNum(live.skillTierEffective, "");
+      if (live.overcharge) tier += " (overcharge " + statNum(live.skillTier, "") + ")";
+      skill.push({ name: "Skill Tier", value: tier });
+    }
     (live.groups.skill || []).forEach(function (row) {
-      if (!row.value || row.id === "skillTier") return;
+      if (!statPresent(row.value) || row.id === "skillTier") return;
       skill.push({ name: row.name, value: statNum(row.value, row.unit) });
     });
-    var skillMods = (live.skillMods || []).map(function (mod) {
+    (live.skillMods || []).forEach(function (mod) {
+      if (!statPresent(mod.value)) return;
       var who = mod.specialization ? " (" + mod.specialization + ")" : "";
-      return { name: (mod.skill ? mod.skill + " · " : "") + mod.name + who, value: statNum(mod.value, mod.unit) };
+      skill.push({ name: (mod.skill ? mod.skill + " · " : "") + mod.name + who, value: statNum(mod.value, mod.unit) });
     });
-    var bonuses = (live.bonuses || []).map(function (row) {
-      var stats = (row.applied || []).map(function (stat) {
-        var meta = stat.id && ShadeEngine.STATS[stat.id];
-        return stat.name + " " + statNum(stat.value, meta ? meta.unit : "");
-      }).join(", ");
-      var talent = row.talent ? row.talent.name : "";
-      return { name: row.name + " " + (row.need || row.pieces) + "pc", value: stats || talent || "Set bonus" };
-    });
-    var watch = (live.watch || []).filter(function (node) { return node.value; }).map(function (node) {
-      return { name: node.name, value: statNum(node.value, node.unit || "%") };
-    });
-    var spec = live.specialization || { applied: [], noted: [] };
-    var specLines = (spec.applied || []).map(function (row) {
-      return { name: row.name, value: row.value };
-    });
-    (spec.noted || []).forEach(function (row) {
-      specLines.push({ name: row.name, value: String(row.value) + " (not in the total)" });
-    });
-    if (!specLines.length && spec.name) specLines.push({ name: spec.name, value: "Equipped" });
     return (
       '<div class="stat-sheet">' +
+      damageHTML(computed) +
       statBlock("Offense", offense) +
       statBlock("Defense", defense) +
       statBlock("Skill", skill) +
-      statBlock("Skill mods", skillMods) +
-      statBlock("Bonuses", bonuses) +
-      statBlock("SHD Watch", watch) +
-      statBlock("Specialization", specLines) +
       "</div>"
     );
   }
@@ -375,7 +443,8 @@
     }
     builderCatalog().then(function (catalog) {
       var state = ShadeCatalog.fromSaved(row.loadout || {}, catalog);
-      node.innerHTML = renderStats(ShadeEngine.compute(state, catalog));
+      var computed = (row.loadout && row.loadout.computed) || state.computed || null;
+      node.innerHTML = renderStats(ShadeEngine.compute(state, catalog), computed);
     }).catch(function (err) {
       console.error(err);
       node.innerHTML = '<p class="lede">Could not compute this build.</p>';
