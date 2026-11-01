@@ -31,7 +31,8 @@ const catalog = catalogApi.adapt({
   rules: read("data/td2/builder/rules.json"),
   mods: read("data/td2/builder/mods.json"),
   coreRules: read("data/td2/builder/core-rules.json"),
-  layouts: read("data/td2/builder/layouts.json")
+  layouts: read("data/td2/builder/layouts.json"),
+  skillMods: read("data/td2/builder/skill-mods.json")
 });
 
 function gear(name, brand, rarity, core, coreValue, attributes) {
@@ -487,6 +488,29 @@ test("legacy admin loadouts still sum", function () {
   assert.equal(sheet.stats.headshotDamage, 13);
   assert.equal(sheet.stats.explosiveDamage, 10);
   assert.equal(sheet.stats.pulseResistance, 50);
+});
+
+test("skill mods follow the sourced slot list and still load without them", function () {
+  const pulse = catalog.skillMods.families.Pulse;
+  assert.equal(pulse.slots.length, 2);
+  assert.equal(pulse.slots[0].name, "Coil");
+  assert.equal(pulse.slots[1].name, "Housing");
+  assert.ok(pulse.slots[0].mods.some(function (mod) { return mod.name === "Radius" && mod.max === 10 && !mod.specialization; }));
+  assert.ok(pulse.slots[0].mods.some(function (mod) { return mod.name === "Radius" && mod.max === 15 && mod.specialization === "Gunner"; }));
+  assert.equal(pulse.slots[0].mods.some(function (mod) { return mod.name === "Charge Speed"; }), false);
+  assert.equal(catalog.skillMods.families.Turret.slots.length, 3);
+  assert.equal(catalog.skillMods.families.Decoy.slots.length, 2);
+  const old = catalogApi.fromSaved({ loadout: { skill2: { name: "Banshee Pulse", variant: "Banshee Pulse" } } }, catalog);
+  assert.equal(old.skill2.name, "Banshee Pulse");
+  assert.deepEqual(old.skill2.mods, []);
+  old.skill2.mods = [{ slot: "Coil", name: "Radius", value: 10, unit: "%" }];
+  const sheet = engine.compute(old, catalog);
+  assert.equal(sheet.skillMods.length, 1);
+  assert.equal(sheet.skillMods[0].skill, "Banshee Pulse");
+  assert.equal(sheet.skillMods[0].slot, "Coil");
+  assert.equal(sheet.skillMods[0].value, 10);
+  assert.equal(catalogApi.toPublic(old).skill2.mods[0].name, "Radius");
+  assert.equal(sheet.stats.skillHaste || 0, 0);
 });
 
 test("weapon attachments add their bonuses and penalties", function () {

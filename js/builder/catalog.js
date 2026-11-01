@@ -10,7 +10,7 @@
     "weapons", "brands", "gearsets", "named", "exotics", "attributes", "talents",
     "skills", "specializations", "grenades", "playstyles"
   ];
-var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules", "layouts", "talent-calc", "damage"];
+  var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules", "layouts", "talent-calc", "damage", "skill-mods"];
   var GEAR_CORES = ["Weapon Damage", "Armor", "Skill Tier"];
 
   function list(doc, key) {
@@ -89,9 +89,10 @@ var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "
       rules: files.rules || {},
       weaponMods: (files.mods && files.mods.slots) || {},
       coreRules: files.coreRules || { open: GEAR_CORES, items: [] },
-layouts: files.layouts || {},
+      layouts: files.layouts || {},
       talentCalc: files.talentCalc || { talents: [] },
       damageNotes: files.damageNotes || {},
+      skillMods: files.skillMods || { families: {} },
       namedWeaponByName: byName(namedWeapons),
       namedGearByName: byName(namedGear),
       exoticByName: byName(exotics),
@@ -110,7 +111,7 @@ layouts: files.layouts || {},
       }
     }));
     await Promise.all(BUILDER_FILES.map(async function (name) {
-      var key = name === "attributes" ? "builderAttributes" : name === "weapon-cores" ? "weaponCores" : name === "specializations" ? "builderSpecs" : name === "core-rules" ? "coreRules" : name === "talent-calc" ? "talentCalc" : name === "damage" ? "damageNotes" : name;
+      var key = name === "attributes" ? "builderAttributes" : name === "weapon-cores" ? "weaponCores" : name === "specializations" ? "builderSpecs" : name === "core-rules" ? "coreRules" : name === "talent-calc" ? "talentCalc" : name === "damage" ? "damageNotes" : name === "skill-mods" ? "skillMods" : name;
       try { files[key] = await fetchJSON("data/td2/builder/" + name + ".json"); }
       catch (err) { errors.push(name + ": " + (err && err.message ? err.message : String(err))); }
     }));
@@ -134,9 +135,10 @@ layouts: files.layouts || {},
       rules: files.rules,
       mods: files.mods,
       coreRules: files.coreRules,
-layouts: files.layouts,
+      layouts: files.layouts,
       talentCalc: files.talentCalc,
-      damageNotes: files.damageNotes
+      damageNotes: files.damageNotes,
+      skillMods: files.skillMods
     });
     catalog.errors = errors;
     return catalog;
@@ -161,7 +163,7 @@ layouts: files.layouts,
   }
 
   function emptySkill() {
-    return { name: "", catalogId: "", variant: "", expertise: 0 };
+    return { name: "", catalogId: "", variant: "", family: "", expertise: 0, mods: [] };
   }
 
   function blank(watchNodes) {
@@ -347,7 +349,23 @@ layouts: files.layouts,
     });
     ["skill1", "skill2"].forEach(function (key) {
       var item = loadout[key] || emptySkill();
-      out[key] = { name: item.name || "", catalogId: item.catalogId || "", variant: item.variant || "", expertise: Number(item.expertise) || 0 };
+      out[key] = {
+        name: item.name || "",
+        catalogId: item.catalogId || "",
+        variant: item.variant || "",
+        family: item.family || "",
+        expertise: Number(item.expertise) || 0,
+        mods: (item.mods || []).map(function (mod) {
+          return {
+            slot: mod.slot || "",
+            name: mod.name || "",
+            value: mod.value === "" || mod.value == null ? "" : Number(mod.value),
+            unit: mod.unit || "",
+            max: mod.max == null || mod.max === "" ? null : Number(mod.max),
+            specialization: mod.specialization || ""
+          };
+        })
+      };
     });
     if (loadout.calculator) out.calculator = copy(loadout.calculator);
     if (loadout.computed) out.computed = copy(loadout.computed);

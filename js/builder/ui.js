@@ -324,14 +324,76 @@
         (item.core ? slider(item.core, item.coreValue, limits(item.core, "gear-core"), "core", null, false, item.coreMax) : "");
     }
 
+    function skillFamily(item) {
+      var skill = (catalog.skills || []).filter(function (row) { return row.name === item.name || row.name === item.variant; })[0];
+      return (skill && skill.family) || item.family || "";
+    }
+
+    function skillSlots(item) {
+      var family = skillFamily(item);
+      var row = catalog.skillMods && catalog.skillMods.families && catalog.skillMods.families[family];
+      return (row && row.slots) || [];
+    }
+
+    function syncSkillMods(item) {
+      var slots = skillSlots(item);
+      var prev = item.mods || [];
+      item.mods = slots.map(function (slot) {
+        var found = prev.filter(function (mod) { return mod && mod.slot === slot.name; })[0] || { slot: slot.name, name: "", value: "" };
+        var match = (slot.mods || []).filter(function (mod) {
+          return mod.name === found.name && (mod.specialization || "") === (found.specialization || "");
+        })[0];
+        if (!match) return { slot: slot.name, name: "", value: "", unit: "", max: null, specialization: "" };
+        return {
+          slot: slot.name,
+          name: match.name,
+          value: found.value === "" || found.value == null ? match.max : found.value,
+          unit: match.unit || "",
+          max: match.max,
+          specialization: match.specialization || ""
+        };
+      });
+      item.family = skillFamily(item);
+      return slots;
+    }
+
+    function skillModLabel(mod) {
+      var who = mod.specialization ? " (" + mod.specialization + ")" : "";
+      if (mod.max == null) return mod.name + who + " (max not listed)";
+      var amount = mod.unit === "%" ? "+" + mod.max + "%" : "+" + mod.max;
+      return mod.name + " " + amount + who;
+    }
+
     function skillEditor() {
       var item = state[selected];
       var skill = (catalog.skills || []).filter(function (row) { return row.name === item.name; })[0];
       var variants = (skill && skill.variants) || [];
+      var slots = item.name ? syncSkillMods(item) : [];
+      var mods = slots.map(function (slot, index) {
+        var current = item.mods[index] || {};
+        var options = '<option value="">—</option>' + (slot.mods || []).map(function (mod, modIndex) {
+          var on = mod.name === current.name && (mod.specialization || "") === (current.specialization || "");
+          return '<option value="' + modIndex + '"' + (on ? " selected" : "") + ">" + esc(skillModLabel(mod)) + "</option>";
+        }).join("");
+        var sliderHtml = "";
+        if (current.name && current.max != null) {
+          var max = num(current.max);
+          var value = current.value === "" || current.value == null ? 0 : num(current.value);
+          var step = max % 1 ? "0.1" : "1";
+          sliderHtml = '<div class="bb-slide"><span><em>' + esc(current.name) + "</em><strong data-readout>" +
+            esc(format(value, current.unit || "")) + "</strong></span>" +
+            '<div class="bb-slide-row"><input type="range" min="0" max="' + max + '" step="' + step + '" value="' + value +
+            '" data-bind="skillmod" data-index="' + index + '"></div></div>';
+        } else if (current.name) {
+          sliderHtml = '<p class="lede">No sourced maximum for this mod.</p>';
+        }
+        return "<h4>" + esc(slot.name) + "</h4><label>Mod <select data-skill-mod=\"" + index + "\">" + options + "</select></label>" + sliderHtml;
+      }).join("");
       return head(item, "Choose skill") +
-        '<label>Variant <select data-field="variant">' + optionHTML(variants, item.variant) + "</select></label>" +
+        '<label>Variant <select data-field="variant">' + optionHTML(variants, item.variant || item.name) + "</select></label>" +
         expertiseField(item) +
-        '<p class="lede">Skill damage, repair and duration by tier are phase 3. Expertise is saved with the skill.</p>';
+        mods +
+        '<p class="lede">Skill damage, repair and duration by tier are phase 3. Chosen mod bonuses are listed on the sheet.</p>';
     }
 
     function grenadeEditor() {
@@ -376,8 +438,11 @@
     }
 
     function head(item, pickLabel) {
+      var rarity = item.rarity;
+      if (!rarity && (selected === "skill1" || selected === "skill2")) rarity = item.name ? (item.family || skillFamily(item) || "Skill") : "Empty";
+      if (!rarity) rarity = "Empty";
       return '<p class="bb-kicker">' + esc(LABELS[selected]) + "</p>" +
-        '<p class="slot-rarity">' + esc(item.rarity || "Empty") + "</p>" +
+        '<p class="slot-rarity">' + esc(rarity) + "</p>" +
         "<h3>" + esc(item.name || "Empty slot") + "</h3>" +
         '<p class="admin-row"><button type="button" class="admin-btn" data-pick>' + esc(pickLabel) + '</button>' +
         '<button type="button" class="admin-btn admin-btn-ghost" data-clear>Clear</button></p>';
@@ -422,6 +487,14 @@
         return "<li><span>" + esc(row.name) + "</span><strong>" + esc(row.value) + "</strong></li>";
       }).join("");
       var noted = (spec.noted || []).map(function (row) { return esc(row.name); }).join(", ");
+      function skillModLines(liveSheet) {
+        var lines = (liveSheet.skillMods || []).map(function (mod) {
+          var who = mod.specialization ? " (" + mod.specialization + ")" : "";
+          return "<li><span>" + esc(mod.skill + " · " + mod.slot) + "</span><strong>" +
+            esc(mod.name + who + " " + format(mod.value, mod.unit || "")) + "</strong></li>";
+        }).join("");
+        return lines || "<li><span>None</span><strong>—</strong></li>";
+      }
       var health = live.health.total == null
         ? "Flat " + format(live.health.flat, "") + " · " + format(live.health.percent, "%") + " (base health not sourced)"
         : format(live.health.total, "");
@@ -449,6 +522,7 @@
         "<li><span>Skill Tier</span><strong>" + esc(tier) + "</strong></li>" +
         rows(live.groups.skill.filter(function (row) { return row.id !== "skillTier"; })) +
         "</ul></section>" +
+        '<section><h4>Skill mods</h4><ul class="bb-stat">' + skillModLines(live) + "</ul></section>" +
         '<section><h4>Bonuses</h4><ul class="bb-stat">' + (bonusLines || "<li><span>None</span><strong>—</strong></li>") + "</ul></section>" +
         '<section><h4>' + esc(spec.name || "Specialization") + '</h4><ul class="bb-stat">' + (specLines || "<li><span>None</span><strong>—</strong></li>") + "</ul>" +
         (noted ? '<p class="lede">' + noted + " stays off the total.</p>" : "") + "</section>" +
@@ -545,9 +619,35 @@
         item.expertise = Math.max(0, Math.min((catalog.armor && catalog.armor.expertiseMax) || 30, num(target.value)));
         return "stats";
       }
-      if (field === "talent" || field === "variant") {
-        item[field] = target.value;
+      if (field === "talent") {
+        item.talent = target.value;
         return "stats";
+      }
+      if (field === "variant") {
+        item.variant = target.value;
+        var picked = (catalog.skills || []).filter(function (row) { return row.name === target.value; })[0];
+        if (picked) {
+          item.name = picked.name;
+          item.catalogId = picked.id || item.catalogId;
+          item.family = picked.family || item.family;
+        }
+        syncSkillMods(item);
+        return "editor";
+      }
+      var skillSlot = target.getAttribute("data-skill-mod");
+      if (skillSlot != null) {
+        var slots = skillSlots(item);
+        var slot = slots[Number(skillSlot)] || { name: "", mods: [] };
+        var choice = slot.mods[Number(target.value)];
+        item.mods[Number(skillSlot)] = choice ? {
+          slot: slot.name,
+          name: choice.name,
+          value: choice.max == null ? "" : choice.max,
+          unit: choice.unit || "",
+          max: choice.max,
+          specialization: choice.specialization || ""
+        } : { slot: slot.name, name: "", value: "", unit: "", max: null, specialization: "" };
+        return "editor";
       }
       if (field === "core") {
         item.core = target.value;
@@ -593,7 +693,11 @@
       var index = target.getAttribute("data-index");
       if (bind === "mod") item.modValue = value;
       else if (bind === "mod2") item.mod2Value = value;
-      else {
+      else if (bind === "skillmod") {
+        var skillRow = (item.mods || [])[Number(index)] || {};
+        skillRow.value = value;
+        if (item.mods) item.mods[Number(index)] = skillRow;
+      } else {
         var name = boundStat(item, bind, index);
         var role = boundRole(bind);
         var cap = bind === "attr" ? (item.attributes[Number(index)] || null) : null;
@@ -616,6 +720,7 @@
         var shown = boundStat(item, bind, index);
         if ((bind === "core" || bind === "core2" || bind === "core3") && (shown === "Armor" || shown === "Skill Tier")) unit = "";
         if (bind === "mod" && item.mod === "Armor on Kill") unit = "";
+        if (bind === "skillmod") unit = ((item.mods || [])[Number(index)] || {}).unit || "";
         readout.textContent = format(value, unit);
       }
       paintStats();
@@ -624,7 +729,7 @@
     function clearSlot() {
       if (WEAPONS.indexOf(selected) >= 0) state[selected] = ShadeCatalog.emptyWeapon();
       else if (GEAR.indexOf(selected) >= 0) state[selected] = ShadeCatalog.emptyGear();
-      else if (selected === "skill1" || selected === "skill2") state[selected] = { name: "", catalogId: "", variant: "", expertise: 0 };
+      else if (selected === "skill1" || selected === "skill2") state[selected] = { name: "", catalogId: "", family: "", variant: "", expertise: 0, mods: [] };
       paint();
     }
 
@@ -893,8 +998,10 @@
         state[selected] = {
           name: skill.name,
           catalogId: skill.id || "",
-          variant: (skill.variants && skill.variants[0]) || "",
-          expertise: 0
+          family: skill.family || "",
+          variant: skill.name || ((skill.variants && skill.variants[0]) || ""),
+          expertise: 0,
+          mods: []
         };
         closeModal();
         paint();

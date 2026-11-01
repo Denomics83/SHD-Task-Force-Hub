@@ -580,6 +580,25 @@
     return groups;
   }
 
+  function skillModLines(loadout) {
+    var lines = [];
+    ["skill1", "skill2"].forEach(function (key) {
+      var item = slot(loadout, key);
+      (item.mods || []).forEach(function (mod) {
+        if (!mod || !mod.name || mod.value === "" || mod.value == null) return;
+        lines.push({
+          skill: item.name || "",
+          slot: mod.slot || "",
+          name: mod.name,
+          value: num(mod.value),
+          unit: mod.unit || "",
+          specialization: mod.specialization || ""
+        });
+      });
+    });
+    return lines;
+  }
+
   function compute(loadout, catalog) {
     loadout = loadout || {};
     catalog = catalog || {};
@@ -669,6 +688,7 @@
       bonuses: bonuses,
       watch: watch,
       ninja: counts.ninja,
+      skillMods: skillModLines(loadout),
       specialization: spec ? { name: spec.name, applied: specApplied, noted: specNoted } : { name: named(loadout.specialization), applied: [], noted: [] },
       buckets: built,
       damage: {

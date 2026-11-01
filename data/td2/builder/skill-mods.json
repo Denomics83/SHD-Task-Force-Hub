@@ -1,0 +1,292 @@
+{
+  "source": "Gamerch Division 2 skill pages, read 2026-11-01. Each family shares one mod list. Gameplay slot counts are the page headers (2 or 3). The vanity slot is omitted. English slot names are the in-game labels those pages translate: Coil, Housing, Firing Mechanism, Targeting, Pneumatics, Agitator, and the matching names on the other families. Turret Firing Mechanism, Housing, and Targeting match player reports of those slot names. Pulse Charge Speed is omitted because the Pulse page says that mod no longer drops. Smart Cover effects are listed without a maximum because the page prints a dash. These pages do not list a separate Prototype band for skill mods; a higher maximum is stored only where the page names a specialization. Minimum rolls are not listed, so a slider starts at 0 and stops at the sourced maximum. Pages: Pulse https://gamerch.com/td2/637056 (updated 2026-05-09), Turret https://gamerch.com/td2/767264, Hive https://gamerch.com/td2/767265, Chem Launcher https://gamerch.com/td2/767266, Firefly https://gamerch.com/td2/767267, Seeker Mine https://gamerch.com/td2/767273, Drone https://gamerch.com/td2/768467, Shield https://gamerch.com/td2/768478, Sticky Bomb https://gamerch.com/td2/768535, Trap https://gamerch.com/td2/768555, Decoy https://gamerch.com/td2/768567, Smart Cover https://gamerch.com/td2/926644 (updated 2025-11-18).",
+  "families": {
+    "Pulse": {
+      "slots": [
+        {
+          "name": "Coil",
+          "mods": [
+            { "name": "Radius", "max": 10, "unit": "%" },
+            { "name": "Radius", "max": 15, "unit": "%", "specialization": "Gunner" },
+            { "name": "Cone Size", "max": 7.5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Housing",
+          "mods": [
+            { "name": "Effect Duration", "max": 10, "unit": "%" },
+            { "name": "Effect Duration", "max": 15, "unit": "%", "specialization": "Gunner" },
+            { "name": "Skill Haste", "max": 6, "unit": "%" },
+            { "name": "Health", "max": 18.6, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Turret": {
+      "slots": [
+        {
+          "name": "Firing Mechanism",
+          "mods": [
+            { "name": "Damage", "max": 5, "unit": "%" },
+            { "name": "Damage", "max": 10, "unit": "%", "specialization": "Demolitionist" },
+            { "name": "Burn Damage", "max": 5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Housing",
+          "mods": [
+            { "name": "Duration", "max": 7.5, "unit": "%" },
+            { "name": "Health", "max": 10, "unit": "%" },
+            { "name": "Extra Sniper Ammo", "max": 1, "unit": "" },
+            { "name": "Extra Mortar Ammo", "max": 1, "unit": "", "specialization": "Demolitionist" }
+          ]
+        },
+        {
+          "name": "Targeting",
+          "mods": [
+            { "name": "Skill Haste", "max": 7.5, "unit": "%" },
+            { "name": "Duration", "max": 7.5, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Hive": {
+      "slots": [
+        {
+          "name": "System",
+          "mods": [
+            { "name": "Duration", "max": 5, "unit": "%" },
+            { "name": "Duration", "max": 10, "unit": "%", "specialization": "Technician" },
+            { "name": "Health", "max": 10, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Drone",
+          "mods": [
+            { "name": "Repair", "max": 5, "unit": "%" },
+            { "name": "Damage", "max": 5, "unit": "%" },
+            { "name": "Stim Efficiency", "max": 10, "unit": "%" },
+            { "name": "Reviver Armor Repair", "max": 10, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Launcher",
+          "mods": [
+            { "name": "Radius", "max": 5, "unit": "%" },
+            { "name": "Radius", "max": 10, "unit": "%", "specialization": "Technician" },
+            { "name": "Repair Charges", "max": 4, "unit": "" },
+            { "name": "Stim Charges", "max": 4, "unit": "" },
+            { "name": "Stinger Charges", "max": 4, "unit": "" }
+          ]
+        }
+      ]
+    },
+    "Chem Launcher": {
+      "slots": [
+        {
+          "name": "Pneumatics",
+          "mods": [
+            { "name": "Radius", "max": 7.5, "unit": "%" },
+            { "name": "Duration", "max": 5, "unit": "%" },
+            { "name": "Skill Haste", "max": 7.5, "unit": "%" },
+            { "name": "Ammo", "max": 1, "unit": "" }
+          ]
+        },
+        {
+          "name": "Agitator",
+          "mods": [
+            { "name": "Damage", "max": 5, "unit": "%" },
+            { "name": "Repair", "max": 7.5, "unit": "%" },
+            { "name": "Trap Duration", "max": 10, "unit": "%" },
+            { "name": "Burn Strength", "max": 7.5, "unit": "%" },
+            { "name": "Trap Health", "max": 18.6, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Firefly": {
+      "slots": [
+        {
+          "name": "Propulsion",
+          "mods": [
+            { "name": "Skill Haste", "max": 7.5, "unit": "%" },
+            { "name": "Speed", "max": 10, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Payload",
+          "mods": [
+            { "name": "Damage", "max": 7.5, "unit": "%" },
+            { "name": "Blind Duration", "max": 7.5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Targeting",
+          "mods": [
+            { "name": "Max Targets", "max": 1, "unit": "" }
+          ]
+        }
+      ]
+    },
+    "Seeker Mine": {
+      "slots": [
+        {
+          "name": "Payload",
+          "mods": [
+            { "name": "Skill Haste", "max": 6, "unit": "%" },
+            { "name": "Damage", "max": 5, "unit": "%" },
+            { "name": "Repair", "max": 7.5, "unit": "%" },
+            { "name": "Repair", "max": 15, "unit": "%", "specialization": "Survivalist" }
+          ]
+        },
+        {
+          "name": "Drive",
+          "mods": [
+            { "name": "Radius", "max": 5, "unit": "%" },
+            { "name": "Damage", "max": 5, "unit": "%" },
+            { "name": "Skill Haste", "max": 6, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Targeting",
+          "mods": [
+            { "name": "Health", "max": 7.5, "unit": "%" },
+            { "name": "Cluster Mines", "max": 1, "unit": "" },
+            { "name": "Health", "max": 15, "unit": "%", "specialization": "Survivalist" }
+          ]
+        }
+      ]
+    },
+    "Drone": {
+      "slots": [
+        {
+          "name": "Battery",
+          "mods": [
+            { "name": "Deflect Duration", "max": 7.5, "unit": "%" },
+            { "name": "Duration", "max": 7.5, "unit": "%" },
+            { "name": "Duration", "max": 15, "unit": "%", "specialization": "Sharpshooter" }
+          ]
+        },
+        {
+          "name": "Feed",
+          "mods": [
+            { "name": "Damage", "max": 5, "unit": "%" },
+            { "name": "Damage Reduction", "max": 6, "unit": "%" },
+            { "name": "Armor Repair", "max": 7.5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Hull",
+          "mods": [
+            { "name": "Extra Bombs", "max": 2, "unit": "" },
+            { "name": "Health", "max": 10, "unit": "%" },
+            { "name": "Scan Radius", "max": 10, "unit": "%" },
+            { "name": "Scan Radius", "max": 20, "unit": "%", "specialization": "Sharpshooter" }
+          ]
+        }
+      ]
+    },
+    "Shield": {
+      "slots": [
+        {
+          "name": "Hard Coat",
+          "mods": [
+            { "name": "Shield Health", "max": 5, "unit": "%" },
+            { "name": "Active Regen", "max": 5, "unit": "%" },
+            { "name": "Active Regen", "max": 8, "unit": "%", "specialization": "Firewall" },
+            { "name": "Deflector Damage", "max": 5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Circuit Board",
+          "mods": [
+            { "name": "Shield Health", "max": 5, "unit": "%" },
+            { "name": "Shield Health", "max": 8, "unit": "%", "specialization": "Firewall" },
+            { "name": "Holstered Regen", "max": 5, "unit": "%" },
+            { "name": "Deflector Damage", "max": 5, "unit": "%" },
+            { "name": "Damage Bonus per Enemy", "max": 1, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Gyro",
+          "mods": [
+            { "name": "Holstered Regen", "max": 5, "unit": "%" },
+            { "name": "Deflector Damage", "max": 5, "unit": "%" },
+            { "name": "Damage Bonus per Enemy", "max": 5, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Sticky Bomb": {
+      "slots": [
+        {
+          "name": "Launcher",
+          "mods": [
+            { "name": "Skill Haste", "max": 5, "unit": "%" },
+            { "name": "Duration", "max": 7.5, "unit": "%" },
+            { "name": "Blast Radius", "max": 6, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Payload",
+          "mods": [
+            { "name": "Damage", "max": 7.5, "unit": "%" },
+            { "name": "Blast Radius", "max": 6, "unit": "%" },
+            { "name": "Burn Duration", "max": 5, "unit": "%" },
+            { "name": "Duration", "max": 5, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Trap": {
+      "slots": [
+        {
+          "name": "Charge",
+          "mods": [
+            { "name": "Duration", "max": 5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Electronics",
+          "mods": [
+            { "name": "Duration", "max": 7.5, "unit": "%" },
+            { "name": "Shock Radius", "max": 7.5, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Decoy": {
+      "slots": [
+        {
+          "name": "Projector",
+          "mods": [
+            { "name": "Duration", "max": 7.5, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Housing",
+          "mods": [
+            { "name": "Health", "max": 7.5, "unit": "%" }
+          ]
+        }
+      ]
+    },
+    "Smart Cover": {
+      "slots": [
+        {
+          "name": "Smart Launcher",
+          "mods": [
+            { "name": "Cooldown", "max": null, "unit": "%" }
+          ]
+        },
+        {
+          "name": "Smart Projectile",
+          "mods": [
+            { "name": "Pulse Resistance", "max": null, "unit": "%" },
+            { "name": "Bonus Armor", "max": null, "unit": "%" }
+          ]
+        }
+      ]
+    }
+  }
+}
