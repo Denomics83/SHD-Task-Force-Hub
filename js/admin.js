@@ -185,7 +185,9 @@
     if (!$("event-kind") || $("event-kind").value !== "clan" || !STF.eventCardPath) return;
     var hidden = $("event-image-url");
     if (hidden.dataset.auto !== "1" && hidden.value) return;
-    var path = STF.eventCardPath($("event-title").value);
+    var found = STF.clanActivity ? STF.clanActivity($("event-title").value, "") : { type: "" };
+    var gate = STF.clanGateArt ? STF.clanGateArt(found.type) : "";
+    var path = gate || STF.eventCardPath($("event-title").value);
     var img = $("event-image-preview");
     if (!path) {
       if (hidden.dataset.auto === "1") setCardImage(hidden, img, "", false);
@@ -709,6 +711,10 @@
   });
   $("event-kind").addEventListener("change", function () {
     toggleEventKind();
+    var hidden = $("event-image-url");
+    if ($("event-kind").value !== "clan" && hidden && hidden.dataset.auto === "1") {
+      setCardImage(hidden, $("event-image-preview"), "", false);
+    }
     suggestClanArt();
   });
   $("event-title").addEventListener("input", function () {

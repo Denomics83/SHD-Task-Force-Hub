@@ -1,4 +1,5 @@
-/* Built-in event card art. image_url on a row wins; otherwise match by slug or name. */
+/* Built-in event card art. image_url on a row wins; otherwise match by slug or name.
+   Dark Zone and Conflict gate art are clan activity art only (see clanGateArt). */
 (function () {
   window.STF = window.STF || {};
 
@@ -169,14 +170,27 @@
     return label + ": " + name;
   };
 
+  var CLAN_GATE = {
+    "dark-zone": true,
+    conflict: true
+  };
+
+  STF.clanGateArt = function (activityType) {
+    if (activityType === "dark-zone") return fileFor("dark-zone");
+    if (activityType === "pvp") return fileFor("conflict");
+    return "";
+  };
+
   STF.eventCardPath = function (name) {
     if (name == null || name === "") return "";
     var slug = slugify(name);
-    if (SLUGS.indexOf(slug) >= 0) return fileFor(slug);
-    if (ALIAS[slug]) return fileFor(ALIAS[slug]);
+    var mapped = SLUGS.indexOf(slug) >= 0 ? slug : (ALIAS[slug] || "");
+    if (mapped && !CLAN_GATE[mapped]) return fileFor(mapped);
     var text = String(name).toLowerCase();
     for (var i = 0; i < RULES.length; i++) {
-      if (RULES[i][0].test(text)) return fileFor(RULES[i][1]);
+      if (!RULES[i][0].test(text)) continue;
+      if (CLAN_GATE[RULES[i][1]]) continue;
+      return fileFor(RULES[i][1]);
     }
     return "";
   };

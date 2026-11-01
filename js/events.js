@@ -81,14 +81,17 @@
     var type = (item && item.type) || {};
     var override = safePhoto(type.image_url || "");
     if (override) return override;
-    var card = STF.eventCardPath && (
-      STF.eventCardPath(type.id) ||
-      STF.eventCardPath(type.name) ||
-      STF.eventCardPath(item.title) ||
-      STF.eventCardPath(item.activity) ||
-      STF.eventCardPath(type.category) ||
-      STF.eventCardPath(categoryFor(item))
-    );
+    if (item && item.kind === "clan" && STF.clanGateArt) {
+      var gate = STF.clanGateArt(type.activityType);
+      if (gate) return gate;
+    }
+    var card = "";
+    if (STF.eventCardPath && (!item || item.kind !== "special")) {
+      card = STF.eventCardPath(type.id) ||
+        STF.eventCardPath(type.name) ||
+        STF.eventCardPath(item && item.title) ||
+        STF.eventCardPath(item && item.activity);
+    }
     if (card) return card;
     if (type.emblem || type.image) {
       var stored = safePhoto(type.emblem || type.image);
@@ -143,10 +146,14 @@
   function categoryFor(item) {
     var type = (item && item.type) || {};
     if (type.category) return type.category;
-    if (item.kind === "clan") return "Clan";
+    if (item.kind === "special") return "Special Event";
+    if (item.kind === "clan") {
+      if (type.activityType === "dark-zone") return "Dark Zone Event";
+      if (type.activityType === "pvp") return "Conflict";
+      return "Clan";
+    }
     if (item.kind === "raid") return "Raid";
     var name = String(type.name || "").toLowerCase();
-    if (/dark zone|red moon rising/.test(name)) return "Dark Zone Event";
     if (/assault|ambush|shd exposed|reanimated|golden bullet|polarity/.test(name)) return "Global Event";
     return "Season Event";
   }
