@@ -298,11 +298,16 @@ h1 { margin: 0 0 6px; font-size: clamp(1.25rem, 4.5vw, 1.7rem); letter-spacing: 
 }
 .mod-tile.is-on { background: var(--orange); border-color: var(--orange); color: #1a0d00; }
 .mod-ring {
-  width: 36px; height: 36px; flex: 0 0 auto;
+  width: 44px; height: 44px; flex: 0 0 auto;
   border: 1px solid currentColor; border-radius: 50%;
   display: grid; place-items: center;
 }
 .mod-ring svg { width: 18px; height: 18px; display: block; }
+.mod-ring img {
+  width: 44px; height: 44px; max-width: none;
+  object-fit: contain; display: block;
+}
+.mod-ring:has(img) { border: none; }
 .mod-name {
   font-family: var(--display);
   font-size: .62rem;
@@ -312,8 +317,26 @@ h1 { margin: 0 0 6px; font-size: clamp(1.25rem, 4.5vw, 1.7rem); letter-spacing: 
   text-align: center;
   line-height: 1.1;
 }
-.mod-detail { margin-top: 8px; }
+.mod-detail {
+  grid-column: 1 / -1;
+  position: relative;
+  margin-top: 4px;
+  background: var(--panel);
+  border: 1px solid var(--border);
+  padding: 10px 12px 8px;
+}
 .mod-detail[hidden] { display: none; }
+.mod-notch {
+  position: absolute;
+  left: var(--notch, 50%);
+  top: -8px;
+  width: 0; height: 0;
+  transform: translateX(-50%);
+  border-left: 7px solid transparent;
+  border-right: 7px solid transparent;
+  border-bottom: 8px solid var(--orange);
+  pointer-events: none;
+}
 .mod-detail p {
   margin: 0 0 2px;
   color: #67f0ff;

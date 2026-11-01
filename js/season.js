@@ -237,21 +237,50 @@
     { label: "Hostile", names: ["Draining Presence", "Achilles' Heal", "Thousand Cuts"] }
   ];
 
-  function modIcon(name) {
-    var n = String(name || "").toLowerCase();
+  function modSlug(name) {
+    return String(name || "")
+      .toLowerCase()
+      .replace(/['’]/g, "")
+      .replace(/[^a-z0-9]+/g, "-")
+      .replace(/^-+|-+$/g, "");
+  }
+
+  var MOD_ICON_FILES = {
+    "fiery-aura": 1, "vicarious-combustion": 1, "signed-shield-delivered": 1,
+    "flow-regulator": 1, "throttle-valve": 1, "flux-stabilizer": 1, "pressure-control": 1,
+    "quality-seals": 1, "delayed-venting": 1, "leaky-valve": 1, "vacuum-seal": 1, "reserve-tank": 1,
+    "all-or-nothing": 1, "kickstart": 1, "new-formula-beta": 1, "new-formula-gamma": 1,
+    "microwave-coils": 1, "new-model": 1, "afterburner": 1, "flint-and-steel": 1,
+    "fire-with-fire": 1, "firestarter": 1, "modular-plates": 1,
+    "draining-presence": 1, "achilles-heal": 1, "thousand-cuts": 1
+  };
+
+  function categoryIcon(name, group) {
+    var n = (String(group || "") + " " + String(name || "")).toLowerCase();
     if (/fire|burn|flint|microwave|afterburn|model/.test(n)) {
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s4 4.2 4 8a4 4 0 0 1-8 0c0-3.8 4-8 4-8z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
     }
     if (/shield|signed/.test(n)) {
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 19 6v6.2c0 4.2-2.8 6.6-7 8.2-4.2-1.6-7-4-7-8.2V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
     }
-    if (/plate|armor|armour/.test(n)) {
+    if (/gear|plate|armor|armour/.test(n)) {
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v8H4zM8 8V5h8v3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
     }
-    if (/drain|achilles|thousand|cut/.test(n)) {
+    if (/hostile|drain|achilles|thousand|cut/.test(n)) {
       return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8 10l4 4 4-4M6 19h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
     }
-    return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    if (/bonus|formula|kick|nothing/.test(n)) {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 5v14M5 12h14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M8 4h8v16H8zM10 8h4M10 12h4M10 16h4" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+  }
+
+  function modIcon(name, group) {
+    var slug = modSlug(name);
+    if (MOD_ICON_FILES[slug]) {
+      return '<img src="assets/icons/modifiers/' + slug + '.png" alt="" width="44" height="44" decoding="async">';
+    }
+    return categoryIcon(name, group);
   }
 
   function shortLines(item) {
@@ -259,11 +288,11 @@
     return String(item.effect || "").split(".").map(function (part) { return part.trim(); }).filter(Boolean).slice(0, 3);
   }
 
-  function modTile(item) {
+  function modTile(item, group) {
     var lines = JSON.stringify(shortLines(item)).replace(/"/g, "&quot;");
     return (
-      '<button type="button" class="mod-tile" data-lines="' + lines + '">' +
-      '<span class="mod-ring">' + modIcon(item.name) + "</span>" +
+      '<button type="button" class="mod-tile" aria-expanded="false" data-lines="' + lines + '">' +
+      '<span class="mod-ring">' + modIcon(item.name, group) + "</span>" +
       '<span class="mod-name">' + STF.esc(item.name) + "</span></button>"
     );
   }
@@ -273,8 +302,7 @@
     return (
       '<section class="mod-section">' +
       (label ? '<h3 class="mod-label">' + STF.esc(label) + "</h3>" : "") +
-      '<div class="mod-grid">' + items.map(modTile).join("") + "</div>" +
-      '<div class="mod-detail" hidden></div></section>'
+      '<div class="mod-grid">' + items.map(function (item) { return modTile(item, label); }).join("") + "</div></section>"
     );
   }
 
@@ -300,23 +328,67 @@
   function bindModifiers(root) {
     if (!root || root.dataset.modBound) return;
     root.dataset.modBound = "1";
+    var panel = document.createElement("div");
+    panel.className = "mod-detail";
+    panel.hidden = true;
+    panel.innerHTML = '<span class="mod-notch" aria-hidden="true"></span><div class="mod-detail-body"></div>';
+
+    function gridCols(grid) {
+      var tpl = getComputedStyle(grid).gridTemplateColumns || "";
+      var parts = tpl.split(" ").filter(Boolean);
+      return parts.length || 1;
+    }
+
+    function place(tile) {
+      var grid = tile.closest(".mod-grid");
+      if (!grid) return;
+      var tiles = Array.prototype.filter.call(grid.children, function (el) {
+        return el.classList && el.classList.contains("mod-tile");
+      });
+      var index = tiles.indexOf(tile);
+      if (index < 0) return;
+      var cols = gridCols(grid);
+      var rowEnd = Math.min(tiles.length, Math.floor(index / cols) * cols + cols);
+      var anchor = tiles[rowEnd - 1];
+      grid.insertBefore(panel, anchor.nextSibling);
+      panel.hidden = false;
+      var tileRect = tile.getBoundingClientRect();
+      var panelRect = panel.getBoundingClientRect();
+      var x = tileRect.left + tileRect.width / 2 - panelRect.left;
+      x = Math.max(16, Math.min(Math.max(16, panelRect.width - 16), x));
+      panel.style.setProperty("--notch", x + "px");
+    }
+
+    function closeAll() {
+      root.querySelectorAll(".mod-tile.is-on").forEach(function (el) {
+        el.classList.remove("is-on");
+        el.setAttribute("aria-expanded", "false");
+      });
+      panel.hidden = true;
+      var body = panel.querySelector(".mod-detail-body");
+      if (body) body.innerHTML = "";
+    }
+
     root.addEventListener("click", function (e) {
       var tile = e.target.closest(".mod-tile");
       if (!tile || !root.contains(tile)) return;
-      var section = tile.closest(".mod-section");
-      var panel = section.querySelector(".mod-detail");
-      var open = tile.classList.contains("is-on");
-      section.querySelectorAll(".mod-tile").forEach(function (el) { el.classList.remove("is-on"); });
-      if (open) {
-        panel.hidden = true;
-        panel.innerHTML = "";
-        return;
-      }
-      tile.classList.add("is-on");
+      var wasOpen = tile.classList.contains("is-on");
+      closeAll();
+      if (wasOpen) return;
       var lines = [];
       try { lines = JSON.parse(tile.getAttribute("data-lines") || "[]"); } catch (err) { lines = []; }
-      panel.innerHTML = lines.map(function (line) { return "<p>" + STF.esc(line) + "</p>"; }).join("");
-      panel.hidden = false;
+      panel.querySelector(".mod-detail-body").innerHTML = lines.map(function (line) {
+        return "<p>" + STF.esc(line) + "</p>";
+      }).join("");
+      tile.classList.add("is-on");
+      tile.setAttribute("aria-expanded", "true");
+      place(tile);
+    });
+
+    window.addEventListener("resize", function () {
+      var tile = root.querySelector(".mod-tile.is-on");
+      if (!tile || panel.hidden) return;
+      place(tile);
     });
   }
 
