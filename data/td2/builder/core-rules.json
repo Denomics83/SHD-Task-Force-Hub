@@ -1,0 +1,49 @@
+{
+  "source": "Division 2 Community Data Hub gear CSVs (https://github.com/div2hub/game-data, CC BY 4.0), checked 2026-11-01. type:gear-core can be recalibrated to Weapon Damage, Armor, or Skill Tier. fixed:<id> cannot. Brand pieces, gear-set pieces, and named pieces use type:gear-core except the named rows in items. Exotic rows are every exotic gear piece in those CSVs. Core Strength backpack talent text says it features three cores; backpacks.csv still lists one type:gear-core, so that backpack stays one recalibratable core.",
+  "open": ["Weapon Damage", "Armor", "Skill Tier"],
+  "items": [
+    { "name": "Vile", "locked": true, "cores": ["Skill Tier"], "file": "gear/masks.csv", "token": "fixed:skill-tier-gear-core" },
+    { "name": "Catharsis", "locked": true, "cores": ["Armor"], "file": "gear/masks.csv", "token": "fixed:armor-gear-core" },
+    { "name": "Coyote's Mask", "locked": true, "cores": ["Weapon Damage"], "file": "gear/masks.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "The Catalyst", "locked": true, "cores": ["Weapon Damage"], "file": "gear/masks.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Tinkerer", "locked": true, "cores": ["Weapon Damage"], "file": "gear/masks.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Investor", "locked": false, "file": "gear/masks.csv", "token": "type:gear-core" },
+
+    { "name": "Collector", "locked": true, "cores": ["Weapon Damage"], "file": "gear/chests.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Provocator", "locked": true, "cores": ["Armor"], "file": "gear/chests.csv", "token": "fixed:armor-gear-core" },
+    { "name": "Beacon", "locked": true, "cores": ["Weapon Damage"], "file": "gear/chests.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Tardigrade Armor System", "locked": true, "cores": ["Armor"], "file": "gear/chests.csv", "token": "fixed:armor-gear-core" },
+    { "name": "Ridgeway's Pride", "locked": true, "cores": ["Weapon Damage"], "file": "gear/chests.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Iron Will", "locked": true, "cores": ["Weapon Damage"], "file": "gear/chests.csv", "token": "fixed:weapon-damage-gear-core" },
+
+    { "name": "Acosta's Go-Bag", "locked": true, "cores": ["Skill Tier"], "file": "gear/backpacks.csv", "token": "fixed:skill-tier-gear-core" },
+    { "name": "Birdie's Quick Fix Pack", "locked": true, "cores": ["Skill Tier"], "file": "gear/backpacks.csv", "token": "fixed:skill-tier-gear-core" },
+    { "name": "Memento", "locked": true, "cores": ["Weapon Damage", "Armor", "Skill Tier"], "file": "gear/backpacks.csv", "token": "fixed:weapon-damage-gear-core|fixed:armor-gear-core|fixed:skill-tier-gear-core" },
+    { "name": "NinjaBike Messenger Backpack", "locked": true, "cores": ["Weapon Damage", "Armor", "Skill Tier"], "file": "gear/backpacks.csv", "token": "fixed:weapon-damage-gear-core|fixed:armor-gear-core|fixed:skill-tier-gear-core" },
+    { "name": "Harrier Pride", "locked": true, "cores": ["Weapon Damage", "Armor", "Skill Tier"], "file": "gear/backpacks.csv", "token": "fixed:weapon-damage-gear-core|fixed:armor-gear-core|fixed:skill-tier-gear-core" },
+    { "name": "Sarru", "locked": true, "cores": ["Weapon Damage", "Armor", "Skill Tier"], "file": "gear/backpacks.csv", "token": "fixed:weapon-damage-gear-core|fixed:armor-gear-core|fixed:skill-tier-gear-core" },
+
+    { "name": "Bloody Knuckles", "locked": true, "cores": ["Weapon Damage"], "file": "gear/gloves.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "BTSU Datagloves", "locked": true, "cores": ["Skill Tier"], "file": "gear/gloves.csv", "token": "fixed:skill-tier-gear-core" },
+    { "name": "Exodus Gloves", "locked": true, "cores": ["Weapon Damage"], "file": "gear/gloves.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Overdogs", "locked": true, "cores": ["Weapon Damage"], "file": "gear/gloves.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Rugged Gauntlets", "locked": true, "cores": ["Weapon Damage"], "file": "gear/gloves.csv", "token": "fixed:weapon-damage-gear-core" },
+
+    { "name": "Centurion's Scabbard", "locked": true, "cores": ["Weapon Damage"], "file": "gear/holsters.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Dodge City Gunslinger's Holster", "locked": true, "cores": ["Weapon Damage"], "file": "gear/holsters.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Imperial Dynasty", "locked": true, "cores": ["Skill Tier"], "file": "gear/holsters.csv", "token": "fixed:skill-tier-gear-core" },
+    { "name": "Shocker Punch", "locked": true, "cores": ["Armor"], "file": "gear/holsters.csv", "token": "fixed:armor-gear-core" },
+    { "name": "Waveform", "locked": true, "cores": ["Skill Tier"], "file": "gear/holsters.csv", "token": "fixed:skill-tier-gear-core" },
+    { "name": "Nimble Holster", "locked": true, "cores": ["Weapon Damage"], "file": "gear/holsters.csv", "token": "fixed:weapon-damage-gear-core" },
+
+    { "name": "Sawyer's Kneepads", "locked": true, "cores": ["Armor"], "file": "gear/knees.csv", "token": "fixed:armor-gear-core" },
+    { "name": "Acosta's Kneepads", "locked": true, "cores": ["Weapon Damage"], "file": "gear/knees.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Blacklisters", "locked": true, "cores": ["Weapon Damage"], "file": "gear/knees.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "NinjaBike Messenger Kneepads", "locked": true, "cores": ["Weapon Damage"], "file": "gear/knees.csv", "token": "fixed:weapon-damage-gear-core" },
+    { "name": "Nurse's Kneepads", "locked": true, "cores": ["Weapon Damage"], "file": "gear/knees.csv", "token": "fixed:weapon-damage-gear-core" },
+
+    { "name": "Picaros Holster", "locked": false, "options": ["Armor", "Skill Tier"], "file": "gear/holsters.csv", "token": "type:gear-core|!weapon-damage-gear-core" },
+    { "name": "Turmoil", "locked": true, "cores": ["Weapon Damage"], "file": "gear/knees.csv", "token": "fixed:weapon-damage-turmoil" },
+    { "name": "Cloak", "locked": true, "cores": ["Weapon Damage"], "file": "gear/knees.csv", "token": "fixed:weapon-damage-cloak" }
+  ]
+}

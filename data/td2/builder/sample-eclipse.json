@@ -57,7 +57,7 @@
     "guaranteed": "Status Effects",
     "core": "Skill Tier",
     "coreValue": 1,
-    "coreLocked": true,
+    "coreLocked": false,
     "attributes": [{ "name": "Status Effects", "value": 15 }],
     "mod": "Skill Haste",
     "modValue": 12
@@ -74,7 +74,7 @@
     "guaranteed": "",
     "core": "Skill Tier",
     "coreValue": 1.5,
-    "coreLocked": true,
+    "coreLocked": false,
     "attributes": [{ "name": "Status Effects", "value": 10 }],
     "mod": "Skill Haste",
     "modValue": 12

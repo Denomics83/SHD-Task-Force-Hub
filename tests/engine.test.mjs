@@ -29,7 +29,8 @@ const catalog = catalogApi.adapt({
   builderSpecs: read("data/td2/builder/specializations.json"),
   armor: read("data/td2/builder/armor.json"),
   rules: read("data/td2/builder/rules.json"),
-  mods: read("data/td2/builder/mods.json")
+  mods: read("data/td2/builder/mods.json"),
+  coreRules: read("data/td2/builder/core-rules.json")
 });
 
 function gear(name, brand, rarity, core, coreValue, attributes) {
@@ -149,6 +150,83 @@ test("skill tier does not widen on prototype items", function () {
   loadout.mask.prototype = true;
   const sheet = engine.compute(loadout, catalog);
   assert.equal(sheet.skillTier, 1);
+});
+
+test("gear-set cores recalibrate across the three catalog ranges", function () {
+  const plan = catalogApi.slotPlan("mask", { name: "Eclipse Protocol", rarity: "gear-set" });
+  assert.equal(plan.coreLocked, false);
+  const rule = catalogApi.coreRule(catalog, { name: "Eclipse Protocol", rarity: "gear-set" });
+  assert.equal(rule.locked, false);
+  assert.deepEqual(rule.options, ["Weapon Damage", "Armor", "Skill Tier"]);
+  const brand = catalogApi.coreRule(catalog, { name: "Providence Defense", rarity: "high-end" });
+  assert.equal(brand.locked, false);
+  const saved = catalogApi.fromSaved({ loadout: read("data/td2/builder/sample-eclipse.json") }, catalog);
+  assert.equal(saved.mask.coreLocked, false);
+  assert.equal(saved.chest.coreLocked, false);
+  assert.equal(saved.mask.core, "Skill Tier");
+  const weapon = engine.rangeFor(catalog, "Weapon Damage", "gear-core", "");
+  const armor = engine.rangeFor(catalog, "Armor", "gear-core", "");
+  assert.equal(weapon.max, 15);
+  assert.equal(weapon.protoMax, 22.5);
+  assert.equal(weapon.prototype, true);
+  assert.equal(armor.max, 170000);
+  assert.equal(armor.protoMax, 255000);
+  const loadout = catalogApi.blank(catalog.watch);
+  loadout.mask = gear("Eclipse Protocol", "Eclipse Protocol", "gear-set", "Weapon Damage", 15);
+  loadout.mask.prototype = true;
+  loadout.mask.coreMax = true;
+  let sheet = engine.compute(loadout, catalog);
+  assert.equal(sheet.stats.weaponDamage, 22.5);
+  loadout.mask.core = "Armor";
+  loadout.mask.coreValue = 170000;
+  loadout.mask.coreMax = false;
+  sheet = engine.compute(loadout, catalog);
+  assert.equal(sheet.stats.weaponDamage || 0, 0);
+  assert.equal(sheet.armor.beforePercent, 80297 + 170000);
+  loadout.mask.core = "Skill Tier";
+  loadout.mask.coreValue = 1;
+  sheet = engine.compute(loadout, catalog);
+  assert.equal(sheet.skillTier, 1);
+});
+
+test("only sourced fixed cores stay locked", function () {
+  const coyote = catalogApi.coreRule(catalog, { name: "Coyote's Mask", rarity: "exotic" });
+  assert.equal(coyote.locked, true);
+  assert.equal(coyote.sourced, true);
+  assert.deepEqual(coyote.cores, ["Weapon Damage"]);
+  const investor = catalogApi.coreRule(catalog, { name: "Investor", rarity: "exotic" });
+  assert.equal(investor.locked, false);
+  assert.deepEqual(investor.options, ["Weapon Damage", "Armor", "Skill Tier"]);
+  const picaro = catalogApi.fromSaved({
+    loadout: { holster: { name: "Picaros Holster", rarity: "named", core: "Weapon Damage", coreValue: 15, attributes: [] } }
+  }, catalog);
+  assert.equal(picaro.holster.coreLocked, false);
+  assert.equal(picaro.holster.core, "Armor");
+  assert.equal(picaro.holster.coreValue, 170000);
+  const turmoil = catalogApi.coreRule(catalog, { name: "Turmoil", rarity: "named" });
+  assert.equal(turmoil.locked, true);
+  assert.deepEqual(turmoil.cores, ["Weapon Damage"]);
+  const cloak = catalogApi.coreRule(catalog, { name: "Cloak", rarity: "named" });
+  assert.equal(cloak.locked, true);
+  read("data/td2/exotics.json").items.filter(function (row) { return row.kind === "gear"; }).forEach(function (row) {
+    assert.equal(catalogApi.coreRule(catalog, row).sourced, true, row.name);
+  });
+});
+
+test("memento keeps all three fixed cores on the sheet", function () {
+  const loadout = catalogApi.fromSaved({
+    loadout: { backpack: { name: "Memento", rarity: "exotic", core: "Weapon Damage", coreValue: 12, attributes: [] } }
+  }, catalog);
+  assert.equal(loadout.backpack.coreValue, 12);
+  assert.equal(loadout.backpack.core2, "Armor");
+  assert.equal(loadout.backpack.core2Value, 170000);
+  assert.equal(loadout.backpack.core3, "Skill Tier");
+  assert.equal(loadout.backpack.core3Value, 1);
+  const sheet = engine.compute(loadout, catalog);
+  assert.equal(sheet.stats.weaponDamage, 12);
+  assert.equal(sheet.skillTier, 1);
+  assert.equal(sheet.armor.beforePercent, 130844 + 170000);
+  assert.equal(catalogApi.toPublic(loadout).backpack.core3, "Skill Tier");
 });
 
 test("exotic prototype flag is ignored", function () {

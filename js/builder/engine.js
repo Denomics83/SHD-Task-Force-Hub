@@ -289,6 +289,7 @@
     if (!item || !name) return false;
     if (sameName(item.core, name) && item.coreMax) return true;
     if (sameName(item.core2, name) && item.core2Max) return true;
+    if (sameName(item.core3, name) && item.core3Max) return true;
     if (sameName(item.mod, name) && item.modMax) return true;
     var attrs = item.attributes || [];
     for (var i = 0; i < attrs.length; i++) {
@@ -416,6 +417,8 @@
       });
     } else {
       take(item.core, item.coreValue, "gear-core");
+      take(item.core2, item.core2Value, "gear-core");
+      take(item.core3, item.core3Value, "gear-core");
       (item.attributes || []).forEach(function (attr) {
         take(attr.name || attr.stat, attr.value, "gear-minor");
       });

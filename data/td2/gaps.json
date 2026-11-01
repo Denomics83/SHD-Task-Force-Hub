@@ -3,6 +3,7 @@
   "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
   "disagreements": [
     "Core Strength core: ProtoTrack Mixed, community table Armor",
+    "Core Strength backpack: ProtoTrack talent text says the backpack features three Core Attributes. Community backpacks.csv lists one type:gear-core, so the builder keeps one recalibratable core.",
     "Gear talent Clutch: ProtoTrack numbers (2.5, 4.0, 10.0, 15.0, 100.0), community table (0.0, 1.0, 2.5, 2.5, 4.0, 10.0, 15.0)",
     "Gear talent Concussion: ProtoTrack numbers (1.5, 5.0, 10.0, 10.0, 15.0), community table (1.5, 5.0, 10.0, 10.0, 15.0, 25.0)",
     "Gear talent Empathic Resolve: ProtoTrack numbers (1.0, 3.0, 7.0, 15.0, 20.0), community table (1.0, 3.0, 7.0, 10.0, 15.0)",

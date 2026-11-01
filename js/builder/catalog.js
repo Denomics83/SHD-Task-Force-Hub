@@ -10,7 +10,8 @@
     "weapons", "brands", "gearsets", "named", "exotics", "attributes", "talents",
     "skills", "specializations", "grenades", "playstyles"
   ];
-  var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods"];
+  var BUILDER_FILES = ["attributes", "weapon-cores", "watch", "specializations", "armor", "rules", "mods", "core-rules"];
+  var GEAR_CORES = ["Weapon Damage", "Armor", "Skill Tier"];
 
   function list(doc, key) {
     if (!doc) return [];
@@ -80,6 +81,7 @@
       armor: files.armor || {},
       rules: files.rules || {},
       weaponMods: (files.mods && files.mods.slots) || {},
+      coreRules: files.coreRules || { open: GEAR_CORES, items: [] },
       namedWeaponByName: byName(namedWeapons),
       namedGearByName: byName(namedGear),
       exoticByName: byName(exotics),
@@ -98,7 +100,7 @@
       }
     }));
     await Promise.all(BUILDER_FILES.map(async function (name) {
-      var key = name === "attributes" ? "builderAttributes" : name === "weapon-cores" ? "weaponCores" : name === "specializations" ? "builderSpecs" : name;
+      var key = name === "attributes" ? "builderAttributes" : name === "weapon-cores" ? "weaponCores" : name === "specializations" ? "builderSpecs" : name === "core-rules" ? "coreRules" : name;
       try { files[key] = await fetchJSON("data/td2/builder/" + name + ".json"); }
       catch (err) { errors.push(name + ": " + (err && err.message ? err.message : String(err))); }
     }));
@@ -120,7 +122,8 @@
       builderSpecs: files.builderSpecs,
       armor: files.armor,
       rules: files.rules,
-      mods: files.mods
+      mods: files.mods,
+      coreRules: files.coreRules
     });
     catalog.errors = errors;
     return catalog;
@@ -229,6 +232,7 @@
         next[key].mod = next[key].mod.stat || next[key].mod.name || "";
       }
       applyLegacyMax(next[key]);
+      if (next[key].name) assignCores(catalog, next[key]);
     });
     ["skill1", "skill2"].forEach(function (key) {
       if (load[key]) next[key] = Object.assign(emptySkill(), copy(load[key]));
@@ -305,6 +309,12 @@
         core: item.core || "",
         coreValue: item.coreValue === "" || item.coreValue == null ? "" : Number(item.coreValue),
         coreMax: !!item.coreMax,
+        core2: item.core2 || "",
+        core2Value: item.core2Value === "" || item.core2Value == null ? "" : Number(item.core2Value),
+        core2Max: !!item.core2Max,
+        core3: item.core3 || "",
+        core3Value: item.core3Value === "" || item.core3Value == null ? "" : Number(item.core3Value),
+        core3Max: !!item.core3Max,
         attributes: (item.attributes || []).map(function (attr) {
           return {
             name: attr.name || "",
@@ -323,6 +333,115 @@
     return out;
   }
 
+  function coreKey(name) {
+    return keyOf(name).replace(/['’.]/g, "").replace(/^the /, "");
+  }
+
+  function findCoreRule(catalog, item) {
+    var rows = (catalog && catalog.coreRules && catalog.coreRules.items) || [];
+    var name = coreKey(item && item.name);
+    for (var i = 0; i < rows.length; i++) {
+      if (coreKey(rows[i] && rows[i].name) === name) return rows[i];
+    }
+    return null;
+  }
+
+  function coreNote(row) {
+    if (!row || !row.file) return "";
+    var limited = row.options && row.options.length && row.options.length < GEAR_CORES.length;
+    if (!row.locked && !limited) return "";
+    var detail = row.cores && row.cores.length > 1
+      ? "Fixed cores: " + row.cores.join(", ") + "."
+      : row.locked
+        ? "Fixed core: " + row.cores[0] + "."
+        : "Cores: " + row.options.join(" or ") + ".";
+    return detail + " Source: Division 2 Community Data Hub " + row.file + " (" + row.token + ").";
+  }
+
+  function coreRule(catalog, item) {
+    var open = (catalog && catalog.coreRules && catalog.coreRules.open) || GEAR_CORES;
+    var row = findCoreRule(catalog, item);
+    if (row) {
+      var cores = row.cores && row.cores.length ? row.cores.slice() : [];
+      var options = row.options && row.options.length ? row.options.slice() : (cores.length === 1 ? cores.slice() : open.slice());
+      return {
+        locked: !!row.locked,
+        multi: cores.length > 1,
+        options: options,
+        cores: cores.length ? cores : options.slice(),
+        note: coreNote(row),
+        sourced: true
+      };
+    }
+    var rarity = keyOf(item && item.rarity);
+    if (rarity === "exotic") {
+      var kept = item && item.core ? item.core : "Weapon Damage";
+      return {
+        locked: true,
+        multi: false,
+        options: [kept],
+        cores: [kept],
+        note: "Fixed core: " + kept + ". This exotic is not in the community core table, so the saved core stays.",
+        sourced: false
+      };
+    }
+    return { locked: false, multi: false, options: open.slice(), cores: open.slice(), note: "", sourced: false };
+  }
+
+  function coreCap(catalog, name) {
+    var rows = (catalog && catalog.gearCores) || [];
+    for (var i = 0; i < rows.length; i++) {
+      if (keyOf(rows[i] && rows[i].name) === keyOf(name) && rows[i].max != null) return rows[i].max;
+    }
+    return "";
+  }
+
+  function assignCores(catalog, item) {
+    var rule = coreRule(catalog, item);
+    if (!item) return rule;
+    var fields = [
+      ["core", "coreValue", "coreMax"],
+      ["core2", "core2Value", "core2Max"],
+      ["core3", "core3Value", "core3Max"]
+    ];
+    if (rule.multi) {
+      rule.cores.forEach(function (name, index) {
+        var field = fields[index];
+        var same = keyOf(item[field[0]]) === keyOf(name);
+        item[field[0]] = name;
+        if (!same || item[field[1]] === "" || item[field[1]] == null) {
+          item[field[1]] = coreCap(catalog, name);
+          item[field[2]] = false;
+        }
+      });
+      item.coreLocked = true;
+      return rule;
+    }
+    item.core2 = "";
+    item.core2Value = "";
+    item.core2Max = false;
+    item.core3 = "";
+    item.core3Value = "";
+    item.core3Max = false;
+    if (rule.locked) {
+      var fixed = (rule.cores && rule.cores[0]) || "";
+      if (keyOf(item.core) !== keyOf(fixed)) {
+        item.core = fixed;
+        item.coreValue = coreCap(catalog, fixed);
+        item.coreMax = false;
+      }
+      item.coreLocked = true;
+      return rule;
+    }
+    item.coreLocked = false;
+    if (item.core && rule.options.indexOf(item.core) < 0) {
+      item.core = rule.options[0] || "";
+      item.coreValue = coreCap(catalog, item.core);
+      item.coreMax = false;
+    }
+    return rule;
+  }
+
   function slotPlan(slot, item) {
     var gear = {
       mask: { minors: 1, mod: true, talent: false },
@@ -335,10 +454,10 @@
     if (!gear) return { minors: 1, mod: true, talent: true };
     var rarity = keyOf(item && item.rarity);
     if (rarity === "gear-set") {
-      return { minors: 1, mod: gear.mod, talent: slot === "chest" || slot === "backpack", coreLocked: true, talentLocked: true, prototype: true };
+      return { minors: 1, mod: gear.mod, talent: slot === "chest" || slot === "backpack", coreLocked: false, talentLocked: true, prototype: true };
     }
     if (rarity === "exotic") {
-      return { minors: Math.max(gear.minors, 1), mod: gear.mod, talent: true, coreLocked: true, talentLocked: true, prototype: false };
+      return { minors: Math.max(gear.minors, 1), mod: gear.mod, talent: true, coreLocked: false, talentLocked: true, prototype: false };
     }
     return { minors: gear.minors, mod: gear.mod, talent: gear.talent, coreLocked: false, talentLocked: !!(item && item.talentLocked), prototype: true };
   }
@@ -374,6 +493,8 @@
     fromSaved: fromSaved,
     toPublic: toPublic,
     slotPlan: slotPlan,
+    coreRule: coreRule,
+    assignCores: assignCores,
     fixedTalent: fixedTalent,
     fixedNotes: fixedNotes,
     emptyWeapon: emptyWeapon,

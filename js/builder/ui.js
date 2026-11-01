@@ -250,7 +250,6 @@
       var item = state[selected];
       var layout = ShadeCatalog.slotPlan(selected, item);
       while ((item.attributes || []).length < layout.minors) item.attributes.push({ name: "", value: "" });
-      var coreLim = limits(item.core, "gear-core");
       var attrs = item.attributes.slice(0, layout.minors).map(function (attr, index) {
         var lim = limits(attr.name, "gear-minor");
         return '<label>Attribute ' + (index + 1) +
@@ -271,10 +270,26 @@
       return head(item, "Choose piece") +
         (layout.prototype === false ? '<p class="lede">Exotics cannot be Prototype.</p>' : toggle(item)) +
         expertiseField(item) +
-        '<label>Core <select data-field="core"' + (item.coreLocked || layout.coreLocked ? " disabled" : "") + ">" + optionHTML(catalog.gearCores, item.core) + "</select></label>" +
-        (item.core ? slider(item.core, item.coreValue, coreLim, "core", null, false, item.coreMax) : "") +
+        coreFields(item) +
         "<h4>Minor attributes</h4>" + attrs + mod + talent +
         notesHTML(ShadeCatalog.fixedNotes(catalog, item));
+    }
+
+    function coreFields(item) {
+      var rule = ShadeCatalog.coreRule(catalog, item);
+      var note = rule.note ? '<p class="lede">' + esc(rule.note) + "</p>" : "";
+      if (rule.multi) {
+        return note + rule.cores.map(function (name, index) {
+          var bind = index === 0 ? "core" : "core" + (index + 1);
+          var value = item[bind === "core" ? "coreValue" : bind + "Value"];
+          var maxed = item[bind === "core" ? "coreMax" : bind + "Max"];
+          return slider(name, value, limits(name, "gear-core"), bind, null, false, maxed);
+        }).join("");
+      }
+      var choices = rule.options && rule.options.length ? rule.options : catalog.gearCores;
+      return '<label>Core <select data-field="core"' + (rule.locked ? " disabled" : "") + ">" + optionHTML(choices, item.core) + "</select></label>" +
+        note +
+        (item.core ? slider(item.core, item.coreValue, limits(item.core, "gear-core"), "core", null, false, item.coreMax) : "");
     }
 
     function skillEditor() {
@@ -448,14 +463,28 @@
         item[field] = lim.min;
         if (field === "coreValue") item.coreMax = false;
         if (field === "core2Value") item.core2Max = false;
+        if (field === "core3Value") item.core3Max = false;
       } else {
         item[field] = lim.max;
       }
     }
 
+    function boundStat(item, bind, index) {
+      if (bind === "core") return item.core;
+      if (bind === "core2") return item.core2;
+      if (bind === "core3") return item.core3;
+      return (item.attributes[Number(index)] || {}).name;
+    }
+
+    function boundRole(bind) {
+      if (bind === "attr") return WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor";
+      return WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core";
+    }
+
     function flagMax(item, bind, index, on) {
       if (bind === "core") item.coreMax = on;
       else if (bind === "core2") item.core2Max = on;
+      else if (bind === "core3") item.core3Max = on;
       else if (bind === "attr" && item.attributes[index]) item.attributes[index].maxed = on;
       if (!on) item.guaranteed = "";
     }
@@ -463,6 +492,7 @@
     function writeStat(item, bind, index, value, on) {
       if (bind === "core") item.coreValue = value;
       else if (bind === "core2") item.core2Value = value;
+      else if (bind === "core3") item.core3Value = value;
       else if (bind === "attr" && item.attributes[index]) item.attributes[index].value = value;
       flagMax(item, bind, index, on);
     }
@@ -523,10 +553,8 @@
       var index = target.getAttribute("data-index");
       if (bind === "mod") item.modValue = value;
       else {
-        var name = bind === "core" ? item.core : bind === "core2" ? item.core2 : (item.attributes[Number(index)] || {}).name;
-        var role = bind === "attr"
-          ? (WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor")
-          : (WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core");
+        var name = boundStat(item, bind, index);
+        var role = boundRole(bind);
         var lim = limits(name, role);
         writeStat(item, bind, Number(index), value, atMax(value, lim));
       }
@@ -534,17 +562,16 @@
       var readout = slide && slide.querySelector("[data-readout]");
       var maxBtn = slide && slide.querySelector(".bb-max");
       if (maxBtn && bind !== "mod") {
-        var nameOn = bind === "core" ? item.core : bind === "core2" ? item.core2 : (item.attributes[Number(index)] || {}).name;
-        var roleOn = bind === "attr"
-          ? (WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor")
-          : (WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core");
+        var nameOn = boundStat(item, bind, index);
+        var roleOn = boundRole(bind);
         var on = atMax(value, limits(nameOn, roleOn));
         maxBtn.classList.toggle("is-on", on);
         maxBtn.setAttribute("aria-pressed", on ? "true" : "false");
       }
       if (readout) {
         var unit = readout.textContent.indexOf("%") >= 0 || (bind !== "core" || ShadeEngine.statId(item.core) !== "armorFlat") ? "%" : "";
-        if (bind === "core" && (item.core === "Armor" || item.core === "Skill Tier")) unit = "";
+        var shown = boundStat(item, bind, index);
+        if ((bind === "core" || bind === "core2" || bind === "core3") && (shown === "Armor" || shown === "Skill Tier")) unit = "";
         if (bind === "mod" && item.mod === "Armor on Kill") unit = "";
         readout.textContent = format(value, unit);
       }
@@ -773,8 +800,7 @@
         next.catalogId = set.id || "";
         next.brand = set.name || name;
         next.rarity = "gear-set";
-        next.core = set.core || "Weapon Damage";
-        next.coreLocked = true;
+        next.core = set.core && set.core !== "Mixed" ? set.core : "Weapon Damage";
         next.coreValue = maxForCore(next.core);
         next.talent = selected === "chest" ? (set.chestTalent || "") : selected === "backpack" ? (set.backpackTalent || "") : "";
         next.talentLocked = true;
@@ -784,7 +810,6 @@
         next.brand = named.brand || "";
         next.rarity = "named";
         next.core = named.core || "Weapon Damage";
-        next.coreLocked = !!named.core;
         next.coreValue = maxForCore(next.core);
         next.talent = named.perfectTalent || "";
         next.talentLocked = !!named.perfectTalent;
@@ -799,6 +824,7 @@
         next.coreValue = maxForCore(next.core);
         next.prototype = false;
       }
+      ShadeCatalog.assignCores(catalog, next);
       state[selected] = next;
       closeModal();
       paint();
@@ -902,10 +928,8 @@
         var item = state[selected];
         var bind = maxBtn.getAttribute("data-max");
         var index = Number(maxBtn.getAttribute("data-index"));
-        var name = bind === "core" ? item.core : bind === "core2" ? item.core2 : (item.attributes[index] || {}).name;
-        var role = bind === "attr"
-          ? (WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor")
-          : (WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core");
+        var name = boundStat(item, bind, index);
+        var role = boundRole(bind);
         var lim = limits(name, role);
         var on = maxBtn.classList.contains("is-on");
         writeStat(item, bind, index, on ? lim.min : lim.max, !on);
