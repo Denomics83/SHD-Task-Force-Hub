@@ -136,7 +136,8 @@
       if (!host || host.dataset.ready) return;
       host.dataset.ready = "1";
       host.innerHTML = STF.EVENT_CARDS.map(function (card) {
-        return '<button type="button" class="art-thumb" data-art="' + STF.esc(card.file) + '" title="' + STF.esc(card.label) + '"><img src="' + STF.esc(card.file) + '" alt="' + STF.esc(card.label) + '"></button>';
+        var caption = card.caption || card.label;
+        return '<button type="button" class="art-thumb" data-art="' + STF.esc(card.file) + '" title="' + STF.esc(caption) + '"><img src="' + STF.esc(card.file) + '" alt="' + STF.esc(caption) + '"><span>' + STF.esc(caption) + "</span></button>";
       }).join("");
       host.addEventListener("click", function (e) {
         var btn = e.target.closest("[data-art]");

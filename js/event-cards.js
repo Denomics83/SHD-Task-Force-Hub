@@ -100,8 +100,39 @@
       .join(" ");
   }
 
+  var CAPTIONS = {
+    ambush: "Global Event: Ambush",
+    assault: "Global Event: Assault",
+    "shd-exposed": "Global Event: SHD Exposed",
+    "rage-harvest": "Global Event: Rage Harvest",
+    "vanguard-overdrive": "Global Event: Vanguard Overdrive",
+    "deadeye-overdrive": "Global Event: Deadeye Overdrive",
+    "redline-overdrive": "Global Event: Redline Overdrive",
+    "red-moon-unleashed": "Season Event: Red Moon Unleashed",
+    "countdown-surge": "Countdown Surge",
+    "dark-zone-surge": "Dark Zone Surge",
+    "expertise-surge": "Expertise Surge",
+    "optimization-surge": "Optimization Surge",
+    "retaliation-surge": "Retaliation Surge",
+    "prototype-surge": "Prototype Surge",
+    "proficiency-xp-event": "Proficiency XP Event",
+    "shepherd-xp-x3": "Shepherd XP ×3",
+    "x5-xp-event": "XP Event",
+    "dark-zone": "Dark Zone",
+    conflict: "Conflict",
+    "dark-hours": "Dark Hours",
+    "iron-horse": "Iron Horse",
+    "paradise-lost": "Paradise Lost",
+    "broken-rain": "Broken Rain"
+  };
+
   STF.EVENT_CARDS = SLUGS.map(function (slug) {
-    return { slug: slug, file: fileFor(slug), label: labelFor(slug) };
+    return {
+      slug: slug,
+      file: fileFor(slug),
+      label: labelFor(slug),
+      caption: CAPTIONS[slug] || labelFor(slug)
+    };
   });
 
   var CLAN_MATCHES = [
