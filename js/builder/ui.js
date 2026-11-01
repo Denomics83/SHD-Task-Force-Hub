@@ -134,6 +134,7 @@
       var specName = (state.specialization && state.specialization.name) || "";
       var watchOn = state.watch && state.watch.max;
       var grenadeName = (state.grenade && state.grenade.name) || "";
+      var grenadeIcon = grenadeArt(grenadeName);
       node.innerHTML =
         '<div class="bb-slot-row bb-slot-2">' +
         '<button type="button" class="bb-tile rarity-' + (specName ? "gold" : "empty") + (selected === "specialization" ? " is-on" : "") + '" data-slot="specialization"><span>Specialization</span><strong>' + esc(specName || "Specialization") + "</strong></button>" +
@@ -145,7 +146,8 @@
         '<div class="bb-slot-row bb-slot-2">' + tile("chest", true) + tile("gloves", true) + "</div>" +
         '<div class="bb-slot-row bb-slot-2">' + tile("holster", true) + tile("kneepads", true) + "</div>" +
         '<div class="bb-slot-row bb-slot-3">' + tile("skill1") + tile("skill2") +
-        '<button type="button" class="bb-tile rarity-' + (grenadeName ? "gold" : "empty") + (selected === "grenade" ? " is-on" : "") + '" data-slot="grenade"><span>Grenade</span><strong>' + esc(grenadeName || "Grenade") + "</strong></button>" +
+        '<button type="button" class="bb-tile bb-gear rarity-' + (grenadeName ? "gold" : "empty") + (selected === "grenade" ? " is-on" : "") + '" data-slot="grenade"><span class="bb-tile-copy"><span>Grenade</span><strong>' + esc(grenadeName || "Grenade") + "</strong></span>" +
+        (grenadeIcon ? '<img class="bb-tile-grenade" src="' + esc(grenadeIcon) + '" alt="">' : "") + "</button>" +
         "</div>";
     }
 
@@ -396,10 +398,17 @@
         '<p class="lede">Skill damage, repair and duration by tier are phase 3. Chosen mod bonuses are listed on the sheet.</p>';
     }
 
+    function grenadeArt(name) {
+      var row = (catalog.grenades || []).filter(function (item) { return item.name === name; })[0];
+      return row && row.icon ? row.icon : "";
+    }
+
     function grenadeEditor() {
       var name = (state.grenade && state.grenade.name) || "";
       var spec = (state.grenade && state.grenade.specialization) || "";
+      var icon = grenadeArt(name);
       return '<p class="bb-kicker">Grenade</p>' +
+        (icon ? '<img class="bb-tile-grenade" src="' + esc(icon) + '" alt="">' : "") +
         "<h3>" + esc(name || "Empty slot") + "</h3>" +
         (spec ? '<p class="lede">' + esc(spec) + "</p>" : "") +
         '<p class="admin-row"><button type="button" class="admin-btn" data-grenade-pick>Choose grenade</button>' +
@@ -742,7 +751,7 @@
 
     function openGrenadePicker() {
       var rows = (catalog.grenades || []).map(function (row) {
-        return { name: row.name, rarity: "high-end", specialization: row.specialization || "", id: row.id || "" };
+        return { name: row.name, rarity: "high-end", specialization: row.specialization || "", id: row.id || "", icon: row.icon || "", colorIcon: true };
       });
       modal("<h3>Choose grenade</h3>" + grid(rows, "data-grenade", function (row) { return row.specialization || "Grenade"; }), function (e) {
         var pick = e.target.closest && e.target.closest("[data-grenade]");
@@ -787,7 +796,7 @@
     function grid(rows, attr, label) {
       if (!rows.length) return '<p class="lede">Nothing in this list.</p>';
       return '<div class="bb-grid">' + rows.map(function (row) {
-        var logo = row.icon ? '<img class="bb-logo" src="' + esc(row.icon) + '" alt="">' : "";
+        var logo = row.icon ? '<img class="bb-logo' + (row.colorIcon ? " is-color" : "") + '" src="' + esc(row.icon) + '" alt="">' : "";
         return '<button type="button" class="bb-pick rarity-' + rarityClass(row) + '" ' + attr + '="' + esc(row.name) + '">' +
           '<span class="bb-pick-copy"><strong>' + esc(row.name) + "</strong><small>" + esc(label(row)) + "</small></span>" +
           logo + "</button>";

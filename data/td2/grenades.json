@@ -1,35 +1,41 @@
 {
-  "source": "ProtoTrack indexes (sets, named gear, named weapons, exotics, gear talents, weapon talents, prototype stats) checked 2026-11-01, cross-checked against the Division 2 Community Data Hub CSVs (https://github.com/div2hub/game-data, CC BY 4.0), which ProtoTrack cites for base weapon stats and attribute caps. shd.gg was behind Cloudflare and was not fetched. Numbers are stored only where one of those sources states them.",
+  "source": "The six specialization grenades are the inventory grenade slot. Icons are traced SHD-orange silhouettes of the in-game grenade glyphs (frag with a burst, flashbang canister with rays, EMP with signal waves, foam canister with bubbles, incendiary with flames, cluster with sparks). Fandom returned 403, Fextralife's grenade icon files are missing uploads, and ProtoTrack has no grenade assets.",
   "items": [
     {
       "id": "grenade-flashbang-grenade",
       "name": "Flashbang Grenade",
-      "specialization": "Sharpshooter"
+      "specialization": "Sharpshooter",
+      "icon": "assets/icons/grenades/flashbang.svg"
     },
     {
       "id": "grenade-fragmentation-grenade",
       "name": "Fragmentation Grenade",
-      "specialization": "Demolitionist"
+      "specialization": "Demolitionist",
+      "icon": "assets/icons/grenades/fragmentation.svg"
     },
     {
       "id": "grenade-incendiary-grenade",
       "name": "Incendiary Grenade",
-      "specialization": "Survivalist"
+      "specialization": "Survivalist",
+      "icon": "assets/icons/grenades/incendiary.svg"
     },
     {
       "id": "grenade-riot-foam-grenade",
       "name": "Riot Foam Grenade",
-      "specialization": "Gunner"
+      "specialization": "Gunner",
+      "icon": "assets/icons/grenades/riot-foam.svg"
     },
     {
       "id": "grenade-emp-grenade",
       "name": "EMP Grenade",
-      "specialization": "Technician"
+      "specialization": "Technician",
+      "icon": "assets/icons/grenades/emp.svg"
     },
     {
       "id": "grenade-cluster-grenade",
       "name": "Cluster Grenade",
-      "specialization": "Firewall"
+      "specialization": "Firewall",
+      "icon": "assets/icons/grenades/cluster.svg"
     }
   ]
 }

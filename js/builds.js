@@ -134,6 +134,25 @@
     return STF.iconFor(item.brand) || STF.iconFor(item.name) || STF.iconFor(item.type) || null;
   }
 
+  var GRENADE_FILES = [
+    ["fragmentation", "assets/icons/grenades/fragmentation.svg"],
+    ["flashbang", "assets/icons/grenades/flashbang.svg"],
+    ["incendiary", "assets/icons/grenades/incendiary.svg"],
+    ["riot foam", "assets/icons/grenades/riot-foam.svg"],
+    ["cluster", "assets/icons/grenades/cluster.svg"],
+    ["emp", "assets/icons/grenades/emp.svg"]
+  ];
+
+  function grenadeFile(name) {
+    var text = String(name || "").toLowerCase();
+    var direct = STF.iconFor && STF.iconFor(name);
+    if (direct && direct.kind === "grenade" && direct.file) return direct.file;
+    for (var i = 0; i < GRENADE_FILES.length; i++) {
+      if (text.indexOf(GRENADE_FILES[i][0]) >= 0) return GRENADE_FILES[i][1];
+    }
+    return direct && direct.file ? direct.file : "";
+  }
+
   function filledName(item) {
     return !!(item && item.name);
   }
@@ -142,8 +161,9 @@
     var item = slotOf(row, spec.key);
     var rarity = faceClass(item, spec.force);
     var filled = filledName(item);
-    var hit = libraryIcon(item);
-    var own = localArt(item.image) || localArt(item.icon);
+    var hit = spec.key === "grenade" ? null : libraryIcon(item);
+    var grenadeSrc = spec.key === "grenade" && filled ? grenadeFile(item.name) : "";
+    var own = localArt(item.image) || localArt(item.icon) || grenadeSrc;
     var art = filled && own
       ? '<img src="' + STF.esc(own) + '" alt="">'
       : (hit

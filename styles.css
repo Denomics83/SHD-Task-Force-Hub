@@ -2622,6 +2622,8 @@ body.page-admin [hidden] { display: none !important; }
 }
 .bb-pick-copy { display: grid; gap: 2px; min-width: 0; flex: 1; }
 .bb-logo { width: 40px; height: 40px; object-fit: contain; flex: 0 0 auto; filter: brightness(0); }
+.bb-logo.is-color { filter: none; background: #1a1208; border-radius: 4px; padding: 3px; }
+.bb-tile-grenade { width: 36px; height: 36px; object-fit: contain; flex: 0 0 auto; background: #1a1208; border-radius: 4px; padding: 3px; }
 .bb-tile span, .bb-pick small { font-size: .62rem; letter-spacing: .08em; text-transform: uppercase; }
 .bb-tile strong, .bb-pick strong { font-family: var(--display); letter-spacing: .03em; text-transform: uppercase; font-size: .78rem; line-height: 1.15; overflow-wrap: anywhere; }
 .bb-tile.rarity-empty { background: #12151a; color: #d5d8de; }

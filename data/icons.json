@@ -2,9 +2,9 @@
   "source": "https://prototrack.gg/assets/division2/",
   "fallback": "assets/icons/loot/generic.svg",
   "missing": [
-    "Rogue Agents faction mark — ProtoTrack has no rogue/rogueagents asset",
+    "Rogue Agents faction mark \u2014 ProtoTrack has no rogue/rogueagents asset",
     "Separate mission-type icons (stronghold, invaded, bounty). ProtoTrack uses the faction mark on each mission.",
-    "Dedicated prototype cache crate icon — ProtoTrack cache cards have no crate image"
+    "Dedicated prototype cache crate icon \u2014 ProtoTrack cache cards have no crate image"
   ],
   "icons": [
     {
@@ -1198,7 +1198,7 @@
     },
     {
       "slug": "brand-esk-v-roba-s-r-o",
-      "name": "Česká Výroba s.r.o.",
+      "name": "\u010cesk\u00e1 V\u00fdroba s.r.o.",
       "kind": "brand",
       "file": "assets/icons/brands/ceskavyrobasro.png",
       "proto": "",
@@ -1621,7 +1621,7 @@
     },
     {
       "slug": "named-gear-contractors-gloves-gloves",
-      "name": "Contractor’s Gloves",
+      "name": "Contractor\u2019s Gloves",
       "kind": "named-gear",
       "file": "assets/icons/brands/petrov.png",
       "proto": "",
@@ -1648,7 +1648,7 @@
     },
     {
       "slug": "named-gear-door-kickers-knock-chest",
-      "name": "Door-Kicker’s Knock",
+      "name": "Door-Kicker\u2019s Knock",
       "kind": "named-gear",
       "file": "assets/icons/talents/gear/perfectspark.svg",
       "proto": "",
@@ -1666,7 +1666,7 @@
     },
     {
       "slug": "named-gear-emperors-guard-kneepads",
-      "name": "Emperor’s Guard",
+      "name": "Emperor\u2019s Guard",
       "kind": "named-gear",
       "file": "assets/icons/brands/murakami.png",
       "proto": "",
@@ -1738,7 +1738,7 @@
     },
     {
       "slug": "named-gear-foxs-prayer-kneepads",
-      "name": "Fox’s Prayer",
+      "name": "Fox\u2019s Prayer",
       "kind": "named-gear",
       "file": "assets/icons/brands/overlord.png",
       "proto": "",
@@ -2071,7 +2071,7 @@
     },
     {
       "slug": "named-gear-zero-fs-chest",
-      "name": "Zero F’s",
+      "name": "Zero F\u2019s",
       "kind": "named-gear",
       "file": "assets/icons/talents/gear/unbreakable.svg",
       "proto": "",
@@ -2269,7 +2269,7 @@
     },
     {
       "slug": "named-weapon-cu-lebre",
-      "name": "Cuélebre",
+      "name": "Cu\u00e9lebre",
       "kind": "named-weapon",
       "file": "assets/icons/talents/weapons/perfectjazzhands.svg",
       "proto": "",
@@ -10600,12 +10600,85 @@
     },
     {
       "slug": "brand-ceska-vyroba-s-r-o",
-      "name": "Česká Výroba s.r.o.",
+      "name": "\u010cesk\u00e1 V\u00fdroba s.r.o.",
       "kind": "brand",
       "file": "assets/icons/brands/ceskavyrobasro.png",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
+    },
+    {
+      "slug": "grenade-fragmentation",
+      "name": "Fragmentation Grenade",
+      "kind": "grenade",
+      "file": "assets/icons/grenades/fragmentation.svg",
+      "proto": "",
+      "aliases": [
+        "frag grenade",
+        "frag",
+        "fragmentation"
+      ],
+      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+    },
+    {
+      "slug": "grenade-flashbang",
+      "name": "Flashbang Grenade",
+      "kind": "grenade",
+      "file": "assets/icons/grenades/flashbang.svg",
+      "proto": "",
+      "aliases": [
+        "flashbang",
+        "flash bang grenade"
+      ],
+      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+    },
+    {
+      "slug": "grenade-incendiary",
+      "name": "Incendiary Grenade",
+      "kind": "grenade",
+      "file": "assets/icons/grenades/incendiary.svg",
+      "proto": "",
+      "aliases": [
+        "incendiary",
+        "incendiary grenades"
+      ],
+      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+    },
+    {
+      "slug": "grenade-riot-foam",
+      "name": "Riot Foam Grenade",
+      "kind": "grenade",
+      "file": "assets/icons/grenades/riot-foam.svg",
+      "proto": "",
+      "aliases": [
+        "riot foam",
+        "foam grenade"
+      ],
+      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+    },
+    {
+      "slug": "grenade-emp",
+      "name": "EMP Grenade",
+      "kind": "grenade",
+      "file": "assets/icons/grenades/emp.svg",
+      "proto": "",
+      "aliases": [
+        "emp",
+        "emp grenades"
+      ],
+      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+    },
+    {
+      "slug": "grenade-cluster",
+      "name": "Cluster Grenade",
+      "kind": "grenade",
+      "file": "assets/icons/grenades/cluster.svg",
+      "proto": "",
+      "aliases": [
+        "cluster",
+        "cluster grenades"
+      ],
+      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
     }
   ],
   "note": "White-on-transparent marks from ProtoTrack. Slot icons live under caches/ because they are the targeted loot on prototype caches."
