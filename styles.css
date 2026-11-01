@@ -2692,7 +2692,7 @@ body.page-admin [hidden] { display: none !important; }
 .desk-card h1, .desk h1 {
   font-family: var(--display); letter-spacing: .08em; text-transform: uppercase; margin-top: 0;
 }
-.desk-actions { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 16px; margin: 0 0 22px; }
+.desk-actions { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 16px; margin: 0 0 22px; }
 .desk-action {
   min-height: 140px; border: 1px solid rgba(255,255,255,.55); background: #101114; color: #fff;
   font-family: var(--display); font-size: 1.35rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
@@ -2778,7 +2778,8 @@ body.page-admin [hidden] { display: none !important; }
   padding: 14px 16px;
 }
 .bb-meta { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 12px; align-items: end; }
-.bb-meta .admin-row, .bb-meta .admin-status, .bb-meta .bb-kicker { grid-column: 1 / -1; }
+.bb-meta .admin-row, .bb-meta .admin-status, .bb-meta .bb-kicker,
+.bb-meta .bb-notes-label, .bb-meta .rich-editor, .bb-meta .ql-toolbar, .bb-meta .ql-container { grid-column: 1 / -1; }
 .bb-kicker {
   margin: 0 0 8px;
   font-family: var(--display);

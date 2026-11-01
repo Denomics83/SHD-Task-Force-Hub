@@ -46,6 +46,13 @@
   }
 
   function mount(host, options) {
+    if (host._shadeBuilder && host.parentNode) {
+      var fresh = host.cloneNode(false);
+      fresh.id = host.id;
+      host.parentNode.replaceChild(fresh, host);
+      host = fresh;
+    }
+    host._shadeBuilder = 1;
     options = options || {};
     var catalog = null;
     var state = null;
@@ -61,7 +68,7 @@
         playstyle: record && record.playstyle || "",
         short: record && record.short_description || "",
         published: record ? !!record.published : true,
-        notes: record && record.notes_html ? String(record.notes_html).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim() : ""
+        notesHtml: record && record.notes_html || ""
       };
     }
 
@@ -100,7 +107,12 @@
           unit: cap.unit || span.unit || ""
         };
       }
-      var proto = !!(item.prototype && span.prototype && ShadeCatalog.slotPlan(selected, item, catalog).prototype !== false);
+      var allowProto = true;
+      if (GEAR.indexOf(selected) >= 0) {
+        var plan = ShadeCatalog.slotPlan(selected, item, catalog);
+        if (plan && plan.prototype === false) allowProto = false;
+      }
+      var proto = !!(item.prototype && span.prototype && allowProto);
       if (item.rarity === "exotic") proto = false;
       if (!span.prototype) proto = false;
       var min = proto ? span.max : 0;
@@ -109,6 +121,33 @@
     }
 
     var panel = "build";
+    var notesQuill = null;
+    var CATEGORIES = ["solo", "team", "incursion", "raid", "pvp", "escalation"];
+
+    function categoryLabel(name) {
+      if (name === "pvp") return "PvP";
+      return name ? name.charAt(0).toUpperCase() + name.slice(1) : "";
+    }
+
+    function notesMarkup() {
+      if (!notesQuill) return meta.notesHtml || "";
+      var text = notesQuill.getText().replace(/\u200b/g, "").trim();
+      if (!text && !notesQuill.root.querySelector("img")) return "";
+      var html = notesQuill.root.innerHTML;
+      return window.STF && STF.safeHTML ? STF.safeHTML(html) : html;
+    }
+
+    function mountNotes() {
+      var node = host.querySelector("#bb-notes");
+      if (!node || !window.Quill) return;
+      notesQuill = new Quill(node, {
+        theme: "snow",
+        modules: {
+          toolbar: [["bold", "italic"], [{ header: [2, 3, false] }], [{ list: "ordered" }, { list: "bullet" }], ["link"], ["clean"]]
+        }
+      });
+      if (meta.notesHtml) notesQuill.clipboard.dangerouslyPasteHTML(meta.notesHtml);
+    }
 
     function paint() {
       paintSlots();
@@ -567,20 +606,19 @@
       meta.playstyle = host.querySelector("#bb-playstyle").value;
       meta.short = host.querySelector("#bb-short").value.trim();
       meta.published = host.querySelector("#bb-published").checked;
-      meta.notes = host.querySelector("#bb-notes").value.trim();
+      meta.notesHtml = notesMarkup();
       host.querySelector("#bb-short-count").textContent = meta.short.length + " / 140";
     }
 
     function payload() {
       readMeta();
-      var notes = meta.notes ? "<p>" + esc(meta.notes) + "</p>" : "";
       return {
         id: meta.id,
         category: meta.category,
         playstyle: meta.playstyle,
         name: meta.name,
         short_description: meta.short,
-        notes_html: notes,
+        notes_html: meta.notesHtml,
         loadout: (function () {
         var load = ShadeCatalog.toPublic(state);
         if (window.ShadeCalc && catalog) load.computed = ShadeCalc.summary(state, catalog);
@@ -1052,20 +1090,26 @@
     }
 
     function shell() {
-      var plays = (catalog.playstyles || ["DPS"]).map(function (name) {
-        return '<option value="' + esc(name) + '"' + (name === meta.playstyle ? " selected" : "") + ">" + esc(name) + "</option>";
-      }).join("");
+      var plays = (catalog.playstyles || ["DPS"]).slice();
+      if (meta.playstyle && plays.indexOf(meta.playstyle) < 0) plays.unshift(meta.playstyle);
+      var categories = CATEGORIES.slice();
+      if (meta.category && categories.indexOf(meta.category) < 0) categories.unshift(meta.category);
       host.innerHTML =
         '<form class="bb-meta" id="bb-form">' +
-        '<p class="bb-kicker">Shade Hub Builder</p>' +
-        "<label>Category <select id=\"bb-category\">" +
-        ["solo", "team", "incursion", "raid", "pvp", "escalation"].map(function (name) {
-          return '<option value="' + name + '"' + (name === meta.category ? " selected" : "") + ">" + name + "</option>";
+        '<p class="bb-kicker">Build info</p>' +
+        "<label>Category <select id=\"bb-category\" required>" +
+        categories.map(function (name) {
+          return '<option value="' + esc(name) + '"' + (name === meta.category ? " selected" : "") + ">" + esc(categoryLabel(name)) + "</option>";
         }).join("") + "</select></label>" +
-        "<label>Playstyle <select id=\"bb-playstyle\">" + plays + "</select></label>" +
+        "<label>Playstyle <select id=\"bb-playstyle\" required>" +
+        plays.map(function (name) {
+          return '<option value="' + esc(name) + '"' + (name === meta.playstyle ? " selected" : "") + ">" + esc(name) + "</option>";
+        }).join("") + "</select></label>" +
         '<label>Name <input id="bb-name" required value="' + esc(meta.name) + '"></label>' +
         '<label>Short description <input id="bb-short" maxlength="140" required value="' + esc(meta.short) + '"><small id="bb-short-count">' + meta.short.length + " / 140</small></label>" +
         '<label class="bb-check"><input id="bb-published" type="checkbox"' + (meta.published ? " checked" : "") + "> Published</label>" +
+        '<label class="bb-notes-label">Notes</label>' +
+        '<div id="bb-notes" class="rich-editor"></div>' +
         '<p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" data-sample>Load Eclipse sample</button>' +
         '<button class="admin-btn" type="submit">Save build</button></p>' +
         '<p id="bb-status" class="admin-status" role="status"></p></form>' +
@@ -1074,8 +1118,7 @@
         '<button type="button" class="bb-chip' + (panel === "calculator" ? " is-on" : "") + '" data-bb-tab="calculator">Calculator</button>' +
         "</div>" +
         '<div id="bb-build-panel"' + (panel === "build" ? "" : " hidden") + '>' +
-        '<div class="bb-columns"><section class="bb-panel" id="bb-slots"></section><section class="bb-panel bb-editor" id="bb-editor"></section><section class="bb-panel bb-stats" id="bb-stats"></section></div>' +
-        '<label class="bb-notes-label">Notes <textarea id="bb-notes" rows="4">' + esc(meta.notes) + "</textarea></label></div>" +
+        '<div class="bb-columns"><section class="bb-panel" id="bb-slots"></section><section class="bb-panel bb-editor" id="bb-editor"></section><section class="bb-panel bb-stats" id="bb-stats"></section></div></div>' +
         '<div id="bb-calc" class="bb-panel"' + (panel === "calculator" ? "" : " hidden") + "></div>";
     }
 
@@ -1265,6 +1308,7 @@
       state = ShadeCatalog.fromSaved(options.record || { loadout: {} }, catalog);
       if (!meta.playstyle) meta.playstyle = (catalog.playstyles || [])[0] || "";
       shell();
+      mountNotes();
       paint();
       if (catalog.errors && catalog.errors.length) status(catalog.errors[0], "err");
       if (options.sample) loadSample();

@@ -2,9 +2,7 @@
 (function () {
   var sb = STF.sb;
   var quills = {};
-  var editingBuild = null;
   var editingBuilder = null;
-  var buildReady = false;
 
   function $(id) { return document.getElementById(id); }
   function status(id, msg, kind) {
@@ -27,7 +25,6 @@
       ensureQuill("template-body");
       loadTemplates();
     }
-    if (name === "build") openBuild(editingBuild);
     if (name === "builder") openBuilder(editingBuilder);
     window.scrollTo(0, 0);
   }
@@ -236,8 +233,8 @@
   }
 
   function rowButtons(kind, id) {
-    var builder = kind === "build" ? '<button type="button" data-edit="builder" data-id="' + id + '">Builder</button>' : "";
-    return '<span class="desk-row-actions"><button type="button" data-edit="' + kind + '" data-id="' + id + '">Edit</button>' + builder + '<button type="button" data-del="' + kind + '" data-id="' + id + '">Delete</button></span>';
+    var editKind = kind === "build" ? "builder" : kind;
+    return '<span class="desk-row-actions"><button type="button" data-edit="' + editKind + '" data-id="' + id + '">Edit</button><button type="button" data-del="' + kind + '" data-id="' + id + '">Delete</button></span>';
   }
 
   async function loadDash() {
@@ -439,78 +436,6 @@
     await loadTemplates();
   }
 
-  async function fillPlaystyles() {
-    var doc = await STF.fetchJSON("data/td2/playstyles.json");
-    var list = Array.isArray(doc) ? doc : (doc.items || []);
-    $("build-playstyle").innerHTML = list.map(function (name) {
-      return '<option value="' + STF.esc(name) + '">' + STF.esc(name) + "</option>";
-    }).join("");
-  }
-  async function openBuild(record) {
-    if (!buildReady) {
-      await fillPlaystyles();
-      buildReady = true;
-    }
-    editingBuild = record;
-    $("build-heading").textContent = record ? "Edit build" : "Add build";
-    $("build-id").value = record ? record.id : "";
-    $("build-name").value = record ? record.name : "";
-    $("build-category").value = record ? record.category : "solo";
-    if (record && record.playstyle) $("build-playstyle").value = record.playstyle;
-    $("build-short").value = record ? (record.short_description || "") : "";
-    $("build-short-count").textContent = ($("build-short").value.length) + " / 140";
-    $("build-published").checked = record ? !!record.published : true;
-    setQuill("build-notes", record ? record.notes_html || "" : "");
-    $("build-source-url").value = record && record.source_url ? record.source_url : "";
-    $("build-source-id").value = record && record.source_id ? record.source_id : "";
-    $("build-import-url").value = record && record.source_url ? record.source_url : "";
-    $("build-resync").hidden = !(record && record.source_url);
-    $("build-form")._sourceRaw = record && record.source_raw ? record.source_raw : null;
-    await BuildAdmin.mount($("build-board"), record);
-  }
-  async function importBuildStation(url) {
-    var link = (url || "").trim();
-    if (!link) throw new Error("Paste a Build Station link.");
-    var res = await sb.functions.invoke("buildstation-import", { body: { url: link } });
-    if (res.error) throw new Error(res.error.message || "Import failed.");
-    var data = res.data || {};
-    if (data.error) throw new Error(data.error);
-    if (!data.normalized) throw new Error("Build Station did not return a build.");
-    if (!$("build-name").value.trim() && data.name) $("build-name").value = data.name;
-    $("build-source-url").value = data.source_url || link;
-    $("build-source-id").value = data.source_id || "";
-    $("build-import-url").value = data.source_url || link;
-    $("build-form")._sourceRaw = data.raw || null;
-    $("build-resync").hidden = false;
-    var misses = BuildAdmin.applyImport(data.normalized);
-    if (misses.length) {
-      throw new Error("Imported, with catalog gaps: " + misses.join(", "));
-    }
-  }
-  async function saveBuild() {
-    var short = $("build-short").value.trim();
-    if (short.length > 140) throw new Error("Short description is over 140 characters.");
-    var payload = {
-      category: $("build-category").value,
-      playstyle: $("build-playstyle").value,
-      name: $("build-name").value.trim(),
-      short_description: short,
-      notes_html: quillHTML("build-notes"),
-      loadout: BuildAdmin.read(),
-      published: $("build-published").checked,
-      source_url: $("build-source-url").value.trim() || null,
-      source_id: $("build-source-id").value.trim() || null,
-      source_raw: $("build-form")._sourceRaw || null
-    };
-    if (!payload.name) throw new Error("Name is required.");
-    var id = $("build-id").value;
-    var res = id
-      ? await sb.from("builds").update(payload).eq("id", id).select("id").single()
-      : await sb.from("builds").insert(payload).select("id").single();
-    if (res.error) throw res.error;
-    if (!id && res.data) $("build-id").value = res.data.id;
-  }
-
   async function edit(kind, id) {
     if (kind === "update") {
       var res = await sb.from("updates").select("*").eq("id", id).single();
@@ -568,13 +493,8 @@
     if (kind === "build" || kind === "builder") {
       var buildRes = await sb.from("builds").select("*").eq("id", id).single();
       if (buildRes.error) return status("dash-status", buildRes.error.message, "err");
-      if (kind === "builder") {
-        editingBuilder = buildRes.data;
-        show("builder");
-        return;
-      }
-      editingBuild = buildRes.data;
-      show("build");
+      editingBuilder = buildRes.data;
+      show("builder");
     }
   }
 
@@ -585,16 +505,19 @@
   }
 
   async function saveBuilder(body) {
+    var short = String(body.short_description || "").trim();
+    if (short.length > 140) throw new Error("Short description is over 140 characters.");
     var payload = {
       category: body.category,
-      playstyle: body.playstyle,
-      name: body.name,
-      short_description: body.short_description,
-      notes_html: body.notes_html,
-      loadout: body.loadout,
-      published: body.published
+      playstyle: body.playstyle || null,
+      name: String(body.name || "").trim(),
+      short_description: short,
+      notes_html: window.STF && STF.safeHTML ? STF.safeHTML(body.notes_html || "") : (body.notes_html || ""),
+      loadout: body.loadout || {},
+      published: !!body.published
     };
     if (!payload.name) throw new Error("Name is required.");
+    if (!payload.category) throw new Error("Category is required.");
     var res = body.id
       ? await sb.from("builds").update(payload).eq("id", body.id).select("id").single()
       : await sb.from("builds").insert(payload).select("id").single();
@@ -651,7 +574,6 @@
     if (go) {
       if (go.getAttribute("data-go") === "update") resetUpdate();
       if (go.getAttribute("data-go") === "event") resetEvent();
-      if (go.getAttribute("data-go") === "build") editingBuild = null;
       if (go.getAttribute("data-go") === "builder") editingBuilder = null;
       show(go.getAttribute("data-go"));
       return;
@@ -750,37 +672,6 @@
     }
   });
   $("template-new").addEventListener("click", resetTemplate);
-  $("build-short").addEventListener("input", function () {
-    $("build-short-count").textContent = $("build-short").value.length + " / 140";
-  });
-  $("build-import").addEventListener("click", async function () {
-    try {
-      status("build-import-status", "Importing…");
-      await importBuildStation($("build-import-url").value);
-      status("build-import-status", "Imported onto our catalog. Review the slots, then save.", "ok");
-    } catch (err) {
-      status("build-import-status", err.message || String(err), "err");
-    }
-  });
-  $("build-resync").addEventListener("click", async function () {
-    try {
-      status("build-import-status", "Re-syncing…");
-      await importBuildStation($("build-source-url").value || $("build-import-url").value);
-      status("build-import-status", "Re-synced onto our catalog. Save to keep it.", "ok");
-    } catch (err) {
-      status("build-import-status", err.message || String(err), "err");
-    }
-  });
-  $("build-form").addEventListener("submit", async function (e) {
-    e.preventDefault();
-    try {
-      status("build-status", "Saving…");
-      await saveBuild();
-      status("build-status", "Saved.", "ok");
-    } catch (err) {
-      status("build-status", err.message || String(err), "err");
-    }
-  });
   mountArtPickers();
   previewFile($("event-image"), $("event-image-preview"), $("event-image-url"));
   bindMapFields("event");

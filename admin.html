@@ -38,7 +38,6 @@
       <div class="desk-actions">
         <button type="button" class="desk-action" data-go="update">Add update</button>
         <button type="button" class="desk-action" data-go="event">Add event</button>
-        <button type="button" class="desk-action" data-go="build">Add build</button>
         <button type="button" class="desk-action" data-go="builder">Builder</button>
       </div>
       <div class="desk-lists">
@@ -181,57 +180,6 @@
       </div>
     </section>
 
-    <section data-view="build" hidden>
-      <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
-      <h1 id="build-heading">Add build</h1>
-      <form id="build-form" class="desk-form">
-        <input type="hidden" id="build-id">
-        <input type="hidden" id="build-source-url">
-        <input type="hidden" id="build-source-id">
-        <section class="bs-import">
-          <h2>Import from Build Station</h2>
-          <p class="lede">Paste a buildstation.app/td2/builder link. The import is matched to our catalog by name. Build Station's raw payload is kept only as a backup.</p>
-          <label>Build Station link
-            <input id="build-import-url" type="url" placeholder="https://buildstation.app/td2/builder/game/…">
-          </label>
-          <p class="admin-row">
-            <button type="button" class="admin-btn" id="build-import">Import</button>
-            <button type="button" class="admin-btn admin-btn-ghost" id="build-resync" hidden>Re-sync from Build Station</button>
-          </p>
-          <p id="build-import-status" class="admin-status" role="status"></p>
-        </section>
-        <div class="ba-meta">
-          <label>Category
-            <select id="build-category" required>
-              <option value="solo">Solo</option>
-              <option value="team">Team</option>
-              <option value="incursion">Incursion</option>
-              <option value="raid">Raid</option>
-              <option value="pvp">PvP</option>
-              <option value="escalation">Escalation</option>
-            </select>
-          </label>
-          <label>Playstyle
-            <select id="build-playstyle" required></select>
-          </label>
-          <label>Name <input id="build-name" required></label>
-          <label>Short description
-            <input id="build-short" maxlength="140" required>
-            <small id="build-short-count">0 / 140</small>
-          </label>
-          <label class="ba-check"><input id="build-published" type="checkbox" checked> Published</label>
-        </div>
-        <div id="build-board"></div>
-        <label>Notes</label>
-        <div id="build-notes" class="rich-editor"></div>
-        <p class="lede">Item lists are in data/td2/. Gaps are listed in data/td2/gaps.json.</p>
-        <p class="admin-row">
-          <button class="admin-btn" type="submit">Save build</button>
-        </p>
-        <p id="build-status" class="admin-status" role="status"></p>
-      </form>
-    </section>
-
     <section data-view="builder" hidden>
       <p class="desk-back"><button type="button" class="admin-btn admin-btn-ghost" data-go="dash">Back</button></p>
       <div id="builder-root"></div>
@@ -256,7 +204,6 @@
   <script src="js/common.js?v=f1dbca6"></script>
   <script src="js/event-cards.js?v=f1dbca6"></script>
   <script src="js/icons.js?v=f1dbca6"></script>
-  <script src="js/build-admin.js?v=f1dbca6"></script>
   <script src="js/builder/engine.js?v=f1dbca6"></script>
   <script src="js/builder/catalog.js?v=f1dbca6"></script>
   <script src="js/builder/calc.js?v=f1dbca6"></script>

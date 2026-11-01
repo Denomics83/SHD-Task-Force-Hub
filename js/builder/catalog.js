@@ -538,7 +538,7 @@
   function layoutOf(catalog, slot, item) {
     var family = layoutFamily(item);
     var tables = (catalog && catalog.layouts && catalog.layouts.defaults) || LAYOUT_DEFAULTS;
-    var base = (tables[family] && tables[family][slot]) || LAYOUT_DEFAULTS[family][slot] || LAYOUT_DEFAULTS["high-end"][slot];
+    var base = (tables[family] && tables[family][slot]) || (LAYOUT_DEFAULTS[family] && LAYOUT_DEFAULTS[family][slot]) || LAYOUT_DEFAULTS["high-end"][slot] || { cores: 0, minors: 0, mods: 0, talent: false };
     var row = layoutRow(catalog, slot, item);
     var minorSlots = row && Array.isArray(row.minors) ? row.minors : null;
     var minors = minorSlots ? minorSlots.length : (row && row.minors != null ? row.minors : base.minors);
