@@ -138,12 +138,12 @@
   }
 
   var GRENADE_FILES = [
-    ["fragmentation", "assets/icons/grenades/fragmentation.svg"],
-    ["flashbang", "assets/icons/grenades/flashbang.svg"],
-    ["incendiary", "assets/icons/grenades/incendiary.svg"],
-    ["riot foam", "assets/icons/grenades/riot-foam.svg"],
-    ["cluster", "assets/icons/grenades/cluster.svg"],
-    ["emp", "assets/icons/grenades/emp.svg"]
+    ["fragmentation", "assets/icons/grenades/fragmentation.png"],
+    ["flashbang", "assets/icons/grenades/flashbang.png"],
+    ["incendiary", "assets/icons/grenades/incendiary.png"],
+    ["riot foam", "assets/icons/grenades/riot-foam.png"],
+    ["cluster", "assets/icons/grenades/cluster.png"],
+    ["emp", "assets/icons/grenades/emp.png"]
   ];
 
   function grenadeFile(name) {
@@ -160,39 +160,69 @@
     return !!(item && item.name);
   }
 
+  function rawPiece(row, key) {
+    var load = (row && row.loadout) || {};
+    if (key === "signature") {
+      var spec = load.specialization;
+      if (spec && spec.name) return spec;
+      if (typeof spec === "string" && spec) return { name: spec };
+      return {};
+    }
+    return load[key] || {};
+  }
+
   function tdSlot(row, spec) {
     var item = slotOf(row, spec.key);
-    var filled = filledName(item);
-    var rarity = faceClass(item, spec.force);
+    var raw = rawPiece(row, spec.key);
+    var name = (raw && raw.name) || item.name || "";
+    var filled = !!name;
+    var rarity = faceClass({ name: name, rarity: (raw && raw.rarity) || item.rarity }, spec.force);
     if (filled && (spec.key === "grenade" || spec.key === "watch") && rarity === "empty") rarity = "gold";
-    var hit = spec.key === "grenade" ? null : libraryIcon(item);
-    var grenadeSrc = spec.key === "grenade" && filled ? grenadeFile(item.name) : "";
-    var own = localArt(item.image) || localArt(item.icon) || grenadeSrc;
-    var art = own
-      ? '<img class="' + (grenadeSrc && own === grenadeSrc ? "is-grenade" : "") + '" src="' + STF.esc(own) + '" alt="">'
-      : (hit
-        ? '<img class="is-mark" src="' + STF.esc(hit.file) + '" alt="">'
-        : (SLOT_ART[spec.art] || SLOT_ART.skill));
-    var dots = "";
-    var count = dotCount(item);
-    for (var i = 0; i < count; i++) dots += "<i></i>";
-    var talentHit = filled && item.talent && STF.iconFor ? STF.iconFor(item.talent) : null;
-    var talent = talentHit && talentHit.file
-      ? '<img class="td-talent is-mark" src="' + STF.esc(talentHit.file) + '" alt="">'
-      : "";
-    var title = filled ? item.name : spec.label;
-    var showLabel = filled && String(title).toLowerCase() !== String(spec.label).toLowerCase();
-    return (
-      '<button type="button" class="td-slot" data-slot="' + spec.key + '">' +
-      '<div class="td-face rarity-' + rarity + '">' +
-      '<span class="td-copy">' +
-      (showLabel ? '<span class="td-slot-label">' + STF.esc(spec.label) + "</span>" : "") +
-      '<strong class="td-name">' + STF.esc(title) + "</strong>" +
-      (filled ? '<span class="td-meta"><span class="td-lvl">40</span>' + (dots ? '<span class="td-dots">' + dots + "</span>" : "") + talent + "</span>" : "") +
-      "</span>" +
-      '<span class="td-art">' + art + "</span>" +
-      "</div></button>"
-    );
+    var isWeapon = spec.key === "primary" || spec.key === "secondary" || spec.key === "sidearm";
+    var isGear = ["mask", "backpack", "chest", "gloves", "holster", "kneepads"].indexOf(spec.key) >= 0;
+    var logo = "";
+    var nativeLogo = false;
+    var ghost = "";
+    var pips = [];
+    var talents = [];
+    var augs = [];
+    if (spec.key === "grenade" && filled) {
+      logo = grenadeFile(name);
+      nativeLogo = true;
+    } else if (spec.key === "signature" && filled) {
+      logo = STF.specIcon(name);
+      nativeLogo = true;
+    } else if (isWeapon && filled) {
+      logo = STF.slotGhost(spec.key, raw.type || "");
+      nativeLogo = true;
+      pips = STF.weaponPips(raw);
+      if (raw.talent) talents.push(STF.talentSrc(raw.talent));
+    } else if (isGear && filled) {
+      logo = STF.logoSrc(raw) || (libraryIcon(item) && libraryIcon(item).file) || "";
+      ghost = STF.slotGhost(spec.key);
+      pips = STF.gearPips(raw);
+      if (raw.talent) talents.push(STF.talentSrc(raw.talent));
+    }
+    var expertise = "";
+    if (filled && raw && Number(raw.expertise) > 0) expertise = raw.expertise;
+    var modName = "";
+    if (raw && raw.mod) {
+      if (typeof raw.mod === "string") modName = raw.mod;
+      else modName = raw.mod.name || raw.mod.stat || "";
+    }
+    if (modName) augs = [(STF.iconFor && STF.iconFor(modName) && STF.iconFor(modName).file) || "assets/icons/mods/generic.svg"];
+    var tile = STF.invTile({
+      rarity: filled ? rarity : "empty",
+      name: filled ? name : spec.label,
+      logo: logo,
+      nativeLogo: nativeLogo,
+      ghost: ghost,
+      pips: pips,
+      talents: talents,
+      augments: augs,
+      expertise: expertise
+    });
+    return '<button type="button" class="td-slot" data-slot="' + spec.key + '">' + tile + "</button>";
   }
 
   function barWidth(text) {

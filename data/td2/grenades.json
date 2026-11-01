@@ -1,41 +1,41 @@
 {
-  "source": "The six specialization grenades are the inventory grenade slot. Icons are traced SHD-orange silhouettes of the in-game grenade glyphs (frag with a burst, flashbang canister with rays, EMP with signal waves, foam canister with bubbles, incendiary with flames, cluster with sparks). Fandom returned 403, Fextralife's grenade icon files are missing uploads, and ProtoTrack has no grenade assets.",
+  "source": "Official Division 2 white grenade icons, cropped from the in-game sheet.",
   "items": [
     {
       "id": "grenade-flashbang-grenade",
       "name": "Flashbang Grenade",
       "specialization": "Sharpshooter",
-      "icon": "assets/icons/grenades/flashbang.svg"
+      "icon": "assets/icons/grenades/flashbang.png"
     },
     {
       "id": "grenade-fragmentation-grenade",
       "name": "Fragmentation Grenade",
       "specialization": "Demolitionist",
-      "icon": "assets/icons/grenades/fragmentation.svg"
+      "icon": "assets/icons/grenades/fragmentation.png"
     },
     {
       "id": "grenade-incendiary-grenade",
       "name": "Incendiary Grenade",
       "specialization": "Survivalist",
-      "icon": "assets/icons/grenades/incendiary.svg"
+      "icon": "assets/icons/grenades/incendiary.png"
     },
     {
       "id": "grenade-riot-foam-grenade",
       "name": "Riot Foam Grenade",
       "specialization": "Gunner",
-      "icon": "assets/icons/grenades/riot-foam.svg"
+      "icon": "assets/icons/grenades/riot-foam.png"
     },
     {
       "id": "grenade-emp-grenade",
       "name": "EMP Grenade",
       "specialization": "Technician",
-      "icon": "assets/icons/grenades/emp.svg"
+      "icon": "assets/icons/grenades/emp.png"
     },
     {
       "id": "grenade-cluster-grenade",
       "name": "Cluster Grenade",
       "specialization": "Firewall",
-      "icon": "assets/icons/grenades/cluster.svg"
+      "icon": "assets/icons/grenades/cluster.png"
     }
   ]
 }

@@ -9858,74 +9858,74 @@
       "slug": "grenade-fragmentation",
       "name": "Fragmentation Grenade",
       "kind": "grenade",
-      "file": "assets/icons/grenades/fragmentation.svg",
+      "file": "assets/icons/grenades/fragmentation.png",
       "proto": "",
       "aliases": [
         "frag grenade",
         "frag",
         "fragmentation"
       ],
-      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     },
     {
       "slug": "grenade-flashbang",
       "name": "Flashbang Grenade",
       "kind": "grenade",
-      "file": "assets/icons/grenades/flashbang.svg",
+      "file": "assets/icons/grenades/flashbang.png",
       "proto": "",
       "aliases": [
         "flashbang",
         "flash bang grenade"
       ],
-      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     },
     {
       "slug": "grenade-incendiary",
       "name": "Incendiary Grenade",
       "kind": "grenade",
-      "file": "assets/icons/grenades/incendiary.svg",
+      "file": "assets/icons/grenades/incendiary.png",
       "proto": "",
       "aliases": [
         "incendiary",
         "incendiary grenades"
       ],
-      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     },
     {
       "slug": "grenade-riot-foam",
       "name": "Riot Foam Grenade",
       "kind": "grenade",
-      "file": "assets/icons/grenades/riot-foam.svg",
+      "file": "assets/icons/grenades/riot-foam.png",
       "proto": "",
       "aliases": [
         "riot foam",
         "foam grenade"
       ],
-      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     },
     {
       "slug": "grenade-emp",
       "name": "EMP Grenade",
       "kind": "grenade",
-      "file": "assets/icons/grenades/emp.svg",
+      "file": "assets/icons/grenades/emp.png",
       "proto": "",
       "aliases": [
         "emp",
         "emp grenades"
       ],
-      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     },
     {
       "slug": "grenade-cluster",
       "name": "Cluster Grenade",
       "kind": "grenade",
-      "file": "assets/icons/grenades/cluster.svg",
+      "file": "assets/icons/grenades/cluster.png",
       "proto": "",
       "aliases": [
         "cluster",
         "cluster grenades"
       ],
-      "source": "Traced SHD-orange grenade silhouette. Fandom 403, Fextralife files missing, ProtoTrack has no grenade asset."
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     },
     {
       "slug": "skill-precision-smart-cover",
@@ -10399,6 +10399,15 @@
         "Striker Shield"
       ],
       "source": "The Division Wiki skill icon, saved locally"
+    },
+    {
+      "slug": "spec-demolitionist",
+      "name": "Demolitionist",
+      "kind": "specialization",
+      "file": "assets/icons/specializations/demolitionist.png",
+      "proto": "",
+      "aliases": [],
+      "source": "Official Division 2 white icon, cropped from the in-game sheet."
     }
   ],
   "note": "White-on-transparent marks from ProtoTrack. Slot icons live under caches/ because they are the targeted loot on prototype caches."

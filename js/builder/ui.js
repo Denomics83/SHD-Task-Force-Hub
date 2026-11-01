@@ -163,11 +163,41 @@
         var item = state[key] || {};
         var name = item.name || LABELS[key];
         var on = key === selected ? " is-on" : "";
-        var proto = item.prototype ? '<i class="bb-proto">Prototype</i>' : "";
-        var art = gear ? '<span class="bb-tile-art"></span>' : "";
-        return '<button type="button" class="bb-tile' + (gear ? " bb-gear" : "") + ' rarity-' + rarityClass(item) + on + '" data-slot="' + key + '">' +
-          '<span class="bb-tile-copy"><span>' + esc(LABELS[key]) + "</span><strong>" + esc(name) + "</strong>" + proto + "</span>" +
-          art + "</button>";
+        var filled = !!item.name;
+        var rarity = filled ? rarityClass(item) : "empty";
+        var isWeapon = WEAPONS.indexOf(key) >= 0;
+        var logo = "";
+        var nativeLogo = false;
+        var ghost = "";
+        var pips = [];
+        var talents = [];
+        var augs = [];
+        if (filled && isWeapon) {
+          logo = STF.slotGhost(key, item.type);
+          nativeLogo = true;
+          pips = STF.weaponPips(item);
+          if (item.talent) talents.push(STF.talentSrc(item.talent));
+        } else if (filled && gear) {
+          logo = STF.logoSrc(item);
+          ghost = STF.slotGhost(key);
+          pips = STF.gearPips(item);
+          if (item.talent) talents.push(STF.talentSrc(item.talent));
+          var modName = item.mod && (item.mod.name || (typeof item.mod === "string" ? item.mod : ""));
+          if (modName) augs.push((STF.iconFor && STF.iconFor(modName) && STF.iconFor(modName).file) || "assets/icons/mods/generic.svg");
+        }
+        var expertise = filled && Number(item.expertise) > 0 ? item.expertise : "";
+        return '<button type="button" class="bb-tile is-inv' + on + '" data-slot="' + key + '">' +
+          STF.invTile({
+            rarity: rarity,
+            name: name,
+            logo: logo,
+            nativeLogo: nativeLogo,
+            ghost: ghost,
+            pips: pips,
+            talents: talents,
+            augments: augs,
+            expertise: expertise
+          }) + "</button>";
       }
       function skillTile(key) {
         var item = state[key] || {};
@@ -185,8 +215,15 @@
       var grenadeIcon = grenadeArt(grenadeName);
       node.innerHTML =
         '<div class="bb-slot-row bb-slot-2">' +
-        '<button type="button" class="bb-tile rarity-' + (specName ? "gold" : "empty") + (selected === "specialization" ? " is-on" : "") + '" data-slot="specialization"><span>Specialization</span><strong>' + esc(specName || "Specialization") + "</strong></button>" +
-        '<button type="button" class="bb-tile rarity-gold' + (selected === "watch" ? " is-on" : "") + '" data-slot="watch"><span>SHD Watch</span><strong>' + (watchOn ? "Max" : "Custom") + "</strong></button>" +
+        '<button type="button" class="bb-tile is-inv' + (selected === "specialization" ? " is-on" : "") + '" data-slot="specialization">' +
+        STF.invTile({
+          rarity: specName ? "spec" : "empty",
+          name: specName || "Specialization",
+          logo: specName && specIcon(specName),
+          nativeLogo: true
+        }) + "</button>" +
+        '<button type="button" class="bb-tile is-inv' + (selected === "watch" ? " is-on" : "") + '" data-slot="watch">' +
+        STF.invTile({ rarity: "gold", name: watchOn ? "Max" : "Custom" }) + "</button>" +
         "</div>" +
         '<p class="bb-kicker">Loadout</p>' +
         '<div class="bb-slot-row bb-slot-3">' + WEAPONS.map(function (key) { return tile(key); }).join("") + "</div>" +
@@ -194,8 +231,13 @@
         '<div class="bb-slot-row bb-slot-2">' + tile("chest", true) + tile("gloves", true) + "</div>" +
         '<div class="bb-slot-row bb-slot-2">' + tile("holster", true) + tile("kneepads", true) + "</div>" +
         '<div class="bb-slot-row bb-slot-3">' + skillTile("skill1") + skillTile("skill2") +
-        '<button type="button" class="bb-tile bb-gear rarity-' + (grenadeName ? "gold" : "empty") + (selected === "grenade" ? " is-on" : "") + '" data-slot="grenade"><span class="bb-tile-copy"><span>Grenade</span><strong>' + esc(grenadeName || "Grenade") + "</strong></span>" +
-        (grenadeIcon ? '<img class="bb-tile-grenade" src="' + esc(grenadeIcon) + '" alt="">' : "") + "</button>" +
+        '<button type="button" class="bb-tile is-inv' + (selected === "grenade" ? " is-on" : "") + '" data-slot="grenade">' +
+        STF.invTile({
+          rarity: grenadeName ? "gold" : "empty",
+          name: grenadeName || "Grenade",
+          logo: grenadeIcon,
+          nativeLogo: true
+        }) + "</button>" +
         "</div>";
     }
 
@@ -446,6 +488,12 @@
         '<p class="lede">Skill damage, repair and duration by tier are phase 3. Chosen mod bonuses are listed on the sheet.</p>';
     }
 
+    function specIcon(name) {
+      var plain = String(name || "").replace(/\s*\([^)]*\)\s*$/, "").trim();
+      var row = (catalog.specDetails || []).filter(function (item) { return item.name === name || item.name === plain; })[0];
+      return (row && row.icon) || STF.specIcon(name) || "";
+    }
+
     function grenadeArt(name) {
       var row = (catalog.grenades || []).filter(function (item) { return item.name === name; })[0];
       return row && row.icon ? row.icon : "";
@@ -461,7 +509,7 @@
       var spec = (state.grenade && state.grenade.specialization) || "";
       var icon = grenadeArt(name);
       return '<p class="bb-kicker">Grenade</p>' +
-        (icon ? '<img class="bb-tile-grenade" src="' + esc(icon) + '" alt="">' : "") +
+        (icon ? '<img class="bb-tile-grenade is-native" src="' + esc(icon) + '" alt="">' : "") +
         "<h3>" + esc(name || "Empty slot") + "</h3>" +
         (spec ? '<p class="lede">' + esc(spec) + "</p>" : "") +
         '<p class="admin-row"><button type="button" class="admin-btn" data-grenade-pick>Choose grenade</button>' +
@@ -472,7 +520,9 @@
       var current = state.specialization.name || "";
       var buttons = catalog.specializations.map(function (row) {
         var on = row.name === current ? " is-on" : "";
-        return '<button type="button" class="bb-chip' + on + '" data-spec="' + esc(row.name) + '">' + esc(row.name) + "</button>";
+        var icon = specIcon(row.name);
+        return '<button type="button" class="bb-chip' + on + '" data-spec="' + esc(row.name) + '">' +
+          (icon ? '<img class="inv-icon is-native" src="' + esc(icon) + '" alt="">' : "") + esc(row.name) + "</button>";
       }).join("");
       var row = catalog.specializations.filter(function (item) { return item.name === current; })[0];
       var lines = row ? (row.stats || []).map(function (stat) {

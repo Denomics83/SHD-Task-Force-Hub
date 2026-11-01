@@ -21,7 +21,7 @@
       "name": "Demolitionist",
       "grenade": "Fragmentation Grenade",
       "sidearm": null,
-      "icon": null
+      "icon": "assets/icons/specializations/demolitionist.png"
     },
     {
       "id": "spec-survivalist",
