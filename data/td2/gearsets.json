@@ -1,5 +1,5 @@
 {
-  "source": "Bonuses and talent names from the Division Fandom gear-set table, plus the Core Strength, Tipping Scales, Refactor, Ortiz: Reficere, Virtuoso, and Ember Engine pages. Talent text is the wiki summary, not a rewritten description.",
+  "source": "Bonuses and talent names from the Division Fandom gear-set table, plus the Core Strength, Tipping Scales, Refactor, Ortiz: Reficere, Virtuoso, and Ember Engine pages. Talent text is the wiki summary, not a rewritten description. Measured Assembly follows the Ubisoft Crossroads notes, checked against ProtoTrack and shd.gg. Concentrated Company follows ProtoTrack, the Fandom set page, and shd.gg.",
   "items": [
     {
       "name": "Aces & Eights",
@@ -338,6 +338,34 @@
       "backpackText": "Increase the Burn Damage debuff duration of Spontaneous Combustion by 50%.",
       "rarity": "gear-set",
       "icon": null
+    },
+    {
+      "name": "Measured Assembly",
+      "core": "Skill Tier",
+      "bonus2": "+15% Skill Haste",
+      "bonus3": "+60% Repair Skills, +40% Explosive Resistance",
+      "talent": "Huddle",
+      "talentText": "Receive +1 Skill Tier for each ally Agent that is within range of your Hive or Smart Cover. While at Skill Tier 6, having at least one ally Agent in the range of your Hive or Smart Cover for 4s will grant Overcharge for 15s. Cooldown: 40s. Mortars and enemy Skills that enter the range of your Hive or Smart Cover will be destroyed. Cooldown 10s. The cooldown is 20% faster for each ally Agent within the range of your Hive or Smart Cover.",
+      "chestTalent": "Hivemind",
+      "chestText": "Decrease the Overcharge cooldown from 40s to 25s.",
+      "backpackTalent": "Smart Cooperation",
+      "backpackText": "Decrease the cooldown for destroying Mortars or enemy Skills from 10s to 1s.",
+      "rarity": "gear-set",
+      "icon": "assets/icons/gearsets/measured-assembly.png"
+    },
+    {
+      "name": "Concentrated Company",
+      "core": "Weapon Damage",
+      "bonus2": "+10% Weapon Damage",
+      "bonus3": "+30% Weapon Handling",
+      "talent": "Camaraderie",
+      "talentText": "Shooting an enemy marks them for 10s. When a marked enemy dies, receive one stack of 3% Weapon Damage and 3% Critical Hit Damage for each ally or skill that contributed to killing that enemy, including yourself. Maximum stacks: 35. Stacks decay every 10s. Maximum number of marks: 4.",
+      "chestTalent": "All for One",
+      "chestText": "Increase the amount of marks that can be placed from 4 to 8.",
+      "backpackTalent": "One for All",
+      "backpackText": "Increases the Weapon Damage bonus per stack from 3% to 6%.",
+      "rarity": "gear-set",
+      "icon": "assets/icons/gearsets/concentrated-company.png"
     }
   ]
 }

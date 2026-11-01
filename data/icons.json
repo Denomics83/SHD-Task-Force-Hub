@@ -685,6 +685,28 @@
       "source": "https://prototrack.gg/assets/division2/gearsets/umbrainitiative.png"
     },
     {
+      "slug": "measured-assembly",
+      "name": "Measured Assembly",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/measured-assembly.png",
+      "proto": "measuredassembly",
+      "aliases": [
+        "measured assembly"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/measuredassembly.png"
+    },
+    {
+      "slug": "concentrated-company",
+      "name": "Concentrated Company",
+      "kind": "gearset",
+      "file": "assets/icons/gearsets/concentrated-company.png",
+      "proto": "concentratedcompany",
+      "aliases": [
+        "concentrated company"
+      ],
+      "source": "https://prototrack.gg/assets/division2/gearsets/concentratedcompany.png"
+    },
+    {
       "slug": "assault-rifle",
       "name": "Assault Rifles",
       "kind": "weapon",
