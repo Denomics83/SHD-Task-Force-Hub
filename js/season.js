@@ -4,7 +4,8 @@
   mountEventsBack();
 
   var title = document.getElementById("season-title");
-  var summary = document.getElementById("season-summary");
+  var kicker = document.getElementById("season-kicker");
+  var remain = document.getElementById("season-remain");
   var tabs = document.getElementById("season-tabs");
   var panels = {
     manhunts: document.getElementById("panel-manhunts"),
@@ -33,7 +34,7 @@
       .join("");
   }
 
-  var SCOUT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M1 20.4 6.15 3.2 11.3 20.4H1zm11.7 0 5.15-17.2 5.15 17.2H12.7z"/></svg>';
+  var SCOUT_ICO = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 20" fill="currentColor"><path d="M12.0 1.0 L22 19 L18.4 19 L10.2 4.24 Z"/><path d="M9.4 5.68 L16.8 19 L13.4 19 L7.7 8.74 Z"/><path d="M6.9 10.18 L11.8 19 L8.6 19 L5.3 13.06 Z"/></svg>';
   var HVT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>';
   var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
 
@@ -66,7 +67,7 @@
     return (
       '<article class="mh-week">' +
       '<button type="button" class="mh-head" aria-expanded="false" aria-controls="' + panelId + '">' +
-      '<span class="mh-logo" aria-hidden="true">' + icon + "</span>" +
+      '<span class="mh-logo mh-logo-' + id.kind + '" aria-hidden="true">' + icon + "</span>" +
       '<span class="mh-titles"><strong>' + STF.esc(id.title) + "</strong>" +
       '<small>Week ' + STF.esc(week.week) + "</small></span>" +
       "</button>" +
@@ -203,27 +204,138 @@
     }).join("");
   }
 
-  function modifierCard(item) {
+  var MOD_LINES = {
+    "Fiery Aura": ["Armor Regen and Damage Resistance up", "Extra protection while sprinting", "Enemies burn on first entry"],
+    "Vicarious Combustion": ["Headshot on a burning enemy spreads Burn", "Higher levels cover a larger area", "Top level: headshots apply Burn"],
+    "Signed, Shield, Delivered": ["Signature Weapon, Shield Health, and Shield Regen up", "Those kills refill the magazine", "Top level can extend the modifier"],
+    "Flow Regulator": ["+10% Pressure per action"],
+    "Throttle Valve": ["+25% Pressure per action", "Decay 50% faster"],
+    "Flux Stabilizer": ["Decay 25% slower"],
+    "Pressure Control": ["Decay 50% slower", "Gain −20% per action"],
+    "Quality Seals": ["Decay starts later"],
+    "Delayed Venting": ["Bonuses at 0 / 20 / 50 / 80%", "Actives unlock 10% sooner"],
+    "Leaky Valve": ["Cover no longer stops decay", "Gain +50%", "Actives need 95% Pressure"],
+    "Vacuum Seal": ["No decay", "Gain −50%"],
+    "Reserve Tank": ["After an Active, gauge returns to 20%"],
+    "All or Nothing": ["Below 80% becomes 0", "Above 80% +25%"],
+    "Kickstart": ["Above 80% becomes 0", "Below 80% +50%"],
+    "New Formula: Beta": ["Primary bonus is Signature Weapon Damage", "10 / 20 / 30 / 50%"],
+    "New Formula: Gamma": ["Primary bonus is Hazard Protection", "5 / 15 / 25 / 40%"],
+    "Microwave Coils": ["Up to 4 pulsed enemies", "30% chance to burn", "+3% Pressure each"],
+    "New Model": ["K8 flamethrower +30% to named", "−50% spread · +100% range"],
+    "Afterburner": ["Kill a burning enemy", "+20% movement speed for 30s"],
+    "Flint and Steel": ["Skill plus gunfire ignites", "15s cooldown"],
+    "Fire with Fire": ["Being burned", "+50% burn damage for 30s"],
+    "Firestarter": ["Grenades +100% range", "Applies a short burn"],
+    "Modular Plates": ["Armor kits +100% bonus armor", "Restores the shield"],
+    "Draining Presence": ["Drains ammo and Pressure while close", "Fire removes it"],
+    "Achilles' Heal": ["Broken armor heals the enemy", "Cuts your Pressure", "Fire removes it"],
+    "Thousand Cuts": ["Hits cut Pressure", "Stacks a damage-reduction debuff", "Fire removes it"]
+  };
+  var MOD_GROUPS = [
+    { label: "Pressure", names: ["Flow Regulator", "Throttle Valve", "Flux Stabilizer", "Pressure Control", "Quality Seals", "Delayed Venting", "Leaky Valve", "Vacuum Seal", "Reserve Tank"] },
+    { label: "Bonus", names: ["All or Nothing", "Kickstart", "New Formula: Beta", "New Formula: Gamma"] },
+    { label: "Fire", names: ["Microwave Coils", "New Model", "Afterburner", "Flint and Steel", "Fire with Fire", "Firestarter"] },
+    { label: "Gear", names: ["Modular Plates"] },
+    { label: "Hostile", names: ["Draining Presence", "Achilles' Heal", "Thousand Cuts"] }
+  ];
+
+  function modIcon(name) {
+    var n = String(name || "").toLowerCase();
+    if (/fire|burn|flint|microwave|afterburn|model/.test(n)) {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3s4 4.2 4 8a4 4 0 0 1-8 0c0-3.8 4-8 4-8z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+    }
+    if (/shield|signed/.test(n)) {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.2 19 6v6.2c0 4.2-2.8 6.6-7 8.2-4.2-1.6-7-4-7-8.2V6z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+    }
+    if (/plate|armor|armour/.test(n)) {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 8h16v8H4zM8 8V5h8v3" fill="none" stroke="currentColor" stroke-width="1.6"/></svg>';
+    }
+    if (/drain|achilles|thousand|cut/.test(n)) {
+      return '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4v10M8 10l4 4 4-4M6 19h12" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+    }
+    return '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 8v5l3 2" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  }
+
+  function shortLines(item) {
+    if (MOD_LINES[item.name]) return MOD_LINES[item.name];
+    return String(item.effect || "").split(".").map(function (part) { return part.trim(); }).filter(Boolean).slice(0, 3);
+  }
+
+  function modTile(item) {
+    var lines = JSON.stringify(shortLines(item)).replace(/"/g, "&quot;");
     return (
-      '<article class="season-item"><h3>' + STF.esc(item.name) + "</h3><p>" +
-      STF.esc(item.effect) + "</p></article>"
+      '<button type="button" class="mod-tile" data-lines="' + lines + '">' +
+      '<span class="mod-ring">' + modIcon(item.name) + "</span>" +
+      '<span class="mod-name">' + STF.esc(item.name) + "</span></button>"
+    );
+  }
+
+  function modSection(label, items) {
+    if (!items.length) return "";
+    return (
+      '<section class="mod-section">' +
+      (label ? '<h3 class="mod-label">' + STF.esc(label) + "</h3>" : "") +
+      '<div class="mod-grid">' + items.map(modTile).join("") + "</div>" +
+      '<div class="mod-detail" hidden></div></section>'
     );
   }
 
   function modifiersHTML(data) {
-    var actives = (data.actives || []).map(modifierCard).join("");
-    var hostiles = (data.hostiles || []).map(modifierCard).join("");
-    var passives = (data.passives || []).map(modifierCard).join("");
+    var byName = {};
+    (data.passives || []).concat(data.hostiles || []).forEach(function (item) { byName[item.name] = item; });
+    var used = {};
+    var groups = MOD_GROUPS.map(function (group) {
+      var items = group.names.map(function (name) { return byName[name]; }).filter(Boolean);
+      items.forEach(function (item) { used[item.name] = 1; });
+      return modSection(group.label, items);
+    }).join("");
+    var rest = (data.passives || []).filter(function (item) { return !used[item.name]; });
+    var blurb = "Pressure builds as you fight and powers the season bonuses. It decays out of cover.";
     return (
-      '<article class="season-item"><span class="status">Global</span><h3>' +
-      STF.esc(data.global.name) + "</h3><p>" + STF.esc(data.global.effect) + "</p></article>" +
-      '<h3 class="mod-label">Active</h3><p class="lede">' + STF.esc(data.activeNote || "") + "</p>" +
-      actives +
-      '<h3 class="mod-label">Hostile</h3>' + hostiles +
-      '<h3 class="mod-label">Passive</h3>' +
-      '<p class="caveat">Passive numbers are from the 13 Aug 2026 PTS notes. Ubisoft’s live season article names the system but does not reprint every passive. Exact live values can differ.</p>' +
-      passives
+      '<p class="mod-blurb">' + STF.esc(blurb) + "</p>" +
+      modSection("", data.actives || []) +
+      groups +
+      modSection(rest.length ? "More" : "", rest)
     );
+  }
+
+  function bindModifiers(root) {
+    if (!root || root.dataset.modBound) return;
+    root.dataset.modBound = "1";
+    root.addEventListener("click", function (e) {
+      var tile = e.target.closest(".mod-tile");
+      if (!tile || !root.contains(tile)) return;
+      var section = tile.closest(".mod-section");
+      var panel = section.querySelector(".mod-detail");
+      var open = tile.classList.contains("is-on");
+      section.querySelectorAll(".mod-tile").forEach(function (el) { el.classList.remove("is-on"); });
+      if (open) {
+        panel.hidden = true;
+        panel.innerHTML = "";
+        return;
+      }
+      tile.classList.add("is-on");
+      var lines = [];
+      try { lines = JSON.parse(tile.getAttribute("data-lines") || "[]"); } catch (err) { lines = []; }
+      panel.innerHTML = lines.map(function (line) { return "<p>" + STF.esc(line) + "</p>"; }).join("");
+      panel.hidden = false;
+    });
+  }
+
+  function seasonRemain(endIso) {
+    if (!endIso) return "";
+    var end = new Date(endIso).getTime();
+    if (isNaN(end)) return "";
+    var ms = end - Date.now();
+    if (ms <= 0) return "";
+    var mins = Math.floor(ms / 60000);
+    var days = Math.floor(mins / 1440);
+    var hours = Math.floor((mins % 1440) / 60);
+    if (days > 0) return days + "d " + hours + "h";
+    var rem = mins % 60;
+    if (hours > 0) return hours + "h " + rem + "m";
+    return Math.max(1, rem) + "m";
   }
 
   if (tabs) {
@@ -261,11 +373,12 @@
       themeEl.hidden = !showTheme;
       themeEl.textContent = showTheme ? themeText : "";
     }
-    if (title) title.textContent = (season.yearSeason || "") + " — " + (season.name || "Season");
-    if (summary) {
-      summary.textContent =
-        (season.summary || "") +
-        (season.patch ? " · Patch: " + season.patch : "");
+    if (kicker) kicker.textContent = season.yearSeason || "";
+    if (title) title.textContent = season.name || "Season";
+    var left = seasonRemain(season.ends || season.end || "");
+    if (remain) {
+      remain.hidden = !left;
+      remain.textContent = left;
     }
 
     var weeks = (manhunt.weeks || []).map(weekHTML).join("");
@@ -285,7 +398,10 @@
       bindJourney(panels.journey);
     }
 
-    if (panels.modifiers) panels.modifiers.innerHTML = modifiersHTML(modifiers);
+    if (panels.modifiers) {
+      panels.modifiers.innerHTML = modifiersHTML(modifiers);
+      bindModifiers(panels.modifiers);
+    }
   } catch (e) {
     if (summary) summary.textContent = "Could not load season data.";
     console.error(e);

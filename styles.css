@@ -235,6 +235,88 @@ h1 { margin: 0 0 6px; font-size: clamp(1.25rem, 4.5vw, 1.7rem); letter-spacing: 
 .mod-label {
   margin: 16px 0 8px; font-size: .72rem; letter-spacing: .12em;
   text-transform: uppercase; color: var(--orange);
+  font-family: var(--display); font-weight: 700;
+}
+.season-kicker {
+  margin: 4px 0 2px;
+  font-family: var(--display);
+  font-size: .78rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: #9aa0a6;
+}
+#season-title {
+  margin: 0 0 10px;
+  font-size: clamp(2rem, 9vw, 2.7rem);
+  line-height: .95;
+  letter-spacing: 0;
+}
+.season-status { display: flex; align-items: center; gap: 10px; margin: 0 0 16px; }
+.season-tag {
+  display: inline-block;
+  background: var(--orange);
+  color: #1a0d00;
+  font-family: var(--display);
+  font-weight: 700;
+  letter-spacing: .08em;
+  text-transform: uppercase;
+  font-size: .72rem;
+  line-height: 1.2;
+  padding: 4px 8px;
+}
+.season-remain {
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.35rem;
+  letter-spacing: .02em;
+  color: #fff;
+}
+.season-remain[hidden] { display: none; }
+.mod-blurb { margin: 0 0 12px; color: #c5cad3; font-size: .92rem; line-height: 1.35; }
+#panel-modifiers .mod-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 8px;
+}
+.mod-tile {
+  aspect-ratio: 1;
+  min-height: 0;
+  padding: 8px 6px;
+  border: 1px solid rgba(255,255,255,.4);
+  background: #101114;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.mod-tile.is-on { background: var(--orange); border-color: var(--orange); color: #1a0d00; }
+.mod-ring {
+  width: 36px; height: 36px; flex: 0 0 auto;
+  border: 1px solid currentColor; border-radius: 50%;
+  display: grid; place-items: center;
+}
+.mod-ring svg { width: 18px; height: 18px; display: block; }
+.mod-name {
+  font-family: var(--display);
+  font-size: .62rem;
+  font-weight: 700;
+  letter-spacing: .03em;
+  text-transform: uppercase;
+  text-align: center;
+  line-height: 1.1;
+}
+.mod-detail { margin-top: 8px; }
+.mod-detail[hidden] { display: none; }
+.mod-detail p {
+  margin: 0 0 2px;
+  color: #67f0ff;
+  font-family: var(--display);
+  font-weight: 700;
+  font-size: 1.05rem;
+  line-height: 1.25;
 }
 .altar-map { margin: 8px 0 12px; }
 .altar-map svg { width: 100%; height: auto; display: block; }
@@ -1825,8 +1907,9 @@ a.col-tile:hover { text-decoration: none; color: #fff; }
   background: var(--orange);
   color: #1a0d00;
 }
-.mh-logo { width: 34px; height: 34px; flex: 0 0 auto; display: grid; place-items: center; }
-.mh-logo svg { width: 30px; height: 30px; display: block; }
+.mh-logo { flex: 0 0 auto; display: grid; place-items: center; align-self: center; }
+.mh-logo-scout svg { width: 22px; height: 18px; display: block; }
+.mh-logo-hvt svg { width: 22px; height: 22px; display: block; }
 .mh-titles { display: flex; flex-direction: column; gap: 2px; min-width: 0; }
 .mh-titles strong {
   font-family: var(--display);
