@@ -1153,8 +1153,7 @@
         '<label class="bb-check"><input id="bb-published" type="checkbox"' + (meta.published ? " checked" : "") + "> Published</label>" +
         '<label class="bb-notes-label">Notes</label>' +
         '<div id="bb-notes" class="rich-editor"></div>' +
-        '<p class="admin-row"><button type="button" class="admin-btn admin-btn-ghost" data-sample>Load Eclipse sample</button>' +
-        '<button class="admin-btn" type="submit">Save build</button></p>' +
+        '<p class="admin-row"><button class="admin-btn" type="submit">Save build</button></p>' +
         '<p id="bb-status" class="admin-status" role="status"></p></form>' +
         '<div class="bb-tabs">' +
         '<button type="button" class="bb-chip' + (panel === "build" ? " is-on" : "") + '" data-bb-tab="build">Build</button>' +
@@ -1273,7 +1272,6 @@
         paint();
         return;
       }
-      if (e.target.closest("[data-sample]")) return loadSample();
     });
 
     host.addEventListener("change", function (e) {
