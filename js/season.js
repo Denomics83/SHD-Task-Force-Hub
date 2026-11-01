@@ -34,31 +34,61 @@
   }
 
   var TASK_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="none" stroke="currentColor" stroke-width="1.4"/><path d="M12 8.2v7.6M8.2 12h7.6" stroke="currentColor" stroke-width="1.4"/></svg>';
+  var SCOUT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="7.6" cy="14" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><circle cx="16.4" cy="14" r="3.1" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M10.7 14h2.6M7.6 10.9V8.2M16.4 10.9V8.2M5.4 8.2h4.4M14.2 8.2h4.4" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>';
+  var HVT_ICO = '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="5.6" fill="none" stroke="currentColor" stroke-width="1.6"/><path d="M12 3.2v3.1M12 17.7v3.1M3.2 12h3.1M17.7 12h3.1" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/></svg>';
   var ROMAN = ["I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X", "XI", "XII", "XIII", "XIV", "XV"];
 
   function pad2(n) {
     return (n < 10 ? "0" : "") + n;
   }
 
-  function taskRows(tasks) {
-    return (tasks || []).map(function (task, index) {
-      return (
-        '<div class="j-task"><span>' + STF.esc(task) + "</span>" +
-        '<span class="j-meta"><b>' + pad2(index + 1) + "</b>" + TASK_ICO + "</span></div>"
-      );
-    }).join("");
+  function weekIdentity(week) {
+    var scout = String(week.scout || "");
+    var hvt = scout.match(/HVT\s*(\d+)/i);
+    if (hvt) return { kind: "hvt", title: "HVT " + hvt[1] };
+    var num = scout.match(/Scout\s*(\d+)/i);
+    if (num) return { kind: "scout", title: "Scout " + num[1] };
+    var plain = scout.replace(/\s*[—-].*$/, "").trim();
+    return { kind: "scout", title: plain || ("Scout " + (week.week || "")) };
   }
 
-  function weekHTML(week) {
+  function weekHTML(week, index) {
     var tasks = (week.tasks || []).slice(0, 3);
-    var title = "Week " + week.week + (week.scout ? " · " + week.scout : "");
-    if (week.label) title += " · " + week.label;
+    var id = weekIdentity(week);
+    var panelId = "mh-panel-" + index;
+    var icon = id.kind === "hvt" ? HVT_ICO : SCOUT_ICO;
+    var rows = tasks.map(function (task, t) {
+      return (
+        '<div class="mh-obj">' +
+        '<span class="mh-obj-label">Objective ' + (t + 1) + "</span>" +
+        "<p>" + STF.esc(task) + "</p></div>"
+      );
+    }).join("");
     return (
       '<article class="mh-week">' +
-      '<h3><span class="j-roman">' + STF.esc(ROMAN[(week.week || 1) - 1] || String(week.week)) + "</span>" + STF.esc(title) + "</h3>" +
-      taskRows(tasks) +
-      "</article>"
+      '<button type="button" class="mh-head" aria-expanded="false" aria-controls="' + panelId + '">' +
+      '<span class="mh-logo" aria-hidden="true">' + icon + "</span>" +
+      '<span class="mh-titles"><strong>' + STF.esc(id.title) + "</strong>" +
+      '<small>Week ' + STF.esc(week.week) + "</small></span>" +
+      "</button>" +
+      '<div class="mh-panel" id="' + panelId + '" role="region">' +
+      '<div class="mh-panel-inner">' + rows + "</div></div></article>"
     );
+  }
+
+  function bindManhunt(root) {
+    if (!root || root.dataset.manhuntBound) return;
+    root.dataset.manhuntBound = "1";
+    root.addEventListener("click", function (e) {
+      var btn = e.target.closest(".mh-head");
+      if (!btn || !root.contains(btn)) return;
+      var panel = document.getElementById(btn.getAttribute("aria-controls"));
+      if (!panel) return;
+      var open = btn.getAttribute("aria-expanded") !== "true";
+      btn.setAttribute("aria-expanded", open ? "true" : "false");
+      btn.classList.toggle("is-on", open);
+      panel.classList.toggle("is-open", open);
+    });
   }
 
   function journeyHTML(pack) {
@@ -208,7 +238,10 @@
       : "";
     var climax = climaxText ? '<p class="climax-line">' + STF.esc(climaxText) + "</p>" : "";
 
-    if (panels.manhunts) panels.manhunts.innerHTML = weeks + climax;
+    if (panels.manhunts) {
+      panels.manhunts.innerHTML = weeks + climax;
+      bindManhunt(panels.manhunts);
+    }
 
     if (panels.journey) {
       var pack = (journey.seasons && journey.seasons[season.id]) || { missions: [] };
