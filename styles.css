@@ -25,9 +25,12 @@
   --display: "Rajdhani", "Arial Narrow", "Segoe UI", sans-serif;
 }
 *, *::before, *::after { box-sizing: border-box; }
-html { -webkit-text-size-adjust: 100%; }
+html { -webkit-text-size-adjust: 100%; max-width: 100%; overflow-x: hidden; }
+img, svg, video, canvas { max-width: 100%; }
 body {
   margin: 0;
+  max-width: 100%;
+  overflow-x: hidden;
   font-family: var(--font);
   background: var(--bg);
   color: var(--text);
@@ -89,7 +92,8 @@ button { cursor: pointer; }
 /* ===== Bottom tab bar (Updates · Events · Loot · Builds · Resources) ===== */
 .bottom-nav {
   position: fixed; left: 0; right: 0; bottom: 0; z-index: 60;
-  display: grid; grid-template-columns: repeat(5, 1fr);
+  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr));
+  width: 100%; max-width: 100%;
   height: calc(var(--nav-h) + env(safe-area-inset-bottom, 0px));
   padding-bottom: env(safe-area-inset-bottom, 0px);
   background: #0e1116;
@@ -97,9 +101,9 @@ button { cursor: pointer; }
 }
 .bottom-nav a {
   display: flex; flex-direction: column; align-items: center; justify-content: center;
-  gap: 4px; min-height: var(--nav-h); color: #8a9099; text-decoration: none;
+  gap: 4px; min-width: 0; min-height: var(--nav-h); color: #8a9099; text-decoration: none;
   font-size: .58rem; font-weight: 700; letter-spacing: .01em; text-transform: uppercase;
-  white-space: nowrap; padding: 0 2px;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis; padding: 0 2px;
   -webkit-tap-highlight-color: transparent;
 }
 .bottom-nav a:hover { text-decoration: none; color: var(--text); }
@@ -734,7 +738,7 @@ body.page-events .bottom-nav {
   position: relative; left: auto; right: auto; bottom: auto; flex: 0 0 auto;
 }
 .hero-rail {
-  flex: 1; width: 100%; height: 100%; min-height: 0;
+  flex: 1; width: 100%; max-width: 100%; height: 100%; min-height: 0; min-width: 0;
   display: flex; overflow-x: auto; scroll-snap-type: x mandatory;
   scroll-behavior: smooth; -webkit-overflow-scrolling: touch;
   scrollbar-width: none; overscroll-behavior-x: contain;
@@ -934,7 +938,7 @@ body.page-builds.is-grid .cat-stage { flex: 1 1 auto; min-height: 0; display: fl
   gap: 10px;
   padding: 12px 14px 8px;
 }
-.cat-grid { grid-template-columns: 1fr 1fr; grid-template-rows: repeat(3, minmax(0, 1fr)); }
+.cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); min-width: 0; max-width: 100%; }
 body.page-resources {
   height: 100dvh;
   overflow: hidden;
@@ -974,7 +978,7 @@ body.page-resources.is-hunter-home #res-detail-body {
 }
 body.page-resources .topbar { position: relative; flex: 0 0 auto; }
 body.page-resources .bottom-nav { position: relative; flex: 0 0 auto; }
-body.page-resources main { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+body.page-resources main { flex: 1 1 auto; min-height: 0; min-width: 0; max-width: 100%; display: flex; flex-direction: column; }
 .res-landing {
   flex: 1;
   min-height: 0;
@@ -1032,6 +1036,8 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   align-items: center;
   gap: 10px;
   width: 100%;
+  max-width: 100%;
+  min-width: 0;
   height: 80px;
   text-align: left;
   margin: 0 0 8px;
@@ -1182,7 +1188,8 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   color: inherit;
   text-decoration: none;
 }
-.creator-row { margin: 0 0 8px; }
+.creator-row { margin: 0 0 8px; min-width: 0; max-width: 100%; }
+.creator-row strong { min-width: 0; overflow-wrap: anywhere; }
 .creator-label {
   margin: 4px 2px 8px;
   font-family: var(--font);
@@ -2047,27 +2054,42 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
 .signin-card h2 { margin: 0 0 8px; font-family: var(--display); letter-spacing: .04em; text-transform: uppercase; }
 .signin-card p { margin: 0 0 14px; color: #c5cad3; }
 
-.res-shell { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+.res-shell { flex: 1 1 auto; min-height: 0; min-width: 0; max-width: 100%; display: flex; flex-direction: column; }
 .res-tabs {
   flex: 0 0 auto;
-  display: grid; grid-template-columns: repeat(5, minmax(0, 1fr)); gap: 4px;
+  display: grid;
+  grid-template-columns: repeat(5, minmax(0, 1fr));
+  gap: 4px;
+  width: 100%;
+  max-width: 100%;
+  min-width: 0;
   padding: 10px 8px 8px;
 }
 .res-tabs button,
 .res-tabs a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-width: 0;
+  max-width: 100%;
   min-height: 36px;
-  padding: 0 1px;
+  padding: 0 2px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   border: 1px solid rgba(255,255,255,.55);
   background: transparent; color: #fff;
   font-family: var(--display); font-weight: 700;
   font-size: clamp(.5rem, 2.35vw, .74rem);
   letter-spacing: .02em; text-transform: uppercase;
 }
+@media (max-width: 420px) {
+  .res-tabs { gap: 3px; padding: 8px 6px 6px; }
+  .res-tabs button,
+  .res-tabs a { font-size: .58rem; letter-spacing: 0; padding: 0 1px; }
+}
 .res-tabs a {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  gap: 4px;
   border-radius: 0;
   text-decoration: none;
 }
@@ -2083,6 +2105,8 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
 }
 .mut-item {
   margin: 0 0 8px;
+  min-width: 0;
+  max-width: 100%;
   border: 1px solid rgba(255,255,255,.4);
   background: #101114;
 }
@@ -2091,6 +2115,7 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
   align-items: center;
   gap: 10px;
   width: 100%;
+  min-width: 0;
   min-height: 52px;
   padding: 8px 12px;
   border: 0;
@@ -2109,6 +2134,8 @@ button.td-slot.is-picked .td-face { outline: 1px solid #fff; outline-offset: 2px
 }
 .mut-item.is-open .mut-row img { filter: brightness(0); }
 .mut-row strong {
+  min-width: 0;
+  overflow-wrap: anywhere;
   font-family: var(--display);
   font-weight: 700;
   letter-spacing: .04em;
@@ -2139,7 +2166,7 @@ body.page-resources { display: flex; flex-direction: column; }
 body.page-resources.is-grid .res-shell,
 body.page-resources.is-grid #tab-builds { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
 body.page-resources.is-grid #cat-stage { flex: 1 1 auto; min-height: 0; display: flex; }
-body.page-resources .res-panel:not([hidden]) { flex: 1 1 auto; min-height: 0; overflow: auto; }
+body.page-resources .res-panel:not([hidden]) { flex: 1 1 auto; min-height: 0; min-width: 0; max-width: 100%; overflow: auto; }
 body.page-resources.is-grid #tab-builds { overflow: hidden; }
 .map-sec {
   margin: 14px 0 8px;
