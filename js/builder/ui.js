@@ -197,19 +197,15 @@
         var rarity = filled ? rarityClass(item) : "empty";
         var isWeapon = WEAPONS.indexOf(key) >= 0;
         var logo = "";
-        var nativeLogo = false;
-        var ghost = "";
         var pips = [];
         var talents = [];
         var augs = [];
         if (filled && isWeapon) {
           logo = STF.slotGhost(key, item.type);
-          nativeLogo = true;
           pips = STF.weaponPips(item);
           if (item.talent) talents.push(STF.talentSrc(item.talent));
         } else if (filled && gear) {
           logo = STF.logoSrc(item);
-          ghost = STF.slotGhost(key);
           pips = STF.gearPips(item);
           if (item.talent) talents.push(STF.talentSrc(item.talent));
           var modName = item.mod && (item.mod.name || (typeof item.mod === "string" ? item.mod : ""));
@@ -221,8 +217,6 @@
             rarity: rarity,
             name: name,
             logo: logo,
-            nativeLogo: nativeLogo,
-            ghost: ghost,
             pips: pips,
             talents: talents,
             augments: augs,
@@ -234,10 +228,12 @@
         var name = item.name || LABELS[key];
         var on = key === selected ? " is-on" : "";
         var icon = item.name ? skillArt(item.name) : "";
-        return '<button type="button" class="bb-tile bb-skill rarity-' + rarityClass(item) + on + '" data-slot="' + key + '">' +
-          '<span class="bb-tile-copy"><span>' + esc(LABELS[key]) + "</span><strong>" + esc(name) + "</strong></span>" +
-          (icon ? '<img class="bb-logo" src="' + esc(icon) + '" alt="">' : "") +
-          "</button>";
+        return '<button type="button" class="bb-tile is-inv' + on + '" data-slot="' + key + '">' +
+          STF.invTile({
+            rarity: item.name ? "gold" : "empty",
+            name: name,
+            logo: icon
+          }) + "</button>";
       }
       var specName = (state.specialization && state.specialization.name) || "";
       var watchOn = state.watch && state.watch.max;
@@ -253,7 +249,11 @@
           nativeLogo: true
         }) + "</button>" +
         '<button type="button" class="bb-tile is-inv' + (selected === "watch" ? " is-on" : "") + '" data-slot="watch">' +
-        STF.invTile({ rarity: "gold", name: watchOn ? "Max" : "Custom" }) + "</button>" +
+        STF.invTile({
+          rarity: "gold",
+          name: "SHD Watch",
+          detail: watchOn ? "MAX" : ((state.watch && state.watch.level != null && state.watch.level !== "") ? String(state.watch.level) : "")
+        }) + "</button>" +
         "</div>" +
         '<p class="bb-kicker">Loadout</p>' +
         '<div class="bb-slot-row bb-slot-3">' + WEAPONS.map(function (key) { return tile(key); }).join("") + "</div>" +

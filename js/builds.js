@@ -183,30 +183,37 @@
     var isWeapon = spec.key === "primary" || spec.key === "secondary" || spec.key === "sidearm";
     var isGear = ["mask", "backpack", "chest", "gloves", "holster", "kneepads"].indexOf(spec.key) >= 0;
     var logo = "";
-    var nativeLogo = false;
-    var ghost = "";
     var pips = [];
     var talents = [];
     var augs = [];
-    if (spec.key === "grenade" && filled) {
+    var detail = "";
+    var tileName = filled ? name : spec.label;
+    if (spec.key === "watch" && filled) {
+      var watch = raw || {};
+      var maxed = !!watch.max || /^max(ed)?$/i.test(name);
+      var level = watch.level != null && watch.level !== "" ? watch.level : "";
+      tileName = "SHD Watch";
+      detail = maxed ? "MAX" : (level !== "" ? String(level) : "");
+      rarity = "gold";
+    } else if (spec.key === "grenade" && filled) {
       logo = grenadeFile(name);
-      nativeLogo = true;
     } else if (spec.key === "signature" && filled) {
       logo = STF.specIcon(name);
-      nativeLogo = true;
     } else if (isWeapon && filled) {
       logo = STF.slotGhost(spec.key, raw.type || "");
-      nativeLogo = true;
       pips = STF.weaponPips(raw);
       if (raw.talent) talents.push(STF.talentSrc(raw.talent));
+    } else if ((spec.key === "skill1" || spec.key === "skill2") && filled) {
+      var skillIcon = STF.iconFor && STF.iconFor(name);
+      logo = skillIcon && skillIcon.file ? skillIcon.file : "";
+      if (rarity === "empty") rarity = "gold";
     } else if (isGear && filled) {
       logo = STF.logoSrc(raw) || (libraryIcon(item) && libraryIcon(item).file) || "";
-      ghost = STF.slotGhost(spec.key);
       pips = STF.gearPips(raw);
       if (raw.talent) talents.push(STF.talentSrc(raw.talent));
     }
     var expertise = "";
-    if (filled && raw && Number(raw.expertise) > 0) expertise = raw.expertise;
+    if (filled && raw && Number(raw.expertise) > 0 && spec.key !== "watch") expertise = raw.expertise;
     var modName = "";
     if (raw && raw.mod) {
       if (typeof raw.mod === "string") modName = raw.mod;
@@ -215,10 +222,9 @@
     if (modName) augs = [(STF.iconFor && STF.iconFor(modName) && STF.iconFor(modName).file) || "assets/icons/mods/generic.svg"];
     var tile = STF.invTile({
       rarity: filled ? rarity : "empty",
-      name: filled ? name : spec.label,
+      name: tileName,
+      detail: detail,
       logo: logo,
-      nativeLogo: nativeLogo,
-      ghost: ghost,
       pips: pips,
       talents: talents,
       augments: augs,

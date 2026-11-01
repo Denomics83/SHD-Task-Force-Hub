@@ -85,13 +85,12 @@
       return mark(src, "inv-aug");
     }).join("");
     var exp = opts.expertise == null || opts.expertise === "" ? "" : '<b class="inv-exp">' + esc(opts.expertise) + "</b>";
-    var logo = opts.logo ? mark(opts.logo, "inv-logo" + (opts.nativeLogo ? " is-native" : "")) : '<span class="inv-logo"></span>';
-    var ghost = opts.ghost ? mark(opts.ghost, "inv-ghost is-native") : "";
-    return '<div class="inv-tile rarity-' + esc(rarity) + '">' +
-      '<span class="inv-edge"></span>' +
+    var detail = opts.detail ? '<em class="inv-detail">' + esc(opts.detail) + "</em>" : "";
+    var logo = opts.logo ? mark(opts.logo, "inv-logo" + (opts.nativeLogo ? " is-native" : "")) : "";
+    return '<div class="inv-tile rarity-' + esc(rarity) + (logo ? "" : " no-logo") + '">' +
       logo +
-      ghost +
       '<span class="inv-copy"><strong>' + esc(name) + "</strong>" +
+      detail +
       (pips ? '<span class="inv-pips">' + pips + "</span>" : "") +
       "</span>" +
       (talents || augs ? '<span class="inv-side">' + talents + augs + "</span>" : "") +
