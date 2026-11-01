@@ -7,13 +7,36 @@
   /* Dark Zone data and row markup stay in place. Flip this to show the section again. */
   var SHOW_DARK_ZONE = false;
   var FALLBACK = "assets/icons/loot/generic.svg";
+  /* Division 2 daily reset. 08:00 UTC is 7pm Sydney in AEDT and 6pm in AEST, so it stays correct across daylight saving. */
+  var LOOT_RESET_UTC_HOUR = 8;
 
   function pad(n) { return (n < 10 ? "0" : "") + n; }
 
+  function nextReset(now) {
+    var next = new Date(Date.UTC(
+      now.getUTCFullYear(),
+      now.getUTCMonth(),
+      now.getUTCDate(),
+      LOOT_RESET_UTC_HOUR, 0, 0, 0
+    ));
+    if (now.getTime() >= next.getTime()) next.setUTCDate(next.getUTCDate() + 1);
+    return next;
+  }
+
   function expectedLootDate(now) {
     var d = new Date(now.getTime());
-    if (d.getUTCHours() < 8) d.setUTCDate(d.getUTCDate() - 1);
+    if (d.getUTCHours() < LOOT_RESET_UTC_HOUR) d.setUTCDate(d.getUTCDate() - 1);
     return d.getUTCFullYear() + "-" + pad(d.getUTCMonth() + 1) + "-" + pad(d.getUTCDate());
+  }
+
+  function resetLabel(now) {
+    var ms = Math.max(0, nextReset(now).getTime() - now.getTime());
+    var total = Math.floor(ms / 1000);
+    var hours = Math.floor(total / 3600);
+    var minutes = Math.floor((total % 3600) / 60);
+    var seconds = total % 60;
+    if (hours >= 1) return "RESETS IN " + hours + "h " + minutes + "m";
+    return "RESETS IN " + minutes + "m " + pad(seconds) + "s";
   }
 
   function mark(src) {
@@ -63,22 +86,23 @@
       );
     }).join("");
 
-    var creditDate = data.lootDate ? STF.formatDate(data.lootDate) : "";
     var stale = data.lootDate && data.lootDate < expectedLootDate(new Date());
     var dzSection = SHOW_DARK_ZONE ? section("Dark Zone", "Target loot", dz) : "";
-    var credit = "";
-    if (creditDate || stale) {
-      credit =
-        '<p class="loot-credit">' +
-        (creditDate ? STF.esc(creditDate) : "") +
-        (stale ? (creditDate ? " · " : "") + '<span class="loot-updating">updating…</span>' : "") +
-        "</p>";
-    }
     root.innerHTML =
+      '<p class="loot-status"><span class="loot-reset" id="loot-reset"></span>' +
+      (stale ? '<span class="loot-updating">updating…</span>' : "") +
+      "</p>" +
       section("Missions", "Target loot", esc) +
       section("Caches", "Target loot", caches) +
-      dzSection +
-      credit;
+      dzSection;
+    var resetEl = document.getElementById("loot-reset");
+    function paintReset() {
+      var now = new Date();
+      if (resetEl) resetEl.textContent = resetLabel(now);
+      var remain = nextReset(now).getTime() - now.getTime();
+      window.setTimeout(paintReset, remain < 3600000 ? 1000 : 60000);
+    }
+    paintReset();
   } catch (err) {
     root.innerHTML = '<p class="lede">Could not load targeted loot.</p>';
     console.error(err);
