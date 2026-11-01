@@ -281,12 +281,28 @@
     return n;
   }
 
-  function effectiveValue(catalog, item, name, value, role, type, mode, guaranteed) {
+  function sameName(a, b) {
+    return keyOf(a) === keyOf(b) && keyOf(a) !== "";
+  }
+
+  function statMaxed(item, name) {
+    if (!item || !name) return false;
+    if (sameName(item.core, name) && item.coreMax) return true;
+    if (sameName(item.core2, name) && item.core2Max) return true;
+    if (sameName(item.mod, name) && item.modMax) return true;
+    var attrs = item.attributes || [];
+    for (var i = 0; i < attrs.length; i++) {
+      if (sameName(attrs[i] && attrs[i].name, name) && attrs[i].maxed) return true;
+    }
+    return sameName(item.guaranteed, name);
+  }
+
+  function effectiveValue(catalog, item, name, value, role, type, mode) {
     var range = rangeFor(catalog, name, role, type);
     var proto = prototypeOn(item, catalog) && range.prototype;
     var amount = num(value);
     if (!range.id) return { id: "", value: 0, range: range };
-    if (proto && guaranteed && keyOf(guaranteed) === keyOf(name)) amount = range.protoMax;
+    if (proto && statMaxed(item, name)) amount = range.protoMax;
     if (proto && mode === "restricted") amount = range.max;
     else if (proto) amount = clamp(amount, range.max, range.protoMax);
     else if (range.max != null) amount = clamp(amount, range.min, range.max);
@@ -387,10 +403,9 @@
   function contributeItem(bag, catalog, item, kind, mode) {
     if (!item || !item.name) return;
     var type = item.type;
-    var guaranteed = item.guaranteed || "";
     function take(name, value, role) {
       if (!name || value == null || value === "") return;
-      var hit = effectiveValue(catalog, item, name, value, role, type, mode, guaranteed);
+      var hit = effectiveValue(catalog, item, name, value, role, type, mode);
       addStat(bag, hit.id, hit.value);
     }
     if (kind === "weapon") {

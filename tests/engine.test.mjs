@@ -126,6 +126,20 @@ test("guaranteed prototype roll forces the new max", function () {
   assert.equal(sheet.stats.criticalHitChance, 9 + 8);
 });
 
+test("several prototype attributes can be maxed together", function () {
+  const loadout = catalogApi.blank(catalog.watch);
+  loadout.chest = gear("Ceska", "Česká Výroba s.r.o.", "high-end", "Weapon Damage", 15, [
+    { name: "Critical Hit Chance", value: 6, maxed: true },
+    { name: "Critical Hit Damage", value: 12, maxed: true }
+  ]);
+  loadout.chest.prototype = true;
+  loadout.chest.coreMax = true;
+  const sheet = engine.compute(loadout, catalog);
+  assert.equal(sheet.stats.weaponDamage, 22.5);
+  assert.equal(sheet.stats.criticalHitChance, 9 + 8);
+  assert.equal(sheet.stats.criticalHitDamage, 18);
+});
+
 test("skill tier does not widen on prototype items", function () {
   const range = engine.rangeFor(catalog, "Skill Tier", "gear-core", "");
   assert.equal(range.max, 1);
@@ -276,7 +290,7 @@ test("public loadout keeps the fields the build page reads", function () {
   assert.equal(pub.primary.attributes[0].name, "Damage to TOC");
   assert.equal(pub.mask.brand, "Eclipse Protocol");
   assert.equal(pub.mask.prototype, true);
-  assert.equal(pub.mask.guaranteed, "Status Effects");
+  assert.equal(pub.mask.attributes[0].maxed, true);
   assert.equal(pub.specialization.name, "Survivalist");
   assert.equal(pub.secondary.talent, "Cover Shooter");
   assert.equal(pub.secondary.rarity, "exotic");

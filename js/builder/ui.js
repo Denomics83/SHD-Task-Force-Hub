@@ -126,22 +126,29 @@
         "</div>";
     }
 
-    function slider(label, value, lim, bind, index, locked) {
+    function atMax(value, lim) {
+      return lim && lim.max != null && Math.abs(num(value) - num(lim.max)) < 0.001;
+    }
+
+    function slider(label, value, lim, bind, index, locked, maxed) {
       var max = lim.max == null ? Math.max(num(value), 1) : lim.max;
       var min = lim.min || 0;
       var current = value === "" || value == null ? min : num(value);
       var step = stepFor(max);
-      var flag = "";
-      if (lim.proto) {
-        var checked = key(state[selected].guaranteed) === key(label) ? " checked" : "";
-        flag = '<label class="bb-flag"><input type="radio" name="bb-guaranteed" data-guarantee="' + esc(label) + '"' + checked + (locked ? " disabled" : "") + "> Guaranteed max</label>";
-      }
+      var on = !!(lim.proto && (maxed || atMax(current, lim)));
+      var maxBtn = lim.proto
+        ? '<button type="button" class="bb-max' + (on ? " is-on" : "") + '" data-max="' + bind + '"' +
+          (index == null ? "" : ' data-index="' + index + '"') + (locked ? " disabled" : "") +
+          ' aria-pressed="' + (on ? "true" : "false") + '">MAX</button>'
+        : "";
       return '<div class="bb-slide">' +
         "<span><em>" + esc(label) + "</em><strong data-readout>" + esc(format(current, lim.unit)) + "</strong></span>" +
+        '<div class="bb-slide-row">' +
         '<input type="range" min="' + min + '" max="' + max + '" step="' + step + '" value="' + current + '" data-bind="' + bind + '"' +
         (index == null ? "" : ' data-index="' + index + '"') + (locked ? " disabled" : "") + ">" +
+        maxBtn + "</div>" +
         (lim.known ? "" : '<small>No sourced max. The typed value is still counted.</small>') +
-        flag + "</div>";
+        "</div>";
     }
 
     function key(value) {
@@ -221,11 +228,11 @@
       return head(item, "Choose weapon") +
         toggle(item) +
         expertiseField(item) +
-        (item.core ? slider(item.core, item.coreValue, lim1, "core") : '<p class="lede">Pick a weapon to set its cores.</p>') +
-        (lim2 ? slider(item.core2, item.core2Value, lim2, "core2") : "") +
+        (item.core ? slider(item.core, item.coreValue, lim1, "core", null, false, item.coreMax) : '<p class="lede">Pick a weapon to set its cores.</p>') +
+        (lim2 ? slider(item.core2, item.core2Value, lim2, "core2", null, false, item.core2Max) : "") +
         "<h4>Minor attribute</h4>" +
         '<label>Stat <select data-minor="0"' + (minor.locked ? " disabled" : "") + ">" + optionHTML(catalog.weaponMinors, minor.name) + "</select></label>" +
-        (minor.name ? slider(minor.name, minor.value, limA, "attr", 0, minor.locked) : "") +
+        (minor.name ? slider(minor.name, minor.value, limA, "attr", 0, minor.locked, minor.maxed) : "") +
         "<h4>Mods</h4>" + mods +
         '<label>Talent <select data-field="talent"' + (talentLocked ? " disabled" : "") + ">" + optionHTML(catalog.talents.weapon, item.talent) + "</select></label>" +
         notesHTML(notes);
@@ -240,7 +247,7 @@
         var lim = limits(attr.name, "gear-minor");
         return '<label>Attribute ' + (index + 1) +
           '<select data-minor="' + index + '"' + (attr.locked ? " disabled" : "") + ">" + optionHTML(catalog.gearMinors, attr.name) + "</select></label>" +
-          (attr.name ? slider(attr.name, attr.value, lim, "attr", index, attr.locked) : "");
+          (attr.name ? slider(attr.name, attr.value, lim, "attr", index, attr.locked, attr.maxed) : "");
       }).join("");
       var mod = "";
       if (layout.mod) {
@@ -257,7 +264,7 @@
         (layout.prototype === false ? '<p class="lede">Exotics cannot be Prototype.</p>' : toggle(item)) +
         expertiseField(item) +
         '<label>Core <select data-field="core"' + (item.coreLocked || layout.coreLocked ? " disabled" : "") + ">" + optionHTML(catalog.gearCores, item.core) + "</select></label>" +
-        (item.core ? slider(item.core, item.coreValue, coreLim, "core") : "") +
+        (item.core ? slider(item.core, item.coreValue, coreLim, "core", null, false, item.coreMax) : "") +
         "<h4>Minor attributes</h4>" + attrs + mod + talent +
         notesHTML(ShadeCatalog.fixedNotes(catalog, item));
     }
@@ -313,8 +320,7 @@
 
     function toggle(item) {
       if (item.rarity === "exotic") return "";
-      return '<label class="bb-check"><input type="checkbox" data-field="prototype"' + (item.prototype ? " checked" : "") + "> Prototype</label>" +
-        (item.prototype ? '<p class="lede">Old max is the new minimum. New max is the catalog prototype cap, otherwise 1.5x. One attribute can be the guaranteed max.</p>' : "");
+      return '<label class="bb-switch"><span>Prototype</span><input type="checkbox" data-field="prototype"' + (item.prototype ? " checked" : "") + '><i aria-hidden="true"></i></label>';
     }
 
     function expertiseField(item) {
@@ -419,35 +425,28 @@
 
     function setCoreValue(item, field, stat, role) {
       var lim = limits(stat, role);
-      item[field] = lim.max == null ? item[field] : lim.max;
-      if (item.prototype && lim.proto && !item.guaranteed) {
-        item.guaranteed = stat;
+      if (lim.max == null) return;
+      if (item.prototype && lim.proto) {
+        item[field] = lim.min;
+        if (field === "coreValue") item.coreMax = false;
+        if (field === "core2Value") item.core2Max = false;
+      } else {
         item[field] = lim.max;
       }
     }
 
-    function normalizePrototype(item, kind) {
-      if (!item.prototype) {
-        item.guaranteed = "";
-        return;
-      }
-      var pairs = [];
-      if (item.core) pairs.push({ name: item.core, field: "coreValue", role: kind === "weapon" ? "weapon-core" : "gear-core" });
-      if (kind === "weapon" && item.core2) pairs.push({ name: item.core2, field: "core2Value", role: "weapon-core" });
-      (item.attributes || []).forEach(function (attr, index) {
-        if (attr.name) pairs.push({ name: attr.name, index: index, role: kind === "weapon" ? "weapon-minor" : "gear-minor" });
-      });
-      var eligible = pairs.filter(function (pair) {
-        return ShadeEngine.statId(pair.name) !== "skillTier" && limits(pair.name, pair.role).proto;
-      });
-      if (!item.guaranteed && eligible[0]) item.guaranteed = eligible[0].name;
-      pairs.forEach(function (pair) {
-        var lim = limits(pair.name, pair.role);
-        if (!lim.proto) return;
-        var next = key(item.guaranteed) === key(pair.name) ? lim.max : lim.min;
-        if (pair.field) item[pair.field] = next;
-        else item.attributes[pair.index].value = next;
-      });
+    function flagMax(item, bind, index, on) {
+      if (bind === "core") item.coreMax = on;
+      else if (bind === "core2") item.core2Max = on;
+      else if (bind === "attr" && item.attributes[index]) item.attributes[index].maxed = on;
+      if (!on) item.guaranteed = "";
+    }
+
+    function writeStat(item, bind, index, value, on) {
+      if (bind === "core") item.coreValue = value;
+      else if (bind === "core2") item.core2Value = value;
+      else if (bind === "attr" && item.attributes[index]) item.attributes[index].value = value;
+      flagMax(item, bind, index, on);
     }
 
     function applyField(target) {
@@ -455,7 +454,7 @@
       var field = target.getAttribute("data-field");
       if (field === "prototype") {
         item.prototype = target.checked && item.rarity !== "exotic";
-        normalizePrototype(item, WEAPONS.indexOf(selected) >= 0 ? "weapon" : "gear");
+        if (item.prototype) item.expertise = (catalog.armor && catalog.armor.expertiseMax) || 30;
         return "editor";
       }
       if (field === "expertise") {
@@ -485,8 +484,8 @@
         var role = WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor";
         var limMinor = limits(row.name, role);
         row.value = limMinor.max == null ? 0 : (item.prototype && limMinor.proto ? limMinor.min : limMinor.max);
+        row.maxed = false;
         item.attributes[Number(minor)] = row;
-        if (item.prototype) normalizePrototype(item, WEAPONS.indexOf(selected) >= 0 ? "weapon" : "gear");
         return "editor";
       }
       var modSlot = target.getAttribute("data-mod-slot");
@@ -503,11 +502,28 @@
       var item = state[selected];
       var bind = target.getAttribute("data-bind");
       var value = num(target.value);
-      if (bind === "core") item.coreValue = value;
-      else if (bind === "core2") item.core2Value = value;
-      else if (bind === "mod") item.modValue = value;
-      else if (bind === "attr") item.attributes[Number(target.getAttribute("data-index"))].value = value;
-      var readout = target.parentElement && target.parentElement.querySelector("[data-readout]");
+      var index = target.getAttribute("data-index");
+      if (bind === "mod") item.modValue = value;
+      else {
+        var name = bind === "core" ? item.core : bind === "core2" ? item.core2 : (item.attributes[Number(index)] || {}).name;
+        var role = bind === "attr"
+          ? (WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor")
+          : (WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core");
+        var lim = limits(name, role);
+        writeStat(item, bind, Number(index), value, atMax(value, lim));
+      }
+      var slide = target.closest(".bb-slide");
+      var readout = slide && slide.querySelector("[data-readout]");
+      var maxBtn = slide && slide.querySelector(".bb-max");
+      if (maxBtn && bind !== "mod") {
+        var nameOn = bind === "core" ? item.core : bind === "core2" ? item.core2 : (item.attributes[Number(index)] || {}).name;
+        var roleOn = bind === "attr"
+          ? (WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor")
+          : (WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core");
+        var on = atMax(value, limits(nameOn, roleOn));
+        maxBtn.classList.toggle("is-on", on);
+        maxBtn.setAttribute("aria-pressed", on ? "true" : "false");
+      }
       if (readout) {
         var unit = readout.textContent.indexOf("%") >= 0 || (bind !== "core" || ShadeEngine.statId(item.core) !== "armorFlat") ? "%" : "";
         if (bind === "core" && (item.core === "Armor" || item.core === "Skill Tier")) unit = "";
@@ -816,6 +832,21 @@
     }
 
     host.addEventListener("click", function (e) {
+      var maxBtn = e.target.closest("[data-max]");
+      if (maxBtn && host.contains(maxBtn) && !maxBtn.disabled) {
+        var item = state[selected];
+        var bind = maxBtn.getAttribute("data-max");
+        var index = Number(maxBtn.getAttribute("data-index"));
+        var name = bind === "core" ? item.core : bind === "core2" ? item.core2 : (item.attributes[index] || {}).name;
+        var role = bind === "attr"
+          ? (WEAPONS.indexOf(selected) >= 0 ? "weapon-minor" : "gear-minor")
+          : (WEAPONS.indexOf(selected) >= 0 ? "weapon-core" : "gear-core");
+        var lim = limits(name, role);
+        var on = maxBtn.classList.contains("is-on");
+        writeStat(item, bind, index, on ? lim.min : lim.max, !on);
+        paint();
+        return;
+      }
       var opener = e.target.closest("[data-mod-open]");
       if (opener && host.contains(opener)) {
         var menu = host.querySelector('[data-mod-menu="' + opener.getAttribute("data-mod-open") + '"]');
@@ -871,14 +902,6 @@
     host.addEventListener("change", function (e) {
       if (e.target.getAttribute("data-mode") != null) {
         state.mode = e.target.value === "restricted" ? "restricted" : "normal";
-        paintStats();
-        return;
-      }
-      var guarantee = e.target.getAttribute("data-guarantee");
-      if (guarantee) {
-        state[selected].guaranteed = guarantee;
-        normalizePrototype(state[selected], WEAPONS.indexOf(selected) >= 0 ? "weapon" : "gear");
-        paintEditor();
         paintStats();
         return;
       }

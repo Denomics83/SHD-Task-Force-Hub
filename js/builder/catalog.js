@@ -130,7 +130,7 @@
     return {
       name: "", catalogId: "", type: "", rarity: "", talent: "", talentLocked: false,
       prototype: false, expertise: 0, guaranteed: "",
-      core: "", coreValue: "", core2: "", core2Value: "",
+      core: "", coreValue: "", coreMax: false, core2: "", core2Value: "", core2Max: false,
       attributes: [], mods: []
     };
   }
@@ -139,7 +139,7 @@
     return {
       name: "", catalogId: "", brand: "", rarity: "", talent: "", talentLocked: false,
       prototype: false, expertise: 0, guaranteed: "",
-      core: "", coreValue: "", coreLocked: false,
+      core: "", coreValue: "", coreMax: false, coreLocked: false,
       attributes: [], mod: "", modValue: ""
     };
   }
@@ -175,6 +175,20 @@
     return JSON.parse(JSON.stringify(value || {}));
   }
 
+  function sameName(a, b) {
+    return String(a || "").toLowerCase().replace(/\s+/g, " ").trim() === String(b || "").toLowerCase().replace(/\s+/g, " ").trim() && String(a || "").trim() !== "";
+  }
+
+  function applyLegacyMax(item) {
+    if (!item || !item.guaranteed) return;
+    if (sameName(item.core, item.guaranteed)) item.coreMax = true;
+    if (sameName(item.core2, item.guaranteed)) item.core2Max = true;
+    if (sameName(item.mod, item.guaranteed)) item.modMax = true;
+    (item.attributes || []).forEach(function (attr) {
+      if (sameName(attr.name, item.guaranteed)) attr.maxed = true;
+    });
+  }
+
   function fromSaved(record, catalog) {
     var next = blank(catalog && catalog.watch);
     var load = (record && record.loadout) || record || {};
@@ -192,6 +206,7 @@
       if (load[key]) next[key] = Object.assign(emptyWeapon(), copy(load[key]));
       if (!Array.isArray(next[key].attributes)) next[key].attributes = [];
       if (!Array.isArray(next[key].mods)) next[key].mods = [];
+      applyLegacyMax(next[key]);
     });
     GEAR.forEach(function (key) {
       if (load[key]) next[key] = Object.assign(emptyGear(), copy(load[key]));
@@ -200,6 +215,7 @@
         next[key].modValue = next[key].mod.value || next[key].modValue || "";
         next[key].mod = next[key].mod.stat || next[key].mod.name || "";
       }
+      applyLegacyMax(next[key]);
     });
     ["skill1", "skill2"].forEach(function (key) {
       if (load[key]) next[key] = Object.assign(emptySkill(), copy(load[key]));
@@ -228,10 +244,16 @@
         guaranteed: item.guaranteed || "",
         core: item.core || "",
         coreValue: item.coreValue === "" || item.coreValue == null ? "" : Number(item.coreValue),
+        coreMax: !!item.coreMax,
         core2: item.core2 || "",
         core2Value: item.core2Value === "" || item.core2Value == null ? "" : Number(item.core2Value),
+        core2Max: !!item.core2Max,
         attributes: (item.attributes || []).map(function (attr) {
-          return { name: attr.name || "", value: attr.value === "" || attr.value == null ? "" : Number(attr.value) };
+          return {
+            name: attr.name || "",
+            value: attr.value === "" || attr.value == null ? "" : Number(attr.value),
+            maxed: !!attr.maxed
+          };
         }),
         mods: (item.mods || []).map(function (mod) {
           return {
@@ -265,8 +287,13 @@
         guaranteed: item.guaranteed || "",
         core: item.core || "",
         coreValue: item.coreValue === "" || item.coreValue == null ? "" : Number(item.coreValue),
+        coreMax: !!item.coreMax,
         attributes: (item.attributes || []).map(function (attr) {
-          return { name: attr.name || "", value: attr.value === "" || attr.value == null ? "" : Number(attr.value) };
+          return {
+            name: attr.name || "",
+            value: attr.value === "" || attr.value == null ? "" : Number(attr.value),
+            maxed: !!attr.maxed
+          };
         }),
         mod: item.mod || "",
         modValue: item.modValue === "" || item.modValue == null ? "" : Number(item.modValue)
