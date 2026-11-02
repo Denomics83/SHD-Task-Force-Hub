@@ -8,16 +8,21 @@
   var ALLOWED = { announcement: 1, maintenance: 1, patch: 1, reminder: 1 };
   var byId = {};
 
-  var MEGAPHONE =
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M4 10h3.2L13 16.2V7.8L7.2 10H4z"/><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" d="M16 9.2a3.2 3.2 0 0 1 0 5.6"/></svg>';
+  var BELL =
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="currentColor" d="M12 3.2a1 1 0 0 1 1 .95V4.9a5.5 5.5 0 0 1 4.4 5.4v2.7l1.2 2a.95.95 0 0 1-.8 1.45H6.2a.95.95 0 0 1-.8-1.45l1.2-2V10.3A5.5 5.5 0 0 1 11 4.9v-.75a1 1 0 0 1 1-.95z"/><path fill="currentColor" d="M9.35 17.7a2.65 2.65 0 0 0 5.3 0h-5.3z"/></svg>';
   var GLYPH = {
-    announcement: MEGAPHONE,
-    reminder: MEGAPHONE,
+    announcement: BELL,
+    reminder: BELL,
     maintenance:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" d="M14.2 6.2 17.8 9.8l2.2-2.2a4.6 4.6 0 0 1-6.2 6.1L7.2 20.3a1.6 1.6 0 0 1-2.3-2.3l6.6-6.6a4.6 4.6 0 0 1 6.1-6.2z"/></svg>',
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linejoin="round" d="M14.2 6.2 17.8 9.8l2.2-2.2a4.6 4.6 0 0 1-6.2 6.1L7.2 20.3a1.6 1.6 0 0 1-2.3-2.3l6.6-6.6a4.6 4.6 0 0 1 6.1-6.2z"/></svg>',
     patch:
-      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>'
+      '<svg viewBox="0 0 24 24" aria-hidden="true"><path fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" d="M12 4.5v8M8.5 9.2 12 12.7l3.5-3.5M6 18.5h12"/></svg>'
   };
+
+  function iconHTML(type) {
+    var face = iconType(type);
+    return '<div class="upd-ico ' + face + '" aria-hidden="true">' + (GLYPH[face] || "") + "</div>";
+  }
 
   function iconType(type) {
     return type === "reminder" ? "announcement" : type;
@@ -103,7 +108,6 @@
       .map(function (item) {
         var desc = item.summary || item.body || "";
         var when = item.date ? shortDate(item.date) : "";
-        var face = iconType(item.type);
         return (
           '<a class="upd-entry" href="#' + STF.esc(item.id) + '">' +
           "<div>" +
@@ -111,7 +115,7 @@
           (desc ? '<p class="upd-desc">' + STF.esc(desc) + "</p>" : "") +
           (when ? '<time class="upd-stamp" datetime="' + STF.esc(item.date) + '">' + STF.esc(when) + "</time>" : "") +
           "</div>" +
-          '<div class="upd-ico ' + face + '" aria-hidden="true">' + (GLYPH[face] || "") + "</div>" +
+          iconHTML(item.type) +
           "</a>"
         );
       })
@@ -136,7 +140,8 @@
       ? '<p class="upd-source"><a href="' + STF.esc(item.source) + '" target="_blank" rel="noopener noreferrer">' + sourceLabel + "</a></p>"
       : "";
     detail.innerHTML =
-      "<h1>" + STF.esc(item.title) + "</h1>" +
+      '<div class="upd-detail-head">' + iconHTML(item.type) +
+      "<h1>" + STF.esc(item.title) + "</h1></div>" +
       (summary ? '<p class="upd-summary">' + STF.esc(summary) + "</p>" : "") +
       (posted ? '<p class="upd-posted">' + STF.esc(posted) + "</p>" : "") +
       pill +

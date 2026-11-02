@@ -725,14 +725,12 @@ a.upd-entry:hover { text-decoration: none; color: inherit; border-color: rgba(25
   margin-top: 18px; font-size: .72rem; color: #6c7380; line-height: 1.4;
 }
 .upd-ico {
-  width: 54px; height: 54px; border-radius: 12px;
+  width: 46px; height: 46px; border-radius: 10px;
   justify-self: end; align-self: center;
   display: grid; place-items: center; flex-shrink: 0;
+  background: var(--orange); color: #fff; border: 0;
 }
-.upd-ico svg { width: 27px; height: 27px; display: block; }
-.upd-ico.announcement { background: #dc2626; }
-.upd-ico.maintenance { background: #ff7f00; }
-.upd-ico.patch { background: #3b82f6; }
+.upd-ico svg { width: 22px; height: 22px; display: block; }
 
 .loot-week { display: grid; gap: 8px; }
 .loot-week-row {
@@ -2867,11 +2865,17 @@ body.page-events.is-event-detail .event-detail { padding-top: 8px; }
   text-transform: uppercase;
   font-size: .95rem;
 }
+.upd-detail-head {
+  display: flex; align-items: center; gap: 12px; margin: 4px 0 8px;
+}
+.upd-detail-head h1 { margin: 0; min-width: 0; }
+.upd-detail-head .upd-ico { width: 42px; height: 42px; }
 .upd-ico {
   width: 46px; height: 46px;
-  border-radius: 50% !important;
-  border: 1px solid currentColor;
-  background: transparent !important;
+  border-radius: 10px !important;
+  border: 0;
+  background: var(--orange) !important;
+  color: #fff;
 }
 .upd-thumb {
   width: 56px; height: 42px; object-fit: cover; display: block;
@@ -2881,9 +2885,9 @@ body.page-events.is-event-detail .event-detail { padding-top: 8px; }
 .upd-source { margin: 16px 0 0; }
 .upd-source a { color: var(--orange); font-weight: 700; }
 .upd-ico.announcement,
-.upd-ico.reminder { color: #e23b3b; }
-.upd-ico.maintenance { color: var(--orange); }
-.upd-ico.patch { color: #3b82f6; }
+.upd-ico.reminder,
+.upd-ico.maintenance,
+.upd-ico.patch { color: #fff; background: var(--orange) !important; }
 .upd-ico svg { width: 22px; height: 22px; }
 .upd-pill {
   border-radius: 0; background: transparent; color: #d5d8de;
