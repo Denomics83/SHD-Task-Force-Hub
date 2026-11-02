@@ -225,6 +225,8 @@
       name: tileName,
       detail: detail,
       logo: logo,
+      whiteLogo: isWeapon && filled,
+      slot: spec.key,
       pips: pips,
       talents: talents,
       augments: augs,

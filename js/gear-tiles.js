@@ -9,13 +9,13 @@
     gloves: "assets/icons/slots/gloves.svg",
     holster: "assets/icons/slots/holster.svg",
     kneepads: "assets/icons/slots/kneepads.svg",
-    AR: "assets/icons/slots/ar.svg",
-    SMG: "assets/icons/slots/smg.svg",
-    LMG: "assets/icons/slots/lmg.svg",
-    Rifle: "assets/icons/slots/rifle.svg",
-    MMR: "assets/icons/slots/mmr.svg",
-    Shotgun: "assets/icons/slots/shotgun.svg",
-    Pistol: "assets/icons/slots/pistol.svg"
+    AR: "assets/icons/weapons/ar.png",
+    SMG: "assets/icons/weapons/smg.png",
+    LMG: "assets/icons/weapons/lmg.png",
+    Rifle: "assets/icons/weapons/rifle.png",
+    MMR: "assets/icons/weapons/mmr.png",
+    Shotgun: "assets/icons/weapons/shotgun.png",
+    Pistol: "assets/icons/weapons/pistol.png"
   };
   var GENERIC_TALENT = "assets/icons/talents/generic.svg";
   var GENERIC_MOD = "assets/icons/mods/generic.svg";
@@ -37,6 +37,28 @@
     if (/damage|critical|headshot|reload|accuracy|stability|ammo|handling|rate of fire|weapon|magazine/.test(text)) return "off";
     if (/armor|health|hazard|protection|regen|bleed|burn|ensnare|disrupt|shock|blind|disorient/.test(text)) return "def";
     return "off";
+  };
+
+  var SLOT_LABEL = {
+    mask: "Mask",
+    backpack: "Backpack",
+    chest: "Chest",
+    gloves: "Gloves",
+    holster: "Holster",
+    kneepads: "Kneepads",
+    primary: "Primary Weapon",
+    secondary: "Secondary Weapon",
+    sidearm: "Sidearm",
+    signature: "Specialization",
+    specialization: "Specialization",
+    watch: "Watch",
+    skill1: "Skill",
+    skill2: "Skill",
+    grenade: "Grenade"
+  };
+
+  STF.slotLabel = function (key) {
+    return SLOT_LABEL[key] || "";
   };
 
   function ghostFor(slot, type) {
@@ -86,8 +108,11 @@
     }).join("");
     var exp = opts.expertise == null || opts.expertise === "" ? "" : '<b class="inv-exp">' + esc(opts.expertise) + "</b>";
     var detail = opts.detail ? '<em class="inv-detail">' + esc(opts.detail) + "</em>" : "";
-    var logo = opts.logo ? mark(opts.logo, "inv-logo" + (opts.nativeLogo ? " is-native" : "")) : "";
+    var logoClass = "inv-logo" + (opts.whiteLogo ? " is-weapon" : "") + (opts.nativeLogo ? " is-native" : "");
+    var logo = opts.logo ? mark(opts.logo, logoClass) : "";
+    var slot = opts.slot ? '<span class="inv-slot">' + esc(STF.slotLabel(opts.slot) || opts.slot) + "</span>" : "";
     return '<div class="inv-tile rarity-' + esc(rarity) + (logo ? "" : " no-logo") + '">' +
+      slot +
       logo +
       '<span class="inv-copy"><strong>' + esc(name) + "</strong>" +
       detail +

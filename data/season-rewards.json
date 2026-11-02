@@ -1,0 +1,82 @@
+{
+  "note": "Only items named by the cited posts are listed. Per-tier season numbers and Journey item drops were not published in these sources.",
+  "sections": [
+    {
+      "title": "Free track",
+      "items": [
+        "3 Arm Patches",
+        "Red Horizon Drone Skill VFX",
+        "Beaufort Outfit",
+        "Iron Will Exotic Chest",
+        "Fafnir Exotic Weapon",
+        "Drag On Universal Weapon Skin",
+        "2 Named Weapons",
+        "4 Named Gear Items",
+        "2 Exotic Caches",
+        "18 Red Horizon Caches",
+        "3 Named Item Caches"
+      ]
+    },
+    {
+      "title": "Premium track",
+      "items": [
+        "2 Prestige Arm Patches",
+        "Red Horizon Seeker Mine Skill VFX",
+        "Richardson Outfit",
+        "Kernwell Outfit",
+        "1 extra copy of the Fafnir Exotic Weapon",
+        "Hot-Rigged Exotic Weapon Skin",
+        "10 Gear Dyes",
+        "10 Universal Weapon Skins",
+        "3 Exotic Caches",
+        "9 Optimization Material Caches",
+        "9 Crafting Material Caches",
+        "400 Premium Credits"
+      ]
+    },
+    {
+      "title": "Season gear named by Ubisoft",
+      "items": [
+        "Ember Engine Gear Set",
+        "Fafnir Exotic Shotgun, talent Dragon's Breath",
+        "Iron Will Exotic Chest, talent Resolved",
+        "Trick Shot named Imminence Armaments chest, talent Perfect Reassigned",
+        "Rushdown named Richter & Kaiser GmbH chest, talent Tag Team",
+        "Melon Baller named Airaldi Holdings backpack, talent Perfect Concussion",
+        "Keeper named 5.11 Tactical backpack, talent Perfect Protector",
+        "Teapot and Steamer named weapons, talent Perfect Boiling Point"
+      ]
+    },
+    {
+      "title": "Manhunt",
+      "items": [
+        "Loaded for Bear exotic gloves, listed by Ubisoft as the Climax Mission reward and as the climax exclusive in the Red Horizon PTS notes",
+        "Scout rewards are described by the Division wiki as equipment, XP, materials, and audio collectibles. This season's per-scout item list is not in the Ubisoft Red Horizon post"
+      ]
+    },
+    {
+      "title": "Journey",
+      "items": [
+        "No Year 8 Season 3 Journey reward list was published in the Ubisoft Red Horizon post or the Division wiki Manhunt Scouts page"
+      ]
+    }
+  ],
+  "sources": [
+    {
+      "label": "Ubisoft: The Division 2: Red Horizon (26 Aug 2026)",
+      "url": "https://www.ubisoft.com/en-au/game/the-division/the-division-2/news-updates/4mrYiFPIyKpzpoqshDQk80/the-division-2-red-horizon"
+    },
+    {
+      "label": "Ubisoft: Red Horizon PTS patch notes",
+      "url": "https://www.ubisoft.com/en-gb/game/the-division/the-division-2/news-updates/hdUs80E1Fc9nHAhckksLw/red-horizon-pts-patch-notes"
+    },
+    {
+      "label": "Ubisoft News: Red Horizon, Cleaners in Washington D.C.",
+      "url": "https://news.ubisoft.com/en-us/article/6PXPT3FoQS0q8BKXa6dna/the-division-2-red-horizon-cleaners-in-washington-dc-crossplay-update-dark-zone-news-and-more"
+    },
+    {
+      "label": "The Division Wiki: Manhunt Scouts",
+      "url": "https://thedivision.fandom.com/wiki/Manhunt_Scouts"
+    }
+  ]
+}

@@ -10,7 +10,8 @@
   var panels = {
     manhunts: document.getElementById("panel-manhunts"),
     journey: document.getElementById("panel-journey"),
-    modifiers: document.getElementById("panel-modifiers")
+    modifiers: document.getElementById("panel-modifiers"),
+    rewards: document.getElementById("panel-rewards")
   };
   var themeEl = document.getElementById("season-theme");
 
@@ -277,6 +278,23 @@
     );
   }
 
+  function rewardsHTML(doc) {
+    doc = doc || {};
+    var sections = (doc.sections || []).map(function (section) {
+      var items = (section.items || []).map(function (item) {
+        return "<li>" + STF.esc(item) + "</li>";
+      }).join("");
+      return '<section class="reward-block"><h2 class="mod-label">' + STF.esc(section.title) + "</h2><ul class=\"reward-list\">" + items + "</ul></section>";
+    }).join("");
+    var sources = (doc.sources || []).map(function (src) {
+      return '<li><a href="' + STF.esc(src.url) + '" target="_blank" rel="noopener">' + STF.esc(src.label) + "</a></li>";
+    }).join("");
+    return sections +
+      '<section class="reward-block"><h2 class="mod-label">Sources</h2><ul class="reward-sources">' + sources + "</ul>" +
+      (doc.note ? '<p class="src-line">' + STF.esc(doc.note) + "</p>" : "") +
+      "</section>";
+  }
+
   function modifiersHTML(data) {
     var byName = {};
     (data.passives || []).concat(data.hostiles || []).forEach(function (item) { byName[item.name] = item; });
@@ -400,7 +418,8 @@
       STF.fetchJSON("data/season.json"),
       STF.fetchJSON("data/manhunt.json"),
       STF.fetchJSON("data/modifiers.json"),
-      STF.fetchJSON("data/journey.json").catch(function () { return { seasons: {} }; })
+      STF.fetchJSON("data/journey.json").catch(function () { return { seasons: {} }; }),
+      STF.fetchJSON("data/season-rewards.json").catch(function () { return { sections: [] }; })
     ]);
     var season = loaded[0];
     var manhunt = loaded[1];
@@ -442,6 +461,8 @@
       panels.modifiers.innerHTML = modifiersHTML(modifiers);
       bindModifiers(panels.modifiers);
     }
+
+    if (panels.rewards) panels.rewards.innerHTML = rewardsHTML(loaded[4]);
   } catch (e) {
     if (summary) summary.textContent = "Could not load season data.";
     console.error(e);

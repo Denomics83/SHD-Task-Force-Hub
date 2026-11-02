@@ -217,6 +217,8 @@
             rarity: rarity,
             name: name,
             logo: logo,
+            whiteLogo: filled && isWeapon,
+            slot: key,
             pips: pips,
             talents: talents,
             augments: augs,
@@ -232,7 +234,8 @@
           STF.invTile({
             rarity: item.name ? "gold" : "empty",
             name: name,
-            logo: icon
+            logo: icon,
+            slot: key
           }) + "</button>";
       }
       var specName = (state.specialization && state.specialization.name) || "";
@@ -246,12 +249,13 @@
           rarity: specName ? "spec" : "empty",
           name: specName || "Specialization",
           logo: specName && specIcon(specName),
-          nativeLogo: true
+          slot: "specialization"
         }) + "</button>" +
         '<button type="button" class="bb-tile is-inv' + (selected === "watch" ? " is-on" : "") + '" data-slot="watch">' +
         STF.invTile({
           rarity: "gold",
           name: "SHD Watch",
+          slot: "watch",
           detail: watchOn ? "MAX" : ((state.watch && state.watch.level != null && state.watch.level !== "") ? String(state.watch.level) : "")
         }) + "</button>" +
         "</div>" +
@@ -266,7 +270,7 @@
           rarity: grenadeName ? "gold" : "empty",
           name: grenadeName || "Grenade",
           logo: grenadeIcon,
-          nativeLogo: true
+          slot: "grenade"
         }) + "</button>" +
         "</div>";
     }

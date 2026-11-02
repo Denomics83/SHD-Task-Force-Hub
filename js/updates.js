@@ -104,9 +104,6 @@
         var desc = item.summary || item.body || "";
         var when = item.date ? shortDate(item.date) : "";
         var face = iconType(item.type);
-        var thumb = item.image
-          ? '<img class="upd-thumb" src="' + STF.esc(item.image) + '" alt="">'
-          : "";
         return (
           '<a class="upd-entry" href="#' + STF.esc(item.id) + '">' +
           "<div>" +
@@ -114,7 +111,6 @@
           (desc ? '<p class="upd-desc">' + STF.esc(desc) + "</p>" : "") +
           (when ? '<time class="upd-stamp" datetime="' + STF.esc(item.date) + '">' + STF.esc(when) + "</time>" : "") +
           "</div>" +
-          thumb +
           '<div class="upd-ico ' + face + '" aria-hidden="true">' + (GLYPH[face] || "") + "</div>" +
           "</a>"
         );
@@ -135,8 +131,9 @@
       ? '<div class="rich-html">' + STF.safeHTML(item.bodyHtml) + "</div>" +
         (item.patchHtml ? '<h2 class="upd-h is-accent">Patch notes</h2><div class="rich-html">' + STF.safeHTML(item.patchHtml) + "</div>" : "")
       : (item.sections || []).map(sectionHTML).join("");
+    var sourceLabel = /ubisoft\.com/i.test(item.source || "") ? "Source: Ubisoft" : "Source";
     var source = item.source
-      ? '<p class="upd-source"><a href="' + STF.esc(item.source) + '" target="_blank" rel="noopener noreferrer">Source: Ubisoft</a></p>'
+      ? '<p class="upd-source"><a href="' + STF.esc(item.source) + '" target="_blank" rel="noopener noreferrer">' + sourceLabel + "</a></p>"
       : "";
     detail.innerHTML =
       "<h1>" + STF.esc(item.title) + "</h1>" +

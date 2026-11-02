@@ -39,6 +39,7 @@
     if (/season-hero|raid-hero/.test(value)) return "";
     if (/^assets\/[a-z0-9._/-]+$/i.test(value)) return value;
     if (/^https:\/\/egojdxwpfjfwihykhnik\.supabase\.co\/storage\/v1\/object\/public\/media\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
+    if (/^https:\/\/staticctf\.ubisoft\.com\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
     return "";
   }
 
@@ -605,8 +606,11 @@
         });
         var emblem = slide.emblem || EMBLEMS.raid;
         var fullBleed = /^assets\/event-cards\//.test(emblem) || /^https:\/\//.test(emblem);
+        var artCrop = "";
+        if (/red[-_ ]moon/i.test(emblem)) artCrop = "height:168%;top:0;bottom:auto;object-position:center top";
+        else if (/echoesofcentralpark/i.test(emblem)) artCrop = "height:168%;top:auto;bottom:0;object-position:center bottom";
         var artOpen = fullBleed
-          ? '<div class="tl-art has-card"><img class="tl-card-art" src="' + STF.esc(emblem) + '" alt="">'
+          ? '<div class="tl-art has-card"><img class="tl-card-art" src="' + STF.esc(emblem) + '"' + (artCrop ? ' style="' + artCrop + '"' : "") + ' alt="">'
           : '<div class="tl-art">';
         var inner =
           artOpen +

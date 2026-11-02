@@ -8922,7 +8922,7 @@
       "slug": "talent-challenger",
       "name": "Challenger",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/provocator-challenger.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8940,7 +8940,7 @@
       "slug": "talent-chemical-agent",
       "name": "Chemical Agent",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/the-catalyst-chemical-agent.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9498,7 +9498,7 @@
       "slug": "talent-busy-little-bee",
       "name": "Busy Little Bee",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/busy-little-bee-busy-little-bee.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9543,7 +9543,7 @@
       "slug": "talent-cover-shooter",
       "name": "Cover Shooter",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/big-alejandro-cover-shooter.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9750,7 +9750,7 @@
       "slug": "talent-septic-shock",
       "name": "Septic Shock",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/scorpio-septic-shock.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
