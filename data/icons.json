@@ -2,9 +2,9 @@
   "source": "https://prototrack.gg/assets/division2/",
   "fallback": "assets/icons/loot/generic.svg",
   "missing": [
-    "Rogue Agents faction mark \u2014 ProtoTrack has no rogue/rogueagents asset",
+    "Rogue Agents faction mark — ProtoTrack has no rogue/rogueagents asset",
     "Separate mission-type icons (stronghold, invaded, bounty). ProtoTrack uses the faction mark on each mission.",
-    "Dedicated prototype cache crate icon \u2014 ProtoTrack cache cards have no crate image"
+    "Dedicated prototype cache crate icon — ProtoTrack cache cards have no crate image"
   ],
   "icons": [
     {
@@ -1198,7 +1198,7 @@
     },
     {
       "slug": "brand-esk-v-roba-s-r-o",
-      "name": "\u010cesk\u00e1 V\u00fdroba s.r.o.",
+      "name": "Česká Výroba s.r.o.",
       "kind": "brand",
       "file": "assets/icons/brands/ceskavyrobasro.png",
       "proto": "",
@@ -1621,7 +1621,7 @@
     },
     {
       "slug": "named-gear-contractors-gloves-gloves",
-      "name": "Contractor\u2019s Gloves",
+      "name": "Contractor’s Gloves",
       "kind": "named-gear",
       "file": "assets/icons/brands/petrov.png",
       "proto": "",
@@ -1648,7 +1648,7 @@
     },
     {
       "slug": "named-gear-door-kickers-knock-chest",
-      "name": "Door-Kicker\u2019s Knock",
+      "name": "Door-Kicker’s Knock",
       "kind": "named-gear",
       "file": "assets/icons/talents/gear/perfectspark.svg",
       "proto": "",
@@ -1666,7 +1666,7 @@
     },
     {
       "slug": "named-gear-emperors-guard-kneepads",
-      "name": "Emperor\u2019s Guard",
+      "name": "Emperor’s Guard",
       "kind": "named-gear",
       "file": "assets/icons/brands/murakami.png",
       "proto": "",
@@ -1738,7 +1738,7 @@
     },
     {
       "slug": "named-gear-foxs-prayer-kneepads",
-      "name": "Fox\u2019s Prayer",
+      "name": "Fox’s Prayer",
       "kind": "named-gear",
       "file": "assets/icons/brands/overlord.png",
       "proto": "",
@@ -2071,7 +2071,7 @@
     },
     {
       "slug": "named-gear-zero-fs-chest",
-      "name": "Zero F\u2019s",
+      "name": "Zero F’s",
       "kind": "named-gear",
       "file": "assets/icons/talents/gear/unbreakable.svg",
       "proto": "",
@@ -2269,7 +2269,7 @@
     },
     {
       "slug": "named-weapon-cu-lebre",
-      "name": "Cu\u00e9lebre",
+      "name": "Cuélebre",
       "kind": "named-weapon",
       "file": "assets/icons/talents/weapons/perfectjazzhands.svg",
       "proto": "",
@@ -8841,7 +8841,7 @@
       "slug": "talent-ablative-nano-plating",
       "name": "Ablative Nano-Plating",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/tardigrade-armor-system-ablative-nano-plating.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8850,7 +8850,7 @@
       "slug": "talent-abridged",
       "name": "Abridged",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/tinkerer-abridged.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8868,7 +8868,7 @@
       "slug": "talent-alternating-current",
       "name": "Alternating Current",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/waveform-alternating-current.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8886,7 +8886,7 @@
       "slug": "talent-bleeding-edge",
       "name": "Bleeding Edge",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/ridgeway-s-pride-bleeding-edge.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8895,7 +8895,7 @@
       "slug": "talent-bob-and-weave",
       "name": "Bob and Weave",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/nimble-holster-bob-and-weave.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8904,7 +8904,7 @@
       "slug": "talent-bond",
       "name": "Bond",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/beacon-bond.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8949,7 +8949,7 @@
       "slug": "talent-combat-medic",
       "name": "Combat Medic",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/birdie-s-quick-fix-pack-combat-medic.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8967,7 +8967,7 @@
       "slug": "talent-counter",
       "name": "Counter",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/centurion-s-scabbard-counter.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -8994,7 +8994,7 @@
       "slug": "talent-defibrillator",
       "name": "Defibrillator",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/shocker-punch-defibrillator.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9003,7 +9003,7 @@
       "slug": "talent-dragons-glare",
       "name": "Dragon's Glare",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/imperial-dynasty-dragon-s-glare.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9012,7 +9012,7 @@
       "slug": "talent-escape-plan",
       "name": "Escape Plan",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/acosta-s-kneepads-escape-plan.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9075,7 +9075,7 @@
       "slug": "talent-hoarder",
       "name": "Hoarder",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/collector-hoarder.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9093,7 +9093,7 @@
       "slug": "talent-impervious",
       "name": "Impervious",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/nurse-s-kneepads-impervious.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9111,7 +9111,7 @@
       "slug": "talent-iron-grip",
       "name": "Iron Grip",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/rugged-gauntlets-iron-grip.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9120,7 +9120,7 @@
       "slug": "talent-kill-confirmed",
       "name": "Kill Confirmed",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/memento-kill-confirmed.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9174,7 +9174,7 @@
       "slug": "talent-ostracize",
       "name": "Ostracize",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/blacklisters-ostracize.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9183,7 +9183,7 @@
       "slug": "talent-over-the-top",
       "name": "Over the top",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/bloody-knuckles-over-the-top.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9192,7 +9192,7 @@
       "slug": "talent-pack-instincts",
       "name": "Pack Instincts",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/coyote-s-mask-pack-instincts.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9201,7 +9201,7 @@
       "slug": "talent-parkour",
       "name": "Parkour!",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/ninjabike-messenger-kneepads-parkour.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9210,7 +9210,7 @@
       "slug": "talent-quick-draw",
       "name": "Quick Draw",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/dodge-city-gunslinger-s-holster-quick-draw.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9219,7 +9219,7 @@
       "slug": "talent-rebalance",
       "name": "Rebalance",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/harrier-pride-rebalance.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9237,7 +9237,7 @@
       "slug": "talent-resourceful",
       "name": "Resourceful",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/ninjabike-messenger-backpack-resourceful.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9264,7 +9264,7 @@
       "slug": "talent-slotted",
       "name": "Slotted",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/investor-slotted.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9273,7 +9273,7 @@
       "slug": "talent-smoke-screen",
       "name": "Smoke Screen",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/exodus-gloves-smoke-screen.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9282,7 +9282,7 @@
       "slug": "talent-stand-your-ground",
       "name": "Stand Your Ground",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/sawyer-s-kneepads-stand-your-ground.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9336,7 +9336,7 @@
       "slug": "talent-toxic-delivery",
       "name": "Toxic Delivery",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/vile-toxic-delivery.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9345,7 +9345,7 @@
       "slug": "talent-transference-overclock",
       "name": "Transference Overclock",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/btsu-datagloves-transference-overclock.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9354,7 +9354,7 @@
       "slug": "talent-vicious-cycle",
       "name": "Vicious Cycle",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/catharsis-vicious-cycle.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9363,7 +9363,7 @@
       "slug": "talent-weakest-link",
       "name": "Weakest Link",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/overdogs-weakest-link.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9399,7 +9399,7 @@
       "slug": "talent-resolved",
       "name": "Resolved",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/iron-will-resolved.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9408,7 +9408,7 @@
       "slug": "talent-decoy-king",
       "name": "Decoy King",
       "kind": "gear-talent",
-      "file": "assets/icons/loot/generic.svg",
+      "file": "assets/icons/talents/exotic/sarru-decoy-king.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9417,7 +9417,7 @@
       "slug": "talent-actum-est",
       "name": "Actum Est",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/st-elmo-s-engine-actum-est.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9426,7 +9426,7 @@
       "slug": "talent-adaptive-instincts",
       "name": "Adaptive Instincts",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/chameleon-adaptive-instincts.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9435,7 +9435,7 @@
       "slug": "talent-agonizing-bite",
       "name": "Agonizing Bite",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/diamondback-agonizing-bite.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9444,7 +9444,7 @@
       "slug": "talent-ardent",
       "name": "Ardent",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/iron-lung-ardent.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9453,7 +9453,7 @@
       "slug": "talent-autentico",
       "name": "Autentico",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/sheriff-autentico.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9462,7 +9462,7 @@
       "slug": "talent-big-game-hunter",
       "name": "Big Game Hunter",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/the-bighorn-big-game-hunter.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9480,7 +9480,7 @@
       "slug": "talent-breathe-free",
       "name": "Breathe Free",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/lady-death-breathe-free.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9489,7 +9489,7 @@
       "slug": "talent-bullet-hell",
       "name": "Bullet Hell",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/bullet-king-bullet-hell.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9507,7 +9507,7 @@
       "slug": "talent-caduceus",
       "name": "Caduceus",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/caduceus-caduceus.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9516,7 +9516,7 @@
       "slug": "talent-capacitance",
       "name": "Capacitance",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/capacitor-capacitance.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9525,7 +9525,7 @@
       "slug": "talent-capitulate",
       "name": "Capitulate",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/overlord-capitulate.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9534,7 +9534,7 @@
       "slug": "talent-shakedown",
       "name": "Shakedown",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/steel-sons-acr-shakedown.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9552,7 +9552,7 @@
       "slug": "talent-disruptor-rounds",
       "name": "Disruptor Rounds",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/bluescreen-disruptor-rounds.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9561,7 +9561,7 @@
       "slug": "talent-doctor-home",
       "name": "Doctor Home",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/doctor-home-doctor-home.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9579,7 +9579,7 @@
       "slug": "talent-electromagnetic-accelerator",
       "name": "Electromagnetic Accelerator",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/nemesis-electromagnetic-accelerator.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9588,7 +9588,7 @@
       "slug": "talent-faster-than-reloading",
       "name": "Faster Than Reloading",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/whiplash-faster-than-reloading.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9597,7 +9597,7 @@
       "slug": "talent-full-stop",
       "name": "Full Stop",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/dread-edict-full-stop.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9606,7 +9606,7 @@
       "slug": "talent-gangland-hit",
       "name": "Gangland Hit",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/underboss-gangland-hit.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9615,7 +9615,7 @@
       "slug": "talent-geri-and-freki",
       "name": "Geri and Freki",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/the-ravenous-geri-and-freki.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9624,7 +9624,7 @@
       "slug": "talent-high-priority-target",
       "name": "High Priority Target",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/shroud-high-priority-target.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9633,7 +9633,7 @@
       "slug": "talent-in-plain-sight",
       "name": "In Plain Sight",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/mantis-in-plain-sight.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9642,7 +9642,7 @@
       "slug": "talent-incessant-chatter",
       "name": "Incessant Chatter",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/the-chatterbox-incessant-chatter.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9651,7 +9651,7 @@
       "slug": "talent-liberty-or-death",
       "name": "Liberty or Death",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/liberty-liberty-or-death.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9660,7 +9660,7 @@
       "slug": "talent-mosquito-song",
       "name": "Mosquito Song",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/mosquito-mosquito-song.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9669,7 +9669,7 @@
       "slug": "talent-ortiz-assault-interface",
       "name": "Ortiz Assault Interface",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/vindicator-ortiz-assault-interface.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9678,7 +9678,7 @@
       "slug": "talent-pakhan",
       "name": "Pakhan",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/pakhan-pakhan.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9687,7 +9687,7 @@
       "slug": "talent-payment-in-kind",
       "name": "Payment in Kind",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/backfire-payment-in-kind.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9696,7 +9696,7 @@
       "slug": "talent-perturb",
       "name": "Perturb",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/agitator-perturb.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9705,7 +9705,7 @@
       "slug": "talent-plague-of-the-outcasts",
       "name": "Plague of the Outcasts",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/pestilence-plague-of-the-outcasts.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9714,7 +9714,7 @@
       "slug": "talent-regicide",
       "name": "Regicide",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/regulus-regicide.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9723,7 +9723,7 @@
       "slug": "talent-restrained",
       "name": "Restrained",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/tempest-restrained.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9732,7 +9732,7 @@
       "slug": "talent-rule-them-all",
       "name": "Rule Them All",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/ouroboros-rule-them-all.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9759,7 +9759,7 @@
       "slug": "talent-symbiosis",
       "name": "Symbiosis",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/oxpecker-symbiosis.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9768,7 +9768,7 @@
       "slug": "talent-the-trap",
       "name": "The Trap",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/sacrum-imperium-the-trap.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9777,7 +9777,7 @@
       "slug": "talent-transfusion",
       "name": "Transfusion",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/bittersweet-transfusion.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9786,7 +9786,7 @@
       "slug": "talent-unnerve",
       "name": "Unnerve",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/strega-unnerve.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9804,7 +9804,7 @@
       "slug": "talent-dragons-breath",
       "name": "Dragon's Breath",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/fafnir-dragon-s-breath.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9813,7 +9813,7 @@
       "slug": "talent-startling",
       "name": "Startling",
       "kind": "weapon-talent",
-      "file": "assets/icons/weapons/assault-rifle.png",
+      "file": "assets/icons/talents/exotic/vertigo-startling.svg",
       "proto": "",
       "aliases": [],
       "source": "local catalog"
@@ -9847,7 +9847,7 @@
     },
     {
       "slug": "brand-ceska-vyroba-s-r-o",
-      "name": "\u010cesk\u00e1 V\u00fdroba s.r.o.",
+      "name": "Česká Výroba s.r.o.",
       "kind": "brand",
       "file": "assets/icons/brands/ceskavyrobasro.png",
       "proto": "",
