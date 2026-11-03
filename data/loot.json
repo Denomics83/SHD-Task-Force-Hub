@@ -1,11 +1,11 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-02",
-  "weekOf": "2026-10-27",
-  "weekEnd": "2026-11-02",
-  "updated": "2026-11-02T09:09",
-  "note": "Escalation targeted loot for 2026-11-02 (rotation week 2026-10-27 to 2026-11-02, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "lootDate": "2026-11-03",
+  "weekOf": "2026-11-03",
+  "weekEnd": "2026-11-09",
+  "updated": "2026-11-03T08:58",
+  "note": "Escalation targeted loot for 2026-11-03 (rotation week 2026-11-03 to 2026-11-09, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "Coney Island Ballpark",
