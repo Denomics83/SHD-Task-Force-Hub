@@ -1,74 +1,75 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-03",
+  "lootDate": "2026-11-04",
   "weekOf": "2026-11-03",
   "weekEnd": "2026-11-09",
-  "updated": "2026-11-03T08:58",
-  "note": "Escalation targeted loot for 2026-11-03 (rotation week 2026-11-03 to 2026-11-09, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-04T09:00",
+  "note": "Escalation targeted loot for 2026-11-04 (rotation week 2026-11-03 to 2026-11-09, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
-      "mission": "Coney Island Ballpark",
-      "faction": "Black Tusk",
-      "missionIcon": "assets/icons/factions/black-tusk.png",
-      "loot": "Ortiz Exuro",
+      "mission": "The Art Museum",
+      "faction": "Rikers",
+      "missionIcon": "assets/icons/factions/rikers.png",
+      "loot": "Umbra Initiative",
       "kind": "gearset",
-      "slug": "ortiz-exuro",
-      "icon": "assets/icons/gearsets/ortiz-exuro.png"
+      "slug": "umbra-initiative",
+      "icon": "assets/icons/gearsets/umbra-initiative.png"
     },
     {
-      "mission": "Coney Island Amusement Park",
-      "faction": "Black Tusk",
-      "missionIcon": "assets/icons/factions/black-tusk.png",
-      "loot": "Shotgun",
-      "kind": "weapon",
-      "slug": "shotgun",
-      "icon": "assets/icons/weapons/shotgun.png"
-    },
-    {
-      "mission": "ViewPoint Museum",
-      "faction": "True Sons",
-      "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Providence Defense",
-      "kind": "brand",
-      "slug": "providence",
-      "icon": "assets/icons/brands/providence.png"
-    },
-    {
-      "mission": "Capitol Building",
-      "faction": "True Sons",
-      "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Future Initiative",
-      "kind": "gearset",
-      "slug": "future-initiative",
-      "icon": "assets/icons/gearsets/future-initiative.png"
-    },
-    {
-      "mission": "Potomac Event Center",
+      "mission": "Manning National Zoo",
       "faction": "Outcasts",
       "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Ortiz: Reficere",
+      "loot": "Sokolov Concern",
+      "kind": "brand",
+      "slug": "sokolov",
+      "icon": "assets/icons/brands/sokolov.png"
+    },
+    {
+      "mission": "Camp White Oak",
+      "faction": "Black Tusk",
+      "missionIcon": "assets/icons/factions/black-tusk.png",
+      "loot": "Body Armor",
+      "kind": "slot",
+      "slug": "chest",
+      "icon": "assets/icons/caches/chest.png"
+    },
+    {
+      "mission": "The Pentagon",
+      "faction": "Black Tusk",
+      "missionIcon": "assets/icons/factions/black-tusk.png",
+      "loot": "Hunters Fury",
       "kind": "gearset",
-      "slug": "ortiz-reficere",
-      "icon": "assets/icons/gearsets/ortiz-reficere.png"
+      "slug": "hunters-fury",
+      "icon": "assets/icons/gearsets/hunters-fury.png",
+      "priority": true
+    },
+    {
+      "mission": "DARPA Research Labs",
+      "faction": "Black Tusk",
+      "missionIcon": "assets/icons/factions/black-tusk.png",
+      "loot": "Refactor",
+      "kind": "gearset",
+      "slug": "refactor",
+      "icon": "assets/icons/gearsets/refactor.png"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Chest Pieces",
+      "loot": "Masks",
       "kind": "slot",
-      "slug": "chest",
-      "icon": "assets/icons/caches/chest.png"
+      "slug": "mask",
+      "icon": "assets/icons/caches/mask.png"
     },
     {
       "cache": "Prototype Weapon Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "MMRs",
+      "loot": "SMGs",
       "kind": "weapon",
-      "slug": "mmr",
-      "icon": "assets/icons/weapons/mmr.png"
+      "slug": "smg",
+      "icon": "assets/icons/weapons/smg.png"
     }
   ],
   "darkZone": [
