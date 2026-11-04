@@ -442,7 +442,7 @@
 
     var weeks = (manhunt.weeks || []).map(weekHTML).join("");
     var climaxText = manhunt.climax
-      ? [manhunt.climax.title, manhunt.climax.task].filter(Boolean).join(" — ")
+      ? [manhunt.climax.title, manhunt.climax.note, manhunt.climax.task].filter(Boolean).join(" — ")
       : "";
     var climax = climaxText ? '<p class="climax-line">' + STF.esc(climaxText) + "</p>" : "";
 

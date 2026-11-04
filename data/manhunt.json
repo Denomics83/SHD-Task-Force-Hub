@@ -1,7 +1,7 @@
 {
   "season": "Year 8 Season 3 — Red Horizon",
-  "checked": "2026-10-29",
-  "note": "Week-by-week scout tasks. Weeks 9 and 10 were rechecked against October 2026 guides. Earlier weeks come from the 27 Aug 2026 compilation, which warned that Scout 6 onward might be retuned.",
+  "checked": "2026-11-04",
+  "note": "The season was cut from 13 Scouts to 11. Rechecked against Rat Blastards (https://www.ratblastards.com/guides/scout-objectives) and the updated r/thedivision dognuttz post. Scout 11 is the last scout and HVT 3.",
   "weeks": [
     {
       "week": 1,
@@ -66,39 +66,36 @@
     {
       "week": 6,
       "scout": "Scout 6",
-      "confirmed": "may-have-changed",
+      "confirmed": "rat-blastards",
       "tasks": [
         "Complete 1 Rescue Operation.",
         "Kill 5 Named or Elite Cleaners.",
         "Complete Potomac Event Center on any difficulty."
       ],
-      "caveat": "Listed in the 27 Aug compilation. That post said Scout 6 onward might change in later title updates. No October 2026 recap was checked for this week.",
       "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
       "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
     },
     {
       "week": 7,
       "scout": "Scout 7",
-      "confirmed": "may-have-changed",
+      "confirmed": "rat-blastards",
       "tasks": [
         "Capture 2 Control Points in Southwest.",
         "Complete 3 activities in Southwest.",
-        "Complete 1 Supply Drop activity in Southwest."
+        "Complete 1 Resource Convoy activity in Southwest."
       ],
-      "caveat": "Listed in the 27 Aug compilation. That post said Scout 6 onward might change. Not rechecked against an October guide.",
-      "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
-      "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
+      "source": "https://www.ratblastards.com/guides/scout-objectives",
+      "sourceName": "Rat Blastards"
     },
     {
       "week": 8,
       "scout": "Scout 8 — HVT 2",
-      "confirmed": "may-have-changed",
+      "confirmed": "rat-blastards",
       "tasks": [
         "Complete 2 Outcast Propaganda Broadcast activities.",
         "Capture the Haunted House Control Point.",
         "Bounty: The Flensed."
       ],
-      "caveat": "Listed in the 27 Aug compilation. That post said Scout 6 onward might change. Not rechecked against an October guide.",
       "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
       "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
     },
@@ -108,13 +105,12 @@
       "date": "2026-10-20",
       "confirmed": "october-guide",
       "tasks": [
-        "Kill 3 named or elite Black Tusk.",
+        "Kill 3 named or elite Hyenas.",
         "Kill 5 Black Tusk medics.",
         "Capture 2 Control Points from the Hyenas."
       ],
-      "caveat": "The 27 Aug compilation listed the first task as named or elite Hyenas, not Black Tusk. The 20 Oct 2026 guide is the later write-up.",
-      "source": "https://www.sportskeeda.com/mmo/the-division-2-y8s3-red-horizon-week-9-manhunt-guide-scout-9-objectives-solutions",
-      "sourceName": "Sportskeeda, 20 Oct 2026"
+      "source": "https://www.ratblastards.com/guides/scout-objectives",
+      "sourceName": "Rat Blastards"
     },
     {
       "week": 10,
@@ -126,54 +122,30 @@
         "Complete 1 Cleaners Territory Control activity.",
         "Capture 1 Control Point from the Cleaners."
       ],
+      "caveat": "sources say 1 or 3",
       "source": "https://www.destructoid.com/the-division-2-y8s3-red-horizon-week-10-manhunt-scout-10-solutions/",
       "sourceName": "Destructoid, 27 Oct 2026"
     },
     {
       "week": 11,
-      "scout": "Scout 11",
-      "confirmed": "may-have-changed",
+      "scout": "Scout 11 / HVT 3",
+      "date": "2026-11-03",
+      "confirmed": "destructoid",
       "tasks": [
-        "Kill 20 Hyenas in Dark Zone South.",
-        "Complete 1 Warhound Convoy activity.",
-        "Kill 5 True Sons Heavy Weapons."
-      ],
-      "caveat": "Listed in the 27 Aug compilation. That post said Scout 6 onward might change. Not rechecked against an October guide.",
-      "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
-      "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
-    },
-    {
-      "week": 12,
-      "scout": "Scout 12 — HVT 3",
-      "confirmed": "may-have-changed",
-      "tasks": [
-        "Complete 1 Aerial Recon activity.",
+        "Complete 3 Black Tusk Living World activities.",
         "Complete any invaded mission.",
-        "Bounty: Carl."
+        "Bounty: Carl 'Eagle Eye' Higgins (West End)."
       ],
-      "caveat": "Listed in the 27 Aug compilation. That post said Scout 6 onward might change. Not rechecked against an October guide.",
-      "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
-      "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
-    },
-    {
-      "week": 13,
-      "scout": "Scout 13",
-      "confirmed": "may-have-changed",
-      "tasks": [
-        "Capture 3 Control Points in the White House, Downtown East, Downtown West, Constitution Hall, or Federal Triangle.",
-        "Sell 10 gear to the Theater vendor.",
-        "Complete Space Administration HQ on any difficulty."
-      ],
-      "caveat": "Listed in the 27 Aug compilation. That post said Scout 6 onward might change. Not rechecked against an October guide.",
-      "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
-      "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
+      "source": "https://www.destructoid.com/the-division-2-y8s3-red-horizon-week-11-manhunt-hvt-scout-11-solutions/",
+      "sourceName": "Destructoid, 3 Nov 2026"
     }
   ],
   "climax": {
     "title": "Climax mission",
     "task": "Stop the Cleaners operation and kill Bobby Guzmán at Washington National Airport.",
-    "confirmed": "launch-compilation",
-    "source": "https://www.reddit.com/r/thedivision/comments/1vzpngy/spoiler_y8s3_red_horizon_scout_113_solutions/",
-    "sourceName": "r/thedivision, dognuttz, 27 Aug 2026"
+    "note": "Unlocks in week 11.",
+    "confirmed": "destructoid",
+    "source": "https://www.destructoid.com/the-division-2-y8s3-red-horizon-week-11-manhunt-hvt-scout-11-solutions/",
+    "sourceName": "Destructoid, 3 Nov 2026"
   }
 }
