@@ -11,6 +11,9 @@
     "dark-zone-surge",
     "deadeye-overdrive",
     "expertise-surge",
+    "fivefold-season-xp",
+    "golden-bullet",
+    "kenly-college",
     "optimization-surge",
     "proficiency-xp-event",
     "prototype-surge",
@@ -20,6 +23,8 @@
     "retaliation-surge",
     "shd-exposed",
     "shepherd-xp-x3",
+    "sixfold-xp",
+    "triple-xp",
     "vanguard-overdrive",
     "x5-xp-event",
     "dark-hours",
@@ -36,6 +41,11 @@
     "xp-x5": "x5-xp-event",
     "season-xp": "x5-xp-event",
     "season-pass-xp": "x5-xp-event",
+    "fivefold-season-pass-xp": "fivefold-season-xp",
+    "triple-xp": "triple-xp",
+    "sixfold-xp": "sixfold-xp",
+    "golden-bullet-global-event": "golden-bullet",
+    "kenly-college-expedition": "kenly-college",
     "shepherd": "shepherd-xp-x3",
     "shepherd-xp": "shepherd-xp-x3",
     "proficiency": "proficiency-xp-event",
@@ -57,6 +67,11 @@
     [/paradise lost/, "paradise-lost"],
     [/broken rain/, "broken-rain"],
     [/\bconflict\b/, "conflict"],
+    [/triple xp|3x xp/, "triple-xp"],
+    [/sixfold|6x xp/, "sixfold-xp"],
+    [/fivefold|5x season/, "fivefold-season-xp"],
+    [/golden bullet/, "golden-bullet"],
+    [/kenly/, "kenly-college"],
     [/proficiency/, "proficiency-xp-event"],
     [/shepherd/, "shepherd-xp-x3"],
     [/x5|xp event|season xp/, "x5-xp-event"],
@@ -95,6 +110,8 @@
       .map(function (part) {
         if (part === "xp") return "XP";
         if (part === "x5") return "x5";
+        if (part === "3x") return "3X";
+        if (part === "6x") return "6X";
         if (part === "shd") return "SHD";
         return part.charAt(0).toUpperCase() + part.slice(1);
       })
@@ -118,6 +135,11 @@
     "prototype-surge": "Prototype Surge",
     "proficiency-xp-event": "Proficiency XP Event",
     "shepherd-xp-x3": "Shepherd XP ×3",
+    "sixfold-xp": "6X XP",
+    "triple-xp": "3X XP",
+    "fivefold-season-xp": "5X Season Pass XP",
+    "golden-bullet": "Global Event: Golden Bullet",
+    "kenly-college": "Kenly College Expedition",
     "x5-xp-event": "XP Event",
     "dark-zone": "Dark Zone",
     conflict: "Conflict",
