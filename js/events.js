@@ -38,7 +38,7 @@
     var value = String(src || "");
     if (/season-hero|raid-hero/.test(value)) return "";
     if (/^assets\/[a-z0-9._/-]+$/i.test(value)) return value;
-    if (/^https:\/\/egojdxwpfjfwihykhnik\.supabase\.co\/storage\/v1\/object\/public\/media\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
+    if (/^https:\/\/dlsnhcsjdnpfnmfkyrlw\.supabase\.co\/storage\/v1\/object\/public\/media\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
     if (/^https:\/\/staticctf\.ubisoft\.com\/[A-Za-z0-9._~/-]+$/.test(value)) return value;
     return "";
   }

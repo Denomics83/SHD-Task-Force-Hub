@@ -1,8 +1,8 @@
 /* Shade Hub Supabase client. Publishable key is safe in the browser. */
 window.STF = window.STF || {};
 
-STF.SUPABASE_URL = "https://egojdxwpfjfwihykhnik.supabase.co";
-STF.SUPABASE_KEY = "sb_publishable_nDRveyTetGdTCIMCflxtjg_fLdGBYhh";
+STF.SUPABASE_URL = "https://dlsnhcsjdnpfnmfkyrlw.supabase.co";
+STF.SUPABASE_KEY = "sb_publishable_ZTL7O4_6PqWr9E_IslWHAg_H-5ai16Z";
 
 if (window.supabase && window.supabase.createClient) {
   STF.sb = window.supabase.createClient(STF.SUPABASE_URL, STF.SUPABASE_KEY, {
