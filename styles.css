@@ -1171,7 +1171,7 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   padding: 8px 12px 10px;
 }
 .hunter-grid {
-  flex: 1 1 auto;
+  flex: 2 1 0;
   min-height: 0;
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -1179,20 +1179,36 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   gap: 10px;
   padding: 0;
 }
-.hunter-grid .col-title {
+.hunter-grid .col-title,
+.hunter-wide .col-title {
   max-width: 100%;
   padding: 0 8px;
   text-align: center;
   line-height: 1.05;
 }
-.hunter-wide {
-  flex: 0 0 76px;
-  height: 76px;
-  flex-direction: row;
-  gap: 16px;
+.hunter-wide.col-tile {
+  flex: 0.6 1 0;
+  height: auto;
+  min-height: 0;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
 }
-.hunter-wide .col-ring { width: 52px; height: 52px; }
-.hunter-wide .col-ring svg { width: 24px; height: 24px; }
+.hunter-wide .col-ring {
+  width: 64px;
+  height: 64px;
+  min-width: 64px;
+  min-height: 64px;
+  aspect-ratio: 1 / 1;
+  flex: 0 0 64px;
+  box-sizing: border-box;
+}
+.hunter-wide .col-ring svg {
+  width: 28px;
+  height: 28px;
+  max-width: none;
+}
 .hunter-mask-row {
   display: block;
   width: 100%;
