@@ -8,15 +8,26 @@
   <meta name="stf-build" content="cb2b119">
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#0B0D10">
-  <title>Loot — Shade Hub</title>
+  <title>Proto — Shade Hub</title>
   <link rel="icon" href="assets/clan-mark.svg" type="image/svg+xml">
   <link rel="stylesheet" href="styles.css?v=cb2b119">
 </head>
 <body class="page-loot">
   <div id="topbar-root"></div>
 
-  <main class="loot-screen" id="loot-screen" aria-live="polite">
-    <p class="lede">Loading targeted loot…</p>
+  <main class="res-shell">
+    <div class="res-tabs" role="tablist" aria-label="Proto">
+      <button type="button" role="tab" data-tab="loot" aria-selected="true">Loot</button>
+      <button type="button" role="tab" data-tab="mutators" aria-selected="false">Mutators</button>
+    </div>
+    <div id="tab-loot" class="res-panel" role="tabpanel">
+      <div class="loot-screen" id="loot-screen" aria-live="polite">
+        <p class="lede">Loading targeted loot…</p>
+      </div>
+    </div>
+    <div id="tab-mutators" class="res-panel wrap" role="tabpanel" hidden>
+      <div id="mutators-body"><p class="lede">Loading mutators…</p></div>
+    </div>
   </main>
 
   <div id="bottomnav-root"></div>

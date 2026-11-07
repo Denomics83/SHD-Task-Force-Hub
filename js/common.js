@@ -32,7 +32,7 @@ STF.NAV_ICONS = {
   events:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 4.2a7.3 7.3 0 0 0-7.3 7.3c0 1.4.4 2.7 1.1 3.8L4.2 19.8l4.5-1.6A7.3 7.3 0 1 0 12 4.2z"/></svg>',
   loot:
-    '<svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="6.1"/><path d="M12 2.2v3.1M12 18.7v3.1M2.2 12h3.1M18.7 12h3.1"/></svg>',
+    '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3.4 20 8v8l-8 4.6L4 16V8z"/><path d="M12 12.2 20 8M12 12.2 4 8M12 12.2v8.4"/></svg>',
   resources:
     '<svg viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4.5h9.2L19 9.2V19.5H5z"/><path d="M14 4.8V9h4.2"/></svg>',
   chat:
@@ -43,7 +43,7 @@ STF.bottomNavHTML = function (active) {
   var tabs = [
     { id: "updates", href: "index.html", label: "Updates" },
     { id: "events", href: "events.html", label: "Events" },
-    { id: "loot", href: "loot.html", label: "Loot" },
+    { id: "loot", href: "loot.html", label: "Proto" },
     { id: "resources", href: "resources.html?tab=builds", label: "Resources" },
     { id: "chat", href: "chat.html", label: "Chat" }
   ];

@@ -16,6 +16,11 @@
       "title": "Brooklyn"
     },
     {
+      "id": "centralpark",
+      "title": "Central Park",
+      "note": "Echoes of Central Park. Shapeless and Craquelure are night only. Each hunter drops a Nightmare Key."
+    },
+    {
       "id": "mission",
       "title": "Mission & Event Hunters"
     }
@@ -1521,6 +1526,198 @@
         "If everyone in the area dies, the puzzle resets."
       ],
       "youtube": "https://www.youtube.com/watch?v=8FcsSk233V8",
+      "mask_img": ""
+    },
+    {
+      "id": "murder",
+      "name": "Murder",
+      "group": "centralpark",
+      "area": "Central Park, Dakota District and Lincoln Square",
+      "subtitle": "Five laptops",
+      "time": "No night requirement is stated. Sportskeeda and Item Level Gaming describe this puzzle without a clock, and LFCarry lists only Shapeless and Craquelure as night hunters.",
+      "steps": [
+        "Own Echoes of Central Park. Sportskeeda starts in the Dakota District: go through an open door, out a second door, and turn right. The first laptop is under a shed with leaves. Interact with it. Item Level Gaming places this laptop in or just north of the Dakota District and says the later laptops have to be done in order.",
+        "Lincoln Square. A crane is on the road and a pile of boxes is on the right. Climb the boxes and a wooden ramp onto the scaffolding, then turn right to the laptop. From this laptop on, Sportskeeda says stay in the area, hold the objective to 100%, and shoot the drones that spawn.",
+        "Back in the Dakota District, find a doorway with a lamp over it and a poster that reads \"At Night Stay Inside.\" Go through the next door, turn left through the courtyard, and climb boxes onto scaffolding. The laptop is at the end. Hold the objective and clear the drones.",
+        "The next laptop is up a set of stairs and scaffolding, then a rope onto a roof. Turn right. Sportskeeda does not name the district for this one.",
+        "Lincoln Square again. Take a rope from a hook onto a roof, then climb left over the ventilation fans onto a second roof. That is the fifth laptop. Hold the objective and clear the drones.",
+        "Return to the first laptop. Sportskeeda says it now shows Locate target, with a red dot for the hunter.",
+        "Go to the south-east of the map, to the southern Central Park checkpoint, and into the circular arena. A swarm of drones appears and the hunter spawns. Item Level Gaming calls this the South Entrance, near Columbus Circle. The kill drops the Murder mask and one Nightmare Key."
+      ],
+      "headsUp": "DJTICKLE's video chapters name the stops Laptop 1 Dakota District, Laptop 2 Lincoln Center, a return to the first laptop, Laptop 3 west of The Majestic, Laptop 4 south of The Majestic, and Laptop 5 Lincoln Center. That return happens earlier than in the Sportskeeda write-up. No written guide gave map coordinates for these laptops.",
+      "notes": "Drops the mask and one Nightmare Key. All four keys open the cache at The Tower settlement. Grindout says that cache contains Specter's Gloves, named Walker, Harris & Co. gloves with +8% Damage to Armor. Gamescreed and LFCarry also list a Killer weapon skin in the same cache. Grindout names only the gloves.",
+      "sources": [
+        {
+          "name": "Sportskeeda — Murder Hunter Mask",
+          "url": "https://www.sportskeeda.com/mmo/how-get-secret-murder-hunter-mask-the-division-2-echoes-central-park",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Item Level Gaming — Murder Hunter Mask",
+          "url": "https://itemlevel.net/the-division-2-how-to-unlock-the-murder-hunter-mask/",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "DJTICKLE — Murder Hunter Mask",
+          "url": "https://www.youtube.com/watch?v=nIdlUd3-njA",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Grindout — Specter's Gloves",
+          "url": "https://grindout.com/division-2/specters-gloves",
+          "date": "6 Nov 2026"
+        }
+      ],
+      "mask": "Murder",
+      "limited": false,
+      "tips": [
+        "Sportskeeda says the drone defence starts at the second laptop and repeats for each laptop after that. Hold the objective until it reaches 100%.",
+        "The poster that says \"At Night Stay Inside\" is a landmark on the third laptop. It is not a time requirement in the written guides."
+      ],
+      "image": "",
+      "youtube": "https://www.youtube.com/watch?v=nIdlUd3-njA",
+      "mask_img": ""
+    },
+    {
+      "id": "shapeless",
+      "name": "Shapeless",
+      "group": "centralpark",
+      "area": "Central Park, in front of the Tower settlement",
+      "subtitle": "Night, six tapes",
+      "time": "Night only. Sportskeeda says start at 21:00. Destructoid says 21:00–06:00, and the RellReallyGaming chapter list uses the same window. That end time is an hour later than the usual 21:00–05:00 hunter night.",
+      "steps": [
+        "Do the whole puzzle at night. Go to the safehouse in front of the Tower settlement. Sportskeeda calls this the first house, because every tape comes back here.",
+        "Find the door marked HELP US. Follow the ringing telephone to a small room with a television, a tape, and \"Do you like scary games?\" written on the wall. Pick up the tape and play it on the TV.",
+        "Dakota District. In the courtyard with the large yellow crane, use the scaffolding and the window into the building. The door on the immediate left is a bathroom. The tape is in the bathtub. Play it on the television in the first house.",
+        "Lincoln Square. On the side of the road is a playground with a light flickering on one of the slides. Take the tape at that light and play it on the television.",
+        "Dakota District. A building door is ringed with blinking decorative lights, with a curved pumpkin beside it. The tape is at the door. Play it on the television.",
+        "Lincoln Square. A yard is flooded, with a yellow machine. Press the button to drain the water. A skeleton is half-buried in the mud to the left of the machine, and the tape is on it. Play it on the television. Destructoid's heading calls this spot Lincoln District; the Sportskeeda text says Lincoln Square.",
+        "Dakota District, per Destructoid. Go in a doorway, out the door opposite, vault the low wall, and take the stairs down into a steam room full of pipes. The tape is at the back, by the pipes. Play it on the television.",
+        "After those tapes, go to the store named High Low Electronics. The tape at the entrance summons the hunter. The kill drops the Shapeless mask and one Nightmare Key."
+      ],
+      "headsUp": "RellReallyGaming's chapter titles add names that the articles do not use: a juice and smoothie bar, and a playground Chucky doll. The playground, the pumpkin door, the drained skeleton, and High Low Electronics are the spots both the articles and that video agree on. Exact map coordinates were not in the written guides.",
+      "notes": "Drops the mask and one Nightmare Key. All four keys open the cache at The Tower settlement. Grindout says that cache contains Specter's Gloves, named Walker, Harris & Co. gloves with +8% Damage to Armor. Gamescreed and LFCarry also list a Killer weapon skin in the same cache. Grindout names only the gloves.",
+      "sources": [
+        {
+          "name": "Sportskeeda — Shapeless Hunter Mask",
+          "url": "https://www.sportskeeda.com/mmo/how-get-secret-shapeless-hunter-mask-the-division-2-echoes-central-park",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Destructoid — Shapeless Hunter Mask",
+          "url": "https://www.destructoid.com/how-to-get-the-shapeless-hunter-mask-in-the-division-2-echoes-of-central-park/",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "RellReallyGaming — all four Central Park hunters",
+          "url": "https://www.youtube.com/watch?v=sKM8_zje_EQ",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Grindout — Specter's Gloves",
+          "url": "https://grindout.com/division-2/specters-gloves",
+          "date": "6 Nov 2026"
+        }
+      ],
+      "mask": "Shapeless",
+      "limited": false,
+      "tips": [
+        "Sportskeeda says each collected tape has to be played on the television in the first house before the next part of the puzzle.",
+        "The last tape, at High Low Electronics, is the one that summons the hunter. The articles do not say to carry that one back to the television."
+      ],
+      "image": "",
+      "youtube": "https://www.youtube.com/watch?v=ZNXQBGBphl8",
+      "mask_img": ""
+    },
+    {
+      "id": "craquelure",
+      "name": "Craquelure",
+      "group": "centralpark",
+      "area": "Central Park, W 75th St to Damrosch Park",
+      "subtitle": "Night, five scenes",
+      "time": "Night only, 21:00–05:00. dognuttzz says a missed window can be continued the next night from the step you left, if you stay in the same session. LFCarry also lists this hunter as night only.",
+      "steps": [
+        "After 21:00, go to the improvised street theater on W 75th St, about -3382, 1181. Five pieces of the play script are there. Each piece names a place, an action, and objects to look for, such as candles and a rose.",
+        "Scene 1. The script points at an alley with a burnt-out car and a dead tree. On the burnt-out stretch of W 59th St, about -3516, -92, the car hood has candles, a rose, and two masks. Use /wave in front of the car. The candles and the streetlight go out when the emote registers.",
+        "Scene 2. An overgrown street with decaying transit and a forbidden sign, on Central Park West at about -2755, 460. The same candles, masks, and rose are there. Use /salute.",
+        "Scene 3. A colonnade with an equestrian statue, at the northeast corner of the Bird's Nest control point, about -2809, 105. The script calls the hero Jack. Use /exercise at the candles. RellReallyGaming's chapter names this the jumping-jacks emote.",
+        "Scene 4. An overgrown park on West End Ave, about -3396, 630. The candles are in front of an ivy-covered tree in the small park beside the parking lot. Use /help.",
+        "Scene 5. Iron gates on W 69th St, about -2920, 680. The candles are behind the gate, next to the window. The script line is \"Plaudite, amici. Comedia finita est.\" Use /clap. The Final Act piece is near those candles, by the large tree. dognuttzz notes that piece is not shown in the video.",
+        "The Final Act opens the gates on W 62nd St, about -3270, 164, into Damrosch Park by Lincoln Center. On the Guggenheim Bandshell stage, use /surrender. The hunter spawns in the sound booth opposite the stage. The kill drops the Craquelure mask and one Nightmare Key."
+      ],
+      "headsUp": "dognuttzz says to turn directives off before you start, because they stop the puzzle from progressing. Coordinates are the ones printed in that video's description.",
+      "notes": "Drops the mask and one Nightmare Key. All four keys open the cache at The Tower settlement. Grindout says that cache contains Specter's Gloves, named Walker, Harris & Co. gloves with +8% Damage to Armor. Gamescreed and LFCarry also list a Killer weapon skin in the same cache. Grindout names only the gloves.",
+      "sources": [
+        {
+          "name": "dognuttzz — Craquelure Hunter Solved",
+          "url": "https://www.youtube.com/watch?v=mJt1VpYVhR8",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "RellReallyGaming — all four Central Park hunters",
+          "url": "https://www.youtube.com/watch?v=sKM8_zje_EQ",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Grindout — Specter's Gloves",
+          "url": "https://grindout.com/division-2/specters-gloves",
+          "date": "6 Nov 2026"
+        }
+      ],
+      "mask": "Craquelure",
+      "limited": false,
+      "tips": [
+        "When an emote registers, the candles and the nearby streetlight go out.",
+        "RellReallyGaming's candle chapters match the emotes in order: wave, salute, jumping jacks, request help, applaud, then surrender after the gate opens."
+      ],
+      "image": "",
+      "youtube": "https://www.youtube.com/watch?v=mJt1VpYVhR8",
+      "mask_img": ""
+    },
+    {
+      "id": "piercing-gaze",
+      "name": "Piercing Gaze",
+      "group": "centralpark",
+      "area": "Central Park, the projects to Columbus Circle",
+      "subtitle": "Any time of day",
+      "time": "Any time of day. dognuttzz says so in the video description. Sportskeeda and Destructoid do not add a night requirement, and LFCarry does not list this hunter as night only.",
+      "steps": [
+        "Go to the projects at about -3497, 556 and find the BREAK MY WALLS graffiti. Shoot the brick wall above the graffiti to reveal the first part of the cipher. Sportskeeda describes this wall as covered in leaves, northwest of Lincoln Square.",
+        "The second BREAK MY WALLS graffiti is in the back alley at about -3169, 1304. Shoot the brick wall below it. Destructoid says this wall shows three letters.",
+        "A leaflet in a trash can shows the cipher RWKRZXVOKSSG WVA and that it is a Caesar cipher. Shift each letter back by 7. That reads KPDKSQOHDLLZ POT. dognuttzz says to use POT as the key on the wall letters. The result given in the description is CIRCLEGARDEN HHH, and the two parts together read CIRCLEGARDEN POT.",
+        "Go to the circle garden next to Columbus Circle and shoot every destructible pot. When they are gone, the hunter appears on the gazebo stage. The kill drops the Piercing Gaze mask and one Nightmare Key."
+      ],
+      "headsUp": "Sportskeeda and Destructoid describe the last spot as a roof in southern Lincoln Square with plant pots and a statue, and say some pots do not break on the first shots. The dognuttzz write-up, which is the one with coordinates, only says to shoot the destructible pots in the circle garden. It does not mention a statue. The letters painted on the two walls were not printed in that description, only the cipher result.",
+      "notes": "Drops the mask and one Nightmare Key. Sportskeeda says all four Nightmare Keys are required for the named Specter's Gloves. Grindout says the four keys open the cache at The Tower settlement, and that the cache contains Specter's Gloves (named Walker, Harris & Co., +8% Damage to Armor). Gamescreed and LFCarry also list a Killer weapon skin in that cache. Grindout names only the gloves.",
+      "sources": [
+        {
+          "name": "dognuttzz — Piercing Gaze Hunter Solved",
+          "url": "https://www.youtube.com/watch?v=IJJ8zHstwaI",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Sportskeeda — Piercing Gaze Hunter Mask",
+          "url": "https://www.sportskeeda.com/mmo/how-get-secret-piercing-gaze-hunter-mask-the-division-2-echoes-central-park",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Destructoid — Piercing Gaze Hunter Mask",
+          "url": "https://www.destructoid.com/how-to-get-the-piercing-gaze-hunter-mask-in-the-division-2-echoes-of-central-park/",
+          "date": "6 Nov 2026"
+        },
+        {
+          "name": "Grindout — Specter's Gloves",
+          "url": "https://grindout.com/division-2/specters-gloves",
+          "date": "6 Nov 2026"
+        }
+      ],
+      "mask": "Piercing Gaze",
+      "limited": false,
+      "tips": [
+        "Sportskeeda says this hunter uses a rifle and seeker mines. Watch the ground for the mines."
+      ],
+      "image": "",
+      "youtube": "https://www.youtube.com/watch?v=IJJ8zHstwaI",
       "mask_img": ""
     }
   ]

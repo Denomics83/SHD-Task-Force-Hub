@@ -4,26 +4,26 @@
 
   var resBody = document.getElementById("res-detail-body");
   var creatorsBody = document.getElementById("creators-body");
-  var mutatorsBody = document.getElementById("mutators-body");
   var panels = {
     builds: document.getElementById("tab-builds"),
     hunters: document.getElementById("tab-hunters"),
-    creators: document.getElementById("tab-creators"),
-    mutators: document.getElementById("tab-mutators")
+    creators: document.getElementById("tab-creators")
   };
   var hunterData = null;
   var REGIONS = [
     { id: "washington", label: "Washington" },
     { id: "newyork", label: "New York" },
     { id: "brooklyn", label: "Brooklyn" },
+    { id: "centralpark", label: "Central Park" },
     { id: "other", label: "Other" }
   ];
-  var REGION_IDS = { washington: 1, newyork: 1, brooklyn: 1, other: 1 };
+  var REGION_IDS = { washington: 1, newyork: 1, brooklyn: 1, centralpark: 1, other: 1 };
   var BUILD_HASH = { solo: 1, team: 1, incursion: 1, escalation: 1, raid: 1, pvp: 1 };
   var REGION_ICONS = {
     washington: '<svg viewBox="0 0 24 24"><path d="M4 18h16M6 18V10M10 18V10M14 18V10M18 18V10M3 10h18L12 4z"/></svg>',
     newyork: '<svg viewBox="0 0 24 24"><path d="M4 20V9h4v11M10 20V5h5v15M17 20v-8h3v8M8 9V6h2"/></svg>',
     brooklyn: '<svg viewBox="0 0 24 24"><path d="M3 16h18M5 16V8M19 16V8M7 11c1.6 2.4 8.4 2.4 10 0"/></svg>',
+    centralpark: '<svg viewBox="0 0 24 24"><path d="M12 20.5v-5.5"/><path d="M12 15c-4.4 0-6.4-3.1-5-6.4C8.6 9.2 10.1 8.2 12 4.8c1.9 3.4 3.4 4.4 5 3.8 1.4 3.3-.6 6.4-5 6.4z"/></svg>',
     other: '<svg viewBox="0 0 24 24"><path d="M12 4 20 12 12 20 4 12z"/></svg>'
   };
   var YT_MARK =
@@ -37,6 +37,7 @@
 
   function hunterRegion(hunter) {
     var area = String((hunter && hunter.area) || "").toLowerCase();
+    if ((hunter && hunter.group === "centralpark") || area.indexOf("central park") >= 0) return "centralpark";
     if (area.indexOf("washington") >= 0 || area.indexOf("d.c") >= 0) return "washington";
     if (area.indexOf("brooklyn") >= 0 || area.indexOf("dumbo") >= 0 || area.indexOf("furman") >= 0) return "brooklyn";
     if (area.indexOf("new york") >= 0) return "newyork";
@@ -94,21 +95,25 @@
     document.body.classList.add("is-hunter-home");
     document.body.classList.remove("is-hunter", "is-grid", "is-list");
     setHunterBack("off");
-    var counts = { washington: 0, newyork: 0, brooklyn: 0, other: 0 };
+    var counts = { washington: 0, newyork: 0, brooklyn: 0, centralpark: 0, other: 0 };
     (hunterData.hunters || []).forEach(function (hunter) {
       counts[hunterRegion(hunter)] += 1;
     });
+    function regionTile(region, extra) {
+      return (
+        '<button type="button" class="cat-tile col-tile' + (extra ? " " + extra : "") + '" data-region="' + region.id + '">' +
+        '<span class="col-title">' + STF.esc(region.label) + "</span>" +
+        '<span class="col-ring">' + REGION_ICONS[region.id] + "</span>" +
+        '<span class="col-count">' + pad2(counts[region.id] || 0) + "</span>" +
+        "</button>"
+      );
+    }
+    var grid = REGIONS.filter(function (region) { return region.id !== "other"; });
+    var other = REGIONS.filter(function (region) { return region.id === "other"; })[0];
     resBody.innerHTML =
-      '<div class="hunter-grid">' +
-      REGIONS.map(function (region) {
-        return (
-          '<button type="button" class="cat-tile col-tile" data-region="' + region.id + '">' +
-          '<span class="col-title">' + STF.esc(region.label) + "</span>" +
-          '<span class="col-ring">' + REGION_ICONS[region.id] + "</span>" +
-          '<span class="col-count">' + pad2(counts[region.id] || 0) + "</span>" +
-          "</button>"
-        );
-      }).join("") +
+      '<div class="hunter-home">' +
+      '<div class="hunter-grid">' + grid.map(function (region) { return regionTile(region); }).join("") + "</div>" +
+      regionTile(other, "hunter-wide") +
       "</div>";
     window.scrollTo(0, 0);
     if (push) history.pushState({ res: "hunters" }, "", "resources.html?tab=hunters");
@@ -182,6 +187,11 @@
       : '<span class="hunter-hero hunter-fallback" aria-hidden="true"><svg viewBox="0 0 24 24"><path d="M5 10c1.4-4 12.6-4 14 0v5c-1.5 4-12.5 4-14 0z" fill="none" stroke="currentColor" stroke-width="1.6"/></svg></span>';
     var steps = (hunter.steps || []).map(function (step) { return "<li>" + STF.esc(step) + "</li>"; }).join("");
     var tips = (hunter.tips || []).map(function (tip) { return "<li>" + STF.esc(tip) + "</li>"; }).join("");
+    var sources = (hunter.sources || []).map(function (src) {
+      if (!src || !src.url) return "";
+      return '<a href="' + STF.esc(src.url) + '" target="_blank" rel="noopener">' + STF.esc(src.name || src.url) + "</a>" +
+        (src.date ? " · " + STF.esc(src.date) : "");
+    }).filter(Boolean).join("<br>");
     resBody.innerHTML =
       hero +
       "<h1>" + STF.esc(hunter.name) + "</h1>" +
@@ -194,6 +204,7 @@
       (hunter.time ? "<h2>Time</h2><p>" + STF.esc(hunter.time) + "</p>" : "") +
       (hunter.notes ? "<h2>Notes</h2><p>" + STF.esc(hunter.notes) + "</p>" : "") +
       (hunter.headsUp ? '<p class="hunter-headsup"><strong>Heads up</strong> ' + STF.esc(hunter.headsUp) + "</p>" : "") +
+      (sources ? '<p class="hunter-sources">' + sources + "</p>" : "") +
       youtubeBlock(hunter);
     window.scrollTo(0, 0);
     if (push) history.pushState({ res: "hunters", region: regionId, hunter: id }, "", "resources.html?tab=hunters#" + regionId + "/" + id);
@@ -251,38 +262,6 @@
     creatorsBody.innerHTML = html;
   }
 
-  function renderMutators(doc) {
-    var groups = (doc && doc.groups) || [];
-    mutatorsBody.innerHTML = groups.map(function (group) {
-      var rows = (group.items || []).map(function (item) {
-        var lines = (item.lines || []).map(function (line) {
-          return (
-            '<p class="mut-line tint-' + STF.esc(line.color || "") + '"><b>' + STF.esc(line.label || "") + "</b> " +
-            STF.esc(line.effect || "") + "<span>" + STF.esc(line.clear || "") + "</span></p>"
-          );
-        }).join("");
-        return (
-          '<article class="mut-item">' +
-          '<button type="button" class="mut-row" aria-expanded="false">' +
-          '<img src="' + STF.esc(item.icon || "") + '" alt="">' +
-          "<strong>" + STF.esc(item.name || "") + "</strong></button>" +
-          '<div class="mut-panel"><p>' + STF.esc(item.description || "") + "</p>" + lines + "</div></article>"
-        );
-      }).join("");
-      return '<h2 class="mut-label">' + STF.esc(group.label || "") + "</h2>" + rows;
-    }).join("") || '<p class="lede">No mutators yet.</p>';
-  }
-
-  function loadMutators() {
-    if (!mutatorsBody || mutatorsBody.dataset.ready) return;
-    STF.fetchJSON("data/mutators.json").then(function (doc) {
-      mutatorsBody.dataset.ready = "1";
-      renderMutators(doc);
-    }).catch(function () {
-      mutatorsBody.innerHTML = '<p class="lede">Could not load mutators.</p>';
-    });
-  }
-
   function loadCreators() {
     if (!creatorsBody || creatorsBody.dataset.ready) return;
     STF.fetchJSON("data/creators.json").then(function (doc) {
@@ -297,12 +276,16 @@
     var query = new URLSearchParams(location.search).get("tab");
     var hash = (location.hash || "").replace("#", "");
     if (hash === "hunters" || hash.indexOf("hunters/") === 0) return "hunters";
-    if (query === "hunters" || query === "builds" || query === "creators" || query === "mutators") return query;
+    if (query === "mutators") {
+      location.replace("loot.html?tab=mutators");
+      return "builds";
+    }
+    if (query === "hunters" || query === "builds" || query === "creators") return query;
     return "builds";
   }
 
   function showTab(tab, push) {
-    if (tab !== "builds" && tab !== "hunters" && tab !== "creators" && tab !== "mutators") tab = "builds";
+    if (tab !== "builds" && tab !== "hunters" && tab !== "creators") tab = "builds";
     Object.keys(panels).forEach(function (key) {
       if (panels[key]) panels[key].hidden = key !== tab;
     });
@@ -319,7 +302,6 @@
       setHunterBack("off");
     }
     if (tab === "creators") loadCreators();
-    if (tab === "mutators") loadMutators();
     if (tab === "hunters") ensureHunters(hunterRoute);
     window.dispatchEvent(new CustomEvent("stf-tab", { detail: tab }));
     if (push) {
@@ -329,24 +311,6 @@
       history.pushState({ tab: tab }, "", next);
     }
     window.scrollTo(0, 0);
-  }
-
-  if (mutatorsBody) {
-    mutatorsBody.addEventListener("click", function (e) {
-      var row = e.target.closest(".mut-row");
-      if (!row || !mutatorsBody.contains(row)) return;
-      var item = row.closest(".mut-item");
-      var open = item.classList.contains("is-open");
-      mutatorsBody.querySelectorAll(".mut-item.is-open").forEach(function (el) {
-        el.classList.remove("is-open");
-        var btn = el.querySelector(".mut-row");
-        if (btn) btn.setAttribute("aria-expanded", "false");
-      });
-      if (!open) {
-        item.classList.add("is-open");
-        row.setAttribute("aria-expanded", "true");
-      }
-    });
   }
 
   document.querySelector(".res-tabs").addEventListener("click", function (e) {
