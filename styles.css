@@ -957,7 +957,7 @@ body.page-builds.is-grid .cat-stage { flex: 1 1 auto; min-height: 0; display: fl
   gap: 10px;
   padding: 12px 14px 8px;
 }
-.cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); min-width: 0; max-width: 100%; }
+.cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); grid-template-rows: repeat(3, minmax(0, 1fr)); min-width: 0; max-width: 100%; align-content: stretch; }
 body.page-resources {
   height: 100dvh;
   overflow: hidden;
@@ -989,11 +989,14 @@ body.page-resources.is-hunter-home #tab-hunters {
   flex-direction: column;
   overflow: hidden;
   padding: 0;
+  flex: 1 1 auto;
+  min-height: 0;
 }
 body.page-resources.is-hunter-home #res-detail-body {
   flex: 1 1 auto;
   min-height: 0;
   display: flex;
+  overflow: hidden;
 }
 body.page-resources .topbar { position: relative; flex: 0 0 auto; }
 body.page-resources .bottom-nav { position: relative; flex: 0 0 auto; }
@@ -1158,15 +1161,38 @@ a.cat-tile, a.cat-tile:hover { text-decoration: none; color: inherit; }
   letter-spacing: .08em;
   text-transform: uppercase;
 }
-.hunter-grid {
-  flex: 1;
+.hunter-home {
+  flex: 1 1 auto;
   min-height: 0;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
   gap: 10px;
   padding: 8px 12px 10px;
 }
+.hunter-grid {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 10px;
+  padding: 0;
+}
+.hunter-grid .col-title {
+  max-width: 100%;
+  padding: 0 8px;
+  text-align: center;
+  line-height: 1.05;
+}
+.hunter-wide {
+  flex: 0 0 76px;
+  height: 76px;
+  flex-direction: row;
+  gap: 16px;
+}
+.hunter-wide .col-ring { width: 52px; height: 52px; }
+.hunter-wide .col-ring svg { width: 24px; height: 24px; }
 .hunter-mask-row {
   display: block;
   width: 100%;
@@ -1787,17 +1813,9 @@ body.page-events .tl-screen {
 .tl-frame {
   flex: 1 1 auto; min-height: 0;
   display: flex; flex-direction: column;
-  border: 1px solid rgba(255,255,255,.55);
-  padding: 10px 8px 8px;
-  background:
-    linear-gradient(#fff, #fff) left top / 12px 1px no-repeat,
-    linear-gradient(#fff, #fff) left top / 1px 12px no-repeat,
-    linear-gradient(#fff, #fff) right top / 12px 1px no-repeat,
-    linear-gradient(#fff, #fff) right top / 1px 12px no-repeat,
-    linear-gradient(#fff, #fff) left bottom / 12px 1px no-repeat,
-    linear-gradient(#fff, #fff) left bottom / 1px 12px no-repeat,
-    linear-gradient(#fff, #fff) right bottom / 12px 1px no-repeat,
-    linear-gradient(#fff, #fff) right bottom / 1px 12px no-repeat;
+  border: 0;
+  padding: 0;
+  background: none;
 }
 body.page-events .hero-rail {
   flex: 1 1 auto; height: auto; min-height: 0;
@@ -2536,8 +2554,7 @@ body.page-resources #tab-builds.res-panel:not([hidden]) {
 .res-shell { flex: 1 1 auto; min-height: 0; min-width: 0; max-width: 100%; display: flex; flex-direction: column; }
 .res-tabs {
   flex: 0 0 auto;
-  display: grid;
-  grid-template-columns: repeat(5, minmax(0, 1fr));
+  display: flex;
   gap: 4px;
   width: 100%;
   max-width: 100%;
@@ -2549,9 +2566,10 @@ body.page-resources #tab-builds.res-panel:not([hidden]) {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 100%;
+  flex: 1 1 0;
+  width: auto;
   min-width: 0;
-  max-width: 100%;
+  max-width: none;
   min-height: 36px;
   padding: 0 2px;
   overflow: hidden;
@@ -2644,9 +2662,25 @@ body.page-resources #tab-builds.res-panel:not([hidden]) {
 body.page-resources { display: flex; flex-direction: column; }
 body.page-resources.is-grid .res-shell,
 body.page-resources.is-grid #tab-builds { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
-body.page-resources.is-grid #cat-stage { flex: 1 1 auto; min-height: 0; display: flex; }
+body.page-resources.is-grid #cat-stage,
+body.page-resources #tab-builds:not([hidden]) #cat-stage:not([hidden]) {
+  flex: 1 1 auto;
+  min-height: 0;
+  display: flex;
+}
 body.page-resources .res-panel:not([hidden]) { flex: 1 1 auto; min-height: 0; min-width: 0; max-width: 100%; overflow: auto; }
-body.page-resources.is-grid #tab-builds { overflow: hidden; }
+body.page-resources.is-grid #tab-builds,
+body.page-resources #tab-builds:not([hidden]) { overflow: hidden; }
+body.page-loot .res-shell { flex: 1 1 auto; min-height: 0; display: flex; flex-direction: column; }
+body.page-loot .res-panel:not([hidden]) {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  display: flex;
+  flex-direction: column;
+}
+body.page-loot #tab-loot:not([hidden]) { overflow: hidden; }
+body.page-loot #tab-loot:not([hidden]) .loot-screen { flex: 1 1 auto; min-height: 0; }
 .map-sec {
   margin: 14px 0 8px;
   font-family: var(--display); font-size: .78rem; letter-spacing: .12em;

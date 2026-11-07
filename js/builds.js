@@ -847,6 +847,19 @@
     };
   }
 
+  function primeBuildLayout() {
+    if (!buildsTabActive()) return;
+    var catId = (location.hash || "").replace("#", "").split("/")[0];
+    if (catId && catById(catId)) {
+      document.body.classList.add("is-list");
+      document.body.classList.remove("is-grid");
+      return;
+    }
+    document.body.classList.add("is-grid");
+    document.body.classList.remove("is-list");
+  }
+
+  primeBuildLayout();
   paintGrid();
   (async function loadBuilds() {
     try { await STF.loadIcons(); } catch (err) { console.error(err); }
