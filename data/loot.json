@@ -1,75 +1,74 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-08",
+  "lootDate": "2026-11-09",
   "weekOf": "2026-11-03",
   "weekEnd": "2026-11-09",
-  "updated": "2026-11-08T08:56",
-  "note": "Escalation targeted loot for 2026-11-08 (rotation week 2026-11-03 to 2026-11-09, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-09T09:17",
+  "note": "Escalation targeted loot for 2026-11-09 (rotation week 2026-11-03 to 2026-11-09, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "The Art Museum",
       "faction": "Rikers",
       "missionIcon": "assets/icons/factions/rikers.png",
-      "loot": "Legatus S.p.A.",
+      "loot": "Golan Gear Ltd",
       "kind": "brand",
-      "slug": "brand-legatus-s-p-a",
-      "icon": "assets/icons/brands/legatusspa.png"
+      "slug": "brand-golan-gear-ltd",
+      "icon": "assets/icons/brands/golangearltd.png"
     },
     {
       "mission": "Manning National Zoo",
       "faction": "Outcasts",
       "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Kneepad",
-      "kind": "slot",
-      "slug": "kneepads",
-      "icon": "assets/icons/caches/kneepads.png"
+      "loot": "Assault Rifle",
+      "kind": "weapon",
+      "slug": "assault-rifle",
+      "icon": "assets/icons/weapons/assault-rifle.png"
     },
     {
       "mission": "Camp White Oak",
       "faction": "Black Tusk",
       "missionIcon": "assets/icons/factions/black-tusk.png",
-      "loot": "LMG",
-      "kind": "weapon",
-      "slug": "lmg",
-      "icon": "assets/icons/weapons/lmg.png",
-      "priority": true
+      "loot": "Ember Engine",
+      "kind": "gearset",
+      "slug": "gearset-ember-engine",
+      "icon": "assets/icons/gearsets/emberengine.png"
     },
     {
       "mission": "The Pentagon",
       "faction": "Black Tusk",
       "missionIcon": "assets/icons/factions/black-tusk.png",
-      "loot": "Alps Summit Armaments",
-      "kind": "brand",
-      "slug": "alps",
-      "icon": "assets/icons/brands/alps.png"
+      "loot": "Gear Mods",
+      "kind": "unknown",
+      "slug": "",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "DARPA Research Labs",
       "faction": "Black Tusk",
       "missionIcon": "assets/icons/factions/black-tusk.png",
-      "loot": "Cavalier",
-      "kind": "gearset",
-      "slug": "cavalier",
-      "icon": "assets/icons/gearsets/cavalier.png"
+      "loot": "Pistol",
+      "kind": "weapon",
+      "slug": "pistol",
+      "icon": "assets/icons/weapons/pistol.png"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Holsters",
+      "loot": "Backpacks",
       "kind": "slot",
-      "slug": "holster",
-      "icon": "assets/icons/caches/holster.png"
+      "slug": "backpack",
+      "icon": "assets/icons/caches/backpack.png"
     },
     {
       "cache": "Prototype Weapon Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "SMGs",
+      "loot": "Pistols",
       "kind": "weapon",
-      "slug": "smg",
-      "icon": "assets/icons/weapons/smg.png"
+      "slug": "pistol",
+      "icon": "assets/icons/weapons/pistol.png"
     }
   ],
   "darkZone": [
