@@ -1,75 +1,75 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-10",
+  "lootDate": "2026-11-11",
   "weekOf": "2026-11-10",
   "weekEnd": "2026-11-16",
-  "updated": "2026-11-10T08:58",
-  "note": "Escalation targeted loot for 2026-11-10 (rotation week 2026-11-10 to 2026-11-16, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-11T09:00",
+  "note": "Escalation targeted loot for 2026-11-11 (rotation week 2026-11-10 to 2026-11-16, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "The Tombs",
       "faction": "Rikers",
       "missionIcon": "assets/icons/factions/rikers.png",
-      "loot": "Electrique",
-      "kind": "brand",
-      "slug": "electrique",
-      "icon": "assets/icons/brands/electrique.png"
+      "loot": "Foundry Bulwark",
+      "kind": "gearset",
+      "slug": "foundry-bulwark",
+      "icon": "assets/icons/gearsets/foundry-bulwark.png"
     },
     {
       "mission": "Manning National Zoo",
       "faction": "Outcasts",
       "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Airaldi Holdings",
+      "loot": "Alps Summit Armaments",
       "kind": "brand",
-      "slug": "airaldi",
-      "icon": "assets/icons/brands/airaldi.png",
-      "priority": true
+      "slug": "alps",
+      "icon": "assets/icons/brands/alps.png"
     },
     {
       "mission": "Bank Headquarters",
       "faction": "Hyenas",
       "missionIcon": "assets/icons/factions/hyenas.png",
-      "loot": "True Patriot",
-      "kind": "gearset",
-      "slug": "true-patriot",
-      "icon": "assets/icons/gearsets/true-patriot.png"
+      "loot": "Lengmo",
+      "kind": "brand",
+      "slug": "lengmo",
+      "icon": "assets/icons/brands/lengmo.png"
     },
     {
       "mission": "American History Museum",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Zwiadowka Sp. z o.o",
+      "loot": "Belstone Armory",
       "kind": "brand",
-      "slug": "zwiadowka",
-      "icon": "assets/icons/brands/zwiadowka.png"
+      "slug": "belstone",
+      "icon": "assets/icons/brands/belstone.png"
     },
     {
       "mission": "Space Administration HQ",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Tip of the Spear",
+      "loot": "Aces & Eights",
       "kind": "gearset",
-      "slug": "tip-of-the-spear",
-      "icon": "assets/icons/gearsets/tip-of-the-spear.png"
+      "slug": "aces-and-eights",
+      "icon": "assets/icons/gearsets/aces-and-eights.png",
+      "priority": true
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Masks",
+      "loot": "Holsters",
       "kind": "slot",
-      "slug": "mask",
-      "icon": "assets/icons/caches/mask.png"
+      "slug": "holster",
+      "icon": "assets/icons/caches/holster.png"
     },
     {
       "cache": "Prototype Weapon Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "MMRs",
+      "loot": "Assault Rifles",
       "kind": "weapon",
-      "slug": "mmr",
-      "icon": "assets/icons/weapons/mmr.png"
+      "slug": "assault-rifle",
+      "icon": "assets/icons/weapons/assault-rifle.png"
     }
   ],
   "darkZone": [
