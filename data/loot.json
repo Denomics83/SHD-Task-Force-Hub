@@ -1,74 +1,75 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-13",
+  "lootDate": "2026-11-14",
   "weekOf": "2026-11-10",
   "weekEnd": "2026-11-16",
-  "updated": "2026-11-13T09:03",
-  "note": "Escalation targeted loot for 2026-11-13 (rotation week 2026-11-10 to 2026-11-16, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-14T08:56",
+  "note": "Escalation targeted loot for 2026-11-14 (rotation week 2026-11-10 to 2026-11-16, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "The Tombs",
       "faction": "Rikers",
       "missionIcon": "assets/icons/factions/rikers.png",
-      "loot": "Shiny Monkey Gear",
+      "loot": "Empress International",
       "kind": "brand",
-      "slug": "brand-shiny-monkey-gear",
-      "icon": "assets/icons/brands/shinymonkeygear.png"
+      "slug": "empress",
+      "icon": "assets/icons/brands/empress.png"
     },
     {
       "mission": "Manning National Zoo",
       "faction": "Outcasts",
       "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Belstone Armory",
-      "kind": "brand",
-      "slug": "belstone",
-      "icon": "assets/icons/brands/belstone.png"
+      "loot": "Holster",
+      "kind": "slot",
+      "slug": "holster",
+      "icon": "assets/icons/caches/holster.png"
     },
     {
       "mission": "Bank Headquarters",
       "faction": "Hyenas",
       "missionIcon": "assets/icons/factions/hyenas.png",
-      "loot": "Gloves",
-      "kind": "slot",
-      "slug": "gloves",
-      "icon": "assets/icons/caches/gloves.png"
+      "loot": "Strikers Battlegear",
+      "kind": "gearset",
+      "slug": "strikers-battlegear",
+      "icon": "assets/icons/gearsets/strikers-battlegear.png",
+      "priority": true
     },
     {
       "mission": "American History Museum",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Assault Rifle",
-      "kind": "weapon",
-      "slug": "assault-rifle",
-      "icon": "assets/icons/weapons/assault-rifle.png"
+      "loot": "Skill Mods",
+      "kind": "unknown",
+      "slug": "",
+      "icon": "assets/icons/loot/generic.svg"
     },
     {
       "mission": "Space Administration HQ",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Rigger",
+      "loot": "Future Initiative",
       "kind": "gearset",
-      "slug": "rigger",
-      "icon": "assets/icons/gearsets/rigger.png"
+      "slug": "future-initiative",
+      "icon": "assets/icons/gearsets/future-initiative.png"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Holsters",
+      "loot": "Backpacks",
       "kind": "slot",
-      "slug": "holster",
-      "icon": "assets/icons/caches/holster.png"
+      "slug": "backpack",
+      "icon": "assets/icons/caches/backpack.png"
     },
     {
       "cache": "Prototype Weapon Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Pistols",
+      "loot": "LMGs",
       "kind": "weapon",
-      "slug": "pistol",
-      "icon": "assets/icons/weapons/pistol.png"
+      "slug": "lmg",
+      "icon": "assets/icons/weapons/lmg.png"
     }
   ],
   "darkZone": [
