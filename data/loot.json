@@ -1,34 +1,16 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-15",
+  "lootDate": "2026-11-16",
   "weekOf": "2026-11-10",
   "weekEnd": "2026-11-16",
-  "updated": "2026-11-15T08:56",
-  "note": "Escalation targeted loot for 2026-11-15 (rotation week 2026-11-10 to 2026-11-16, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-16T10:16",
+  "note": "Escalation targeted loot for 2026-11-16 (rotation week 2026-11-10 to 2026-11-16, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "The Tombs",
       "faction": "Rikers",
       "missionIcon": "assets/icons/factions/rikers.png",
-      "loot": "Holster",
-      "kind": "slot",
-      "slug": "holster",
-      "icon": "assets/icons/caches/holster.png"
-    },
-    {
-      "mission": "Manning National Zoo",
-      "faction": "Outcasts",
-      "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Kneepad",
-      "kind": "slot",
-      "slug": "kneepads",
-      "icon": "assets/icons/caches/kneepads.png"
-    },
-    {
-      "mission": "Bank Headquarters",
-      "faction": "Hyenas",
-      "missionIcon": "assets/icons/factions/hyenas.png",
       "loot": "Hunters Fury",
       "kind": "gearset",
       "slug": "hunters-fury",
@@ -36,32 +18,50 @@
       "priority": true
     },
     {
+      "mission": "Manning National Zoo",
+      "faction": "Outcasts",
+      "missionIcon": "assets/icons/factions/outcasts.png",
+      "loot": "Zwiadowka Sp. z o.o",
+      "kind": "brand",
+      "slug": "zwiadowka",
+      "icon": "assets/icons/brands/zwiadowka.png"
+    },
+    {
+      "mission": "Bank Headquarters",
+      "faction": "Hyenas",
+      "missionIcon": "assets/icons/factions/hyenas.png",
+      "loot": "Mask",
+      "kind": "slot",
+      "slug": "mask",
+      "icon": "assets/icons/caches/mask.png"
+    },
+    {
       "mission": "American History Museum",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Uzina Getica",
+      "loot": "Wyvern Wear",
       "kind": "brand",
-      "slug": "uzina-getica",
-      "icon": "assets/icons/brands/uzina-getica.png"
+      "slug": "wyvern",
+      "icon": "assets/icons/brands/wyvern.png"
     },
     {
       "mission": "Space Administration HQ",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Virtuoso",
+      "loot": "Ortiz: Reficere",
       "kind": "gearset",
-      "slug": "gearset-virtuoso",
-      "icon": "assets/icons/gearsets/virtuoso.png"
+      "slug": "ortiz-reficere",
+      "icon": "assets/icons/gearsets/ortiz-reficere.png"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Gloves",
+      "loot": "Holsters",
       "kind": "slot",
-      "slug": "gloves",
-      "icon": "assets/icons/caches/gloves.png"
+      "slug": "holster",
+      "icon": "assets/icons/caches/holster.png"
     },
     {
       "cache": "Prototype Weapon Cache",
