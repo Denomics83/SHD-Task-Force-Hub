@@ -1,56 +1,57 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-18",
+  "lootDate": "2026-11-19",
   "weekOf": "2026-11-17",
   "weekEnd": "2026-11-23",
-  "updated": "2026-11-18T10:12",
-  "note": "Escalation targeted loot for 2026-11-18 (rotation week 2026-11-17 to 2026-11-23, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-19T09:12",
+  "note": "Escalation targeted loot for 2026-11-19 (rotation week 2026-11-17 to 2026-11-23, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "The Art Museum",
       "faction": "Rikers",
       "missionIcon": "assets/icons/factions/rikers.png",
-      "loot": "Body Armor",
-      "kind": "slot",
-      "slug": "chest",
-      "icon": "assets/icons/caches/chest.png"
+      "loot": "Gila Guard",
+      "kind": "brand",
+      "slug": "gila",
+      "icon": "assets/icons/brands/gila.png"
     },
     {
       "mission": "Capitol Building",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Future Initiative",
-      "kind": "gearset",
-      "slug": "future-initiative",
-      "icon": "assets/icons/gearsets/future-initiative.png"
+      "loot": "Hana-U Corporation",
+      "kind": "brand",
+      "slug": "hana-u",
+      "icon": "assets/icons/brands/hana-u.png"
     },
     {
       "mission": "Jefferson Plaza",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Ortiz: Reficere",
-      "kind": "gearset",
-      "slug": "ortiz-reficere",
-      "icon": "assets/icons/gearsets/ortiz-reficere.png"
+      "loot": "Uzina Getica",
+      "kind": "brand",
+      "slug": "uzina-getica",
+      "icon": "assets/icons/brands/uzina-getica.png"
     },
     {
       "mission": "Lincoln Memorial",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Fenris Group AB",
-      "kind": "brand",
-      "slug": "fenris",
-      "icon": "assets/icons/brands/fenris.png"
+      "loot": "Concentrated Company",
+      "kind": "gearset",
+      "slug": "concentrated-company",
+      "icon": "assets/icons/gearsets/concentrated-company.png",
+      "priority": true
     },
     {
       "mission": "Federal Emergency Bunker",
       "faction": "Outcasts",
       "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Gear Mods",
-      "kind": "unknown",
-      "slug": "",
-      "icon": "assets/icons/loot/generic.svg"
+      "loot": "Grupo Sombra S.A.",
+      "kind": "brand",
+      "slug": "grupo",
+      "icon": "assets/icons/brands/grupo.png"
     }
   ],
   "protoCaches": [
@@ -65,10 +66,10 @@
     {
       "cache": "Prototype Weapon Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Shotguns",
+      "loot": "MMRs",
       "kind": "weapon",
-      "slug": "shotgun",
-      "icon": "assets/icons/weapons/shotgun.png"
+      "slug": "mmr",
+      "icon": "assets/icons/weapons/mmr.png"
     }
   ],
   "darkZone": [
