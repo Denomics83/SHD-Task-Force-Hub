@@ -1,68 +1,66 @@
 {
   "source": "https://prototrack.gg/",
   "sourceName": "ProtoTrack.gg",
-  "lootDate": "2026-11-20",
+  "lootDate": "2026-11-21",
   "weekOf": "2026-11-17",
   "weekEnd": "2026-11-23",
-  "updated": "2026-11-20T09:10",
-  "note": "Escalation targeted loot for 2026-11-20 (rotation week 2026-11-17 to 2026-11-23, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
+  "updated": "2026-11-21T08:55",
+  "note": "Escalation targeted loot for 2026-11-21 (rotation week 2026-11-17 to 2026-11-23, daily reset 08:00 UTC). Dark Zone targeted loot is not on the ProtoTrack board.",
   "escalations": [
     {
       "mission": "The Art Museum",
       "faction": "Rikers",
       "missionIcon": "assets/icons/factions/rikers.png",
-      "loot": "Ortiz: Reficere",
+      "loot": "Core Strength",
       "kind": "gearset",
-      "slug": "ortiz-reficere",
-      "icon": "assets/icons/gearsets/ortiz-reficere.png"
+      "slug": "core-strength",
+      "icon": "assets/icons/gearsets/core-strength.png"
     },
     {
       "mission": "Capitol Building",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Breaking Point",
-      "kind": "gearset",
-      "slug": "breaking-point",
-      "icon": "assets/icons/gearsets/breaking-point.png"
+      "loot": "Shotgun",
+      "kind": "weapon",
+      "slug": "shotgun",
+      "icon": "assets/icons/weapons/shotgun.png"
     },
     {
       "mission": "Jefferson Plaza",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Aces & Eights",
+      "loot": "Foundry Bulwark",
       "kind": "gearset",
-      "slug": "aces-and-eights",
-      "icon": "assets/icons/gearsets/aces-and-eights.png",
-      "priority": true
+      "slug": "foundry-bulwark",
+      "icon": "assets/icons/gearsets/foundry-bulwark.png"
     },
     {
       "mission": "Lincoln Memorial",
       "faction": "True Sons",
       "missionIcon": "assets/icons/factions/true-sons.png",
-      "loot": "Empress International",
-      "kind": "brand",
-      "slug": "empress",
-      "icon": "assets/icons/brands/empress.png"
+      "loot": "Measured Assembly",
+      "kind": "gearset",
+      "slug": "measured-assembly",
+      "icon": "assets/icons/gearsets/measured-assembly.png"
     },
     {
       "mission": "Federal Emergency Bunker",
       "faction": "Outcasts",
       "missionIcon": "assets/icons/factions/outcasts.png",
-      "loot": "Rifle",
-      "kind": "weapon",
-      "slug": "rifle",
-      "icon": "assets/icons/weapons/rifle.png",
-      "priority": true
+      "loot": "Alps Summit Armaments",
+      "kind": "brand",
+      "slug": "alps",
+      "icon": "assets/icons/brands/alps.png"
     }
   ],
   "protoCaches": [
     {
       "cache": "Prototype Gear Cache",
       "cacheIcon": "assets/icons/loot/generic.svg",
-      "loot": "Holsters",
+      "loot": "Chest Pieces",
       "kind": "slot",
-      "slug": "holster",
-      "icon": "assets/icons/caches/holster.png"
+      "slug": "chest",
+      "icon": "assets/icons/caches/chest.png"
     },
     {
       "cache": "Prototype Weapon Cache",
